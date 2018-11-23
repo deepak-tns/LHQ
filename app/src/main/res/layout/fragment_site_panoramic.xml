@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SitePanoramicFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/fragment_site_panorama"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/activity_vertical_margin">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvBearing0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 0º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing0Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing0"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing0Image"
+                       android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing0" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvBearing30"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 30º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing30Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing30"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing30Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing30" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing30"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing60"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 60º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing60Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing60"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing60Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing60" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing60"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing90"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 90º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing90Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing90"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing90Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing90" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing90"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing120"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 120º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing120Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing120"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing120Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing120" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing120"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing150"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 150º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing150Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing150"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing150Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing150" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing150"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing180"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 180º" />
+
+
+                    <ImageView
+                        android:id="@+id/imgBearing180Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing180"
+                     />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing180Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing180" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing180"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing210"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 210º" />
+
+                    <ImageView
+                        android:id="@+id/imgBearing210Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing210"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing210Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing210" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing210"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="6dp"/>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing240"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 240º" />
+
+                    <ImageView
+                        android:id="@+id/imgBearing240Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing240"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing240Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing240" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing240"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing270"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 270º" />
+
+                    <ImageView
+                        android:id="@+id/imgBearing270Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing270"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing270Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing270" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing270"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing300"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 300º" />
+
+                    <ImageView
+                        android:id="@+id/imgBearing300Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing300"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing300Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing300" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing300"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/tvBearing330"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:paddingBottom="@dimen/font_Xsmall"
+                        android:paddingTop="@dimen/font_Xsmall"
+                        android:text="Bearing 330º" />
+
+                    <ImageView
+                        android:id="@+id/imgBearing330Image"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:tag="imgView,Bearing330"
+                         />
+
+                    <ImageButton
+                        android:id="@+id/btnBearing330Image"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="@dimen/camera_btn_size"
+                        android:layout_height="@dimen/camera_btn_size"
+                        android:tag="camBtn,Bearing330" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <CheckBox
+                    android:id="@+id/inputIsBlockingBearing330"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Blocking" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:background="@color/gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_bearing_extra1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Extra1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputBearin_extra1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/section_label"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_bearing_extra2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Extra2">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputBearin_extra2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/section_label"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_bearing_remark1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Remark1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputBearin_remark1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/section_label"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_bearing_remark2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Remark2">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/inputBearin_remark2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/section_label"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:ems="10"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp" />
+
+                <LinearLayout
+                    android:id="@+id/buttonsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:visibility="gone"
+                        android:layout_margin="2dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/clickpress"
+                        android:id="@+id/btnCancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cancel" />
+
+                    <Button
+                        android:layout_margin="2dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/clickpress"
+                        android:id="@+id/btnSave"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Save" />
+
+                    <Button
+                        android:layout_margin="2dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/clickpress"
+                        android:id="@+id/btnUpload"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Upload" />
+                </LinearLayout>
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,1404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_margin="@dimen/margin_small"
+    tools:context=".fragment.SectorDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Technolgy Available"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordetail_edt_techavailable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordetail_img_techavailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Band available"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordetail_edt_bandavailable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_bandavailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna Ports Count"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_APC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_APC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Azimuth"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectoreatail_edt_preazimuth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_preazimuth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Azimuth"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postazimuth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postazimuth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Mechanical Tilt"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_premechanical_tilt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_premechanical_tilt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Mechanical Tilt"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postmechanical_tilt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postmechanical_tilt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Electrical Tilt 2G"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_preelectrical_tilt2g"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_preelectrical_tilt2g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Electrical Tilt 2G"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postelectrical_tilt2g"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postelectrical_tilt2g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Electrical Tilt 3G"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_preelectrical_tilt3g"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_pretelectrical_tilt3g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Electrical Tilt 3G"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postelectrical_tilt3g"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postelectrical_tilt3g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Electrical Tilt 4G F1"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_preelectrical_tilt4gf1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_preelectrical_tilt4gf1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Electrical Tilt 4G F1"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postelectrical_tilt4gf1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postelectrical_tilt4gf1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Electrical Tilt 4G F2"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_preelectrical_tilt4gf2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_preelectrical_tilt4gf2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Electrical Tilt 4G F2"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postelectrical_tilt4gf2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postelectrical_tilt4gf2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pre Electrical Tilt"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_preelectrical_tilt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_preelectrical_tilt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Post Electrical Tilt"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_postelectrical_tilt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_postelectrical_tilt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_antennaheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_antennaheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pole Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_poleheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_poleheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Building height "
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_buildingheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_buildingheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Tower Type"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/sectordeatail_edt_towertype"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_towertype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna Make">
+                </TextView>
+                <EditText
+                    android:textSize="@dimen/font_small"
+                    android:id="@+id/sectordeatail_edt_antennamake"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_antennamake"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna Model">
+                </TextView>
+                <EditText
+                    android:textSize="@dimen/font_small"
+                    android:id="@+id/sectordeatail_edt_antenmodel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_antennamodel"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Clutter Pic">
+                </TextView>
+                <EditText
+                    android:textSize="@dimen/font_small"
+                    android:id="@+id/sectordeatail_edt_clutterpic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_clutterpic"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Tx Bandwidth">
+                </TextView>
+                <EditText
+                    android:textSize="@dimen/font_small"
+                    android:id="@+id/sectordeatail_edt_txbandwidth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_txbandwidth"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna shared Technology">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_AST"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_AST"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna port shared  Technology">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_APST"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_APST"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Type of eNode B ">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_typ_enodeb"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_typ_enodeb"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="MIMO Type">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_mimo"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_mimo"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="RET Visibility in OSS">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_ret"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_ret"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="e Node B Band">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_enodebband"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_enodebband"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Max. Output Power">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_MOP"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_MOP"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Config. Output Power">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_COP"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_COP"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Multiplexer availability ">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_multiplexer_avail"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_multiplexer_avail"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Antenna Pic leg of Tower">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_antennapicleg"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_antennapicleg"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Configured Radio Power">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_CRP"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_CRP"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Power de-boosting (Y/N) with Value">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_powerdeboosting"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_powerdeboosting"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Dynamic Frequency Share (Yes/no)">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_DFS"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_DFS"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="RB per Cell configured">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_rb_percell"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_rb_percell"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="M-MIMO Deployed">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_m_mimo"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_m_mimo"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Feeder Cable type ">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_FCT"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_FCT"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Jumper Cable Type">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_JCT"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_JCT"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Feeder Cable Length">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_FCL"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_FCL"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Jumper Length">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_jumperlength"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_jumperlength"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="PRACH Config Index">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_prachconfig_index"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_prachconfig_index"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Carrier Aggregation (Yes/No)">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_carrieraggregation"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_carrieraggregation"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Attach Configuration Dump of Node">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_ACD"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_ACD"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="VSWR Test">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_VSWRtest"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_VSWRtest"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Uplink Receiver Sensitivity">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_URS"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_URS"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Extra 1">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_extra1"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_extra1"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Extra2">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_extra2"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_extra2"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Remark1">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_remak1"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_remark1"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Remark2">
+                </TextView>
+                <EditText
+                    android:id="@+id/sectordeatail_edt_remak2"
+                    android:textSize="@dimen/font_small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp">
+                </EditText>
+                <ImageButton
+                    android:id="@+id/sectordeatail_img_remark2"
+                    android:background="@android:drawable/ic_menu_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_small"
+                android:layout_gravity="bottom|center"
+                android:id="@+id/btnsectordetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shadow_bg"
+                android:text="Next" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</FrameLayout>
