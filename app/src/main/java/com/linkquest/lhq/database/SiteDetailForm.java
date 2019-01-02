@@ -56,12 +56,13 @@ public class SiteDetailForm {
     private String remark2;
     private String remark2_photo;
     private int flag;
+    private String date;
 
 
     public SiteDetailForm() {
     }
 
-    public SiteDetailForm(String siteid, String siteid_photo, String sitename, String sitename_photo, String towersiteid, String towersiteid_photo, String towercompanyname, String towercompanyname__photo, String siteaddress, String siteaddress_photo, String sectorid, String sectorid_photo, String lat, String log, String sitetype, String sitetype_photo, String buildingfloor, String buildingfloor_photo, String buildingheight, String buildingheight_photo, String towerheight, String towerheight_photo, String fulltowerphoto, String fulltowerphoto_photo, String nodebtype, String nodebtype_photo, String classical, String classical_photo, String enodebtype, String enodebtype_photo, String anchoroperator, String anchoroperator_photo, String sharingopco1, String sharingopco1_photo, String sharingopco2, String sharingopco2_photo, String sharingopco3, String sharingopco3_photo, String infraprovider, String infraprovider_photo, String type_id_od, String type_id_od_photo, String infrashared, String infrashared_photo, String extra1, String extra1_photo, String extra2, String extra2_photo, String remark1, String remark1_photo, String remark2, String remark2_photo, int flag) {
+    public SiteDetailForm(String siteid, String siteid_photo, String sitename, String sitename_photo, String towersiteid, String towersiteid_photo, String towercompanyname, String towercompanyname__photo, String siteaddress, String siteaddress_photo, String sectorid, String sectorid_photo, String lat, String log, String sitetype, String sitetype_photo, String buildingfloor, String buildingfloor_photo, String buildingheight, String buildingheight_photo, String towerheight, String towerheight_photo, String fulltowerphoto, String fulltowerphoto_photo, String nodebtype, String nodebtype_photo, String classical, String classical_photo, String enodebtype, String enodebtype_photo, String anchoroperator, String anchoroperator_photo, String sharingopco1, String sharingopco1_photo, String sharingopco2, String sharingopco2_photo, String sharingopco3, String sharingopco3_photo, String infraprovider, String infraprovider_photo, String type_id_od, String type_id_od_photo, String infrashared, String infrashared_photo, String extra1, String extra1_photo, String extra2, String extra2_photo, String remark1, String remark1_photo, String remark2, String remark2_photo, int flag,String date) {
         this.siteid = siteid;
         this.siteid_photo = siteid_photo;
         this.sitename = sitename;
@@ -115,6 +116,7 @@ public class SiteDetailForm {
         this.remark2 = remark2;
         this.remark2_photo = remark2_photo;
         this.flag = flag;
+        this.date = date;
     }
 
     public int getId() {
@@ -547,5 +549,74 @@ public class SiteDetailForm {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String toString(){
+
+        return id+","+
+                siteid+","+
+                siteid_photo+","+
+                sitename+","+
+                sitename_photo+","+
+                towersiteid+","+
+                towersiteid_photo+","+
+                towercompanyname+","+
+                towercompanyname__photo+","+
+                siteaddress+","+
+                siteaddress_photo+","+
+                sectorid+","+
+                sectorid_photo+","+
+                lat+","+
+                log+","+
+                sitetype+","+
+                sitetype_photo+","+
+                buildingfloor+","+
+                buildingfloor_photo+","+
+                buildingheight+","+
+                buildingheight_photo+","+
+                towerheight+","+
+                towerheight_photo+","+
+                fulltowerphoto+","+
+                fulltowerphoto_photo+","+
+                nodebtype+","+
+                nodebtype_photo+","+
+                classical+","+
+                classical_photo+","+
+                enodebtype+","+
+                enodebtype_photo+","+
+                anchoroperator+","+
+                anchoroperator_photo+","+
+                sharingopco1+","+
+                sharingopco1_photo+","+
+                sharingopco2+","+
+                sharingopco2_photo+","+
+                sharingopco3+","+
+                sharingopco3_photo+","+
+                infraprovider+","+
+                infraprovider_photo+","+
+                type_id_od+","+
+                type_id_od_photo+","+
+                infrashared+","+
+                infrashared_photo+","+
+                extra1+","+
+                extra1_photo+","+
+                extra2+","+
+                extra2_photo+","+
+
+                remark1+","+
+                remark1_photo+","+
+                remark2+","+
+                remark2_photo+","+
+                flag+","+
+                date+"," ;
+
     }
 }

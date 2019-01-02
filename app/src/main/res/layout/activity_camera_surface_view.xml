@@ -25,27 +25,24 @@
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <TextView
-                android:textColor="@color/black"
-                android:padding="5dp"
+            <Button
+                android:textColor="@color/white"
+                android:padding="10dp"
                 android:onClick="captureImage"
                 android:background="@drawable/button_shadow_bg"
                 android:id="@+id/capture"
-                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="Capture" />
 
-            <TextView
-                android:textColor="@color/black"
-                android:padding="5dp"
+            <Button
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:padding="10dp"
                 android:background="@drawable/button_shadow_bg"
                 android:id="@+id/back"
-                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Back" />
 
             <LinearLayout

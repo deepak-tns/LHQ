@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    tools:context=".fragment.OtherFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:background="@color/lightgray"
+            android:text="No of Records : "
+            android:id="@+id/tv_otherdetail_count_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:text="Rigger Pic with full Kit &amp; First Aid"
+            android:textSize="@dimen/font_small"></TextView>
+
+        <EditText
+            android:id="@+id/other_riggerpic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_small"></EditText>
+        <ImageView
+            android:id="@+id/ivother_riggerpic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tag="imgView,Bearing0"
+            />
+
+        <ImageButton
+            android:id="@+id/ibother_riggerpic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:text="Engineer Pic"
+            android:textSize="@dimen/font_small"></TextView>
+
+        <EditText
+            android:id="@+id/other_engineerpic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_small"></EditText>
+        <ImageView
+            android:id="@+id/ivother_engineerpic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tag="imgView,Bearing0"
+            />
+
+
+        <ImageButton
+            android:id="@+id/ibother_engineerpic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:text="Car Pic"
+            android:textSize="@dimen/font_small"></TextView>
+
+        <EditText
+            android:id="@+id/other_carpic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_small"></EditText>
+        <ImageView
+            android:id="@+id/iv_other_carpic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tag="imgView,Bearing0"
+            />
+        <ImageButton
+            android:id="@+id/ib_other_carpic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Rigger Pic with climbing Tower"
+            android:textSize="@dimen/font_small"></TextView>
+
+        <EditText
+            android:id="@+id/otherriggerpic_with_tower"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_small"></EditText>
+        <ImageView
+            android:id="@+id/iv_otherriggerpic_with_tower"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tag="imgView,Bearing0"
+            />
+
+        <ImageButton
+            android:id="@+id/ib_otherriggerpic_with_tower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".8"
+            android:text="Rigger Pic during W@H"
+            android:textSize="@dimen/font_small"></TextView>
+
+        <EditText
+            android:id="@+id/other_riggerpicwithwah"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_small"></EditText>
+        <ImageView
+            android:id="@+id/iv_otherriggerpicwithwah"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:tag="imgView,Bearing0"
+            />
+        <ImageButton
+            android:id="@+id/ib_otherriggerpicwithwah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_camera" />
+    </LinearLayout>
+
+       <LinearLayout
+           android:layout_weight="1"
+           android:textColor="@color/white"
+           android:layout_margin="@dimen/margin_large"
+           android:layout_gravity="bottom|center"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+
+        <Button
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:layout_gravity="bottom|center"
+            android:id="@+id/btnothersave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shadow_bg"
+            android:text="Save" />
+
+        <Button
+            android:layout_gravity="bottom|center"
+            android:layout_margin="2dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_shadow_bg"
+            android:id="@+id/btnUpload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Upload" />
+
+       </LinearLayout>
+        <TextView
+            android:id="@+id/tv_otherdetail_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp" />
+
+    </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

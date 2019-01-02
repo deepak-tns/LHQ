@@ -23,4 +23,10 @@ public interface AppConstants {
     public static final String TECHNOLOGYTYPE = "http://13.126.69.214/lqtapp/api/Login/TechTYPE";
     public static final String LOCATION = "http://13.126.69.214/lqtapp/api/Login/location";
 
+    public static final String SURVEYDETAIL ="http://13.126.69.214/lq/api/Login/SurveyDetail";
+    public static final String SITEDETAIL = "http://13.126.69.214/lq/api/Login/SiteDetail";
+    public static final String SECTORDETAIL = "http://13.126.69.214/lq/api/Login/SectorDetail";
+    public static final String SITEPANAROMIC = "http://13.126.69.214/lq/api/Login/SitePanaromic";
+    public static final String OTHERDETAIL = "http://13.126.69.214/lq/api/Login/OtherDetail";
+
 }

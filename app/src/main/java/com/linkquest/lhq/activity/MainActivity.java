@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.fragment.OtherFragment;
 import com.linkquest.lhq.fragment.SiteDetailFragment;
 import com.linkquest.lhq.fragment.SitePanoramicFragment;
 import com.linkquest.lhq.fragment.SiteSurveyFragment;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_sitedetail;
     private TextView tv_sitepanoramic;
     private TextView tv_sectordetail;
+    private TextView tv_otherdetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +67,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_sitedetail=(TextView)findViewById(R.id.tv_sitedetail);
         tv_sitepanoramic=(TextView)findViewById(R.id.tv_sitepanoramic);
         tv_sectordetail=(TextView)findViewById(R.id.tv_sectordetail);
+        tv_otherdetail=(TextView)findViewById(R.id.tv_otherdetail);
 
          tvsiteinfo.setOnClickListener(this);
         tv_sitedetail.setOnClickListener(this);
         tv_sitepanoramic.setOnClickListener(this);
         tv_sectordetail.setOnClickListener(this);
+        tv_otherdetail.setOnClickListener(this);
     }
 
     private void navigationdrawer() {
@@ -112,6 +116,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabFragment()).addToBackStack(null).commit();
+            mDrawerLayout.closeDrawer(mDrawerPane);
+            // startActivity(new Intent (this,RegisterActivity.class));
+
+        }
+
+        if(v == tv_otherdetail){
+
+            //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,OtherFragment.newInstance(1000)).addToBackStack(null).commit();
             mDrawerLayout.closeDrawer(mDrawerPane);
             // startActivity(new Intent (this,RegisterActivity.class));
 

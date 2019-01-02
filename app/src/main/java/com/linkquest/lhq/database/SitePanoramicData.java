@@ -40,11 +40,12 @@ public class SitePanoramicData {
     private String inputBearin_remark2;
 
     private int flag;
+    private String date;
 
     public SitePanoramicData() {
     }
 
-    public SitePanoramicData(String tvBearing0, String tvBearing30, String tvBearing60, String tvBearing90, String tvBearing120, String tvBearing150, String tvBearing180, String tvBearing210, String tvBearing240, String tvBearing270, String tvBearing300, String tvBearing330, String btnBearing0Image, String btnBearing30Image, String btnBearing60Image, String btnBearing90Image, String btnBearing120Image, String btnBearing150Image, String btnBearing180Image, String btnBearing210Image, String btnBearing240Image, String btnBearing270Image, String btnBearing300Image, String btnBearing330Image, String inputBearin_extra1, String inputBearin_extra2, String inputBearin_remark1, String inputBearin_remark2, int flag) {
+    public SitePanoramicData(String tvBearing0, String tvBearing30, String tvBearing60, String tvBearing90, String tvBearing120, String tvBearing150, String tvBearing180, String tvBearing210, String tvBearing240, String tvBearing270, String tvBearing300, String tvBearing330, String btnBearing0Image, String btnBearing30Image, String btnBearing60Image, String btnBearing90Image, String btnBearing120Image, String btnBearing150Image, String btnBearing180Image, String btnBearing210Image, String btnBearing240Image, String btnBearing270Image, String btnBearing300Image, String btnBearing330Image, String inputBearin_extra1, String inputBearin_extra2, String inputBearin_remark1, String inputBearin_remark2, int flag,String date) {
         this.tvBearing0 = tvBearing0;
         this.tvBearing30 = tvBearing30;
         this.tvBearing60 = tvBearing60;
@@ -74,6 +75,7 @@ public class SitePanoramicData {
         this.inputBearin_remark1 = inputBearin_remark1;
         this.inputBearin_remark2 = inputBearin_remark2;
         this.flag = flag;
+        this.date = date;
     }
 
     public int getId() {
@@ -314,5 +316,13 @@ public class SitePanoramicData {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

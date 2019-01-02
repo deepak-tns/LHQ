@@ -15,8 +15,8 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true">
 
             <LinearLayout
@@ -26,6 +26,12 @@
                 android:orientation="vertical"
                 android:padding="@dimen/activity_vertical_margin">
 
+                <TextView
+                    android:background="@color/lightgray"
+                    android:text="No of Records : "
+                    android:id="@+id/tv_sitepanaromic_count_previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -37,8 +43,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 0º" />
 
 
@@ -48,14 +54,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing0"
-                         />
+                        android:tag="imgView,Bearing0" />
 
                     <ImageButton
                         android:id="@+id/btnBearing0Image"
-                       android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing0" />
 
 
@@ -76,9 +81,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -102,8 +107,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 30º" />
 
 
@@ -113,14 +118,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing30"
-                         />
+                        android:tag="imgView,Bearing30" />
 
                     <ImageButton
                         android:id="@+id/btnBearing30Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing30" />
 
 
@@ -141,9 +145,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -168,8 +172,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 60º" />
 
 
@@ -179,14 +183,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing60"
-                         />
+                        android:tag="imgView,Bearing60" />
 
                     <ImageButton
                         android:id="@+id/btnBearing60Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing60" />
 
 
@@ -207,9 +210,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -234,8 +237,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 90º" />
 
 
@@ -245,14 +248,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing90"
-                        />
+                        android:tag="imgView,Bearing90" />
 
                     <ImageButton
                         android:id="@+id/btnBearing90Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing90" />
 
 
@@ -273,9 +275,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -300,8 +302,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 120º" />
 
 
@@ -311,14 +313,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing120"
-                        />
+                        android:tag="imgView,Bearing120" />
 
                     <ImageButton
                         android:id="@+id/btnBearing120Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing120" />
 
 
@@ -339,9 +340,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -366,8 +367,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 150º" />
 
 
@@ -377,14 +378,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing150"
-                        />
+                        android:tag="imgView,Bearing150" />
 
                     <ImageButton
                         android:id="@+id/btnBearing150Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing150" />
 
 
@@ -405,9 +405,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -432,8 +432,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 180º" />
 
 
@@ -443,14 +443,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing180"
-                     />
+                        android:tag="imgView,Bearing180" />
 
                     <ImageButton
                         android:id="@+id/btnBearing180Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing180" />
 
 
@@ -471,9 +470,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -498,8 +497,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 210º" />
 
                     <ImageView
@@ -508,14 +507,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing210"
-                        />
+                        android:tag="imgView,Bearing210" />
 
                     <ImageButton
                         android:id="@+id/btnBearing210Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing210" />
 
                 </LinearLayout>
@@ -535,9 +533,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="6dp"/>
+                    android:layout_height="6dp"
+                    android:background="@color/gray" />
 
 
                 <Space
@@ -563,8 +561,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 240º" />
 
                     <ImageView
@@ -573,14 +571,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing240"
-                         />
+                        android:tag="imgView,Bearing240" />
 
                     <ImageButton
                         android:id="@+id/btnBearing240Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing240" />
 
                 </LinearLayout>
@@ -600,9 +597,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
 
                 <Space
@@ -628,8 +625,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 270º" />
 
                     <ImageView
@@ -638,14 +635,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing270"
-                         />
+                        android:tag="imgView,Bearing270" />
 
                     <ImageButton
                         android:id="@+id/btnBearing270Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing270" />
 
                 </LinearLayout>
@@ -688,8 +684,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 300º" />
 
                     <ImageView
@@ -698,14 +694,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing300"
-                        />
+                        android:tag="imgView,Bearing300" />
 
                     <ImageButton
                         android:id="@+id/btnBearing300Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing300" />
 
                 </LinearLayout>
@@ -725,9 +720,9 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -752,8 +747,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:paddingBottom="@dimen/font_Xsmall"
                         android:paddingTop="@dimen/font_Xsmall"
+                        android:paddingBottom="@dimen/font_Xsmall"
                         android:text="Bearing 330º" />
 
                     <ImageView
@@ -762,14 +757,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:src="@android:drawable/ic_menu_gallery"
-                        android:tag="imgView,Bearing330"
-                         />
+                        android:tag="imgView,Bearing330" />
 
                     <ImageButton
                         android:id="@+id/btnBearing330Image"
-                        android:src="@android:drawable/ic_menu_camera"
                         android:layout_width="@dimen/camera_btn_size"
                         android:layout_height="@dimen/camera_btn_size"
+                        android:src="@android:drawable/ic_menu_camera"
                         android:tag="camBtn,Bearing330" />
 
                 </LinearLayout>
@@ -789,9 +783,10 @@
                     android:layout_height="16dp" />
 
                 <View
-                    android:background="@color/gray"
                     android:layout_width="fill_parent"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="16dp" />
@@ -811,13 +806,13 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:ems="10"
-                        android:inputType="textMultiLine"
-                        />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="6dp" />
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text_input_layout_bearing_extra2"
                     android:layout_width="match_parent"
@@ -833,13 +828,13 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:ems="10"
-                        android:inputType="textMultiLine"
-                        />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="6dp" />
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text_input_layout_bearing_remark1"
                     android:layout_width="match_parent"
@@ -855,13 +850,13 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:ems="10"
-                        android:inputType="textMultiLine"
-                        />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="6dp" />
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text_input_layout_bearing_remark2"
                     android:layout_width="match_parent"
@@ -877,8 +872,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:ems="10"
-                        android:inputType="textMultiLine"
-                        />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <Space
@@ -897,42 +891,50 @@
 
 
                     <Button
-                        android:visibility="gone"
-                        android:layout_margin="2dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/clickpress"
                         android:id="@+id/btnCancel"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
                         android:layout_weight="1"
-                        android:text="Cancel" />
+                        android:background="@drawable/clickpress"
+                        android:text="Cancel"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
 
                     <Button
-                        android:layout_margin="2dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/clickpress"
                         android:id="@+id/btnSave"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
                         android:layout_weight="1"
-                        android:text="Save" />
+                        android:background="@drawable/clickpress"
+                        android:text="Save"
+                        android:textColor="@color/white" />
 
                     <Button
-                        android:layout_margin="2dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/clickpress"
                         android:id="@+id/btnUpload"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
                         android:layout_weight="1"
-                        android:text="Upload" />
+                        android:background="@drawable/clickpress"
+                        android:text="Next"
+                        android:textColor="@color/white"
+                        android:visibility="visible" />
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_sitepanaromic_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1" />
+
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

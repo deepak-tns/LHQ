@@ -1,7 +1,9 @@
 package com.linkquest.lhq.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +15,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -26,9 +29,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.Utils.DrawBitmapAll;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,6 +66,13 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
     private float currentDegree = 0f;
     Bitmap bitmap;
     int pos;
+    private Handler handler;
+    private String time;
+
+    private String lat ="Not Found",log= "Not Found" ;
+    private long lastBackPressTime = 0;
+/////////////////////////////////////////03/12/18
+
     /**
      * Called when the activity is first created.
      */
@@ -71,6 +84,17 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
         cal = Calendar.getInstance();
         current_date = dateFormat.format(cal.getTime());
+
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                time = android.text.format.DateFormat.format("dd-MM-yyyy h:mm:ss:aa", System.currentTimeMillis()).toString();
+
+                handler.postDelayed(this, 1000);
+            }
+
+        }, 1000);
 
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         surfaceHolder = surfaceView.getHolder();
@@ -88,12 +112,10 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
                 String destinationpath = Environment.getExternalStorageDirectory().toString();
                 SimpleDateFormat time_formatter = new SimpleDateFormat("HH:mm:ss");
                 String current_time_str = time_formatter.format(System.currentTimeMillis());
-
                 File destination = new File(destinationpath + "/ESP/SurveyFormFixRow/");
                 if (!destination.exists()) {
                     destination.mkdirs();
                 }
-
                 File file = null;
                 FileOutputStream outStream = null;
                 try {
@@ -112,7 +134,6 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
                 } finally {
                 }
                 getPicturePath =destinationpath + "/ESP/SurveyFormFixRow/" + capturepath;
-
                 Log.d("Log", getPicturePath);*/
 
                 if (data != null) {
@@ -158,7 +179,7 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
                 finish();//finishing activity
             }
         });
-        TextView back =findViewById(R.id.back);
+        final Button back =findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,6 +193,17 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
                 finish();//finishing activity
             }
         });
+        final Button capture =findViewById(R.id.capture);
+
+        capture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                camera.takePicture(null, null, jpegCallback);
+                capture.setClickable(false);
+                capture.setFocusable(false);
+            }
+        });
+
         compasinitial();
     }
     private  void SaveImage(Bitmap finalBitmap) {
@@ -181,14 +213,21 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         SimpleDateFormat time_formatter = new SimpleDateFormat("HH:mm:ss");
         String current_time_str = time_formatter.format(System.currentTimeMillis());
 
-        File destination = new File(destinationpath + "/LHQ/");
+
+            String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + compassAngle.getText().toString();
+            // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+            Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(this, finalBitmap, totalString);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+        File destination = new File(destinationpath + "/LHQTEMP/");
         if (!destination.exists()) {
             destination.mkdirs();
         }
-        capturepath =destinationpath+"/LHQ/"+ current_date + "_" + current_time_str + ".jpg";
+        capturepath =destinationpath+"/LHQTEMP/"+time + ".jpg";
         try {
             FileOutputStream out = new FileOutputStream(capturepath);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 50, out);
             out.flush();
             out.close();
 
@@ -197,16 +236,25 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         }
         getPicturePath =capturepath;
     }
-    public void captureImage(View v) throws IOException {
+   /* public void captureImage(View v) throws IOException {
         //take the picture
+
+        *//*if (this.lastBackPressTime < System.currentTimeMillis() - 4000) {
+            Toast.makeText(this, "Press back again to close this app", 4000);
+            camera.takePicture(null, null, jpegCallback);
+            this.lastBackPressTime = System.currentTimeMillis();
+
+        } else {
+
+            }*//*
         camera.takePicture(null, null, jpegCallback);
-       /* Intent intent=new Intent();
+       *//* Intent intent=new Intent();
 
         // intent.putExtra("text",message);
         intent.putExtra("path",getPicturePath);
-        setResult(1,intent);*/
+        setResult(1,intent);*//*
         //finish();//finishing activity
-    }
+    }*/
 
     public void refreshCamera() {
         if (surfaceHolder.getSurface() == null) {
@@ -220,7 +268,6 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
         }
-
         // set preview size and make any resize, rotate or
         // reformatting changes here
         // start preview with new settings
@@ -278,27 +325,36 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
    @Override
    protected void onResume() {
        super.onResume();
-       sensorManager.registerListener(this, compass, SensorManager.SENSOR_DELAY_NORMAL);
+      // sensorManager.registerListener(this, compass, SensorManager.SENSOR_DELAY_NORMAL);
+       sensorManager.registerListener(this,sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
+       registerReceiver(broadcastReceiver, new IntentFilter(GoogleGPSService.BROADCAST_ACTION));
    }
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+        unregisterReceiver(broadcastReceiver);
     }
 
     private void compasinitial(){
         image = (ImageView)findViewById(R.id.imageViewCompass);
         compassAngle = (TextView)findViewById(R.id.angle);
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        compass = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+       /* compass = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         if(compass != null){
             sensorManager.registerListener( this, compass, SensorManager.SENSOR_DELAY_NORMAL);
-        }
+        }*/
+        sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
 
     }
+
+
+
+
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float degree = Math.round(event.values[0]);
+       /* float degree = Math.round(event.values[0]);
         compassAngle.setText("Heading: " + Float.toString(degree) + " degrees");
         // create a rotation animation (reverse turn degree degrees)
         RotateAnimation ra = new RotateAnimation(currentDegree, -degree, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -308,10 +364,30 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         ra.setFillAfter(true);
         // Start the animation
         image.startAnimation(ra);
-        currentDegree = -degree;
+        currentDegree = -degree;*/
+
+       // commemnt by deepak 12/03/18
+       float degree=Math.round(event.values[0]);
+        compassAngle.setText("Rotation: "+Float.toString(degree)+" degrees");
+        RotateAnimation ra=new RotateAnimation(currentDegree,-degree,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        ra.setDuration(120);
+        ra.setFillAfter(true);
+        image.startAnimation(ra);
+        currentDegree=-degree;
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // mContact = (Contact)getIntent().getExtras().getSerializable(EXTRA_CONTACT);
+            lat = intent.getStringExtra("LAT");
+            log = intent.getStringExtra("LOG");
+            //    Toast.makeText(getActivity(), "Lat : " + lat + "," + "Long : " + log, Toast.LENGTH_LONG).show();
+        }
+    };
 
 }

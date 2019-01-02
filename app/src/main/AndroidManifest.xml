@@ -16,16 +16,22 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.camera"/>
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/logonew"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/logonew"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,32 +40,35 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/DrawerTheme" >
-        </activity>
-        <activity
-            android:name=".activity.RegisterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/DrawerTheme"></activity>
         <activity
+            android:name=".activity.RegisterActivity"
+            android:label="@string/app_name"
+            android:theme="@style/DrawerTheme" />
+        <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-       <service android:name=".GPSTracker"
-           android:enabled="true" />
-       <service android:name=".GoogleGPSService"
-           android:enabled="true"/>
+        <service
+            android:name=".GPSTracker"
+            android:enabled="true" />
+        <service
+            android:name=".GoogleGPSService"
+            android:enabled="true" />
 
         <activity
             android:name=".activity.CameraSurfaceViewActivity"
             android:label="Camera"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SiteAuditAllDataHistory"
+            android:label="@string/title_activity_site_audit_all_data_history"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
-
     </application>
 
 </manifest>

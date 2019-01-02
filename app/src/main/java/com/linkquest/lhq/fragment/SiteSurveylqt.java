@@ -27,9 +27,11 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.linkquest.lhq.CustomClass;
 import com.linkquest.lhq.GPSTracker;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.constants.AppConstants;
@@ -48,8 +50,8 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SiteSurveylqt extends Fragment {
-    private final String TAG = SiteSurveylqt.class.getSimpleName();
+public class SiteSurveylqt extends Fragment   {
+    private final String TAG = SiteSurveylqt.class.getSimpleName() ;
 
     private String SELECT = "-SELECT-";
     private Spinner spinner_siteaudit, spinner_customer, spi_operator, spi_circle, spi_tech, spi_techtype, spi_location;
@@ -71,6 +73,7 @@ public class SiteSurveylqt extends Fragment {
     private DatabaseHandler databaseHandler;
     private String lat;
     private String log;
+    private TextView lat_log;
 
     public SiteSurveylqt() {
         // Required empty public constructor
@@ -85,9 +88,9 @@ public class SiteSurveylqt extends Fragment {
         View v = inflater.inflate(R.layout.fragment_site_surveylqt, container, false);
         final TextView tvdate = (TextView) v.findViewById(R.id.surveyformdate);
         databaseHandler = new DatabaseHandler(getActivity());
-      if(! GoogleGPSService.isRunning){
-          getActivity().startService(new Intent(getActivity(),GoogleGPSService.class));
-      }
+        if (!GoogleGPSService.isRunning) {
+            getActivity().startService(new Intent(getActivity(), GoogleGPSService.class));
+        }
 
 
         handler = new Handler();
@@ -104,16 +107,26 @@ public class SiteSurveylqt extends Fragment {
         addListenerOnButton(v);
         addListenerOnSpinnerItemSelection(v);
 
-
         spinner_siteaudit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                selectitem = parent.getItemAtPosition(position).toString();
-                adapter_listsiteaudit.notifyDataSetChanged();
-                todatasppinercustomer(selectitem);
+              //  selectitem = parent.getItemAtPosition(position).toString();
+                //adapter_listsiteaudit.notifyDataSetChanged();
+               // todatasppinercustomer(selectitem);
 
-                //  dataAdapter.notifyDataSetChanged();
+                listcustomer.clear();
+                listcustomer.add(SELECT);
+                listcustomer.add("ERICSSON");
+                listcustomer.add("NSN");
+                listcustomer.add("SAMSUNG");
+                listcustomer.add("HUAWEI");
+                listcustomer.add("ZTE");
+
+                final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listcustomer);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner_customer.setAdapter(dataAdapter);
+                dataAdapter.notifyDataSetChanged();
 
             }
 
@@ -126,8 +139,18 @@ public class SiteSurveylqt extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-                todatasppineroperator(selectitem);
+              //  todatasppineroperator(selectitem);
+                listoperater.clear();
+                listoperater.add("AIRTEL");
+                listoperater.add("VODAFONE");
+                listoperater.add("IDEA");
+                listoperater.add("VFI");
+                listoperater.add("JIO");
 
+                final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listoperater);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spi_operator.setAdapter(dataAdapter);
+                dataAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -139,7 +162,7 @@ public class SiteSurveylqt extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-                todatasppinerCircle(selectitem);
+                //  todatasppinerCircle(selectitem);
 
             }
 
@@ -152,8 +175,18 @@ public class SiteSurveylqt extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-                todatasppinerTechnology(selectitem);
+               // todatasppinerTechnology(selectitem);
                 todatasppinerLocation(selectitem);
+
+                listtechnology.clear();
+                listtechnology.add("2G");
+                listtechnology.add("3G");
+                listtechnology.add("4G");
+
+                final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listtechnology);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spi_tech.setAdapter(dataAdapter);
+                dataAdapter.notifyDataSetChanged();
 
             }
 
@@ -166,7 +199,15 @@ public class SiteSurveylqt extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-                todatasppinerTechnologyType(selectitem);
+             //   todatasppinerTechnologyType(selectitem);
+                listtechnogytype.clear();
+                listtechnogytype.add("SCFT");
+                listtechnogytype.add("CLUSTER");
+
+                final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listtechnogytype);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spi_techtype.setAdapter(dataAdapter);
+                dataAdapter.notifyDataSetChanged();
 
             }
 
@@ -200,8 +241,8 @@ public class SiteSurveylqt extends Fragment {
     }
 
     public void addListenerOnSpinnerItemSelection(View v) {
-      //  todatasppinersiteadudit();
-        listsiteaudit.add("Select");
+        //  todatasppinersiteadudit();
+        listsiteaudit.add(SELECT);
         listsiteaudit.add("Site Audit");
         listsiteaudit.add("RF Survey");
         listsiteaudit.add("LOS Survey");
@@ -236,6 +277,64 @@ public class SiteSurveylqt extends Fragment {
         adapter_listsiteaudit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_siteaudit.setAdapter(adapter_listsiteaudit);
         // spinner_siteaudit.setOnItemSelectedListener(new MyOnItemSelectedListener());
+
+        listcircle.clear();
+        listcircle.add("Andaman and Nicobar");
+        listcircle.add("Andaman and Nicobar Islands");
+        listcircle.add("Andhra Pradesh");
+        listcircle.add("Arunachal Pradesh");
+        listcircle.add("Assam");
+        listcircle.add("Bihar");
+        listcircle.add("Chandigarh");
+        listcircle.add("Chhattisgarh");
+        listcircle.add("Dadra and Nagar Haveli");
+        listcircle.add("Daman and Diu");
+        listcircle.add("Delhi");
+        listcircle.add("Goa");
+        listcircle.add("Gujarat");
+        listcircle.add("Haryana");
+        listcircle.add("Himachal Pradesh");
+        listcircle.add("Jammu and Kashmir");
+        listcircle.add("Jharkhand");
+        listcircle.add("Karnataka");
+        listcircle.add("Kashmir");
+        listcircle.add("Kerala");
+        listcircle.add("Laccadives");
+        listcircle.add("Madhya Pradesh");
+        listcircle.add("Maharashtra");
+        listcircle.add("Manipur");
+        listcircle.add("Meghalaya");
+        listcircle.add("Mizoram");
+        listcircle.add("Nagaland");
+        listcircle.add("National Capital Territory of Delhi");
+        listcircle.add("Odisha");
+        listcircle.add("Orissa");
+        listcircle.add("Puducherry");
+        listcircle.add("Punjab");
+        listcircle.add("Rajasthan");
+        listcircle.add("Sikkim");
+        listcircle.add("State of Andhra Pradesh");
+        listcircle.add("State of Assam");
+        listcircle.add("State of Chhattisgarh");
+        listcircle.add("State of Gujarat");
+        listcircle.add("State of Himachal Pradesh");
+        listcircle.add("State of Jharkhand");
+        listcircle.add("State of Punjab");
+        listcircle.add("State of Rajasthan");
+        listcircle.add("State of Tripura");
+        listcircle.add("Tamil Nadu");
+        listcircle.add("Telangana");
+        listcircle.add("Tripura");
+        listcircle.add("Union Territory of Puducherry");
+        listcircle.add("Uttar Pradesh");
+        listcircle.add("Uttarakhand");
+        listcircle.add("West Bengal");
+
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listcircle);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spi_circle.setAdapter(dataAdapter);
+        dataAdapter.notifyDataSetChanged();
+
     }
 
     public void addListenerOnButton(View v) {
@@ -251,6 +350,7 @@ public class SiteSurveylqt extends Fragment {
         edtsiteid = (EditText) v.findViewById(R.id.edt_siteid);
         button = (Button) v.findViewById(R.id.button);
         li_other = (LinearLayout) v.findViewById(R.id.li_otherlocation);
+        lat_log = (TextView) v.findViewById(R.id.lat_log);
 
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -308,7 +408,7 @@ public class SiteSurveylqt extends Fragment {
                                     "\nSpinner 1 : " + String.valueOf(spinner_siteaudit.getSelectedItem()) +
                                     "\nSpinner 2 : " + String.valueOf(spinner_customer.getSelectedItem()),
                             Toast.LENGTH_SHORT).show();
-                    databaseHandler.insertSurveyFormData(new SurveyForm(spinner_siteaudit.getSelectedItem().toString(), spinner_customer.getSelectedItem().toString(), spi_operator.getSelectedItem().toString(), spi_circle.getSelectedItem().toString(), spi_tech.getSelectedItem().toString(), spi_techtype.getSelectedItem().toString(), getcustomLocation, edtsiteid.getText().toString(), time,lat,log, 1));
+                    databaseHandler.insertSurveyFormData(new SurveyForm(spinner_siteaudit.getSelectedItem().toString(), spinner_customer.getSelectedItem().toString(), spi_operator.getSelectedItem().toString(), spi_circle.getSelectedItem().toString(), spi_tech.getSelectedItem().toString(), spi_techtype.getSelectedItem().toString(), getcustomLocation, edtsiteid.getText().toString(), time, lat, log, 1));
 
                     SiteSurveylqtReport ldf = new SiteSurveylqtReport();
                     Bundle args = new Bundle();
@@ -324,6 +424,8 @@ public class SiteSurveylqt extends Fragment {
         });
 
     }
+
+
 
     class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
@@ -368,6 +470,22 @@ public class SiteSurveylqt extends Fragment {
                 pDialog.hide();
             }
 
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
         });
         queue.add(queue.add(jsonObjReq));
         //AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
@@ -437,7 +555,24 @@ public class SiteSurveylqt extends Fragment {
 
         });
         queue.add(jsonObjReq);
-       // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParametercustomer(String type) {
@@ -502,8 +637,24 @@ public class SiteSurveylqt extends Fragment {
             }
 
         });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(jsonObjReq);
-      //  AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+        //  AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParameteroperator(String type) {
@@ -556,7 +707,7 @@ public class SiteSurveylqt extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseCircle(response);
-                        Log.v(TAG, response.toString());
+                        Log.v(TAG + "circle", response.toString());
                         pDialog.hide();
 
                     }
@@ -570,8 +721,24 @@ public class SiteSurveylqt extends Fragment {
             }
 
         });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(jsonObjReq);
-       // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+        // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParameterCircle(String type) {
@@ -638,9 +805,24 @@ public class SiteSurveylqt extends Fragment {
             }
 
         });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
 
-queue.add(jsonObjReq);
-       // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+        queue.add(jsonObjReq);
+        // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParametertechnology(String type) {
@@ -708,8 +890,25 @@ queue.add(jsonObjReq);
             }
 
         });
+
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(jsonObjReq);
-      //  AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+        //  AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParametertechnologyType(String type) {
@@ -775,8 +974,25 @@ queue.add(jsonObjReq);
             }
 
         });
+
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
         queue.add(jsonObjReq);
-       // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+        // AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
     private JSONObject JSonobjParameterLocation(String type) {
@@ -824,6 +1040,7 @@ queue.add(jsonObjReq);
         //  GPSTracker.BUS.register(this);
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter(GoogleGPSService.BROADCAST_ACTION));
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -833,21 +1050,21 @@ queue.add(jsonObjReq);
             e.printStackTrace();
         }
     }
+
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // mContact = (Contact)getIntent().getExtras().getSerializable(EXTRA_CONTACT);
-             lat = intent.getStringExtra("LAT");
-             log = intent.getStringExtra("LOG");
-
-                Toast.makeText(getActivity(), "Lat : "+lat+","+ "Long : "+ log, Toast.LENGTH_LONG).show();
-
-
-
+            lat = intent.getStringExtra("LAT");
+            log = intent.getStringExtra("LOG");
+            lat_log.setText(lat + "," + log);
+            //  Toast.makeText(getActivity(), "Lat : "+lat+","+ "Long : "+ log, Toast.LENGTH_LONG).show();
 
 
         }
 
 
     };
+
+
 }

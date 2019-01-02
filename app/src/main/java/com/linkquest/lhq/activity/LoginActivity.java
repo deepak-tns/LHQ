@@ -45,7 +45,10 @@ public class LoginActivity extends AppCompatActivity {
             "android.permission.WRITE_EXTERNAL_STORAGE",
             "android.permission.READ_SMS",
             "android.permission.RECEIVE_SMS",
-            "android.permission.READ_PHONE_STATE"
+            "android.permission.READ_PHONE_STATE",
+            "android.permission.CAMERA"
+
+
     };
     public static final int MULTIPLE_PERMISSIONS = 10;
     String emino;
@@ -63,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         checkPermissions();
 
        emino=  getIMEINumber(this);
-    Log.v("imeno",emino);
+        Log.v("imeno",emino);
 
         //  JSonobjParameter("18459","18459");
 
@@ -98,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 // toHideKeyboard();
                 //initLoginModel();
                 toLogin(edt_loginid.getText().toString(), edt_password.getText().toString());
-
+               // startActivity(new Intent(this, MainActivity.class));
             }
         } else {
             alert(this, getString(R.string.alert_message_no_network), getString(R.string.alert_message_no_network), getString(R.string.labelOk), getString(R.string.labelCancel), false, false, ALERT_TYPE_NO_NETWORK);
@@ -208,8 +211,9 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
                 startActivity(new Intent(this, MainActivity.class));
             } else {
+               // startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(this, "Invalid loginid or passsword", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, MainActivity.class));
+
             }
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
@@ -238,7 +242,7 @@ public class LoginActivity extends AppCompatActivity {
             jsonObject.put("password", password);
             jsonObject.put("imeno", emino);
 
-
+Log.v("imeno",emino);
             // jsonObject.put("ParameterList",jsonArrayParameter);
 
         } catch (JSONException e) {

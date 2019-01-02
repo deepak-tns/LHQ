@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.linkquest.lhq.GPSTracker;
@@ -135,6 +136,9 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private SiteDetailForm siteDetailForm;
 
     private Button btnsitedetail;
+    private Button btnsitedetailsave;
+    private TextView tv_sitedetail_count;
+    private TextView tv_sitedetail_count_previous;
 
     DatabaseHandler db;
 
@@ -178,6 +182,8 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         findviewIDS(v);
         db = new DatabaseHandler(getActivity());
         siteDetailForm = new SiteDetailForm();
+
+        tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString()+db.getCountSiteDetail());
 
         return v;
     }
@@ -236,6 +242,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         remark2 = v.findViewById(R.id.sitedeatail_edt_remark2);
         remark2_photo = v.findViewById(R.id.sitedeatail_img_remark2);
         btnsitedetail = v.findViewById(R.id.btnsitedetail);
+        btnsitedetailsave = v.findViewById(R.id.btnsitedetailsave);
 
          ivsiteid = v.findViewById(R.id.ivsiteid);
          ivsitename = v.findViewById(R.id.ivsitename);
@@ -263,6 +270,9 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
          ivremark1 = v.findViewById(R.id.ivremark1);
         ivremark2 = v.findViewById(R.id.ivremark2);
 
+        tv_sitedetail_count = v.findViewById(R.id.tv_sitedetail_count);
+        tv_sitedetail_count_previous = v.findViewById(R.id.tv_sitedetail_count_previous);
+
         siteid_photo.setOnClickListener(this);
         sitename_photo.setOnClickListener(this);
         towersiteid_photo.setOnClickListener(this);
@@ -289,6 +299,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         remark1_photo.setOnClickListener(this);
         remark2_photo.setOnClickListener(this);
         btnsitedetail.setOnClickListener(this);
+        btnsitedetailsave.setOnClickListener(this);
 
     }
 
@@ -372,29 +383,36 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
             selectImage("25");
         }
 
-        if (v == btnsitedetail) {
+        if (v == btnsitedetailsave) {
 
-            db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo(), sitename.getText().toString(), siteDetailForm.getSitename_photo(),
-                    towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo(), towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo(),
-                    siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo(), sectorid.getText() + "", siteDetailForm.getSectorid_photo(),
-                    edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo(), buildingfloor.getText() + "",
-                    siteDetailForm.getBuildingfloor_photo(), buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo(), towerheight.getText() + "",
-                    siteDetailForm.getTowerheight_photo(), fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo(), nodebtype.getText() + "",
-                    siteDetailForm.getNodebtype_photo(), classical.getText() + "", siteDetailForm.getClassical_photo(), enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo(),
-                    anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo(), sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo(),
-                    sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo(), sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo(),
-                    infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo(), type_id_od.getText() + "", siteDetailForm.getType_id_od_photo(),
-                    infrashared.getText() + "", siteDetailForm.getInfrashared_photo(), extra1.getText() + "", siteDetailForm.getExtra1_photo(),
-                    extra2.getText() + "", siteDetailForm.getExtra2_photo(), remark1.getText() + "", siteDetailForm.getRemark1_photo(), remark2.getText() + "",
-                    siteDetailForm.getRemark2_photo(), 1));
-/*
+            db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo()+"", sitename.getText().toString(), siteDetailForm.getSitename_photo()+"",
+                    towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo()+"", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo()+"",
+                    siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo()+"", sectorid.getText() + "", siteDetailForm.getSectorid_photo()+"",
+                    edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo()+"", buildingfloor.getText() + "",
+                    siteDetailForm.getBuildingfloor_photo()+"", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo()+"", towerheight.getText() + "",
+                    siteDetailForm.getTowerheight_photo()+"", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo()+"", nodebtype.getText() + "",
+                    siteDetailForm.getNodebtype_photo()+"", classical.getText() + "", siteDetailForm.getClassical_photo()+"", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo()+"",
+                    anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo()+"", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo()+"",
+                    sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo()+"", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo()+"",
+                    infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo()+"", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo()+"",
+                    infrashared.getText() + "", siteDetailForm.getInfrashared_photo()+"", extra1.getText() + "", siteDetailForm.getExtra1_photo()+"",
+                    extra2.getText() + "", siteDetailForm.getExtra2_photo()+"", remark1.getText() + "", siteDetailForm.getRemark1_photo()+"", remark2.getText() + "",
+                    siteDetailForm.getRemark2_photo()+"", 1,time));
+
+
+        int count =db.getCountSiteDetail();
+        tv_sitedetail_count.setText(count+"");
+
+
+            /*
 db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","1","1","1","1",
                "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1",
                "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1",1));
   */
         }
-
-
+        if (v == btnsitedetail) {
+            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabFragment()).addToBackStack(null).commit();
+        }
     }
 
     private void selectImage(String Value) {
@@ -419,96 +437,165 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             startActivityForResult(i, 2);
         }
         if (Value.equals("3")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 3);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 3);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",3);
+            startActivityForResult(i, 3);
         }
         if (Value.equals("4")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 4);
+         /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 4);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",4);
+            startActivityForResult(i, 4);
         }
         if (Value.equals("5")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 5);
+            /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 5);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",5);
+            startActivityForResult(i, 5);
         }
         if (Value.equals("6")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 6);
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 6);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",6);
+            startActivityForResult(i, 6);
         }
         if (Value.equals("7")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 7);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 7);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",7);
+            startActivityForResult(i, 7);
         }
         if (Value.equals("8")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 8);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 8);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",8);
+            startActivityForResult(i, 8);
         }
         if (Value.equals("9")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 9);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 9);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",9);
+            startActivityForResult(i, 9);
         }
         if (Value.equals("10")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 10);
+            /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 10);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",10);
+            startActivityForResult(i, 10);
         }
         if (Value.equals("11")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 11);
+            /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 11);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",11);
+            startActivityForResult(i, 11);
         }
         if (Value.equals("12")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 12);
+         /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 12);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",12);
+            startActivityForResult(i, 12);
         }
         if (Value.equals("13")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 13);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 13);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",13);
+            startActivityForResult(i, 13);
         }
         if (Value.equals("14")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 14);
+       /*     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 14);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",14);
+            startActivityForResult(i, 14);
         }
         if (Value.equals("15")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 15);
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 15);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",15);
+            startActivityForResult(i, 15);
         }
         if (Value.equals("16")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 16);
+        /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 16);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",16);
+            startActivityForResult(i, 16);
         }
         if (Value.equals("17")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 17);
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 17);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",17);
+            startActivityForResult(i, 17);
         }
         if (Value.equals("18")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 18);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 18);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",18);
+            startActivityForResult(i, 18);
         }
         if (Value.equals("19")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 19);
+       /*     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 19);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",19);
+            startActivityForResult(i, 19);
         }
         if (Value.equals("20")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 20);
+         /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 20);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",20);
+            startActivityForResult(i, 20);
         }
         if (Value.equals("21")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 21);
+         /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 21);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",21);
+            startActivityForResult(i, 21);
         }
         if (Value.equals("22")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 22);
+         /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 22);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",22);
+            startActivityForResult(i, 22);
         }
         if (Value.equals("23")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 23);
+           /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 23);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",23);
+            startActivityForResult(i, 23);
         }
         if (Value.equals("24")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 24);
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 24);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",24);
+            startActivityForResult(i, 24);
         }
         if (Value.equals("25")) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 25);
+        /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 25);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",25);
+            startActivityForResult(i, 25);
         }
     }
 
@@ -521,88 +608,178 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
 
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
-
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
-                onCameraSurfaceViewActivity(bitmap, "one", angle);
+                onCameraSurfaceViewActivity(path, "one", angle);
 
                 // onCaptureImageResult(data, "one");
             }
             if (requestCode == 2) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
-
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
-                onCameraSurfaceViewActivity(bitmap, "2", angle);
+                onCameraSurfaceViewActivity(path, "2", angle);
                 //  onCaptureImageResult(data, "2");
             }
             if (requestCode == 3) {
-                onCaptureImageResult(data, "3");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "3", angle);
+               // onCaptureImageResult(data, "3");
             }
             if (requestCode == 4) {
-                onCaptureImageResult(data, "4");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "4", angle);
+              //  onCaptureImageResult(data, "4");
             }
             if (requestCode == 5) {
-                onCaptureImageResult(data, "5");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "5", angle);
+                //onCaptureImageResult(data, "5");
             }
             if (requestCode == 6) {
-                onCaptureImageResult(data, "6");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "6", angle);
+               // onCaptureImageResult(data, "6");
             }
             if (requestCode == 7) {
-                onCaptureImageResult(data, "7");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "7", angle);
+               // onCaptureImageResult(data, "7");
             }
             if (requestCode == 8) {
-                onCaptureImageResult(data, "8");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "8", angle);
+               // onCaptureImageResult(data, "8");
             }
             if (requestCode == 9) {
-                onCaptureImageResult(data, "9");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "9", angle);
+              //  onCaptureImageResult(data, "9");
             }
             if (requestCode == 10) {
-                onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "10", angle);
+               // onCaptureImageResult(data, "10");
             }
             if (requestCode == 11) {
-                onCaptureImageResult(data, "11");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "11", angle);
+             //   onCaptureImageResult(data, "11");
             }
             if (requestCode == 12) {
-                onCaptureImageResult(data, "12");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "12", angle);
+            //    onCaptureImageResult(data, "12");
             }
             if (requestCode == 13) {
-                onCaptureImageResult(data, "13");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "13", angle);
+           //     onCaptureImageResult(data, "13");
             }
             if (requestCode == 14) {
-                onCaptureImageResult(data, "14");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "14", angle);
+            //    onCaptureImageResult(data, "14");
             }
             if (requestCode == 15) {
-                onCaptureImageResult(data, "15");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "15", angle);
+            //    onCaptureImageResult(data, "15");
             }
             if (requestCode == 16) {
-                onCaptureImageResult(data, "16");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "16", angle);
+            //    onCaptureImageResult(data, "16");
             }
             if (requestCode == 17) {
-                onCaptureImageResult(data, "17");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "17", angle);
+            //    onCaptureImageResult(data, "17");
             }
             if (requestCode == 18) {
-                onCaptureImageResult(data, "18");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "18", angle);
+            //    onCaptureImageResult(data, "18");
             }
             if (requestCode == 19) {
-                onCaptureImageResult(data, "19");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "19", angle);
+            //    onCaptureImageResult(data, "19");
             }
             if (requestCode == 20) {
-                onCaptureImageResult(data, "20");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "20", angle);
+           //     onCaptureImageResult(data, "20");
             }
             if (requestCode == 21) {
-                onCaptureImageResult(data, "21");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "21", angle);
+            //    onCaptureImageResult(data, "21");
             }
             if (requestCode == 22) {
-                onCaptureImageResult(data, "22");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "22", angle);
+               // onCaptureImageResult(data, "22");
             }
             if (requestCode == 23) {
-                onCaptureImageResult(data, "23");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "23", angle);
+           //     onCaptureImageResult(data, "23");
             }
             if (requestCode == 24) {
-                onCaptureImageResult(data, "24");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "24", angle);
+           //     onCaptureImageResult(data, "24");
             }
             if (requestCode == 25) {
-                onCaptureImageResult(data, "25");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "25", angle);
+           //     onCaptureImageResult(data, "25");
             }
         }
 
@@ -610,7 +787,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
     }
 
 
-    private void onCaptureImageResult(Intent data, String name) {
+  /*  private void onCaptureImageResult(Intent data, String name) {
 
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         //.........................................one.....................................
@@ -1567,16 +1744,16 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             }
         }
         //......................................25................................................................
-    }
+    }*/
 
-    private void onCameraSurfaceViewActivity(Bitmap thumbnail, String name, String angle){
+    private void onCameraSurfaceViewActivity(String thumbnail, String name, String angle){
 
         if (name.equals("one")) {
 
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-                String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
                 // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
                 Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -1602,9 +1779,11 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
                 String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
                 siteDetailForm.setSiteid_photo(imgtxt);
-                ivsiteid.setImageBitmap(decodeBase64(imgtxt));
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsiteid.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
             }
         }
@@ -1613,7 +1792,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-                String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
                 // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
                 Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -1639,9 +1818,908 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
                 String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
-                siteDetailForm.setSiteid_photo(imgtxt);
-                ivsitename.setImageBitmap(decodeBase64(imgtxt));
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSitename_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsitename.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("3")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+            /*    String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setTowersiteid_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivtowersiteid.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("4")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setTowercompanyname__photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivtowercompnyname.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("5")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSiteaddress_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsiteaddress.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("6")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSectorid_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsectorid.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("7")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+               /* String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSitetype_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsitetype.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("8")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setBuildingfloor_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivbuildingfloor.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("9")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setBuildingheight_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivbuildingheight.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("10")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+        /*        String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setTowerheight_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivtowerheight.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("11")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setFulltowerphoto_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivfulltowerphoto.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("12")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setNodebtype_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivnodebtype.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("13")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+           /*     String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setClassical_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivclassicalrrm.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("14")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setEnodebtype_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivenodebtype.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("15")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setAnchoroperator_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivanchoroper.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("16")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSharingopco1_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsharingopco1.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("17")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSharingopco2_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsharingopco2.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("18")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+            /*    String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setSharingopco3_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivsharingopco3.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("19")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+           /*     String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setInfraprovider_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivinfraprovider.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("20")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setType_id_od_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivtypeindoor.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("21")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setInfrashared_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivinfrashared.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("22")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setExtra1_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivextra1.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("23")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setExtra2_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivextra2.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("24")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+             /*   String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setRemark1_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivremark1.setImageBitmap(out);
+                Log.v("img-encode", imgtxt);
+            }
+        }
+        if (name.equals("25")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+               /* String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
+                String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
+                String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                siteDetailForm.setRemark2_photo(imgtxt);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                ivremark2.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
             }
         }
@@ -1686,7 +2764,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             lat = intent.getStringExtra("LAT");
             log = intent.getStringExtra("LOG");
 
-            Toast.makeText(getActivity(), "Lat : " + lat + "," + "Long : " + log, Toast.LENGTH_LONG).show();
+        //    Toast.makeText(getActivity(), "Lat : " + lat + "," + "Long : " + log, Toast.LENGTH_LONG).show();
         }
 
 

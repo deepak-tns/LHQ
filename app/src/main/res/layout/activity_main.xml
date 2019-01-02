@@ -173,6 +173,25 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="16dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+                <TextView
+                    android:visibility="visible"
+                    android:id="@+id/tv_otherdetail"
+                    android:padding="10dp"
+                    android:text="Other Detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"/>
+
             </LinearLayout>
         </ScrollView>
 

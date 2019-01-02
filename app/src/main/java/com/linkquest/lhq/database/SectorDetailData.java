@@ -107,13 +107,15 @@ public class SectorDetailData {
     private String sectordeatail_edt_remak1;
     private String sectordeatail_img_remark1;
     private String sectordeatail_edt_remak2;
-    private String sitedeatail_img_remark2;
+    private String sectordeatail_img_remark2;
+    private String sectordeatailfrgamentname;
     private int flag;
+    private String date;
 
     public SectorDetailData() {
     }
 
-    public SectorDetailData(String sectordetail_edt_techavailable, String sectordetail_img_techavailable, String sectordetail_edt_bandavailable, String sectordeatail_img_bandavailable, String sectordeatail_edt_APC, String sectordeatail_img_APC, String sectoreatail_edt_preazimuth, String sectordeatail_img_preazimuth, String sectordeatail_edt_postazimuth, String sectordeatail_img_postazimuth, String sectordeatail_edt_premechanical_tilt, String sectordeatail_img_premechanical_tilt, String sectordeatail_edt_postmechanical_tilt, String sectordeatail_img_postmechanical_tilt, String sectordeatail_edt_preelectrical_tilt2g, String sectordeatail_img_preelectrical_tilt2g, String sectordeatail_edt_postelectrical_tilt2g, String sectordeatail_img_postelectrical_tilt2g, String sectordeatail_edt_preelectrical_tilt3g, String sectordeatail_img_pretelectrical_tilt3g, String sectordeatail_edt_postelectrical_tilt3g, String sectordeatail_img_postelectrical_tilt3g, String sectordeatail_edt_preelectrical_tilt4gf1, String sectordeatail_img_preelectrical_tilt4gf1, String sectordeatail_edt_postelectrical_tilt4gf1, String sectordeatail_img_postelectrical_tilt4gf1, String sectordeatail_edt_preelectrical_tilt4gf2, String sectordeatail_img_preelectrical_tilt4gf2, String sectordeatail_edt_postelectrical_tilt4gf2, String sectordeatail_img_postelectrical_tilt4gf2, String sectordeatail_edt_preelectrical_tilt, String sectordeatail_img_preelectrical_tilt, String sectordeatail_edt_postelectrical_tilt, String sectordeatail_img_postelectrical_tilt, String sectordeatail_edt_antennaheight, String sectordeatail_img_antennaheight, String sectordeatail_edt_poleheight, String sectordeatail_img_poleheight, String sectordeatail_edt_buildingheight, String sectordeatail_img_buildingheight, String sectordeatail_edt_towertype, String sectordeatail_img_towertype, String sectordeatail_edt_antennamake, String sectordeatail_img_antennamake, String sectordeatail_edt_antenmodel, String sectordeatail_img_antennamodel, String sectordeatail_edt_clutterpic, String sectordeatail_img_clutterpic, String sectordeatail_edt_txbandwidth, String sectordeatail_img_txbandwidth, String sectordeatail_edt_AST, String sectordeatail_img_AST, String sectordeatail_edt_APST, String sectordeatail_img_APST, String sectordeatail_edt_typ_enodeb, String sectordeatail_img_typ_enodeb, String sectordeatail_edt_mimo, String sectordeatail_img_mimo, String sectordeatail_edt_ret, String sectordeatail_img_ret, String sectordeatail_edt_enodebband, String sectordeatail_img_enodebband, String sectordeatail_edt_MOP, String sectordeatail_img_MOP, String sectordeatail_edt_COP, String sectordeatail_img_COP, String sectordeatail_edt_multiplexer_avail, String sectordeatail_img_multiplexer_avail, String sectordeatail_edt_antennapicleg, String sectordeatail_img_antennapicleg, String sectordeatail_edt_CRP, String sectordeatail_img_CRP, String sectordeatail_edt_powerdeboosting, String sectordeatail_img_powerdeboosting, String sectordeatail_edt_DFS, String sectordeatail_img_DFS, String sectordeatail_edt_rb_percell, String sectordeatail_img_rb_percell, String sectordeatail_edt_m_mimo, String sectordeatail_img_m_mimo, String sectordeatail_edt_FCT, String sectordeatail_img_FCT, String sectordeatail_edt_JCT, String sectordeatail_img_JCT, String sectordeatail_edt_FCL, String sectordeatail_img_FCL, String sectordeatail_edt_jumperlength, String sectordeatail_img_jumperlength, String sectordeatail_edt_prachconfig_index, String sectordeatail_img_prachconfig_index, String sectordeatail_edt_carrieraggregation, String sectordeatail_img_carrieraggregation, String sectordeatail_edt_ACD, String sectordeatail_img_ACD, String sectordeatail_edt_VSWRtest, String sectordeatail_img_VSWRtest, String sectordeatail_edt_URS, String sectordeatail_img_URS, String sectordeatail_edt_extra1, String sectordeatail_img_extra1, String sectordeatail_edt_extra2, String sectordeatail_img_extra2, String sectordeatail_edt_remak1, String sectordeatail_img_remark1, String sectordeatail_edt_remak2, String sitedeatail_img_remark2, int flag) {
+    public SectorDetailData(String sectordetail_edt_techavailable, String sectordetail_img_techavailable, String sectordetail_edt_bandavailable, String sectordeatail_img_bandavailable, String sectordeatail_edt_APC, String sectordeatail_img_APC, String sectoreatail_edt_preazimuth, String sectordeatail_img_preazimuth, String sectordeatail_edt_postazimuth, String sectordeatail_img_postazimuth, String sectordeatail_edt_premechanical_tilt, String sectordeatail_img_premechanical_tilt, String sectordeatail_edt_postmechanical_tilt, String sectordeatail_img_postmechanical_tilt, String sectordeatail_edt_preelectrical_tilt2g, String sectordeatail_img_preelectrical_tilt2g, String sectordeatail_edt_postelectrical_tilt2g, String sectordeatail_img_postelectrical_tilt2g, String sectordeatail_edt_preelectrical_tilt3g, String sectordeatail_img_pretelectrical_tilt3g, String sectordeatail_edt_postelectrical_tilt3g, String sectordeatail_img_postelectrical_tilt3g, String sectordeatail_edt_preelectrical_tilt4gf1, String sectordeatail_img_preelectrical_tilt4gf1, String sectordeatail_edt_postelectrical_tilt4gf1, String sectordeatail_img_postelectrical_tilt4gf1, String sectordeatail_edt_preelectrical_tilt4gf2, String sectordeatail_img_preelectrical_tilt4gf2, String sectordeatail_edt_postelectrical_tilt4gf2, String sectordeatail_img_postelectrical_tilt4gf2, String sectordeatail_edt_preelectrical_tilt, String sectordeatail_img_preelectrical_tilt, String sectordeatail_edt_postelectrical_tilt, String sectordeatail_img_postelectrical_tilt, String sectordeatail_edt_antennaheight, String sectordeatail_img_antennaheight, String sectordeatail_edt_poleheight, String sectordeatail_img_poleheight, String sectordeatail_edt_buildingheight, String sectordeatail_img_buildingheight, String sectordeatail_edt_towertype, String sectordeatail_img_towertype, String sectordeatail_edt_antennamake, String sectordeatail_img_antennamake, String sectordeatail_edt_antenmodel, String sectordeatail_img_antennamodel, String sectordeatail_edt_clutterpic, String sectordeatail_img_clutterpic, String sectordeatail_edt_txbandwidth, String sectordeatail_img_txbandwidth, String sectordeatail_edt_AST, String sectordeatail_img_AST, String sectordeatail_edt_APST, String sectordeatail_img_APST, String sectordeatail_edt_typ_enodeb, String sectordeatail_img_typ_enodeb, String sectordeatail_edt_mimo, String sectordeatail_img_mimo, String sectordeatail_edt_ret, String sectordeatail_img_ret, String sectordeatail_edt_enodebband, String sectordeatail_img_enodebband, String sectordeatail_edt_MOP, String sectordeatail_img_MOP, String sectordeatail_edt_COP, String sectordeatail_img_COP, String sectordeatail_edt_multiplexer_avail, String sectordeatail_img_multiplexer_avail, String sectordeatail_edt_antennapicleg, String sectordeatail_img_antennapicleg, String sectordeatail_edt_CRP, String sectordeatail_img_CRP, String sectordeatail_edt_powerdeboosting, String sectordeatail_img_powerdeboosting, String sectordeatail_edt_DFS, String sectordeatail_img_DFS, String sectordeatail_edt_rb_percell, String sectordeatail_img_rb_percell, String sectordeatail_edt_m_mimo, String sectordeatail_img_m_mimo, String sectordeatail_edt_FCT, String sectordeatail_img_FCT, String sectordeatail_edt_JCT, String sectordeatail_img_JCT, String sectordeatail_edt_FCL, String sectordeatail_img_FCL, String sectordeatail_edt_jumperlength, String sectordeatail_img_jumperlength, String sectordeatail_edt_prachconfig_index, String sectordeatail_img_prachconfig_index, String sectordeatail_edt_carrieraggregation, String sectordeatail_img_carrieraggregation, String sectordeatail_edt_ACD, String sectordeatail_img_ACD, String sectordeatail_edt_VSWRtest, String sectordeatail_img_VSWRtest, String sectordeatail_edt_URS, String sectordeatail_img_URS, String sectordeatail_edt_extra1, String sectordeatail_img_extra1, String sectordeatail_edt_extra2, String sectordeatail_img_extra2, String sectordeatail_edt_remak1, String sectordeatail_img_remark1, String sectordeatail_edt_remak2, String sectordeatail_img_remark2, String sectordeatailfrgamentname,int flag,String date) {
         this.sectordetail_edt_techavailable = sectordetail_edt_techavailable;
         this.sectordetail_img_techavailable = sectordetail_img_techavailable;
         this.sectordetail_edt_bandavailable = sectordetail_edt_bandavailable;
@@ -219,8 +221,10 @@ public class SectorDetailData {
         this.sectordeatail_edt_remak1 = sectordeatail_edt_remak1;
         this.sectordeatail_img_remark1 = sectordeatail_img_remark1;
         this.sectordeatail_edt_remak2 = sectordeatail_edt_remak2;
-        this.sitedeatail_img_remark2 = sitedeatail_img_remark2;
+        this.sectordeatail_img_remark2 = sectordeatail_img_remark2;
+        this.sectordeatailfrgamentname = sectordeatailfrgamentname;
         this.flag = flag;
+        this.date = date;
     }
 
     public int getId() {
@@ -1071,12 +1075,22 @@ public class SectorDetailData {
         this.sectordeatail_edt_remak2 = sectordeatail_edt_remak2;
     }
 
-    public String getSitedeatail_img_remark2() {
-        return sitedeatail_img_remark2;
+
+
+    public String getSectordeatail_img_remark2() {
+        return sectordeatail_img_remark2;
     }
 
-    public void setSitedeatail_img_remark2(String sitedeatail_img_remark2) {
-        this.sitedeatail_img_remark2 = sitedeatail_img_remark2;
+    public void setSectordeatail_img_remark2(String sectordeatail_img_remark2) {
+        this.sectordeatail_img_remark2 = sectordeatail_img_remark2;
+    }
+
+    public String getSectordeatailfrgamentname() {
+        return sectordeatailfrgamentname;
+    }
+
+    public void setSectordeatailfrgamentname(String sectordeatailfrgamentname) {
+        this.sectordeatailfrgamentname = sectordeatailfrgamentname;
     }
 
     public int getFlag() {
@@ -1085,5 +1099,13 @@ public class SectorDetailData {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

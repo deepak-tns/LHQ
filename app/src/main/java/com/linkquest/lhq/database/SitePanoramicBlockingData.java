@@ -22,8 +22,8 @@ public class SitePanoramicBlockingData {
 
     }
 
-    public SitePanoramicBlockingData(int id, String blocking0, String blocking30, String blocking60, String blocking90, String blocking120, String blocking150, String blocking180, String blocking210, String blocking240, String blocking270, String blocking300, String blocking330, int flag) {
-        this.id = id;
+    public SitePanoramicBlockingData( String blocking0, String blocking30, String blocking60, String blocking90, String blocking120, String blocking150, String blocking180, String blocking210, String blocking240, String blocking270, String blocking300, String blocking330, int flag) {
+
         this.blocking0 = blocking0;
         this.blocking30 = blocking30;
         this.blocking60 = blocking60;

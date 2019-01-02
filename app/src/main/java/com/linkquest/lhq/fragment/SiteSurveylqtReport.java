@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.linkquest.lhq.CustomClass;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SurveyForm;
@@ -50,7 +51,7 @@ public class SiteSurveylqtReport extends Fragment {
         databaseHandler = new DatabaseHandler(getActivity());
 
         findsIds(v);
-
+      //  CustomClass.geCustomclass().setNotifyData("Deepak");
         return v;
     }
 
