@@ -21,13 +21,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.DrawBitmapAll;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
+import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SectorDetailData;
 
@@ -153,7 +156,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private ImageButton sectordeatail_img_remark2;
     private Button btnsectordetail;
 
-   private ImageView iv_sectordetail_techavailable;
+    private ImageView iv_sectordetail_techavailable;
     private ImageView iv_sectordetail_bandavailable;
     private ImageView iv_sectordetail_APC;
     private ImageView iv_sectordetail_preazimuth;
@@ -207,8 +210,8 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private ImageView iv_sectordetail_remark1;
     private ImageView iv_sectordetail_remark2;
 
-    private String  sectordetail_techavailable ="";
-    private String  sectordetail_bandavailable ="";
+    private String sectordetail_techavailable ="";
+    private String sectordetail_bandavailable ="";
     private String sectordetail_APC ="";
     private String sectordetail_preazimuth ="";
     private String sectordetail_postazimuth ="";
@@ -261,14 +264,154 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private String sectordetail_remark1="";
     private String sectordetail_remark2="";
     private String sectordeatailfrgamentname="";
-private Button btnsectordetailsave;
-private TextView tv_sectordetail_count;
-private TextView tv_sectordetail_count_previous;
+    private Button btnsectordetailsave;
+    private TextView tv_sectordetail_count;
+    private TextView tv_sectordetail_count_previous;
+
+    private LinearLayout linear_sectordetail_techavailable ;
+    private LinearLayout linear_sectordetail_bandavailable ;
+    private LinearLayout linear_sectordetail_APC ;
+    private LinearLayout linear_sectordetail_preazimuth ;
+    private LinearLayout linear_sectordetail_postazimuth ;
+    private LinearLayout linear_sectordetail_premechanical_tilt;
+    private LinearLayout linear_sectordetail_postmechanical_tilt;
+    private LinearLayout linear_sectordetail_preelectrical_tilt2g;
+    private LinearLayout linear_sectordetail_postelectrical_tilt2g;
+    private LinearLayout linear_sectordetail_preelectrical_tilt3g;
+    private LinearLayout linear_sectordetail_postelectrical_tilt3g;
+    private LinearLayout linear_sectordetail_preelectrical_tilt4gf1;
+    private LinearLayout linear_sectordetail_postelectrical_tilt4gf1;
+    private LinearLayout linear_sectordetail_preelectrical_tilt4gf2;
+    private LinearLayout linear_sectordetail_postelectrical_tilt4gf2;
+    private LinearLayout linear_sectordetail_preelectrical_tilt;
+    private LinearLayout linear_sectordetail_postelectrical_tilt;
+    private LinearLayout linear_sectordetail_antennaheight;
+    private LinearLayout linear_sectordetail_poleheight ;
+    private LinearLayout linear_sectordetail_buildingheight;
+    private LinearLayout linear_sectordetail_towertype ;
+    private LinearLayout linear_sectordetail_antenamake;
+    private LinearLayout linear_sectordetail_antenamodel;
+    private LinearLayout linear_sectordetail_cullterpic;
+    private LinearLayout linear_sectordetail_txbandwidth;
+    private LinearLayout linear_sectordetail_AST;
+    private LinearLayout linear_sectordetail_APST;
+    private LinearLayout linear_sectordetail_typeenodeb;
+    private LinearLayout linear_sectordetail_mimotype;
+    private LinearLayout linear_sectordetail_ret;
+    private LinearLayout linear_sectordetail_enodebband;
+    private LinearLayout linear_sectordetail_MOP;
+    private LinearLayout linear_sectordetail_COP;
+    private LinearLayout linear_sectordetail_multiplexer_avail;
+    private LinearLayout linear_sectordetail_antennapicleg ;
+    private LinearLayout linear_sectordetail_CRP ;
+    private LinearLayout linear_sectordetail_powerdeboosting;
+    private LinearLayout linear_sectordetail_DFS;
+    private LinearLayout linear_sectordetail_rb_percell;
+    private LinearLayout linear_sectordetail_m_mimo;
+    private LinearLayout linear_sectordetail_FCT;
+    private LinearLayout linear_sectordetail_JCT;
+    private LinearLayout linear_sectordetail_FCL;
+    private LinearLayout linear_sectordetail_jumperlength;
+    private LinearLayout linear_sectordetail_prachconfig_index;
+    private LinearLayout linear_sectordetail_carrieraggregation;
+    private LinearLayout linear_sectordetail_ACD;
+    private LinearLayout linear_sectordetail_VSWRtest;
+    private LinearLayout linear_sectordetail_URS;
+    private LinearLayout linear_sectordetail_extra1;
+    private LinearLayout linear_sectordetail_extra2;
+    private LinearLayout linear_sectordetail_remark1;
+    private LinearLayout linear_sectordetail_remark2;
+    private LinearLayout linear_sdbasebandtype;
+    private LinearLayout linear_sdrnc ;
+    private LinearLayout linear_sdnoofchannelelement;
+
+    private TextView tv_sectordetail_techavailable ;
+    private TextView tv_sectordetail_bandavailable ;
+    private TextView tv_sectordetail_APC ;
+    private TextView tv_sectordetail_preazimuth ;
+    private TextView tv_sectordetail_postazimuth ;
+    private TextView tv_sectordetail_premechanical_tilt;
+    private TextView tv_sectordetail_postmechanical_tilt;
+    private TextView tv_sectordetail_preelectrical_tilt2g;
+    private TextView tv_sectordetail_postelectrical_tilt2g;
+    private TextView tv_sectordetail_preelectrical_tilt3g;
+    private TextView tv_sectordetail_postelectrical_tilt3g;
+    private TextView tv_sectordetail_preelectrical_tilt4gf1;
+    private TextView tv_sectordetail_postelectrical_tilt4gf1;
+    private TextView tv_sectordetail_preelectrical_tilt4gf2;
+    private TextView tv_sectordetail_postelectrical_tilt4gf2;
+    private TextView tv_sectordetail_preelectrical_tilt;
+    private TextView tv_sectordetail_postelectrical_tilt;
+    private TextView tv_sectordetail_antennaheight;
+    private TextView tv_sectordetail_poleheight ;
+    private TextView tv_sectordetail_buildingheight;
+    private TextView tv_sectordetail_towertype ;
+    private TextView tv_sectordetail_antenamake;
+    private TextView tv_sectordetail_antenamodel;
+    private TextView tv_sectordetail_cullterpic;
+    private TextView tv_sectordetail_txbandwidth;
+    private TextView tv_sectordetail_AST;
+    private TextView tv_sectordetail_APST;
+    private TextView tv_sectordetail_typeenodeb;
+    private TextView tv_sectordetail_mimotype;
+    private TextView tv_sectordetail_ret;
+    private TextView tv_sectordetail_enodebband;
+    private TextView tv_sectordetail_MOP;
+    private TextView tv_sectordetail_COP;
+    private TextView tv_sectordetail_multiplexer_avail;
+    private TextView tv_sectordetail_antennapicleg ;
+    private TextView tv_sectordetail_CRP ;
+    private TextView tv_sectordetail_powerdeboosting;
+    private TextView tv_sectordetail_DFS;
+    private TextView tv_sectordetail_rb_percell;
+    private TextView tv_sectordetail_m_mimo;
+    private TextView tv_sectordetail_FCT;
+    private TextView tv_sectordetail_JCT;
+    private TextView tv_sectordetail_FCL;
+    private TextView tv_sectordetail_jumperlength;
+    private TextView tv_sectordetail_prachconfig_index;
+    private TextView tv_sectordetail_carrieraggregation;
+    private TextView tv_sectordetail_ACD;
+    private TextView tv_sectordetail_VSWRtest;
+    private TextView tv_sectordetail_URS;
+   /* private TextView tv_sectordetail_extra1;
+    private TextView tv_sectordetail_extra2;
+    private TextView tv_sectordetail_remark1;
+    private TextView tv_sectordetail_remark2;*/
+    private TextView tv_sdbasebandtype;
+    private TextView tv_sdrnc ;
+    private TextView tv_sdnoofchannelelement;
+
+
+
+    //insert new row 4/1/19
+    private EditText sdbasebandtype_edt;
+    private ImageButton sdbasebandtype_img;
+    private ImageView sdbasebandtype_iv;
+    private String sdbasebandtype_st ="";
+
+    private EditText sdrnc_edt;
+    private ImageButton sdrnc_img;
+    private ImageView sdrnc_iv;
+    private String sdrnc_st ="";
+
+    private EditText sdnoofchannelelement_edt;
+    private ImageButton sdnoofchannelelement_img;
+    private ImageView sdnoofchannelelement_iv;
+    private String sdnoofchannelelement_st="";
 
     String lat, log;
     Handler handler;
     String time;
     DatabaseHandler db;
+    private SharedPreferenceUtils sharedPreferences;
+    private String changetempleteName;
+    private String changetempleteName_Operator;
+    private  TextView tvextra1;
+    private  TextView tvextra2;
+    private  TextView tvremark1;
+    private  TextView tvremark2;
+
     public SectorDetailFragment() {
         // Required empty public constructor
     }
@@ -303,7 +446,9 @@ private TextView tv_sectordetail_count_previous;
 
         findids(v);
 
-         tv_sectordetail_count_previous.setText(tv_sectordetail_count_previous.getText().toString()+ db.getCountSectorDetail());
+        tv_sectordetail_count_previous.setText(tv_sectordetail_count_previous.getText().toString()+ db.getCountSectorDetail());
+
+        changeTemplete(v);
         return v;
     }
 
@@ -395,6 +540,7 @@ private TextView tv_sectordetail_count_previous;
         sectordeatail_img_JCT = v.findViewById(R.id.sectordeatail_img_JCT);
         sectordeatail_edt_FCL = v.findViewById(R.id.sectordeatail_edt_FCL);
         sectordeatail_img_FCL = v.findViewById(R.id.sectordeatail_img_FCL);
+
         sectordeatail_edt_jumperlength = v.findViewById(R.id.sectordeatail_edt_jumperlength);
         sectordeatail_img_jumperlength = v.findViewById(R.id.sectordeatail_img_jumperlength);
         sectordeatail_edt_prachconfig_index = v.findViewById(R.id.sectordeatail_edt_prachconfig_index);
@@ -477,7 +623,19 @@ private TextView tv_sectordetail_count_previous;
                 iv_sectordetail_remark1  = v.findViewById(R.id.iv_sectordetail_remark1);
         iv_sectordetail_remark2  = v.findViewById(R.id.iv_sectordetail_remark2);
 
+         sdbasebandtype_edt = v.findViewById(R.id.edt_sd_basebandunittype);
+         sdbasebandtype_img = v.findViewById(R.id.ib_sd_basebandunittype);
+         sdbasebandtype_iv =v.findViewById(R.id.iv_sd_basebandunittype);
+         sdrnc_edt = v.findViewById(R.id.edt_sd_rncname);
+         sdrnc_img =v.findViewById(R.id.ib_sd_rncname);
+         sdrnc_iv =v.findViewById(R.id.iv_sd_rncname);
+         sdnoofchannelelement_edt = v.findViewById(R.id.edt_noofchannelelement);
+         sdnoofchannelelement_img = v.findViewById(R.id.ib_sd_noofchannelelement);
+         sdnoofchannelelement_iv = v.findViewById(R.id.iv_sd_noofchannelelement);
 
+        sdbasebandtype_img.setOnClickListener(this);
+        sdrnc_img.setOnClickListener(this);
+        sdnoofchannelelement_img.setOnClickListener(this);
 
        sectordetail_img_techavailable.setOnClickListener(this);
                 sectordeatail_img_bandavailable.setOnClickListener(this);
@@ -539,6 +697,214 @@ private TextView tv_sectordetail_count_previous;
 
 
     }
+
+    private void changeTemplete(View v){
+        sharedPreferences = SharedPreferenceUtils.getInstance();
+        sharedPreferences.setContext(getActivity());
+        // String empId = sharedPreferences.getString(AppConstraint.EMPID);
+        changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
+        changetempleteName_Operator = sharedPreferences.getString(AppConstants.operator);
+        // Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+        //  start change templete code
+        linear_sectordetail_techavailable =v.findViewById(R.id.sectordetail_linear_techavailable);
+        linear_sectordetail_bandavailable = v.findViewById(R.id.sectordetail_linear_bandavailable);
+        linear_sectordetail_APC = v.findViewById(R.id.sectordeatail_linear_APC);
+        linear_sectordetail_preazimuth = v.findViewById(R.id.sectoreatail_linear_preazimuth);
+        linear_sectordetail_postazimuth = v.findViewById(R.id.sectordeatail_linear_postazimuth);
+        linear_sectordetail_premechanical_tilt = v.findViewById(R.id.sectordeatail_linear_premechanical_tilt);
+        linear_sectordetail_postmechanical_tilt = v.findViewById(R.id.sectordeatail_linear_postmechanical_tilt);
+
+        linear_sectordetail_preelectrical_tilt2g = v.findViewById(R.id.sectordeatail_linear_preelectrical_tilt2g);
+        linear_sectordetail_postelectrical_tilt2g = v.findViewById(R.id.sectordeatail_linear_postelectrical_tilt2g);
+        linear_sectordetail_preelectrical_tilt3g = v.findViewById(R.id.sectordeatail_linear_preelectrical_tilt3g);
+        linear_sectordetail_postelectrical_tilt3g = v.findViewById(R.id.sectordeatail_linear_postelectrical_tilt3g);
+        linear_sectordetail_preelectrical_tilt4gf1 = v.findViewById(R.id.sectordeatail_linear_preelectrical_tilt4gf1);
+        linear_sectordetail_postelectrical_tilt4gf1 = v.findViewById(R.id.sectordeatail_linear_postelectrical_tilt4gf1);
+        linear_sectordetail_preelectrical_tilt4gf2 = v.findViewById(R.id.sectordeatail_linear_preelectrical_tilt4gf2);
+        linear_sectordetail_postelectrical_tilt4gf2 = v.findViewById(R.id.sectordeatail_linear_postelectrical_tilt4gf2);
+/*        linear_sectordetail_preelectrical_tilt;
+        linear_sectordetail_postelectrical_tilt;
+        linear_sectordetail_antennaheight;
+        linear_sectordetail_poleheight ;
+        linear_sectordetail_buildingheight;
+        linear_sectordetail_towertype ;
+        linear_sectordetail_antenamake;
+        linear_sectordetail_antenamodel;
+        linear_sectordetail_cullterpic;
+        linear_sectordetail_txbandwidth;
+        linear_sectordetail_AST;
+        linear_sectordetail_APST;
+        linear_sectordetail_typeenodeb;*/
+        linear_sectordetail_mimotype = v.findViewById(R.id.sectordeatail_linear_mimo);
+        linear_sectordetail_ret = v.findViewById(R.id.sectordeatail_linear_ret);
+        linear_sectordetail_enodebband = v.findViewById(R.id.sectordeatail_linear_enodebband);
+        linear_sectordetail_MOP = v.findViewById(R.id.sectordeatail_linear_MOP);
+        linear_sectordetail_COP = v.findViewById(R.id.sectordeatail_linear_COP);
+        linear_sectordetail_multiplexer_avail = v.findViewById(R.id.sectordeatail_linear_multiplexer_avail);
+        linear_sectordetail_antennapicleg  = v.findViewById(R.id.sectordeatail_linear_antennapicleg);
+        linear_sectordetail_CRP  = v.findViewById(R.id.sectordeatail_linear_COP) ;
+        linear_sectordetail_powerdeboosting = v.findViewById(R.id.sectordeatail_linear_CRP);
+        linear_sectordetail_DFS = v.findViewById(R.id.sectordeatail_linear_DFS);
+        linear_sectordetail_rb_percell = v.findViewById(R.id.sectordeatail_linear_rb_percell);
+        linear_sectordetail_m_mimo = v.findViewById(R.id.sectordeatail_linear_m_mimo);
+        linear_sectordetail_FCT = v.findViewById(R.id.sectordeatail_linear_FCT);
+        linear_sectordetail_JCT = v.findViewById(R.id.sectordeatail_linear_JCT);
+        linear_sectordetail_FCL = v.findViewById(R.id.sectordeatail_linear_FCL);
+        linear_sectordetail_jumperlength  = v.findViewById(R.id.sectordeatail_linear_jumperlength);
+        linear_sectordetail_prachconfig_index  = v.findViewById(R.id.sectordeatail_linear_prachconfig_index);
+        linear_sectordetail_carrieraggregation  = v.findViewById(R.id.sectordeatail_linear_carrieraggregation);
+        linear_sectordetail_ACD = v.findViewById(R.id.sectordeatail_linear_ACD);
+        linear_sectordetail_VSWRtest = v.findViewById(R.id.sectordeatail_linear_VSWRtest);
+        linear_sectordetail_URS = v.findViewById(R.id.sectordeatail_linear_URS);
+       // linear_sectordetail_extra1;
+      //  linear_sectordetail_extra2;
+       // linear_sectordetail_remark1;
+        linear_sectordetail_remark2 = v.findViewById(R.id.sectordeatail_linear_remak2);
+        linear_sdbasebandtype = v.findViewById(R.id.linear_sd_basebandunittype);
+      //  linear_sdrnc = v.findViewById(R.id.linear_sd_rncname);
+        linear_sdnoofchannelelement = v.findViewById(R.id.linear_noofchannelelement);
+        tvextra1 = v.findViewById(R.id.sectordeatail_tv_extra1);
+        tvextra2 = v.findViewById(R.id.sectordeatail_tv_extra2);
+        tvremark1 = v.findViewById(R.id.sectordeatail_tv_remak1);
+        tvremark2 = v.findViewById(R.id.sectordeatail_tv_remak2);
+
+       // tv_sectordetail_techavailable ;
+        tv_sectordetail_bandavailable = v.findViewById(R.id.sectordetail_tv_bandavailable) ;
+       // tv_sectordetail_APC ;
+       // tv_sectordetail_preazimuth ;
+      //  tv_sectordetail_postazimuth ;
+      //  tv_sectordetail_premechanical_tilt;
+      //  tv_sectordetail_postmechanical_tilt;
+        tv_sectordetail_preelectrical_tilt2g =  v.findViewById(R.id.sectordeatail_tv_preelectrical_tilt2g) ;
+        tv_sectordetail_postelectrical_tilt2g =  v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt2g) ;
+        tv_sectordetail_preelectrical_tilt3g =  v.findViewById(R.id.sectordeatail_tv_preelectrical_tilt3g) ;
+        tv_sectordetail_postelectrical_tilt3g =  v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt3g) ;
+        tv_sectordetail_preelectrical_tilt4gf1 =  v.findViewById(R.id.sectordeatail_tv_preelectrical_tilt4gf1) ;
+        tv_sectordetail_postelectrical_tilt4gf1 =  v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt4gf1) ;
+        tv_sectordetail_preelectrical_tilt4gf2 =  v.findViewById(R.id.sectordeatail_tv_preelectrical_tilt4gf2) ;
+        tv_sectordetail_postelectrical_tilt4gf2 =  v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt4gf2) ;
+      //  tv_sectordetail_preelectrical_tilt;
+      //  tv_sectordetail_postelectrical_tilt;
+     //   tv_sectordetail_antennaheight;
+        tv_sectordetail_poleheight   =  v.findViewById(R.id.sectordeatail_tv_poleheight) ;
+        tv_sectordetail_buildingheight  =  v.findViewById(R.id.sectordeatail_tv_buildingheight) ;
+    //    tv_sectordetail_towertype ;
+    //    tv_sectordetail_antenamake;
+    //    tv_sectordetail_antenamodel;
+     //   tv_sectordetail_cullterpic;
+      //  tv_sectordetail_txbandwidth;
+     //   tv_sectordetail_AST;
+      //  tv_sectordetail_APST;
+     //   tv_sectordetail_typeenodeb;
+      //  tv_sectordetail_mimotype;
+      //  tv_sectordetail_ret;
+        tv_sectordetail_enodebband=  v.findViewById(R.id.sectordeatail_tv_enodebband) ;
+        tv_sectordetail_MOP =   v.findViewById(R.id.sectordeatail_tv_MOP) ;
+        tv_sectordetail_COP =   v.findViewById(R.id.sectordeatail_tv_COP) ;
+        tv_sectordetail_multiplexer_avail =   v.findViewById(R.id.sectordeatail_tv_multiplexer_avail) ;
+        tv_sectordetail_antennapicleg =   v.findViewById(R.id.sectordeatail_tv_antennapicleg) ;
+     //   tv_sectordetail_CRP ;
+     //   tv_sectordetail_powerdeboosting;
+     //   tv_sectordetail_DFS;
+     //   tv_sectordetail_rb_percell;
+    //    tv_sectordetail_m_mimo;
+    //    tv_sectordetail_FCT;
+    //    tv_sectordetail_JCT;
+    //    tv_sectordetail_FCL;
+    //    tv_sectordetail_jumperlength;
+  //      tv_sectordetail_prachconfig_index;
+    //    tv_sectordetail_carrieraggregation;
+   //     tv_sectordetail_ACD;
+    //    tv_sectordetail_VSWRtest;
+    //    tv_sectordetail_URS;
+        tv_sdbasebandtype =v.findViewById(R.id.tv_sd_basebandunittype);
+        tv_sdrnc = v.findViewById(R.id.tv_sd_rncname);
+        tv_sdnoofchannelelement = v.findViewById(R.id.tv_noofchannelelement);
+
+
+
+
+        //  end change templete code
+        if(changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")){
+
+            tvextra1.setText("Sector ID");
+            tvextra2.setText("PCI/PSC/BCCH");
+            tvremark1.setText("No of Antenna");
+            tvremark2.setText("Antenna");
+
+            linear_sectordetail_bandavailable.setVisibility(View.GONE);
+          /*  linear_sectordetail_preelectrical_tilt2g.setVisibility(View.GONE);
+            linear_sectordetail_postelectrical_tilt2g.setVisibility(View.GONE);
+            linear_sectordetail_preelectrical_tilt3g.setVisibility(View.GONE);
+            linear_sectordetail_postelectrical_tilt3g.setVisibility(View.GONE);
+            linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
+            linear_sectordetail_postelectrical_tilt4gf1.setVisibility(View.GONE);
+            linear_sectordetail_preelectrical_tilt4gf2.setVisibility(View.GONE);
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);*/
+            linear_sectordetail_mimotype.setVisibility(View.GONE);
+            linear_sectordetail_ret.setVisibility(View.GONE);
+            linear_sectordetail_enodebband.setVisibility(View.GONE);
+            linear_sectordetail_MOP.setVisibility(View.GONE);
+            linear_sectordetail_COP.setVisibility(View.GONE);
+            linear_sectordetail_multiplexer_avail.setVisibility(View.GONE);
+            linear_sectordetail_antennapicleg.setVisibility(View.GONE);
+            linear_sectordetail_CRP.setVisibility(View.GONE);
+            linear_sectordetail_powerdeboosting.setVisibility(View.GONE);
+            linear_sectordetail_DFS.setVisibility(View.GONE);
+            linear_sectordetail_rb_percell.setVisibility(View.GONE);
+            linear_sectordetail_m_mimo.setVisibility(View.GONE);
+            linear_sectordetail_FCT.setVisibility(View.GONE);
+            linear_sectordetail_JCT.setVisibility(View.GONE);
+            linear_sectordetail_FCL.setVisibility(View.GONE);
+            linear_sectordetail_jumperlength.setVisibility(View.GONE);
+            linear_sectordetail_prachconfig_index.setVisibility(View.GONE);
+            linear_sectordetail_carrieraggregation.setVisibility(View.GONE);
+            linear_sectordetail_ACD.setVisibility(View.GONE);
+            linear_sectordetail_VSWRtest.setVisibility(View.GONE);
+            linear_sectordetail_URS.setVisibility(View.GONE);
+            linear_sdbasebandtype.setVisibility(View.GONE);
+            linear_sdnoofchannelelement.setVisibility(View.GONE);
+        }
+        if(changetempleteName_Operator.equalsIgnoreCase("VFI")) {
+
+
+            tv_sectordetail_bandavailable.setText("Multi Layer Supported (8, 16, 24, 32)");
+
+            tv_sectordetail_preelectrical_tilt2g .setText("Pcell carrier Bandwidth");
+            tv_sectordetail_postelectrical_tilt2g.setText("Scell carrier Bandwidth");
+            tv_sectordetail_preelectrical_tilt3g.setText("DC 3G (Yes/No)");
+            tv_sectordetail_postelectrical_tilt3g .setText("Power RS Boost (Pb value)");
+            tv_sectordetail_preelectrical_tilt4gf1 .setText("Uplink RSSI all Antenna Port (below-115dbm)");
+
+            tv_sectordetail_postelectrical_tilt4gf1 .setText("Antenna Element (xTxR) (x=32;64;128)");
+
+            tv_sectordetail_preelectrical_tilt4gf2 .setText("Backhaul Bandwidth");
+            tv_sectordetail_postelectrical_tilt4gf2.setText("Carrier Aggregation (mention Band & BW of CC)");
+            tv_sectordetail_poleheight .setText("Scell Configurations (2CC, 3CC, 4CC dual F+T)");
+            tv_sectordetail_buildingheight.setText("UL RSSI interference check");
+
+            tv_sectordetail_enodebband.setText("No of Dedicated TSL for Data");
+            tv_sectordetail_enodebband.setHeight(60);
+            tv_sectordetail_MOP .setText("Config. Radio Power 4G");
+            tv_sectordetail_COP .setText("Config. Radio Power 3G");
+            tv_sectordetail_multiplexer_avail.setText("No of TRX");
+            tv_sectordetail_antennapicleg .setText("No of SDCCH");
+            tvremark1.setText("Remark");
+           // tvremark2.setText("");
+            tvextra1.setText("Node B Power cell wise (20W/40W/60W)");
+            tvextra1.setHeight(60);
+            tvextra2.setText("Node B transmitter output power measurement test.");
+            tvextra2.setHeight(60);
+           // tv_sdbasebandtype .setText("");
+           // tv_sdrnc .setText("");
+           // tv_sdnoofchannelelement .setText("");
+
+            linear_sectordetail_remark2.setVisibility(View.GONE);
+
+
+        }
+
+        }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -712,16 +1078,34 @@ private TextView tv_sectordetail_count_previous;
         if (v == sectordeatail_img_remark2) {
             selectImage("53");
         }
+        if (v == sdbasebandtype_img) {
+            selectImage("54");
+        }
+        if (v == sdrnc_img) {
+            selectImage("55");
+        }
+        if (v == sdnoofchannelelement_img) {
+            selectImage("56");
+        }
         if (v == btnsectordetailsave) {
 
+/*
         db.insertSectorDetailData(new  SectorDetailData( sectordetail_edt_techavailable.getText()+"", sectordetail_techavailable, sectordetail_edt_bandavailable.getText()+"",  sectordetail_bandavailable ,  sectordeatail_edt_APC.getText()+"",  sectordetail_APC,  sectoreatail_edt_preazimuth.getText()+"",  sectordetail_preazimuth,  sectordeatail_edt_postazimuth.getText()+"", sectordetail_postazimuth,  sectordeatail_edt_premechanical_tilt.getText()+"", sectordetail_premechanical_tilt,  sectordeatail_edt_postmechanical_tilt.getText()+"",  sectordetail_postmechanical_tilt,sectordeatail_edt_preelectrical_tilt2g.getText()+"", sectordetail_preelectrical_tilt2g,  sectordeatail_edt_postelectrical_tilt2g.getText()+"", sectordetail_postelectrical_tilt2g,  sectordeatail_edt_preelectrical_tilt3g.getText()+"",  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_postelectrical_tilt3g.getText()+"",
                  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_preelectrical_tilt4gf1.getText()+"",  sectordetail_preelectrical_tilt4gf1,  sectordeatail_edt_postelectrical_tilt4gf1.getText()+"", sectordetail_postelectrical_tilt4gf1,  sectordeatail_edt_preelectrical_tilt4gf2.getText()+"", sectordetail_preelectrical_tilt4gf2, sectordeatail_edt_postelectrical_tilt4gf2.getText()+"",sectordetail_postelectrical_tilt4gf2,  sectordeatail_edt_preelectrical_tilt.getText()+"", sectordetail_preelectrical_tilt,  sectordeatail_edt_postelectrical_tilt.getText()+"",sectordetail_postelectrical_tilt,  sectordeatail_edt_antennaheight.getText()+"", sectordetail_antennaheight, sectordeatail_edt_poleheight.getText()+"",  sectordetail_poleheight, sectordeatail_edt_buildingheight.getText()+"",sectordetail_buildingheight,sectordeatail_edt_towertype.getText()+"",sectordetail_towertype, sectordeatail_edt_antennamake.getText()+"",sectordetail_antenamake ,
                 sectordeatail_edt_antenmodel.getText()+"",  sectordetail_antenamodel,  sectordeatail_edt_clutterpic.getText()+"", sectordetail_cullterpic, sectordeatail_edt_txbandwidth.getText()+"", sectordetail_txbandwidth,sectordeatail_edt_AST.getText()+"", sectordetail_AST, sectordeatail_edt_APST.getText()+"",  sectordetail_APST, sectordeatail_edt_typ_enodeb.getText()+"", sectordetail_typeenodeb,  sectordeatail_edt_mimo.getText()+"", sectordetail_mimotype,  sectordeatail_edt_ret.getText()+"",sectordetail_ret, sectordeatail_edt_enodebband.getText()+"",sectordetail_enodebband, sectordeatail_edt_MOP.getText()+"",  sectordetail_MOP,  sectordeatail_edt_COP.getText()+"",sectordetail_COP,  sectordeatail_edt_multiplexer_avail.getText()+"",  sectordetail_multiplexer_avail,  sectordeatail_edt_antennapicleg.getText()+"", sectordetail_antennapicleg,  sectordeatail_edt_CRP.getText()+"",sectordetail_CRP,  sectordeatail_edt_powerdeboosting.getText()+"", sectordetail_powerdeboosting,
                  sectordeatail_edt_DFS.getText()+"", sectordetail_DFS, sectordeatail_edt_rb_percell.getText()+"",sectordetail_rb_percell,  sectordeatail_edt_m_mimo.getText()+"", sectordetail_img_m_mimo,  sectordeatail_edt_FCT.getText()+"", sectordetail_FCT,sectordeatail_edt_JCT.getText()+"", sectordetail_JCT,  sectordeatail_edt_FCL.getText()+"", sectordetail_FCL, sectordeatail_edt_jumperlength.getText()+"", sectordetail_jumperlength,  sectordeatail_edt_prachconfig_index.getText()+"",  sectordetail_prachconfig_index, sectordeatail_edt_carrieraggregation.getText()+"",sectordetail_carrieraggregation,  sectordeatail_edt_ACD.getText()+"", sectordetail_ACD, sectordeatail_edt_VSWRtest.getText()+"", sectordetail_VSWRtest, sectordeatail_edt_URS.getText()+"",sectordetail_URS, sectordeatail_edt_extra1.getText()+"",sectordetail_extra1, sectordeatail_edt_extra2.getText()+"",  sectordetail_extra2, sectordeatail_edt_remak1.getText()+"", sectordetail_remark1, sectordeatail_edt_remak2.getText()+"", sectordetail_remark2, sectordeatailfrgamentname, 1,time));
+*/
+//.................add coloum 4/1/19.......................................
+            db.insertSectorDetailData(new  SectorDetailData( sectordetail_edt_techavailable.getText()+"", sectordetail_techavailable, sectordetail_edt_bandavailable.getText()+"",  sectordetail_bandavailable ,  sectordeatail_edt_APC.getText()+"",  sectordetail_APC,  sectoreatail_edt_preazimuth.getText()+"",  sectordetail_preazimuth,  sectordeatail_edt_postazimuth.getText()+"", sectordetail_postazimuth,  sectordeatail_edt_premechanical_tilt.getText()+"", sectordetail_premechanical_tilt,  sectordeatail_edt_postmechanical_tilt.getText()+"",  sectordetail_postmechanical_tilt,sectordeatail_edt_preelectrical_tilt2g.getText()+"", sectordetail_preelectrical_tilt2g,  sectordeatail_edt_postelectrical_tilt2g.getText()+"", sectordetail_postelectrical_tilt2g,  sectordeatail_edt_preelectrical_tilt3g.getText()+"",  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_postelectrical_tilt3g.getText()+"",
+                    sectordetail_postelectrical_tilt3g,  sectordeatail_edt_preelectrical_tilt4gf1.getText()+"",  sectordetail_preelectrical_tilt4gf1,  sectordeatail_edt_postelectrical_tilt4gf1.getText()+"", sectordetail_postelectrical_tilt4gf1,  sectordeatail_edt_preelectrical_tilt4gf2.getText()+"", sectordetail_preelectrical_tilt4gf2, sectordeatail_edt_postelectrical_tilt4gf2.getText()+"",sectordetail_postelectrical_tilt4gf2,  sectordeatail_edt_preelectrical_tilt.getText()+"", sectordetail_preelectrical_tilt,  sectordeatail_edt_postelectrical_tilt.getText()+"",sectordetail_postelectrical_tilt,  sectordeatail_edt_antennaheight.getText()+"", sectordetail_antennaheight, sectordeatail_edt_poleheight.getText()+"",  sectordetail_poleheight, sectordeatail_edt_buildingheight.getText()+"",sectordetail_buildingheight,sectordeatail_edt_towertype.getText()+"",sectordetail_towertype, sectordeatail_edt_antennamake.getText()+"",sectordetail_antenamake ,
+                    sectordeatail_edt_antenmodel.getText()+"",  sectordetail_antenamodel,  sectordeatail_edt_clutterpic.getText()+"", sectordetail_cullterpic, sectordeatail_edt_txbandwidth.getText()+"", sectordetail_txbandwidth,sectordeatail_edt_AST.getText()+"", sectordetail_AST, sectordeatail_edt_APST.getText()+"",  sectordetail_APST, sectordeatail_edt_typ_enodeb.getText()+"", sectordetail_typeenodeb,  sectordeatail_edt_mimo.getText()+"", sectordetail_mimotype,  sectordeatail_edt_ret.getText()+"",sectordetail_ret, sectordeatail_edt_enodebband.getText()+"",sectordetail_enodebband, sectordeatail_edt_MOP.getText()+"",  sectordetail_MOP,  sectordeatail_edt_COP.getText()+"",sectordetail_COP,  sectordeatail_edt_multiplexer_avail.getText()+"",  sectordetail_multiplexer_avail,  sectordeatail_edt_antennapicleg.getText()+"", sectordetail_antennapicleg,  sectordeatail_edt_CRP.getText()+"",sectordetail_CRP,  sectordeatail_edt_powerdeboosting.getText()+"", sectordetail_powerdeboosting,
+                    sectordeatail_edt_DFS.getText()+"", sectordetail_DFS, sectordeatail_edt_rb_percell.getText()+"",sectordetail_rb_percell,  sectordeatail_edt_m_mimo.getText()+"", sectordetail_img_m_mimo,  sectordeatail_edt_FCT.getText()+"", sectordetail_FCT,sectordeatail_edt_JCT.getText()+"", sectordetail_JCT,  sectordeatail_edt_FCL.getText()+"", sectordetail_FCL, sectordeatail_edt_jumperlength.getText()+"", sectordetail_jumperlength,  sectordeatail_edt_prachconfig_index.getText()+"",  sectordetail_prachconfig_index, sectordeatail_edt_carrieraggregation.getText()+"",sectordetail_carrieraggregation,  sectordeatail_edt_ACD.getText()+"", sectordetail_ACD, sectordeatail_edt_VSWRtest.getText()+"", sectordetail_VSWRtest, sectordeatail_edt_URS.getText()+"",sectordetail_URS, sectordeatail_edt_extra1.getText()+"",sectordetail_extra1, sectordeatail_edt_extra2.getText()+"",  sectordetail_extra2, sectordeatail_edt_remak1.getText()+"", sectordetail_remark1, sectordeatail_edt_remak2.getText()+"", sectordetail_remark2, sectordeatailfrgamentname, 1,time,
+                    sdbasebandtype_edt.getText()+"",sdbasebandtype_st,sdrnc_edt.getText()+"",sdrnc_st,sdnoofchannelelement_edt.getText()+"",sdnoofchannelelement_st));
 
-        int count = db.getCountSectorDetail();
+
+            int count = db.getCountSectorDetail();
         tv_sectordetail_count.setText(count+"");
-
+            Toast.makeText(getActivity(),sectordeatailfrgamentname,Toast.LENGTH_LONG).show();
             if(sectordeatailfrgamentname.equalsIgnoreCase( "Sector4"))
             {
                 btnsectordetail.setVisibility(View.VISIBLE);
@@ -1120,6 +1504,27 @@ private TextView tv_sectordetail_count_previous;
             i.putExtra("pos",53);
             startActivityForResult(i, 53);
         }
+        if (Value.equals("54")) {
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 12);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",54);
+            startActivityForResult(i, 54);
+        }
+        if (Value.equals("55")) {
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 12);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",55);
+            startActivityForResult(i, 55);
+        }
+        if (Value.equals("56")) {
+          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 12);*/
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",56);
+            startActivityForResult(i, 56);
+        }
 
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1497,7 +1902,27 @@ private TextView tv_sectordetail_count_previous;
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "53", angle);
             }
-
+            if (requestCode == 54) {
+                //  onCaptureImageResult(data, "12");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "54", angle);
+            }
+            if (requestCode == 55) {
+                //  onCaptureImageResult(data, "12");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "55", angle);
+            }
+            if (requestCode == 56) {
+                //  onCaptureImageResult(data, "12");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "56", angle);
+            }
         }
     }
 
@@ -3457,6 +3882,114 @@ private TextView tv_sectordetail_count_previous;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 iv_sectordetail_remark2.setImageBitmap(out);
                 Log.v("img-encode", sectordetail_remark2);
+            }
+        }
+        if (name.equals("54")) {
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle+ "\n"+"Blocking 330";
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);*/
+                sdbasebandtype_st = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                sdbasebandtype_iv.setImageBitmap(out);
+                Log.v("img-encode", sdbasebandtype_st);
+            }
+        }
+        if (name.equals("55")) {
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle+ "\n"+"Blocking 330";
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);*/
+                sdrnc_st = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                sdrnc_iv.setImageBitmap(out);
+                Log.v("img-encode", sdrnc_st);
+            }
+        }
+        if (name.equals("56")) {
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle+ "\n"+"Blocking 330";
+                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
+                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String destinationpath = Environment.getExternalStorageDirectory().toString();
+                File destination = new File(destinationpath + "/LinkQuest/");
+                if (!destination.exists()) {
+                    destination.mkdirs();
+                }
+                File file = null;
+                FileOutputStream fo;
+                try {
+                    // destination.createNewFile();
+                    file = new File(destination, time + ".jpg");
+                    fo = new FileOutputStream(file);
+                    fo.write(bytes.toByteArray());
+                    fo.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
+                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);*/
+                sdnoofchannelelement_st = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
+                sdnoofchannelelement_iv.setImageBitmap(out);
+                Log.v("img-encode", sdbasebandtype_st);
             }
         }
 

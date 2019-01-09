@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -57,6 +58,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_site_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -92,13 +94,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_towersiteid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Tower Site ID"
                     android:textSize="@dimen/font_small"></TextView>
@@ -126,13 +129,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_towercompanyname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Tower Company Name"
                     android:textSize="@dimen/font_small"></TextView>
@@ -160,6 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_site_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -194,11 +199,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_sectorid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_sectorid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -228,6 +235,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_lat_long"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -251,7 +259,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
-                    android:text="Log"
+                    android:text="Long"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
@@ -264,6 +272,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_sitetype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -298,13 +307,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_building_floor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Building Floor"
                     android:textSize="@dimen/font_small"></TextView>
@@ -332,13 +342,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_buildingheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Building Height"
                     android:textSize="@dimen/font_small"></TextView>
@@ -366,13 +377,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_towerheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Tower/Pole Height"
                     android:textSize="@dimen/font_small"></TextView>
@@ -400,13 +412,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_fulltowerphoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Full Tower Photo"
                     android:textSize="@dimen/font_small"></TextView>
@@ -434,13 +447,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_nodebtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="NodeB Type"
                     android:textSize="@dimen/font_small"></TextView>
@@ -468,13 +482,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_clasicalRRH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Classical/RRH NodeB"
                     android:textSize="@dimen/font_small"></TextView>
@@ -502,13 +517,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_enodebtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="E NodeB Type"
                     android:textSize="@dimen/font_small"></TextView>
@@ -536,13 +552,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_anchoroperator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Anchor Operator"
                     android:textSize="@dimen/font_small"></TextView>
@@ -570,13 +587,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_sharingopco1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Sharing Opco 1"
                     android:textSize="@dimen/font_small"></TextView>
@@ -604,13 +622,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_sharingopco2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Sharing Opco 2"
                     android:textSize="@dimen/font_small"></TextView>
@@ -638,13 +657,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_sharingopco3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Sharing Opco 3"
                     android:textSize="@dimen/font_small"></TextView>
@@ -672,13 +692,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_infraprovider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Infra Provider"
                     android:textSize="@dimen/font_small"></TextView>
@@ -706,11 +727,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_typeindoor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_typeindoor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -740,13 +763,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_infrashared"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Infra Shared"
                     android:textSize="@dimen/font_small"></TextView>
@@ -774,11 +798,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_extra1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_extra1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -808,11 +834,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_extra2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_extra2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -842,11 +870,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sitedeatail_edt_remark1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_remark1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -876,11 +906,14 @@
             </LinearLayout>
 
             <LinearLayout
+
+                android:id="@+id/linear_sitedeatail_edt_remark2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sitedeatail_tv_remark2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"

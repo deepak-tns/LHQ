@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:layout_margin="@dimen/margin_small"
+    android:orientation="vertical"
     tools:context=".fragment.SectorDetailFragment">
 
     <ScrollView
@@ -23,13 +24,13 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/sectordetail_linear_techavailable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
-
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -46,8 +47,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_techavailable"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -59,11 +60,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordetail_linear_bandavailable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordetail_tv_bandavailable"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -80,8 +84,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_bandavailable"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -93,11 +97,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_APC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -114,8 +120,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_APC"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -127,13 +133,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectoreatail_linear_preazimuth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Pre Azimuth"
                     android:textSize="@dimen/font_small"></TextView>
@@ -148,8 +156,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preazimuth"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -161,13 +169,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postazimuth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Post Azimuth"
                     android:textSize="@dimen/font_small"></TextView>
@@ -182,8 +192,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postazimuth"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -195,11 +205,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_premechanical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -216,8 +228,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_premechanical_tilt"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -229,13 +241,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postmechanical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Post Mechanical Tilt"
                     android:textSize="@dimen/font_small"></TextView>
@@ -263,13 +276,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_preelectrical_tilt2g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_preelectrical_tilt2g"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Pre Electrical Tilt 2G"
                     android:textSize="@dimen/font_small"></TextView>
@@ -297,13 +312,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postelectrical_tilt2g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_postelectrical_tilt2g"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Post Electrical Tilt 2G"
                     android:textSize="@dimen/font_small"></TextView>
@@ -331,13 +348,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_preelectrical_tilt3g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_preelectrical_tilt3g"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Pre Electrical Tilt 3G"
                     android:textSize="@dimen/font_small"></TextView>
@@ -365,13 +384,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postelectrical_tilt3g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_postelectrical_tilt3g"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Post Electrical Tilt 3G"
                     android:textSize="@dimen/font_small"></TextView>
@@ -399,11 +420,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_preelectrical_tilt4gf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_preelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -420,8 +444,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preelectrical_tilt4gf1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -433,11 +457,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postelectrical_tilt4gf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_postelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -454,8 +481,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postelectrical_tilt4gf1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -467,11 +494,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_preelectrical_tilt4gf2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_preelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -488,8 +518,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preelectrical_tilt4gf2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -501,11 +531,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postelectrical_tilt4gf2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_postelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -522,8 +556,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postelectrical_tilt4gf2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -535,13 +569,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_preelectrical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Pre Electrical Tilt"
                     android:textSize="@dimen/font_small"></TextView>
@@ -569,13 +604,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_postelectrical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Post Electrical Tilt"
                     android:textSize="@dimen/font_small"></TextView>
@@ -603,13 +639,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_antennaheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna Height"
                     android:textSize="@dimen/font_small"></TextView>
@@ -637,11 +674,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_poleheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_poleheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -658,8 +698,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_poleheight"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -671,13 +711,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_buildingheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_buildingheight"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Building height "
                     android:textSize="@dimen/font_small"></TextView>
@@ -705,13 +747,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_towertype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Tower Type"
                     android:textSize="@dimen/font_small"></TextView>
@@ -739,13 +782,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_antennamake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna Make"
                     android:textSize="@dimen/font_small"></TextView>
@@ -773,13 +817,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_antenmodel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna Model"
                     android:textSize="@dimen/font_small"></TextView>
@@ -807,13 +852,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_clutterpic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Clutter Pic"
                     android:textSize="@dimen/font_small"></TextView>
@@ -841,13 +887,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_txbandwidth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Tx Bandwidth"
                     android:textSize="@dimen/font_small"></TextView>
@@ -875,14 +922,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_AST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna shared Technology"
                     android:textSize="@dimen/font_small"></TextView>
@@ -910,13 +957,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_APST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna port shared  Technology"
                     android:textSize="@dimen/font_small"></TextView>
@@ -944,13 +992,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_typ_enodeb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Type of eNode B "
                     android:textSize="@dimen/font_small"></TextView>
@@ -978,13 +1027,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_mimo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="MIMO Type"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1012,13 +1062,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_ret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="RET Visibility in OSS"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1046,13 +1097,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_enodebband"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_enodebband"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="e Node B Band"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1080,13 +1133,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_MOP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_MOP"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Max. Output Power"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1114,13 +1169,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_COP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_COP"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Config. Output Power"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1148,13 +1205,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_multiplexer_avail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_multiplexer_avail"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Multiplexer availability "
                     android:textSize="@dimen/font_small"></TextView>
@@ -1182,13 +1241,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_antennapicleg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_antennapicleg"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Antenna Pic leg of Tower"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1216,13 +1277,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_CRP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Configured Radio Power"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1250,13 +1312,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_powerdeboosting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Power de-boosting (Y/N) with Value"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1284,15 +1347,16 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_DFS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Dynamic Frequency Share (Yes/no)"
+                    android:text="Dynamic Frequency Share(Yes/no)"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
@@ -1318,13 +1382,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_rb_percell"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="RB per Cell configured"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1352,13 +1417,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_m_mimo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="M-MIMO Deployed"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1386,13 +1452,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_FCT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Feeder Cable type "
                     android:textSize="@dimen/font_small"></TextView>
@@ -1420,13 +1487,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_JCT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Jumper Cable Type"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1454,13 +1522,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_FCL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Feeder Cable Length"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1488,13 +1557,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_jumperlength"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Jumper Length"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1522,13 +1592,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_prachconfig_index"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="PRACH Config Index"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1556,13 +1627,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_carrieraggregation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Carrier Aggregation (Yes/No)"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1590,13 +1662,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_ACD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Attach Configuration Dump of Node"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1624,13 +1697,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_VSWRtest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="VSWR Test"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1658,13 +1732,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_URS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Uplink Receiver Sensitivity"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1692,13 +1768,122 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear_sd_basebandunittype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_sd_basebandunittype"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Baseband Unit Type"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_sd_basebandunittype"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_sd_basebandunittype"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_sd_basebandunittype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_sd_rncname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_sd_rncname"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="RNC Name"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_sd_rncname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_sd_rncname"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_sd_rncname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_noofchannelelement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_noofchannelelement"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="No of Channel Elements"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_noofchannelelement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_sd_noofchannelelement"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_sd_noofchannelelement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sectordeatail_linear_extra1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sectordeatail_tv_extra1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Extra 1"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1726,13 +1911,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_extra2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_extra2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Extra2"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1760,13 +1947,15 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_remak1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_remak1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
                     android:text="Remark1"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1794,11 +1983,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/sectordeatail_linear_remak2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_remak2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1871,4 +2062,4 @@
     </ScrollView>
 
 
-</FrameLayout>
+</RelativeLayout>

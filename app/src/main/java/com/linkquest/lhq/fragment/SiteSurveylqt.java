@@ -55,7 +55,7 @@ public class SiteSurveylqt extends Fragment   {
 
     private String SELECT = "-SELECT-";
     private Spinner spinner_siteaudit, spinner_customer, spi_operator, spi_circle, spi_tech, spi_techtype, spi_location;
-    private EditText edt_other, edtsiteid;
+    private EditText edt_other, edtsiteid, edt_clusterid;
     private LinearLayout li_other;
     private Button button;
     String selectitem;
@@ -91,7 +91,6 @@ public class SiteSurveylqt extends Fragment   {
         if (!GoogleGPSService.isRunning) {
             getActivity().startService(new Intent(getActivity(), GoogleGPSService.class));
         }
-
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -180,8 +179,15 @@ public class SiteSurveylqt extends Fragment   {
 
                 listtechnology.clear();
                 listtechnology.add("2G");
+                listtechnology.add("2G SRAN");
                 listtechnology.add("3G");
-                listtechnology.add("4G");
+                listtechnology.add("4G FDD");
+                listtechnology.add("4G TDD");
+                listtechnology.add("VoLTE");
+                listtechnology.add("VoLTE FDD");
+                listtechnology.add("VoLTE TDD");
+                listtechnology.add("4G & VoLTE");
+                listtechnology.add("Air Scale");
 
                 final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listtechnology);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -328,7 +334,15 @@ public class SiteSurveylqt extends Fragment   {
         listcircle.add("Union Territory of Puducherry");
         listcircle.add("Uttar Pradesh");
         listcircle.add("Uttarakhand");
-        listcircle.add("West Bengal");
+        listcircle.add("MPCG");
+        listcircle.add("Kolkata");
+        listcircle.add("ROB");
+        listcircle.add("ROM");
+        listcircle.add("Mumbai");
+        listcircle.add("UPE");
+        listcircle.add("UPW");
+        listcircle.add("NESA");
+
 
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listcircle);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -348,6 +362,7 @@ public class SiteSurveylqt extends Fragment   {
         spi_location = (Spinner) v.findViewById(R.id.spi_location);
         edt_other = (EditText) v.findViewById(R.id.edt_other);
         edtsiteid = (EditText) v.findViewById(R.id.edt_siteid);
+        edt_clusterid = (EditText) v.findViewById(R.id.edt_clusterid);
         button = (Button) v.findViewById(R.id.button);
         li_other = (LinearLayout) v.findViewById(R.id.li_otherlocation);
         lat_log = (TextView) v.findViewById(R.id.lat_log);
@@ -408,16 +423,14 @@ public class SiteSurveylqt extends Fragment   {
                                     "\nSpinner 1 : " + String.valueOf(spinner_siteaudit.getSelectedItem()) +
                                     "\nSpinner 2 : " + String.valueOf(spinner_customer.getSelectedItem()),
                             Toast.LENGTH_SHORT).show();
-                    databaseHandler.insertSurveyFormData(new SurveyForm(spinner_siteaudit.getSelectedItem().toString(), spinner_customer.getSelectedItem().toString(), spi_operator.getSelectedItem().toString(), spi_circle.getSelectedItem().toString(), spi_tech.getSelectedItem().toString(), spi_techtype.getSelectedItem().toString(), getcustomLocation, edtsiteid.getText().toString(), time, lat, log, 1));
+                    databaseHandler.insertSurveyFormData(new SurveyForm(spinner_siteaudit.getSelectedItem().toString(), spinner_customer.getSelectedItem().toString(), spi_operator.getSelectedItem().toString(), spi_circle.getSelectedItem().toString(), spi_tech.getSelectedItem().toString(), spi_techtype.getSelectedItem().toString(), getcustomLocation, edtsiteid.getText().toString(), time, lat, log, 1,edt_clusterid.getText().toString()));
 
                     SiteSurveylqtReport ldf = new SiteSurveylqtReport();
                     Bundle args = new Bundle();
                     args.putString("YourKey", "YourValue");
                     ldf.setArguments(args);
-
-//Inflate the fragment
+     //Inflate the fragment
                     getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, ldf).addToBackStack(null).commit();
-
                 }
             }
 
@@ -425,10 +438,7 @@ public class SiteSurveylqt extends Fragment   {
 
     }
 
-
-
     class MyOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
@@ -513,21 +523,17 @@ public class SiteSurveylqt extends Fragment   {
                 String surveyType = jsonObject.getString("SurveyType");
                 Log.v(TAG, surveyType);
                 listsiteaudit.add(surveyType);
-
             }
-
             adapter_listsiteaudit.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//.....................end...........Sppiner Site Aduit.........................//
+     //......................end...........Sppiner Site Aduit.........................//
 
     //.....................start...........Sppiner Customer.........................//
-
     private void todatasppinercustomer(String type) {
-
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
         pDialog.show();
@@ -607,7 +613,7 @@ public class SiteSurveylqt extends Fragment   {
         }
     }
 
-//.....................end...........Sppiner Customer.........................//
+    //.....................end...........Sppiner Customer.........................//
 
     //.....................start...........Sppiner operator.........................//
     private void todatasppineroperator(String type) {
@@ -970,6 +976,9 @@ public class SiteSurveylqt extends Fragment   {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.v(TAG, error.toString());
+                listlocation.clear();
+                listlocation.add(SELECT);
+                listlocation.add("Other");
                 pDialog.hide();
             }
 

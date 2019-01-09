@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,9 @@ import com.linkquest.lhq.GPSTracker;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.DrawBitmapAll;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
+import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SiteDetailForm;
 
@@ -106,6 +109,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private EditText remark2;
     private ImageButton remark2_photo;
 
+
     private ImageView ivsiteid;
     private ImageView ivsitename;
     private ImageView ivtowersiteid;
@@ -132,6 +136,32 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private ImageView ivremark1;
     private ImageView ivremark2;
 
+    private  LinearLayout linear_sitename;
+    private  LinearLayout linear_towersiteid;
+    private  LinearLayout linear_towercompanyname;
+    private  LinearLayout linear_siteaddress;
+    private  LinearLayout linear_sectorid;
+    private  LinearLayout linear_edt_lat_long;
+    private  LinearLayout linear_sitetype;
+    private  LinearLayout linear_buildingfloor;
+    private  LinearLayout linear_buildingheight;
+    private  LinearLayout linear_towerheight;
+    private  LinearLayout linear_fulltowerphoto;
+    private  LinearLayout linear_nodebtype;
+    private  LinearLayout linear_classical;
+    private  LinearLayout linear_enodebtype;
+    private  LinearLayout linear_anchoroperator;
+    private  LinearLayout linear_sharingopco1;
+    private  LinearLayout linear_sharingopco2;
+    private  LinearLayout linear_sharingopco3;
+    private  LinearLayout linear_infraprovider;
+    private  LinearLayout linear_type_id_od;
+    private  LinearLayout linear_infrashared;
+    private  LinearLayout linear_extra1;
+    private  LinearLayout linear_extra2;
+    private  LinearLayout linear_remark1;
+    private  LinearLayout linear_remark2;
+
 
     private SiteDetailForm siteDetailForm;
 
@@ -141,7 +171,13 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private TextView tv_sitedetail_count_previous;
 
     DatabaseHandler db;
-
+    private  SharedPreferenceUtils sharedPreferences;
+    private  String changetempleteName;
+    private  String changetempleteName_Operator;
+    private  TextView tvsectorid;
+    private  TextView tvtype_id_od;
+    private  TextView tvextra1;
+    private  TextView tvextra2;
 
     public SiteDetailFragment() {
         // Required empty public constructor
@@ -185,10 +221,42 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString()+db.getCountSiteDetail());
 
+
+        changeTemplete(v);
         return v;
     }
 
     private void findviewIDS(View v) {
+
+      //  start change templete code
+        linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
+        linear_towersiteid =v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
+        linear_towercompanyname=v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
+        linear_siteaddress=v.findViewById(R.id.linear_sitedeatail_edt_site_address);
+        linear_sectorid=v.findViewById(R.id.linear_sitedeatail_edt_sectorid);
+        linear_edt_lat_long=v.findViewById(R.id.linear_sitedeatail_edt_lat_long);
+        linear_sitetype =v.findViewById(R.id.linear_sitedeatail_edt_sitetype);
+        linear_buildingfloor =v.findViewById(R.id.linear_sitedeatail_edt_building_floor);
+        linear_buildingheight =v.findViewById(R.id.linear_sitedeatail_edt_buildingheight);
+        linear_towerheight =v.findViewById(R.id.linear_sitedeatail_edt_towerheight);
+        linear_fulltowerphoto =v.findViewById(R.id.linear_sitedeatail_edt_fulltowerphoto);
+        linear_nodebtype =v.findViewById(R.id.linear_sitedeatail_edt_nodebtype);
+        linear_classical =v.findViewById(R.id.linear_sitedeatail_edt_clasicalRRH);
+        linear_enodebtype =v.findViewById(R.id.linear_sitedeatail_edt_enodebtype);
+        linear_anchoroperator=v.findViewById(R.id.linear_sitedeatail_edt_anchoroperator);
+        linear_sharingopco1 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco1);
+        linear_sharingopco2 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco2);
+        linear_sharingopco3 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco3);
+        linear_infraprovider =v.findViewById(R.id.linear_sitedeatail_edt_infraprovider);
+        linear_type_id_od =v.findViewById(R.id.linear_sitedeatail_edt_typeindoor);
+        linear_infrashared =v.findViewById(R.id.linear_sitedeatail_edt_infrashared);
+        linear_extra1 =v.findViewById(R.id.linear_sitedeatail_edt_extra1);
+        linear_extra2 =v.findViewById(R.id.linear_sitedeatail_edt_extra2);
+        linear_remark1 =v.findViewById(R.id.linear_sitedeatail_edt_remark1);
+        linear_remark2 =v.findViewById(R.id.linear_sitedeatail_edt_remark2);
+        //  end change templete code
+
+
         siteid = v.findViewById(R.id.sitedeatail_edt_site_id);
         siteid_photo = v.findViewById(R.id.sitedeatail_img_site_id);
         sitename = v.findViewById(R.id.sitedeatail_edt_site_name);
@@ -300,6 +368,87 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         remark2_photo.setOnClickListener(this);
         btnsitedetail.setOnClickListener(this);
         btnsitedetailsave.setOnClickListener(this);
+
+    }
+
+    private void changeTemplete(View v){
+        sharedPreferences = SharedPreferenceUtils.getInstance();
+        sharedPreferences.setContext(getActivity());
+        // String empId = sharedPreferences.getString(AppConstraint.EMPID);
+        changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
+        changetempleteName_Operator = sharedPreferences.getString(AppConstants.operator);
+        // Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+        //  start change templete code
+        linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
+        linear_towersiteid =v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
+        linear_towercompanyname=v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
+        linear_siteaddress=v.findViewById(R.id.linear_sitedeatail_edt_site_address);
+        linear_sectorid=v.findViewById(R.id.linear_sitedeatail_edt_sectorid);
+        linear_edt_lat_long=v.findViewById(R.id.linear_sitedeatail_edt_lat_long);
+        linear_sitetype =v.findViewById(R.id.linear_sitedeatail_edt_sitetype);
+        linear_buildingfloor =v.findViewById(R.id.linear_sitedeatail_edt_building_floor);
+        linear_buildingheight =v.findViewById(R.id.linear_sitedeatail_edt_buildingheight);
+        linear_towerheight =v.findViewById(R.id.linear_sitedeatail_edt_towerheight);
+        linear_fulltowerphoto =v.findViewById(R.id.linear_sitedeatail_edt_fulltowerphoto);
+        linear_nodebtype =v.findViewById(R.id.linear_sitedeatail_edt_nodebtype);
+        linear_classical =v.findViewById(R.id.linear_sitedeatail_edt_clasicalRRH);
+        linear_enodebtype =v.findViewById(R.id.linear_sitedeatail_edt_enodebtype);
+        linear_anchoroperator=v.findViewById(R.id.linear_sitedeatail_edt_anchoroperator);
+        linear_sharingopco1 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco1);
+        linear_sharingopco2 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco2);
+        linear_sharingopco3 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco3);
+        linear_infraprovider =v.findViewById(R.id.linear_sitedeatail_edt_infraprovider);
+        linear_type_id_od =v.findViewById(R.id.linear_sitedeatail_edt_typeindoor);
+        linear_infrashared =v.findViewById(R.id.linear_sitedeatail_edt_infrashared);
+        linear_extra1 =v.findViewById(R.id.linear_sitedeatail_edt_extra1);
+        linear_extra2 =v.findViewById(R.id.linear_sitedeatail_edt_extra2);
+        linear_remark1 =v.findViewById(R.id.linear_sitedeatail_edt_remark1);
+        linear_remark2 =v.findViewById(R.id.linear_sitedeatail_edt_remark2);
+
+        tvsectorid =v.findViewById(R.id.sitedeatail_tv_sectorid);
+        tvtype_id_od =v.findViewById(R.id.sitedeatail_tv_typeindoor);
+        tvextra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
+        tvextra2 = v.findViewById(R.id.sitedeatail_tv_extra2);
+        //  end change templete code
+        if(changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")){
+           tvsectorid.setText("No of Sectors");
+           tvtype_id_od.setText("Zone");
+           tvextra1.setText("DT Name");
+           tvextra2.setText("RNO Name");
+
+           linear_towersiteid.setVisibility(View.GONE);
+           linear_sitetype.setVisibility(View.GONE);
+           linear_buildingfloor.setVisibility(View.GONE);
+           linear_buildingheight.setVisibility(View.GONE);
+           linear_towerheight.setVisibility(View.GONE);
+           linear_classical.setVisibility(View.GONE);
+           linear_nodebtype.setVisibility(View.GONE);
+           linear_anchoroperator.setVisibility(View.GONE);
+           linear_sharingopco1.setVisibility(View.GONE);
+            linear_sharingopco2.setVisibility(View.GONE);
+            linear_sharingopco3.setVisibility(View.GONE);
+       }
+        if(changetempleteName_Operator.equalsIgnoreCase("VFI")){
+            tvsectorid.setText("No of Sectors");
+            tvtype_id_od.setText("Zone");
+            tvextra1.setText("DT Name");
+            tvextra2.setText("RNO Name");
+
+            linear_towersiteid.setVisibility(View.GONE);
+          //  linear_sitetype.setVisibility(View.GONE);
+           // linear_buildingfloor.setVisibility(View.GONE);
+            linear_buildingheight.setVisibility(View.GONE);
+            linear_towerheight.setVisibility(View.GONE);
+            linear_classical.setVisibility(View.GONE);
+            linear_nodebtype.setVisibility(View.GONE);
+            linear_anchoroperator.setVisibility(View.GONE);
+            linear_sharingopco1.setVisibility(View.GONE);
+            linear_sharingopco2.setVisibility(View.GONE);
+            linear_sharingopco3.setVisibility(View.GONE);
+            linear_type_id_od.setVisibility(View.GONE);
+            linear_infraprovider.setVisibility(View.GONE);
+             linear_infrashared .setVisibility(View.GONE);
+        }
 
     }
 

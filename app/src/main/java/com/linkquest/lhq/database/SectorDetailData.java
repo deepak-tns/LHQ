@@ -111,6 +111,12 @@ public class SectorDetailData {
     private String sectordeatailfrgamentname;
     private int flag;
     private String date;
+    private String sdbasebandUnitType_edt;
+    private String sdbasebandUnitType_img;
+    private String sdrNCName_edt;
+    private String sdrNCName_img;
+    private String sdnoofChannelElements_edt;
+    private String sdnoofChannelElements_img;
 
     public SectorDetailData() {
     }
@@ -225,6 +231,124 @@ public class SectorDetailData {
         this.sectordeatailfrgamentname = sectordeatailfrgamentname;
         this.flag = flag;
         this.date = date;
+    }
+
+    public SectorDetailData( String sectordetail_edt_techavailable, String sectordetail_img_techavailable, String sectordetail_edt_bandavailable, String sectordeatail_img_bandavailable, String sectordeatail_edt_APC, String sectordeatail_img_APC, String sectoreatail_edt_preazimuth, String sectordeatail_img_preazimuth, String sectordeatail_edt_postazimuth, String sectordeatail_img_postazimuth, String sectordeatail_edt_premechanical_tilt, String sectordeatail_img_premechanical_tilt, String sectordeatail_edt_postmechanical_tilt, String sectordeatail_img_postmechanical_tilt, String sectordeatail_edt_preelectrical_tilt2g, String sectordeatail_img_preelectrical_tilt2g, String sectordeatail_edt_postelectrical_tilt2g, String sectordeatail_img_postelectrical_tilt2g, String sectordeatail_edt_preelectrical_tilt3g, String sectordeatail_img_pretelectrical_tilt3g, String sectordeatail_edt_postelectrical_tilt3g, String sectordeatail_img_postelectrical_tilt3g, String sectordeatail_edt_preelectrical_tilt4gf1, String sectordeatail_img_preelectrical_tilt4gf1, String sectordeatail_edt_postelectrical_tilt4gf1, String sectordeatail_img_postelectrical_tilt4gf1, String sectordeatail_edt_preelectrical_tilt4gf2, String sectordeatail_img_preelectrical_tilt4gf2, String sectordeatail_edt_postelectrical_tilt4gf2, String sectordeatail_img_postelectrical_tilt4gf2, String sectordeatail_edt_preelectrical_tilt, String sectordeatail_img_preelectrical_tilt, String sectordeatail_edt_postelectrical_tilt, String sectordeatail_img_postelectrical_tilt, String sectordeatail_edt_antennaheight, String sectordeatail_img_antennaheight, String sectordeatail_edt_poleheight, String sectordeatail_img_poleheight, String sectordeatail_edt_buildingheight, String sectordeatail_img_buildingheight, String sectordeatail_edt_towertype, String sectordeatail_img_towertype, String sectordeatail_edt_antennamake, String sectordeatail_img_antennamake, String sectordeatail_edt_antenmodel, String sectordeatail_img_antennamodel, String sectordeatail_edt_clutterpic, String sectordeatail_img_clutterpic, String sectordeatail_edt_txbandwidth, String sectordeatail_img_txbandwidth, String sectordeatail_edt_AST, String sectordeatail_img_AST, String sectordeatail_edt_APST, String sectordeatail_img_APST, String sectordeatail_edt_typ_enodeb, String sectordeatail_img_typ_enodeb, String sectordeatail_edt_mimo, String sectordeatail_img_mimo, String sectordeatail_edt_ret, String sectordeatail_img_ret, String sectordeatail_edt_enodebband, String sectordeatail_img_enodebband, String sectordeatail_edt_MOP, String sectordeatail_img_MOP, String sectordeatail_edt_COP, String sectordeatail_img_COP, String sectordeatail_edt_multiplexer_avail, String sectordeatail_img_multiplexer_avail, String sectordeatail_edt_antennapicleg, String sectordeatail_img_antennapicleg, String sectordeatail_edt_CRP, String sectordeatail_img_CRP, String sectordeatail_edt_powerdeboosting, String sectordeatail_img_powerdeboosting, String sectordeatail_edt_DFS, String sectordeatail_img_DFS, String sectordeatail_edt_rb_percell, String sectordeatail_img_rb_percell, String sectordeatail_edt_m_mimo, String sectordeatail_img_m_mimo, String sectordeatail_edt_FCT, String sectordeatail_img_FCT, String sectordeatail_edt_JCT, String sectordeatail_img_JCT, String sectordeatail_edt_FCL, String sectordeatail_img_FCL, String sectordeatail_edt_jumperlength, String sectordeatail_img_jumperlength, String sectordeatail_edt_prachconfig_index, String sectordeatail_img_prachconfig_index, String sectordeatail_edt_carrieraggregation, String sectordeatail_img_carrieraggregation, String sectordeatail_edt_ACD, String sectordeatail_img_ACD, String sectordeatail_edt_VSWRtest, String sectordeatail_img_VSWRtest, String sectordeatail_edt_URS, String sectordeatail_img_URS, String sectordeatail_edt_extra1, String sectordeatail_img_extra1, String sectordeatail_edt_extra2, String sectordeatail_img_extra2, String sectordeatail_edt_remak1, String sectordeatail_img_remark1, String sectordeatail_edt_remak2, String sectordeatail_img_remark2, String sectordeatailfrgamentname, int flag, String date, String sdbasebandUnitType_edt, String sdbasebandUnitType_img, String sdrNCName_edt, String sdrNCName_img, String sdnoofChannelElements_edt, String sdnoofChannelElements_img) {
+        this.sectordetail_edt_techavailable = sectordetail_edt_techavailable;
+        this.sectordetail_img_techavailable = sectordetail_img_techavailable;
+        this.sectordetail_edt_bandavailable = sectordetail_edt_bandavailable;
+        this.sectordeatail_img_bandavailable = sectordeatail_img_bandavailable;
+        this.sectordeatail_edt_APC = sectordeatail_edt_APC;
+        this.sectordeatail_img_APC = sectordeatail_img_APC;
+        this.sectoreatail_edt_preazimuth = sectoreatail_edt_preazimuth;
+        this.sectordeatail_img_preazimuth = sectordeatail_img_preazimuth;
+        this.sectordeatail_edt_postazimuth = sectordeatail_edt_postazimuth;
+        this.sectordeatail_img_postazimuth = sectordeatail_img_postazimuth;
+        this.sectordeatail_edt_premechanical_tilt = sectordeatail_edt_premechanical_tilt;
+        this.sectordeatail_img_premechanical_tilt = sectordeatail_img_premechanical_tilt;
+        this.sectordeatail_edt_postmechanical_tilt = sectordeatail_edt_postmechanical_tilt;
+        this.sectordeatail_img_postmechanical_tilt = sectordeatail_img_postmechanical_tilt;
+        this.sectordeatail_edt_preelectrical_tilt2g = sectordeatail_edt_preelectrical_tilt2g;
+        this.sectordeatail_img_preelectrical_tilt2g = sectordeatail_img_preelectrical_tilt2g;
+        this.sectordeatail_edt_postelectrical_tilt2g = sectordeatail_edt_postelectrical_tilt2g;
+        this.sectordeatail_img_postelectrical_tilt2g = sectordeatail_img_postelectrical_tilt2g;
+        this.sectordeatail_edt_preelectrical_tilt3g = sectordeatail_edt_preelectrical_tilt3g;
+        this.sectordeatail_img_pretelectrical_tilt3g = sectordeatail_img_pretelectrical_tilt3g;
+        this.sectordeatail_edt_postelectrical_tilt3g = sectordeatail_edt_postelectrical_tilt3g;
+        this.sectordeatail_img_postelectrical_tilt3g = sectordeatail_img_postelectrical_tilt3g;
+        this.sectordeatail_edt_preelectrical_tilt4gf1 = sectordeatail_edt_preelectrical_tilt4gf1;
+        this.sectordeatail_img_preelectrical_tilt4gf1 = sectordeatail_img_preelectrical_tilt4gf1;
+        this.sectordeatail_edt_postelectrical_tilt4gf1 = sectordeatail_edt_postelectrical_tilt4gf1;
+        this.sectordeatail_img_postelectrical_tilt4gf1 = sectordeatail_img_postelectrical_tilt4gf1;
+        this.sectordeatail_edt_preelectrical_tilt4gf2 = sectordeatail_edt_preelectrical_tilt4gf2;
+        this.sectordeatail_img_preelectrical_tilt4gf2 = sectordeatail_img_preelectrical_tilt4gf2;
+        this.sectordeatail_edt_postelectrical_tilt4gf2 = sectordeatail_edt_postelectrical_tilt4gf2;
+        this.sectordeatail_img_postelectrical_tilt4gf2 = sectordeatail_img_postelectrical_tilt4gf2;
+        this.sectordeatail_edt_preelectrical_tilt = sectordeatail_edt_preelectrical_tilt;
+        this.sectordeatail_img_preelectrical_tilt = sectordeatail_img_preelectrical_tilt;
+        this.sectordeatail_edt_postelectrical_tilt = sectordeatail_edt_postelectrical_tilt;
+        this.sectordeatail_img_postelectrical_tilt = sectordeatail_img_postelectrical_tilt;
+        this.sectordeatail_edt_antennaheight = sectordeatail_edt_antennaheight;
+        this.sectordeatail_img_antennaheight = sectordeatail_img_antennaheight;
+        this.sectordeatail_edt_poleheight = sectordeatail_edt_poleheight;
+        this.sectordeatail_img_poleheight = sectordeatail_img_poleheight;
+        this.sectordeatail_edt_buildingheight = sectordeatail_edt_buildingheight;
+        this.sectordeatail_img_buildingheight = sectordeatail_img_buildingheight;
+        this.sectordeatail_edt_towertype = sectordeatail_edt_towertype;
+        this.sectordeatail_img_towertype = sectordeatail_img_towertype;
+        this.sectordeatail_edt_antennamake = sectordeatail_edt_antennamake;
+        this.sectordeatail_img_antennamake = sectordeatail_img_antennamake;
+        this.sectordeatail_edt_antenmodel = sectordeatail_edt_antenmodel;
+        this.sectordeatail_img_antennamodel = sectordeatail_img_antennamodel;
+        this.sectordeatail_edt_clutterpic = sectordeatail_edt_clutterpic;
+        this.sectordeatail_img_clutterpic = sectordeatail_img_clutterpic;
+        this.sectordeatail_edt_txbandwidth = sectordeatail_edt_txbandwidth;
+        this.sectordeatail_img_txbandwidth = sectordeatail_img_txbandwidth;
+        this.sectordeatail_edt_AST = sectordeatail_edt_AST;
+        this.sectordeatail_img_AST = sectordeatail_img_AST;
+        this.sectordeatail_edt_APST = sectordeatail_edt_APST;
+        this.sectordeatail_img_APST = sectordeatail_img_APST;
+        this.sectordeatail_edt_typ_enodeb = sectordeatail_edt_typ_enodeb;
+        this.sectordeatail_img_typ_enodeb = sectordeatail_img_typ_enodeb;
+        this.sectordeatail_edt_mimo = sectordeatail_edt_mimo;
+        this.sectordeatail_img_mimo = sectordeatail_img_mimo;
+        this.sectordeatail_edt_ret = sectordeatail_edt_ret;
+        this.sectordeatail_img_ret = sectordeatail_img_ret;
+        this.sectordeatail_edt_enodebband = sectordeatail_edt_enodebband;
+        this.sectordeatail_img_enodebband = sectordeatail_img_enodebband;
+        this.sectordeatail_edt_MOP = sectordeatail_edt_MOP;
+        this.sectordeatail_img_MOP = sectordeatail_img_MOP;
+        this.sectordeatail_edt_COP = sectordeatail_edt_COP;
+        this.sectordeatail_img_COP = sectordeatail_img_COP;
+        this.sectordeatail_edt_multiplexer_avail = sectordeatail_edt_multiplexer_avail;
+        this.sectordeatail_img_multiplexer_avail = sectordeatail_img_multiplexer_avail;
+        this.sectordeatail_edt_antennapicleg = sectordeatail_edt_antennapicleg;
+        this.sectordeatail_img_antennapicleg = sectordeatail_img_antennapicleg;
+        this.sectordeatail_edt_CRP = sectordeatail_edt_CRP;
+        this.sectordeatail_img_CRP = sectordeatail_img_CRP;
+        this.sectordeatail_edt_powerdeboosting = sectordeatail_edt_powerdeboosting;
+        this.sectordeatail_img_powerdeboosting = sectordeatail_img_powerdeboosting;
+        this.sectordeatail_edt_DFS = sectordeatail_edt_DFS;
+        this.sectordeatail_img_DFS = sectordeatail_img_DFS;
+        this.sectordeatail_edt_rb_percell = sectordeatail_edt_rb_percell;
+        this.sectordeatail_img_rb_percell = sectordeatail_img_rb_percell;
+        this.sectordeatail_edt_m_mimo = sectordeatail_edt_m_mimo;
+        this.sectordeatail_img_m_mimo = sectordeatail_img_m_mimo;
+        this.sectordeatail_edt_FCT = sectordeatail_edt_FCT;
+        this.sectordeatail_img_FCT = sectordeatail_img_FCT;
+        this.sectordeatail_edt_JCT = sectordeatail_edt_JCT;
+        this.sectordeatail_img_JCT = sectordeatail_img_JCT;
+        this.sectordeatail_edt_FCL = sectordeatail_edt_FCL;
+        this.sectordeatail_img_FCL = sectordeatail_img_FCL;
+        this.sectordeatail_edt_jumperlength = sectordeatail_edt_jumperlength;
+        this.sectordeatail_img_jumperlength = sectordeatail_img_jumperlength;
+        this.sectordeatail_edt_prachconfig_index = sectordeatail_edt_prachconfig_index;
+        this.sectordeatail_img_prachconfig_index = sectordeatail_img_prachconfig_index;
+        this.sectordeatail_edt_carrieraggregation = sectordeatail_edt_carrieraggregation;
+        this.sectordeatail_img_carrieraggregation = sectordeatail_img_carrieraggregation;
+        this.sectordeatail_edt_ACD = sectordeatail_edt_ACD;
+        this.sectordeatail_img_ACD = sectordeatail_img_ACD;
+        this.sectordeatail_edt_VSWRtest = sectordeatail_edt_VSWRtest;
+        this.sectordeatail_img_VSWRtest = sectordeatail_img_VSWRtest;
+        this.sectordeatail_edt_URS = sectordeatail_edt_URS;
+        this.sectordeatail_img_URS = sectordeatail_img_URS;
+        this.sectordeatail_edt_extra1 = sectordeatail_edt_extra1;
+        this.sectordeatail_img_extra1 = sectordeatail_img_extra1;
+        this.sectordeatail_edt_extra2 = sectordeatail_edt_extra2;
+        this.sectordeatail_img_extra2 = sectordeatail_img_extra2;
+        this.sectordeatail_edt_remak1 = sectordeatail_edt_remak1;
+        this.sectordeatail_img_remark1 = sectordeatail_img_remark1;
+        this.sectordeatail_edt_remak2 = sectordeatail_edt_remak2;
+        this.sectordeatail_img_remark2 = sectordeatail_img_remark2;
+        this.sectordeatailfrgamentname = sectordeatailfrgamentname;
+        this.flag = flag;
+        this.date = date;
+        this.sdbasebandUnitType_edt = sdbasebandUnitType_edt;
+        this.sdbasebandUnitType_img = sdbasebandUnitType_img;
+        this.sdrNCName_edt = sdrNCName_edt;
+        this.sdrNCName_img = sdrNCName_img;
+        this.sdnoofChannelElements_edt = sdnoofChannelElements_edt;
+        this.sdnoofChannelElements_img = sdnoofChannelElements_img;
     }
 
     public int getId() {
@@ -1107,5 +1231,53 @@ public class SectorDetailData {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getSdbasebandUnitType_edt() {
+        return sdbasebandUnitType_edt;
+    }
+
+    public void setSdbasebandUnitType_edt(String sdbasebandUnitType_edt) {
+        this.sdbasebandUnitType_edt = sdbasebandUnitType_edt;
+    }
+
+    public String getSdbasebandUnitType_img() {
+        return sdbasebandUnitType_img;
+    }
+
+    public void setSdbasebandUnitType_img(String sdbasebandUnitType_img) {
+        this.sdbasebandUnitType_img = sdbasebandUnitType_img;
+    }
+
+    public String getSdrNCName_edt() {
+        return sdrNCName_edt;
+    }
+
+    public void setSdrNCName_edt(String sdrNCName_edt) {
+        this.sdrNCName_edt = sdrNCName_edt;
+    }
+
+    public String getSdrNCName_img() {
+        return sdrNCName_img;
+    }
+
+    public void setSdrNCName_img(String sdrNCName_img) {
+        this.sdrNCName_img = sdrNCName_img;
+    }
+
+    public String getSdnoofChannelElements_edt() {
+        return sdnoofChannelElements_edt;
+    }
+
+    public void setSdnoofChannelElements_edt(String sdnoofChannelElements_edt) {
+        this.sdnoofChannelElements_edt = sdnoofChannelElements_edt;
+    }
+
+    public String getSdnoofChannelElements_img() {
+        return sdnoofChannelElements_img;
+    }
+
+    public void setSdnoofChannelElements_img(String sdnoofChannelElements_img) {
+        this.sdnoofChannelElements_img = sdnoofChannelElements_img;
     }
 }

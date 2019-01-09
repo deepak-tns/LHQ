@@ -43,6 +43,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LAT = "lat";
     private static final String KEY_LOG = "log";
     private static final String KEY_FLAG = "flag";
+    private static final String KEY_CLUSTERID = "CusterId";
 
     // SiteDetail Table Columns names for add post data
     private static final String keyincriid = "id";
@@ -261,6 +262,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String sectordeatailfrgamentname = "sectorname";
     private static final String sectordeatail_flag = "flag";
     private static final String sectordeatail_date = "date";
+    private static final String sdbasebandUnitType_edt="basebandUnitType_edt";
+    private  static final String sdbasebandUnitType_img="basebandUnitType_img";
+    private  static final String sdrNCName_edt = "rNCName_edt";
+    private  static final String sdrNCName_img = "rNCName_img";
+    private  static final String sdnoofChannelElements_edt = "noofChannelElements_edt";
+    private  static final String sdnoofChannelElements_img = "noofChannelElements_img";
 
     private static final String otherid = "id";
     private  static final String edtRiggerPic ="edtRiggerPic";
@@ -277,7 +284,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String otherflag = "flag";
 
     public DatabaseHandler(Context context) {
-        super(context, "/mnt/sdcard/my.db", null, DATABASE_VERSION);
+        super(context, "/mnt/sdcard/lhqdatabase11.db", null, DATABASE_VERSION);
         // super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.v(TAG, "Databaser object created");
     }
@@ -290,7 +297,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_SURVEYFORM = "CREATE TABLE " + TABLE_SURVEYFORM + "(" + KEY_INCRI_ID + " integer primary key autoincrement,"
                 + KEY_SURVEYTYPE + " TEXT," + KEY_CUSTOMER + " TEXT," + KEY_OPERATER + " TEXT," + KEY_CIRCLE + " TEXT,"
-                + KEY_TECHNOLOGY + " TEXT," + KEY_TECHNOLOGYTYPE + " TEXT," + KEY_LOCATION + " TEXT," + KEY_SITEID + " TEXT," + KEY_DATE + " TEXT," + KEY_LAT + " TEXT," + KEY_LOG + " TEXT," + KEY_FLAG + " integer" + ")";
+                + KEY_TECHNOLOGY + " TEXT," + KEY_TECHNOLOGYTYPE + " TEXT," + KEY_LOCATION + " TEXT," + KEY_SITEID + " TEXT," + KEY_DATE + " TEXT," + KEY_LAT + " TEXT," + KEY_LOG + " TEXT," + KEY_FLAG + " integer," +KEY_CLUSTERID + " TEXT" + ")";
 
         String CREATE_TABLE_SITEDETAIL = "CREATE TABLE " + TABLE_SITEDETAIL + "(" + keyincriid + " integer primary key autoincrement,"
                 + keysiteid + " TEXT," + keysiteid_photo + " TEXT," + keysitename + " TEXT," + keysitename_photo + " TEXT," + keytowersiteid + " TEXT,"
@@ -340,7 +347,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + " TEXT," + sectordeatail_img_prachconfig_index + " TEXT," + sectordeatail_edt_carrieraggregation + " TEXT," + sectordeatail_img_carrieraggregation + " TEXT," + sectordeatail_edt_ACD
                 + " TEXT," + sectordeatail_img_ACD + " TEXT," + sectordeatail_edt_VSWRtest + " TEXT," + sectordeatail_img_VSWRtest + " TEXT," + sectordeatail_edt_URS + " TEXT," + sectordeatail_img_URS
                 + " TEXT," + sectordeatail_edt_extra1 + " TEXT," + sectordeatail_img_extra1 + " TEXT," + sectordeatail_edt_extra2 + " TEXT," + sectordeatail_img_extra2 + " TEXT," + sectordeatail_edt_remak1
-                + " TEXT," + sectordeatail_img_remark1 + " TEXT," + sectordeatail_edt_remak2 + " TEXT,"+ sectordeatail_img_remark2 + " TEXT,"  +  sectordeatailfrgamentname + " TEXT," + sectordeatail_flag + " integer,"  +sectordeatail_date + " TEXT"+ ")";
+                + " TEXT," + sectordeatail_img_remark1 + " TEXT," + sectordeatail_edt_remak2 + " TEXT,"+ sectordeatail_img_remark2 + " TEXT,"  +  sectordeatailfrgamentname + " TEXT," + sectordeatail_flag + " integer,"  +sectordeatail_date + " TEXT,"+
+                sdbasebandUnitType_edt+" TEXT,"+
+       sdbasebandUnitType_img + " TEXT,"+ sdrNCName_edt +" TEXT,"+ sdrNCName_img +" TEXT,"+ sdnoofChannelElements_edt + " TEXT," +sdnoofChannelElements_img + " TEXT"+")";
 
 
         String CREATE_TABLE_OTHERDETAIL = "CREATE TABLE " + TABLE_OTHERDETAIL + "(" + otherid + " integer primary key autoincrement,"
@@ -388,6 +397,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LAT, surveyForm.getLat());
         values.put(KEY_LOG, surveyForm.getLog());
         values.put(KEY_FLAG, surveyForm.getFlag());
+        values.put(KEY_CLUSTERID, surveyForm.getCusterid());
         // Inserting Row
         db.insert(TABLE_SURVEYFORM, null, values);
         Log.v(TAG, "Databaser insert surveyform table");
@@ -435,6 +445,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 data.setLat(cursor.getString(10));
                 data.setLog(cursor.getString(11));
                 data.setFlag(cursor.getInt(12));
+                data.setCusterid(cursor.getString(13));
                 // Adding contact to list
                 List.add(data);
             } while (cursor.moveToNext());
@@ -448,9 +459,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Select All Query
         // SELECT * FROM members ORDER BY date_of_birth DESC;
         //String selectQuery = "SELECT  * FROM " + TABLE_LATLONG +" ORDER BY "+KEY_LATLONG_INCRIID+" DESC LIMIT 1;";
-
         String selectQuery = "SELECT  * FROM " + TABLE_SURVEYFORM + " ORDER BY " + KEY_INCRI_ID + " DESC LIMIT 1";
-
         SQLiteDatabase db = this.getReadableDatabase();
         try {
 
@@ -473,6 +482,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         data.setLat(cursor.getString(10));
                         data.setLog(cursor.getString(11));
                         data.setFlag(cursor.getInt(12));
+                        data.setCusterid(cursor.getString(13));
                         // Adding contact to list
                         list.add(data);
                     } while (cursor.moveToNext());
@@ -496,6 +506,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return list;
     }
 
+    public List<SiteIDandDate> getSiteIdandDate() {
+        ArrayList<SiteIDandDate> list = new ArrayList<SiteIDandDate>();
+        // Select All Query
+        // SELECT * FROM members ORDER BY date_of_birth DESC;
+        //String selectQuery = "SELECT  * FROM " + TABLE_LATLONG +" ORDER BY "+KEY_LATLONG_INCRIID+" DESC LIMIT 1;";
+
+        String selectQuery = "SELECT  * FROM " + TABLE_SURVEYFORM + " ORDER BY " + KEY_INCRI_ID + " DESC LIMIT 1";
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            try {
+                // looping through all rows and adding to list
+                if (cursor.moveToFirst()) {
+                    do {
+                        SiteIDandDate data = new SiteIDandDate();
+                        data.setSiteid(cursor.getString(8));
+                        data.setDate(cursor.getString(9));
+
+                        // Adding contact to list
+                        list.add(data);
+                    } while (cursor.moveToNext());
+                }
+
+            } finally {
+                try {
+                    cursor.close();
+
+                } catch (Exception ignore) {
+                }
+            }
+
+        } finally {
+            try {
+                db.close();
+            } catch (Exception ignore) {
+
+            }
+        }
+        return list;
+    }
 
     public int getLastInsertIdTABLE_SURVEYFORM() {
         int index = 0;
@@ -545,6 +596,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         data.setLat(cursor.getString(10));
                         data.setLog(cursor.getString(11));
                         data.setFlag(cursor.getInt(12));
+                        data.setCusterid(cursor.getString(13));
                         //you could add additional columns here..
 
                         list.add(data);
@@ -1105,6 +1157,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(sectordeatailfrgamentname, sectorDetailData.getSectordeatailfrgamentname());
             values.put(sectordeatail_flag, sectorDetailData.getFlag());
             values.put(sectordeatail_date, sectorDetailData.getDate());
+            values.put(sdbasebandUnitType_edt, sectorDetailData.getSdbasebandUnitType_edt());
+            values.put(sdbasebandUnitType_img, sectorDetailData.getSdbasebandUnitType_img());
+            values.put(sdrNCName_edt, sectorDetailData.getSdrNCName_edt());
+            values.put(sdrNCName_img, sectorDetailData.getSdrNCName_img());
+            values.put(sdnoofChannelElements_edt, sectorDetailData.getSdnoofChannelElements_edt());
+            values.put(sdnoofChannelElements_img, sectorDetailData.getSdnoofChannelElements_img());
             // Inserting Row
             db.insert(TABLE_SECTORDETAIL, null, values);
         } catch (Exception ignor) {
@@ -1121,10 +1179,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         //String selectQuery = "SELECT  * FROM " + TABLE_LATLONG +" ORDER BY "+KEY_LATLONG_INCRIID+" DESC LIMIT 1;";
 
         String selectQuery = "SELECT  * FROM " + TABLE_SECTORDETAIL + " ORDER BY " + sectordetail_id + " DESC LIMIT 1";
-
         SQLiteDatabase db = this.getReadableDatabase();
         try {
-
             Cursor cursor = db.rawQuery(selectQuery, null);
             try {
                 // looping through all rows and adding to list
@@ -1132,7 +1188,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     do {
                         SectorDetailData sectorDetailData = new SectorDetailData();
                         sectorDetailData.setId(cursor.getInt(0));
-                      sectorDetailData.setSectordetail_edt_techavailable(cursor.getString(1));
+                        sectorDetailData.setSectordetail_edt_techavailable(cursor.getString(1));
                         sectorDetailData.setSectordetail_img_techavailable(cursor.getString(2));
                         sectorDetailData.setSectordetail_edt_bandavailable(cursor.getString(3));
                         sectorDetailData.setSectordeatail_img_bandavailable(cursor.getString(4));
@@ -1391,6 +1447,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         sectorDetailData.setSectordeatailfrgamentname(cursor.getString(107));
                         sectorDetailData.setFlag(cursor.getInt(108));
                         sectorDetailData.setDate(cursor.getString(109));
+                        sectorDetailData.setSdbasebandUnitType_edt(cursor.getString(110));
+                        sectorDetailData.setSdbasebandUnitType_img(cursor.getString(111));
+                        sectorDetailData.setSdrNCName_edt(cursor.getString(112));
+                        sectorDetailData.setSdrNCName_img(cursor.getString(113));
+                        sectorDetailData.setSdnoofChannelElements_edt(cursor.getString(114));
+                        sectorDetailData.setSdnoofChannelElements_img(cursor.getString(115));
 
 
                         // Adding contact to list

@@ -181,7 +181,7 @@
                     android:visibility="visible"
                     android:id="@+id/tv_otherdetail"
                     android:padding="10dp"
-                    android:text="Other Detail"
+                    android:text="OHS Detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"

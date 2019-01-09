@@ -15,7 +15,11 @@ import android.widget.TextView;
 
 import com.linkquest.lhq.CustomClass;
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
+import com.linkquest.lhq.constants.AppConstants;
+import com.linkquest.lhq.constants.VariableSet;
 import com.linkquest.lhq.database.DatabaseHandler;
+import com.linkquest.lhq.database.SiteIDandDate;
 import com.linkquest.lhq.database.SurveyForm;
 
 import java.util.List;
@@ -37,7 +41,7 @@ public class SiteSurveylqtReport extends Fragment {
     private TextView date;
     private TextView lat;
     private TextView log;
-
+    private SharedPreferenceUtils sharedPreferences;
     public SiteSurveylqtReport() {
         // Required empty public constructor
     }
@@ -49,6 +53,20 @@ public class SiteSurveylqtReport extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_site_surveylq_report, container, false);
         databaseHandler = new DatabaseHandler(getActivity());
+       List<SurveyForm>  siteIDandDate = databaseHandler.getLastSurveyformData();
+       if(siteIDandDate.size() > 0){
+          VariableSet.siteid = siteIDandDate.get(0).getSiteid();
+          VariableSet.date = siteIDandDate.get(0).getDate();
+          String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
+           sharedPreferences = SharedPreferenceUtils.getInstance();
+           sharedPreferences.setContext(getActivity());
+           sharedPreferences.putString(AppConstants.SITEID,VariableSet.siteid );
+           sharedPreferences.putString(AppConstants.DATE,VariableSet.date );
+           sharedPreferences.putString(AppConstants.surveytpeandcustomerandoperator,surveytype_customer_operator );
+           sharedPreferences.putString(AppConstants.operator,siteIDandDate.get(0).getOperator() );
+
+       }
+
 
         findsIds(v);
       //  CustomClass.geCustomclass().setNotifyData("Deepak");

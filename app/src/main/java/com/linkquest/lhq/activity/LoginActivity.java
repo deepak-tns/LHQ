@@ -1,5 +1,6 @@
 package com.linkquest.lhq.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.AppSingleton;
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edt_loginid;
     EditText edt_password;
     Button btn_login;
+    private SharedPreferenceUtils sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +68,30 @@ public class LoginActivity extends AppCompatActivity {
         findIds();
         checkPermissions();
 
-       emino=  getIMEINumber(this);
-        Log.v("imeno",emino);
+
 
         //  JSonobjParameter("18459","18459");
 
     }
 
-    public static String getIMEINumber(Context context) {
-        TelephonyManager tm = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-        String tmDeviceId = tm.getDeviceId();
+    public  String getIMEINumber(Context context) {
+
+        String tmDeviceId;
+
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+             tmDeviceId = tm.getDeviceId();
+        }else{
+             tmDeviceId = tm.getDeviceId();
+        }
+
         return tmDeviceId;
     }
 
@@ -87,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                emino = getIMEINumber(LoginActivity.this);
+                Log.v("imeno", emino);
                 validatelogin();
             }
         });
@@ -210,6 +229,10 @@ public class LoginActivity extends AppCompatActivity {
             if (status.equals("1")) {
                 finish();
                 startActivity(new Intent(this, MainActivity.class));
+                sharedPreferences = SharedPreferenceUtils.getInstance();
+                sharedPreferences.setContext(getApplicationContext());
+                sharedPreferences.putString(AppConstants.EMPID, edt_loginid.getText().toString());
+
             } else {
                // startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(this, "Invalid loginid or passsword", Toast.LENGTH_SHORT).show();

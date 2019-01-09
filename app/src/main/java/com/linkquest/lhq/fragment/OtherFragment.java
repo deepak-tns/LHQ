@@ -36,6 +36,7 @@ import com.linkquest.lhq.HTTPPostRequestMethod;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.AppSingleton;
 import com.linkquest.lhq.Utils.DrawBitmapAll;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
 import com.linkquest.lhq.activity.MainActivity;
 import com.linkquest.lhq.activity.SiteAuditAllDataHistory;
@@ -100,6 +101,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     private final String SECTOR2 ="Sector2";
     private final String SECTOR3 ="Sector3";
     private final String SECTOR4 ="Sector4";
+    private SharedPreferenceUtils sharedPreferences;
 
     public OtherFragment() {
         // Required empty public constructor
@@ -131,6 +133,14 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         findIDS(v);
         tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString()+db.getCountOtherDetail());
 
+
+
+
+        sharedPreferences = SharedPreferenceUtils.getInstance();
+        sharedPreferences.setContext(getActivity());
+       // String empId = sharedPreferences.getString(AppConstraint.EMPID);
+        Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.DATE)+sharedPreferences.getString(AppConstants.EMPID)+
+                sharedPreferences.getString(AppConstants.SITEID),Toast.LENGTH_LONG).show();
         return v;
     }
 
@@ -216,7 +226,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         if(siteDetailData.size()>0) {
             Log.v("OtherFragSiteDetail", siteDetailData.toString());
             try {
-                jsonObject.put("siteid", siteDetailData.get(0).getSiteid());
+               // jsonObject.put("siteid", siteDetailData.get(0).getSiteid());
                 jsonObject.put("siteid_photo", siteDetailData.get(0).getSiteid_photo());
                 jsonObject.put("sitename", siteDetailData.get(0).getSitename());
                 jsonObject.put("sitename_photo", siteDetailData.get(0).getSitename_photo());
@@ -269,7 +279,11 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("remark2", siteDetailData.get(0).getRemark2());
                 jsonObject.put("remark2_photo", siteDetailData.get(0).getRemark2_photo());
                 jsonObject.put("flag", siteDetailData.get(0).getFlag());
-                jsonObject.put("date", siteDetailData.get(0).getDate());
+              //  jsonObject.put("date", siteDetailData.get(0).getDate());
+
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
             } catch (Exception e) {
 
             }
@@ -349,14 +363,20 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("technologytype", surveyformData.get(0).getTechnologytype());
                 jsonObject.put("location", surveyformData.get(0).getLocation());
                 jsonObject.put("siteid", surveyformData.get(0).getSiteid());
-                jsonObject.put("date", surveyformData.get(0).getDate());
+               // jsonObject.put("date", surveyformData.get(0).getDate());
                 jsonObject.put("lat", surveyformData.get(0).getLat());
                 jsonObject.put("log", surveyformData.get(0).getLog());
                 jsonObject.put("flag", surveyformData.get(0).getFlag());
+                jsonObject.put("clusterid", surveyformData.get(0).getCusterid());
+
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+
             } catch (Exception e) {
 
             }
         }
+        Log.v("json_surveydetail", jsonObject.toString());
         return jsonObject;
     }
 
@@ -531,7 +551,19 @@ private JSONObject jsondataSectorDetail1(String secname){
         jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
         jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
         jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-        jsonObject.put("date", sectorDetailData.get(0).getDate());
+       // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+        jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+        jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+        jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+
+        jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
+        jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
+        jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
+        jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
+        jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
+        jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
+
     }catch (Exception e){
 Log.e("Exception",e.toString());
     }
@@ -712,7 +744,18 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
                 jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-                jsonObject.put("date", sectorDetailData.get(0).getDate());
+               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+
+                jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
+                jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
+                jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
+                jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
+                jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
+                jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
             }catch (Exception e){
                 Log.e("Exception",e.toString());
             }
@@ -894,7 +937,18 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
                 jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-                jsonObject.put("date", sectorDetailData.get(0).getDate());
+               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+
+                jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
+                jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
+                jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
+                jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
+                jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
+                jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
             }catch (Exception e){
                 Log.e("Exception",e.toString());
             }
@@ -1076,7 +1130,19 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
                 jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-                jsonObject.put("date", sectorDetailData.get(0).getDate());
+               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+
+                jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
+                jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
+                jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
+                jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
+                jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
+                jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
+
             }catch (Exception e){
                 Log.e("Exception",e.toString());
             }
@@ -1179,8 +1245,12 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("inputBearin_extra2", sitePanoramicData.get(0).getInputBearin_extra2());
             jsonObject.put("inputBearin_remark1", sitePanoramicData.get(0).getInputBearin_remark1());
             jsonObject.put("inputBearin_remark2", sitePanoramicData.get(0).getInputBearin_remark2());
-          //  jsonObject.put("flag", sitePanoramicData.get(0).getFlag());
-            jsonObject.put("date", sitePanoramicData.get(0).getDate());
+            jsonObject.put("flag", sitePanoramicData.get(0).getFlag());
+          //  jsonObject.put("date", sitePanoramicData.get(0).getDate());
+
+            jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+            jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+            jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
             //..................sitepanoramicBlocking................
             jsonObject.put("blocking0", sitePanoramicBlockingData.get(0).getBlocking0());
             jsonObject.put("blocking30", sitePanoramicBlockingData.get(0).getBlocking30());
@@ -1194,7 +1264,7 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("blocking270", sitePanoramicBlockingData.get(0).getBlocking270());
             jsonObject.put("blocking300", sitePanoramicBlockingData.get(0).getBlocking300());
             jsonObject.put("blocking330", sitePanoramicBlockingData.get(0).getBlocking330());
-            jsonObject.put("flag", sitePanoramicBlockingData.get(0).getFlag());
+           // jsonObject.put("flag", sitePanoramicBlockingData.get(0).getFlag());
         } catch (Exception e) {
 
 
@@ -1274,8 +1344,11 @@ private void toSendDataSitePanaromic() {
             jsonObject.put("iv_CarPic", otherDetailData.get(0).getIv_CarPic());
             jsonObject.put("iv_RiggerPicwithclimbingTower", otherDetailData.get(0).getIv_RiggerPicwithclimbingTower());
             jsonObject.put("iv_RiggerPicduringWah", otherDetailData.get(0).getIv_RiggerPicduringWah());
-            jsonObject.put("date", otherDetailData.get(0).getDate());
+           // jsonObject.put("date", otherDetailData.get(0).getDate());
             jsonObject.put("flag", otherDetailData.get(0).getFlag());
+            jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+            jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+            jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
 
 
         } catch (Exception e) {

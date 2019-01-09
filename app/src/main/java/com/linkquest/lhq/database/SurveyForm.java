@@ -14,12 +14,13 @@ public class SurveyForm {
     private String lat;
     private String log;
     private int flag;
+    private String custerid;
 
     public SurveyForm() {
 
     }
 
-    public SurveyForm(String surveytype, String customer, String operator, String circle, String technology, String technologytype, String location, String siteid, String date,String lat,String log, int flag) {
+    public SurveyForm(String surveytype, String customer, String operator, String circle, String technology, String technologytype, String location, String siteid, String date,String lat,String log, int flag,String custerid) {
         this.surveytype = surveytype;
         this.customer = customer;
         this.operator = operator;
@@ -32,6 +33,7 @@ public class SurveyForm {
         this.lat = lat;
         this.log = log;
         this.flag = flag;
+        this.custerid = custerid;
     }
 
     public int getId() {
@@ -136,5 +138,13 @@ public class SurveyForm {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public String getCusterid() {
+        return custerid;
+    }
+
+    public void setCusterid(String custerid) {
+        this.custerid = custerid;
     }
 }
