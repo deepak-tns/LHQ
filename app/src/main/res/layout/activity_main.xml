@@ -118,7 +118,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
                 <TextView
                     android:padding="10dp"
                     android:text="SiteInfo"
@@ -127,11 +126,18 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
                     android:textSize="16dp" />
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray"/>
+
+                <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/linear_surveyaudit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
 
                 <TextView
                     android:visibility="visible"
@@ -192,20 +198,106 @@
                     android:layout_height="1dp"
                     android:background="@color/gray"/>
 
-                <TextView
-                    android:visibility="visible"
-                    android:id="@+id/tv_losotherdetail"
-                    android:padding="10dp"
-                    android:text="LOS OHS Detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16dp" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray"/>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/linear_los"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:padding="10dp"
+                        android:text="Los Site Detail"
+                        android:id="@+id/tv_los_sitedetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_transmissionlink"
+                        android:padding="10dp"
+                        android:text="Transmission Link"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_transmission_nolink"
+                        android:padding="10dp"
+                        android:text="Transmission NoLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_los_sitepanoramic"
+                        android:padding="10dp"
+                        android:text="Site Panoramic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_losphotos"
+                        android:padding="10dp"
+                        android:text="Los Photos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_losotherdetail"
+                        android:padding="10dp"
+                        android:text="LOS OHS Detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>

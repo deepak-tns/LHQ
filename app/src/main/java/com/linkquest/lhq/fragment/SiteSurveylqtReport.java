@@ -134,6 +134,7 @@ public class SiteSurveylqtReport extends Fragment {
                                 // startActivity(new Intent(CardLogin.this, MainActivity.class));
 
                                 if (stSurveyType.equalsIgnoreCase("Site Audit")) {
+                                    CustomClass.getCustomclass().setNotifyData("Site Audit");
                                     getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteDetailFragment()).commit();
                                     dialog.cancel();
                                 }
