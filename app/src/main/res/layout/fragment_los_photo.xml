@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LOSAudit.LosPhotoFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:background="@color/lightgray"
+                android:text="No of Records : "
+                android:id="@+id/tv_count_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="NearEndFarEndphoto1"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_NearEndFarEndphoto1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_NearEndFarEndphoto1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="FarEndtoNearEndphoto1"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_FarEndtoNearEndphoto1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/ib_FarEndtoNearEndphoto1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="TowerPhoto1"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_TowerPhoto1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_TowerPhoto1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="NearEndtoFarEndphoto2"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_NearEndtoFarEndphoto2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_NearEndtoFarEndphoto2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="FarEndNearEndphoto2"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_FarEndNearEndphoto2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_FarEndNearEndphoto2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="TowerPhoto2"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_TowerPhoto2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_TowerPhoto2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="NearEndtoFarEndphoto3"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_NearEndFarEndphoto3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_NearEndFarEndphoto3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="FarEndNearEndphoto3"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_FarEndNearEndphoto3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_FarEndNearEndphoto3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="TowerPhoto3"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_TowerPhoto3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_TowerPhoto3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="NearEndtoFarEndphoto4"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_NearEndFarEndphoto4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/ib_NearEndFarEndphoto4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="FarEndNearEndphoto4"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_FarEndNearEndphoto4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_FarEndNearEndphoto4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="TowerPhoto4"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/iv_TowerPhoto4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/ib_TowerPhoto4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_large"
+                android:layout_gravity="bottom|center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:layout_gravity="bottom|center"
+                    android:id="@+id/btnsave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shadow_bg"
+                    android:text="Save" />
+
+                <Button
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="2dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_shadow_bg"
+                    android:id="@+id/btnnext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Next" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" />
+
+            <TextView
+                android:visibility="gone"
+                android:textColor="@color/red"
+                android:id="@+id/tv_show_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

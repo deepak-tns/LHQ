@@ -1,4 +1,4 @@
-package com.linkquest.lhq.fragment;
+package com.linkquest.lhq.RFSurvey;
 
 
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.SiteAudit.SectorDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TabFragment extends Fragment {
+public class RFTabFragment extends Fragment {
     private View view;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -46,7 +46,7 @@ public class TabFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
         for(int i =1;i<=4;i++){
-            adapter.addFrag( SectorDetailFragment.newInstance(i,"Sector"+i), "Sector"+i);
+            adapter.addFrag( RFSectorDetailFragment.newInstance(i,"Sector"+i), "Sector"+i);
         }
 
     /*    adapter.addFrag(new SiteDetailFragment(), "Sector2");
@@ -60,13 +60,13 @@ public class TabFragment extends Fragment {
 
     @Override
     public void onResume() {
-        Log.e("DEBUG", "onResume of HomeFragment");
+        Log.e("DEBUG", "onResume of TabFragment");
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        Log.e("DEBUG", "OnPause of HomeFragment");
+        Log.e("DEBUG", "OnPause of TabFragment");
         super.onPause();
     }
 

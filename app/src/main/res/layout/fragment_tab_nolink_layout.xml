@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SiteAudit.TabFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,7 +28,7 @@
 
                 <android.support.design.widget.TabLayout
                     android:visibility="visible"
-                    android:id="@+id/tabs"
+                    android:id="@+id/tabs_no_link"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabMode="scrollable"
@@ -43,7 +42,7 @@
         </RelativeLayout>
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+            android:id="@+id/viewpager_no_link"
             android:layout_margin="5dp"
             android:layout_below="@+id/tablayoutRelativeLayout"
             android:layout_width="match_parent"

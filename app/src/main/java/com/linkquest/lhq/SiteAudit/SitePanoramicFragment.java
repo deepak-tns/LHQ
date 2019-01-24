@@ -1,4 +1,4 @@
-package com.linkquest.lhq.fragment;
+package com.linkquest.lhq.SiteAudit;
 
 
 import android.content.BroadcastReceiver;
@@ -8,9 +8,7 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -27,23 +25,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.linkquest.lhq.GoogleGPSService;
+import com.linkquest.lhq.LOSAudit.LOSDetailFragment;
+import com.linkquest.lhq.LOSAudit.LOSOtherFragment;
+import com.linkquest.lhq.LOSAudit.LosPhotoFragment;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.Utils.DrawBitmapAll;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SitePanoramicBlockingData;
 import com.linkquest.lhq.database.SitePanoramicData;
+import com.linkquest.lhq.database.SurveyForm;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
-import static com.linkquest.lhq.fragment.SiteDetailFragment.decodeBase64;
-import static com.linkquest.lhq.fragment.SiteDetailFragment.encodeToBase64;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -392,8 +387,15 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
         }
 
         if(v== btnUpload){
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, OtherFragment.newInstance(1000)).addToBackStack(null).commit();
 
+            List<SurveyForm> listdata = db.getLastSurveyformData();
+            String stSurveyType= listdata.get(0).getSurveytype();
+            if (stSurveyType.equalsIgnoreCase("LOS Survey")) {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new LosPhotoFragment()).commit();
+
+            }else {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new OtherFragment()).addToBackStack(null).commit();
+            }
         }
 
     }
@@ -1092,7 +1094,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                // imgBearing0 = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing0Image.setImageBitmap( out);
-                imgBearing0 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+            //    imgBearing0 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
+                 imgBearing0 = thumbnail;
                 Log.v("img-encode", imgBearing0);
             }
         }
@@ -1131,7 +1134,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing30Image.setImageBitmap(decodeBase64(imgBearing30));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing30Image.setImageBitmap(out);
-                imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+              //  imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing30 = thumbnail;
                 Log.v("img-encode", imgBearing30);
             }
         }
@@ -1170,7 +1174,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing60Image.setImageBitmap(decodeBase64(imgBearing60));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing60Image.setImageBitmap( out);
-                imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+              //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing60 = thumbnail;
                 Log.v("img-encode", imgBearing60);
             }
         }
@@ -1209,7 +1214,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing90Image.setImageBitmap(decodeBase64(imgBearing90));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing90Image.setImageBitmap( out);
-                imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+             //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing90 = thumbnail;
                 Log.v("img-encode", imgBearing90);
             }
         }
@@ -1249,7 +1255,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing120Image.setImageBitmap( out);
-                imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+              //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing120 = thumbnail;
                 Log.v("img-encode", imgBearing120);
             }
         }
@@ -1288,7 +1295,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing150Image.setImageBitmap(decodeBase64(imgBearing150));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing150Image.setImageBitmap( out);
-                imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing150 = thumbnail;
                 Log.v("img-encode", imgBearing150);
             }
         }
@@ -1327,7 +1335,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing180Image.setImageBitmap(decodeBase64(imgBearing180));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing180Image.setImageBitmap( out);
-                imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing180 = thumbnail;
                 Log.v("img-encode", imgBearing180);
             }
         }
@@ -1366,7 +1375,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing210Image.setImageBitmap(decodeBase64(imgBearing210));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing210Image.setImageBitmap( out);
-                imgBearing210 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+             //   imgBearing210 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing210 = thumbnail;
                 Log.v("img-encode", imgBearing210);
             }
         }
@@ -1405,7 +1415,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing240Image.setImageBitmap(decodeBase64(imgBearing240));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing240Image.setImageBitmap( out);
-                imgBearing240 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+               // imgBearing240 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing240 = thumbnail;
                 Log.v("img-encode", imgBearing240);
             }
         }
@@ -1444,7 +1455,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing270Image.setImageBitmap(decodeBase64(imgBearing270));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing270Image.setImageBitmap( out);
-                imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing270 = thumbnail;
                 Log.v("img-encode", imgBearing270);
             }
         }
@@ -1483,7 +1495,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing300Image.setImageBitmap(decodeBase64(imgBearing300));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing300Image.setImageBitmap( out);
-                imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing300 = thumbnail;
                 Log.v("img-encode", imgBearing300);
             }
         }
@@ -1522,7 +1535,8 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 imgBearing330Image.setImageBitmap(decodeBase64(imgBearing330));*/
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing330Image.setImageBitmap( out);
-                imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                imgBearing330 = thumbnail;
                 Log.v("img-encode", imgBearing330);
             }
         }

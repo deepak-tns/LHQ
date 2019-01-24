@@ -1,6 +1,5 @@
 package com.linkquest.lhq.activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,18 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.linkquest.lhq.CustomClass;
+import com.linkquest.lhq.LOSAudit.LOSOtherFragment;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.fragment.OtherFragment;
-import com.linkquest.lhq.fragment.SiteDetailFragment;
-import com.linkquest.lhq.fragment.SitePanoramicFragment;
-import com.linkquest.lhq.fragment.SiteSurveyFragment;
+import com.linkquest.lhq.SiteAudit.OtherFragment;
+import com.linkquest.lhq.SiteAudit.SiteDetailFragment;
+import com.linkquest.lhq.SiteAudit.SitePanoramicFragment;
+import com.linkquest.lhq.fragment.HomeFragment;
 import com.linkquest.lhq.fragment.SiteSurveylqt;
-import com.linkquest.lhq.fragment.TabFragment;
+import com.linkquest.lhq.SiteAudit.TabFragment;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CustomClass.interfaceCustom {
     private DrawerLayout mDrawerLayout;
     private LinearLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_sitepanoramic;
     private TextView tv_sectordetail;
     private TextView tv_otherdetail;
+    private TextView tv_losotherdetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (savedInstanceState == null) {
+
+            getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag, new HomeFragment()).commit();
+        }
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         navigationdrawer();
         findIds();
+
+        CustomClass.setInterfaceCustom(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_sitepanoramic=(TextView)findViewById(R.id.tv_sitepanoramic);
         tv_sectordetail=(TextView)findViewById(R.id.tv_sectordetail);
         tv_otherdetail=(TextView)findViewById(R.id.tv_otherdetail);
+        tv_losotherdetail=(TextView)findViewById(R.id.tv_losotherdetail);
 
          tvsiteinfo.setOnClickListener(this);
         tv_sitedetail.setOnClickListener(this);
         tv_sitepanoramic.setOnClickListener(this);
         tv_sectordetail.setOnClickListener(this);
-        tv_otherdetail.setOnClickListener(this);
+        tv_losotherdetail.setOnClickListener(this);
     }
 
     private void navigationdrawer() {
@@ -130,6 +136,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+        if(v == tv_losotherdetail){
+
+            //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,LOSOtherFragment.newInstance(1000)).addToBackStack(null).commit();
+            mDrawerLayout.closeDrawer(mDrawerPane);
+            // startActivity(new Intent (this,RegisterActivity.class));
+
+        }
+
     }
 
     @Override
@@ -151,6 +166,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
 
+    }
+
+    @Override
+    public void setData(String Data) {
+        tv_losotherdetail.setText(Data);
     }
 
    /*

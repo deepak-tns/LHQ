@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LOSAudit.TransmissionNoLinkFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:background="@color/lightgray"
+                android:text="No of Records : "
+                android:id="@+id/transnolink_tv_count_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Site ID"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_siteid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_siteid"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_siteid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Site Name"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_sitename"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_sitename"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_sitename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Obstruction Details(Height)"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_obstructiondetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_obstructiondetail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/transnolink_ib_obstructiondetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Azimuth"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_azimuth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_azimuth"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_azimuth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Distance"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_distance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_distance"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Antenna Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_antennaheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_antennaheight"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_antennaheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Altitude (AMSL)"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/transnolink_edt_altitude"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/transnolink_iv_altitude"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/transnolink_ib_altitude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_large"
+                android:layout_gravity="bottom|center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:layout_gravity="bottom|center"
+                    android:id="@+id/transnolink_btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shadow_bg"
+                    android:text="Save" />
+
+                <Button
+                    android:visibility="gone"
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="2dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_shadow_bg"
+                    android:id="@+id/transnolink_btnnext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Next" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/transnolink_tv_aftercount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

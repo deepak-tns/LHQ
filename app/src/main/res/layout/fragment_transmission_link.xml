@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LOSAudit.TransmissionLinkFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:background="@color/lightgray"
+                android:text="No of Records : "
+                android:id="@+id/translink_tv_count_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Sector ID"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_sectorid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_sectorid"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/translink_ib_sectorid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Sector Name"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_sectorname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_sectorname"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/translink_ib_sectorname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:text="Lat"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_lat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:text="Long"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_long"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Azimuth from  near end"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_Azimuthfromnearend"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_Azimuthfromnearend"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_Azimuthfromnearend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Distance"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_distance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_distance"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+
+                <ImageButton
+                    android:id="@+id/translink_ib_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Antenna Height at Farend"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_AHAF"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_AHAF"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_AHAF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Pole / Fixture Requirement at Farend"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_pole_fixture"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_pole_fixture"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_pole_fixture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="IF Length at Farend"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_ILAF"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_ILAF"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_ILAF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Building Height at Farend"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_buildingheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_buildingheight"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_buildingheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Total ht For GBT/RTT/RTP AT Far End"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_totalheight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_totalheight"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_totalheight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="AMSL at Far End "
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/translink_edt_AMSL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+                <ImageView
+                    android:id="@+id/translink_iv_AMSL"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0"
+                    />
+                <ImageButton
+                    android:id="@+id/translink_ib_AMSL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_large"
+                android:layout_gravity="bottom|center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:layout_gravity="bottom|center"
+                    android:id="@+id/translink_btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shadow_bg"
+                    android:text="Save" />
+
+                <Button
+                    android:visibility="gone"
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="2dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_shadow_bg"
+                    android:id="@+id/translink_btnnext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Next" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/translink_tv_aftercount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

@@ -32,11 +32,19 @@ public interface AppConstants {
     public static final String SITEPANAROMIC = "http://13.126.69.214/lq/api/Login/SitePanaromic";
     public static final String OTHERDETAIL = "http://13.126.69.214/lq/api/Login/OtherDetail";
 
-     String APPNAME = "LHQ" ;
+
+    public static final String  Los_Site_Detail = "http://13.126.69.214/lq/api/Login/Los_Site_Detail";
+    public static final String  Transmission_Link = "http://13.126.69.214/lq/api/Login/Transmission_Link";
+    public static final String  Transmission_No_Link = "http://13.126.69.214/lq/api/Login/Transmission_No_Link";
+    public static final String  Los_Photos =  "http://13.126.69.214/lq/api/Login/Los_Photos";
+
+
+    String APPNAME = "LHQ" ;
      String EMPID = "EMPID" ;
      String SITEID = "SITEID" ;
      String DATE = "DATE" ;
-     String operator = "" ;
+     String operators = "operators";
+     String idall  = "idall";
 
-     String surveytpeandcustomerandoperator ="";
+     String surveytpeandcustomerandoperator ="surveytpeandcustomerandoperator";
 }

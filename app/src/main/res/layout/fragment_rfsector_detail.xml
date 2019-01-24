@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:layout_margin="@dimen/margin_small"
-    tools:context=".SiteAudit.SiteDetailFragment">
+    tools:context=".RFSurvey.RFSectorDetailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,28 +15,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <TextView
                 android:background="@color/lightgray"
                 android:text="No of Records : "
-                android:id="@+id/tv_sitedetail_count_previous"
+                android:id="@+id/tv_rfsectordetail_count_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    android:text="Site Id"
+                    android:text="Antenna Type"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_site_id"
+                    android:id="@+id/edt_Antenna_Type"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -44,34 +44,34 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivsiteid"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/iv_Antenna_Type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_site_id"
+                    android:id="@+id/ib_Antenna_Type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_site_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    android:text="Site Name"
+                    android:text="2GBand"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_site_name"
+                    android:id="@+id/edt_2GBand"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -79,22 +79,161 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivsitename"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/iv_2GBand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
-
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_site_name"
+                    android:id="@+id/ib_2GBand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_towersiteid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="2GCoverge"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_2GCoverge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_2GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_2GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="2GObstruction"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_2GObstruction"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_2GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_2GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="2G Existing Antenna Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_2G_Existing_Antenna_Height"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_2G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_2G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="2G Antenna Make and Model"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_2G_Antenna_Make_and_Model"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_2G_Antenna_Make_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_2G_Antenna_Make_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -103,11 +242,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Tower Site ID"
+                    android:text="2G Existing Antenna Direction"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_towersiteid"
+                    android:id="@+id/edt_2G_Existing_Antenna_Direction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -115,199 +254,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivtowersiteid"
+                    android:id="@+id/iv_2G_Existing_Antenna_Direction"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_towersiteid"
+                    android:id="@+id/ib_2G_Existing_Antenna_Direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_towercompanyname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Tower Company Name"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_towercompanyname"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivtowercompnyname"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_towercompanyname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_site_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Site Address"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_site_address"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivsiteaddress"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_site_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_sectorid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sitedeatail_tv_sectorid"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Sector ID"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_sectorid"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivsectorid"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_sectorid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_lat_long"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="Lat"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_lat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:text="Long"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_log"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_sitetype"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Site Type"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_sitetype"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivsitetype"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_sitetype"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_building_floor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -316,11 +276,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Building Floor"
+                    android:text="2G Existing antenna tilt Electrical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_building_floor"
+                    android:id="@+id/edt_2G_Existing_antenna_tilt_Electrical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -328,21 +288,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivbuildingfloor"
+                    android:id="@+id/iv_2G_Existing_antenna_tilt_Electrical"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_buildingfloor"
+                    android:id="@+id/ib_2G_Existing_antenna_tilt_Electrical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_buildingheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -351,11 +310,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Building Height"
+                    android:text="2G Existing antenna tilt Mechanical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_buildingheight"
+                    android:id="@+id/edt_2G_Existing_antenna_tilt_Mechanical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -363,21 +322,195 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivbuildingheight"
+                    android:id="@+id/iv_2G_Existing_antenna_tilt_Mechanical"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_buildingheight"
+                    android:id="@+id/ib_2G_Existing_antenna_tilt_Mechanical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="3GBand"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_3GBand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_3GBand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_3GBand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_towerheight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="3GCoverge"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_3GCoverge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_3GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_3GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="3GObstruction"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_3GObstruction"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_3GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_3GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="3G Existing Antenna Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_3G_Existing_Antenna_Height"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_3G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_3G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="3G Antenna Make and Model"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_3G_Antenna_Make_and_Model"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_3G_Antenna_Make_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_3G_Antenna_Make_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -386,11 +519,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Tower/Pole Height"
+                    android:text="3G Existing Antenna Direction"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_towerheight"
+                    android:id="@+id/edt_3G_Existing_Antenna_Direction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -398,21 +531,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivtowerheight"
+                    android:id="@+id/iv_3G_Existing_Antenna_Direction"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_towerheight"
+                    android:id="@+id/ib_3G_Existing_Antenna_Direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_fulltowerphoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -421,11 +553,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Full Tower Photo"
+                    android:text="3G Existing antenna tilt Electrical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_fulltowerphoto"
+                    android:id="@+id/edt_3G_Existing_antenna_Electrical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -433,21 +565,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivfulltowerphoto"
+                    android:id="@+id/iv_3G_Existing_antenna_Electrical_tilt"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_fulltowerphoto"
+                    android:id="@+id/ib_3G_Existing_antenna_Electrical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_nodebtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -456,11 +587,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="NodeB Type"
+                    android:text="3G Existing antenna tilt Mechanical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_nodebtype"
+                    android:id="@+id/edt_3G_Existing_antenna_Mechanical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -468,21 +599,19 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivnodebtype"
+                    android:id="@+id/iv_3G_Existing_antenna_Mechanical_tilt"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_nodebtype"
+                    android:id="@+id/ib_3G_Existing_antenna_Mechanical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_clasicalRRH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -491,11 +620,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Classical/RRH NodeB"
+                    android:text="Space Available for 3G Antenna"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_clasicalRRH"
+                    android:id="@+id/edt_Space_Available_for_3G_Antenna"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -503,21 +632,19 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivclassicalrrm"
+                    android:id="@+id/iv_Space_Available_for_3G_Antenna"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_clasicalRRH"
+                    android:id="@+id/ib_Space_Available_for_3G_Antenna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_enodebtype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -526,11 +653,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="E NodeB Type"
+                    android:text="Addl Poles req for 3G Antenna"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_enodebtype"
+                    android:id="@+id/edt_Addl_Poles_req_for_3G_Antenna"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -538,21 +665,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivenodebtype"
+                    android:id="@+id/iv_Addl_Poles_req_for_3G_Antenna"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_enodebtype"
+                    android:id="@+id/ib_Addl_Poles_req_for_3G_Antenna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_anchoroperator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -561,11 +687,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Anchor Operator"
+                    android:text="3GAntenna Swap Required"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_anchoroperator"
+                    android:id="@+id/edt_3GAntenna_Swap_Required"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -573,21 +699,19 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivanchoroper"
+                    android:id="@+id/iv_3GAntenna_Swap_Required"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_anchoroperator"
+                    android:id="@+id/ib_3GAntenna_Swap_Required"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_sharingopco1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -596,11 +720,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Sharing Opco 1"
+                    android:text="3GApproximate Cable Lenth"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_sharingopco1"
+                    android:id="@+id/edt_3GApproximate_Cable_Lenth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -608,21 +732,19 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivsharingopco1"
+                    android:id="@+id/iv_3GApproximate_Cable_Lenth"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_sharingopco1"
+                    android:id="@+id/ib_3GApproximate_Cable_Lenth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
-
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_sharingopco2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -631,11 +753,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Sharing Opco 2"
+                    android:text="3GAntenna Port EmptyDamaged"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_sharingopco2"
+                    android:id="@+id/edt_3GAntenna_Port_EmptyDamaged"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -643,21 +765,197 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivsharingopco2"
+                    android:id="@+id/iv_3GAntenna_Port_EmptyDamaged"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_sharingopco2"
+                    android:id="@+id/ib_3GAntenna_Port_EmptyDamaged"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+           <!-- ...................................................-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="4GBand"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4GBand"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4GBand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4GBand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_sharingopco3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="4GCoverge"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4GCoverge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4GCoverge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="4GObstruction"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4GObstruction"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4GObstruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="4G Existing Antenna Height"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4G_Existing_Antenna_Height"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4G_Existing_Antenna_Height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="4G Antenna Make and Model"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4G_Antenna_Makeedt_and_Model"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4G_Antenna_Makeedt_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4G_Antenna_Makeedt_and_Model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -666,11 +964,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Sharing Opco 3"
+                    android:text="4G Existing Antenna Direction"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_sharingopco3"
+                    android:id="@+id/edt_4G_Existing_Antenna_Direction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -678,21 +976,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivsharingopco3"
+                    android:id="@+id/iv_4G_Existing_Antenna_Direction"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_sharingopco3"
+                    android:id="@+id/ib_4G_Existing_Antenna_Direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_infraprovider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -701,11 +998,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Infra Provider"
+                    android:text="4G Existing antenna tilt Electrical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_infraprovider"
+                    android:id="@+id/edt_4G_Existing_antenna_tilt_Electrical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -713,57 +1010,20 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivinfraprovider"
+                    android:id="@+id/iv_4G_Existing_antenna_tilt_Electrical"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_infraprovider"
+                    android:id="@+id/ib_4G_Existing_antenna_tilt_Electrical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_typeindoor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sitedeatail_tv_typeindoor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Type(ID/OD) Model"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_typeindoor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivtypeindoor"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_typeindoor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_infrashared"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -772,11 +1032,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Infra Shared"
+                    android:text="4G Existing antenna tilt Mechanical"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_infrashared"
+                    android:id="@+id/edt_4G_Existing_antenna_tilt_Mechanical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -784,35 +1044,99 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivinfrashared"
+                    android:id="@+id/iv_4G_Existing_antenna_tilt_Mechanical"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_infrashared"
+                    android:id="@+id/ib_4G_Existing_antenna_tilt_Mechanical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Space Available for 4G Antenna"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_Space_Available_for_4G_Antenna"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_Space_Available_for_4G_Antenna"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_Space_Available_for_4G_Antenna"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="Addl Poles req for 4G Antenna"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_Addl_Poles_req_for_4G_Antenna"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_Addl_Poles_req_for_4G_Antenna"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_Addl_Poles_req_for_4G_Antenna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_extra1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sitedeatail_tv_extra1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Extra 1"
+                    android:text="4GAntenna Swap Required"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sitedeatail_edt_extra1"
+                    android:id="@+id/edt_4GAntenna_Swap_Required"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -820,162 +1144,123 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/ivextra1"
+                    android:id="@+id/iv_4GAntenna_Swap_Required"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sitedeatail_img_extra1"
+                    android:id="@+id/ib_4GAntenna_Swap_Required"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="4GApproximate Cable Lenth"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4GApproximate_Cable_Lenth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4GApproximate_Cable_Lenth"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4GApproximate_Cable_Lenth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8"
+                    android:text="4GAntenna Port EmptyDamaged"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/edt_4GAntenna_Port_EmptyDamaged"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/iv_4GAntenna_Port_EmptyDamaged"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/ib_4GAntenna_Port_EmptyDamaged"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+
 
             <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_extra2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sitedeatail_tv_extra2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Extra 2"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_extra2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivextra2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_extra2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_sitedeatail_edt_remark1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sitedeatail_tv_remark1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Remark 1"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_remark1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivremark1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_remark1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-            <LinearLayout
-
-                android:id="@+id/linear_sitedeatail_edt_remark2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/sitedeatail_tv_remark2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".8"
-                    android:text="Remark 2"
-                    android:textSize="@dimen/font_small"></TextView>
-
-                <EditText
-                    android:id="@+id/sitedeatail_edt_remark2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font_small"></EditText>
-
-                <ImageView
-                    android:id="@+id/ivremark2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:tag="imgView,Bearing0" />
-
-                <ImageButton
-                    android:id="@+id/sitedeatail_img_remark2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_camera" />
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_margin="@dimen/margin_large"
-            android:layout_gravity="bottom|center"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <Button
-                android:layout_weight="1"
-                android:textColor="@color/white"
                 android:layout_gravity="bottom|center"
-                android:id="@+id/btnsitedetailsave"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_shadow_bg"
-                android:text="Save" />
-
-            <Button
-                android:id="@+id/btnsitedetail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_margin="@dimen/margin_large"
                 android:layout_weight="1"
-                android:background="@drawable/button_shadow_bg"
-                android:text="Next"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:textColor="@color/white">
+
+
+                <Button
+                    android:id="@+id/btnrfsectordetailsave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_shadow_bg"
+                    android:text="Save"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/btnrfsectordetailnext"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_margin="@dimen/margin_small"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_shadow_bg"
+                    android:text="Next"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_sitedetail_count"
+                android:id="@+id/tv_rfsectordetail_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp" />

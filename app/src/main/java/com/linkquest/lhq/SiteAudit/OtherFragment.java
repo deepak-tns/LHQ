@@ -1,4 +1,4 @@
-package com.linkquest.lhq.fragment;
+package com.linkquest.lhq.SiteAudit;
 
 
 import android.app.ProgressDialog;
@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
@@ -31,15 +30,13 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.linkquest.lhq.BitmapEncodedDecoded;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.HTTPPostRequestMethod;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.AppSingleton;
-import com.linkquest.lhq.Utils.DrawBitmapAll;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
-import com.linkquest.lhq.activity.MainActivity;
-import com.linkquest.lhq.activity.SiteAuditAllDataHistory;
 import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.OtherDetailData;
@@ -53,10 +50,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -96,6 +89,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     private Button btnUpload;
     private TextView tv_otherdetail_count;
     private TextView tv_otherdetail_count_previous;
+    private TextView tv_show_status;
 
     private final String SECTOR1 ="Sector1";
     private final String SECTOR2 ="Sector2";
@@ -145,6 +139,8 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     }
 
     private void findIDS(View v){
+
+        tv_show_status =v.findViewById(R.id.tv_show_status);
 
          edtRiggerPic = v.findViewById(R.id.other_riggerpic);
          edtEngineerPic = v.findViewById(R.id.other_engineerpic);
@@ -284,6 +280,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
             } catch (Exception e) {
 
             }
@@ -294,6 +291,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -339,6 +337,8 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(response.toString());
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
+
+            tv_show_status.append("Site Detail :" +status+"\n");
             Toast.makeText(getActivity(),status+" Site Detail",Toast.LENGTH_LONG).show();
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
@@ -371,6 +371,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
 
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
             } catch (Exception e) {
 
@@ -384,6 +385,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -430,6 +432,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
 Toast.makeText(getActivity(),status +"Survey Detail",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Survey Detail :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -556,6 +559,7 @@ private JSONObject jsondataSectorDetail1(String secname){
         jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
         jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
         jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+        jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
         jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
         jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
@@ -574,6 +578,7 @@ private void toSendDataSectorDetail1(String secname) {
     //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
     final ProgressDialog pDialog = new ProgressDialog(getActivity());
     pDialog.setMessage("Loading...");
+    pDialog.setCancelable(false);
     pDialog.show();
     Log.v("jsonobjectsectordetail",jsondataSectorDetail1(secname).toString());
     JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -623,6 +628,7 @@ private void toSendDataSectorDetail1(String secname) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail1",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Sector Detail1 :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -749,6 +755,7 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
                 jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
                 jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
@@ -766,6 +773,7 @@ private void toSendDataSectorDetail1(String secname) {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
         Log.v("jsonobjectsectordetail2",jsondataSectorDetail2(secname).toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -815,6 +823,7 @@ private void toSendDataSectorDetail1(String secname) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail2",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Sector Detail2 :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -942,6 +951,7 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
                 jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
                 jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
@@ -959,6 +969,7 @@ private void toSendDataSectorDetail1(String secname) {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
         Log.v("jsonobjectsectordetail3",jsondataSectorDetail3(secname).toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -1008,6 +1019,7 @@ private void toSendDataSectorDetail1(String secname) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail3",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Sector Detail3 :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1135,6 +1147,7 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
                 jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
                 jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
@@ -1153,6 +1166,7 @@ private void toSendDataSectorDetail1(String secname) {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
         Log.v("jsonobjectsectordetail4",jsondataSectorDetail4(secname).toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -1202,12 +1216,14 @@ private void toSendDataSectorDetail1(String secname) {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail4",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Sector Detail4 :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     //..........................end SectorDetail 3
+
 
 //......................................Start SitePanaromic........................
 private JSONObject jsondataSitePanaromic(){
@@ -1228,18 +1244,18 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("tvBearing300", sitePanoramicData.get(0).getTvBearing300());
             jsonObject.put("tvBearing330", sitePanoramicData.get(0).getTvBearing330());
 
-            jsonObject.put("btnBearing0Image", sitePanoramicData.get(0).getBtnBearing0Image());
-            jsonObject.put("btnBearing30Image", sitePanoramicData.get(0).getBtnBearing30Image());
-            jsonObject.put("btnBearing60Image", sitePanoramicData.get(0).getBtnBearing60Image());
-            jsonObject.put("btnBearing90Image", sitePanoramicData.get(0).getBtnBearing90Image());
-            jsonObject.put("btnBearing120Image", sitePanoramicData.get(0).getBtnBearing120Image());
-            jsonObject.put("btnBearing150Image", sitePanoramicData.get(0).getBtnBearing150Image());
-            jsonObject.put("btnBearing180Image", sitePanoramicData.get(0).getBtnBearing180Image());
-            jsonObject.put("btnBearing210Image", sitePanoramicData.get(0).getBtnBearing210Image());
-            jsonObject.put("btnBearing240Image", sitePanoramicData.get(0).getBtnBearing240Image());
-            jsonObject.put("btnBearing270Image", sitePanoramicData.get(0).getBtnBearing270Image());
-            jsonObject.put("btnBearing300Image", sitePanoramicData.get(0).getBtnBearing300Image());
-            jsonObject.put("btnBearing330Image", sitePanoramicData.get(0).getBtnBearing330Image());
+            jsonObject.put("btnBearing0Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing0Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing30Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100) );
+            jsonObject.put("btnBearing60Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing60Image()), Bitmap.CompressFormat.JPEG, 100) );
+            jsonObject.put("btnBearing90Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing90Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing120Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing120Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing150Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing150Image()), Bitmap.CompressFormat.JPEG, 100) );
+            jsonObject.put("btnBearing180Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing180Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing210Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing210Image()), Bitmap.CompressFormat.JPEG, 100) );
+            jsonObject.put("btnBearing240Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing240Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing270Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing270Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing300Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing300Image()), Bitmap.CompressFormat.JPEG, 100));
+            jsonObject.put("btnBearing330Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing330Image()), Bitmap.CompressFormat.JPEG, 100));
 
             jsonObject.put("inputBearin_extra1", sitePanoramicData.get(0).getInputBearin_extra1());
             jsonObject.put("inputBearin_extra2", sitePanoramicData.get(0).getInputBearin_extra2());
@@ -1251,6 +1267,7 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
             jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
             jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+            jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
             //..................sitepanoramicBlocking................
             jsonObject.put("blocking0", sitePanoramicBlockingData.get(0).getBlocking0());
             jsonObject.put("blocking30", sitePanoramicBlockingData.get(0).getBlocking30());
@@ -1275,6 +1292,7 @@ private void toSendDataSitePanaromic() {
     //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
     final ProgressDialog pDialog = new ProgressDialog(getActivity());
     pDialog.setMessage("Loading...");
+    pDialog.setCancelable(false);
     pDialog.show();
     Log.v("jsonsitepanaromic",jsondataSitePanaromic().toString());
     JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -1323,6 +1341,7 @@ private void toSendDataSitePanaromic() {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status+" Site Panaromic",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Site Panaromic :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1349,6 +1368,7 @@ private void toSendDataSitePanaromic() {
             jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
             jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
             jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+            jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
 
         } catch (Exception e) {
@@ -1361,6 +1381,7 @@ private void toSendDataSitePanaromic() {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
         Log.v("jsonotherdetail",jsondataOtherDetail().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -1409,6 +1430,7 @@ private void toSendDataSitePanaromic() {
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status+"Other Detail",Toast.LENGTH_LONG).show();
+            tv_show_status.append("Other Detail :" +status+"\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1677,6 +1699,7 @@ private void toSendDataSitePanaromic() {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
         pDialog.show();
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
@@ -1721,7 +1744,6 @@ private void toSendDataSitePanaromic() {
         AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
     }
 
-
     private void parseSettingResponse(JSONArray response) {
         try {
             JSONArray jsonArray = new JSONArray(response.toString());
@@ -1736,7 +1758,6 @@ private void toSendDataSitePanaromic() {
 
 
     private void selectImage(String Value) {
-
         if (Value.equals("1")) {
          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);*/
@@ -1744,8 +1765,6 @@ private void toSendDataSitePanaromic() {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos", 1);
             startActivityForResult(i, 1);
-
-
         }
         if (Value.equals("2")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -2092,10 +2111,10 @@ private void toSendDataSitePanaromic() {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pd.setCancelable(false);
             pd.setIndeterminate(false);
             pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pd.setMessage("get credentials");
+            pd.setCancelable(false);
             pd.show();
 
             //  pd.setContentView(R.layout.custom_progressdialog_layout);

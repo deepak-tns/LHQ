@@ -14,12 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.linkquest.lhq.CustomClass;
+import com.linkquest.lhq.LOSAudit.LOSDetailFragment;
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.RFSurvey.RFSiteDetailFragment;
+import com.linkquest.lhq.SiteAudit.SiteDetailFragment;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.constants.AppConstants;
-import com.linkquest.lhq.constants.VariableSet;
 import com.linkquest.lhq.database.DatabaseHandler;
-import com.linkquest.lhq.database.SiteIDandDate;
 import com.linkquest.lhq.database.SurveyForm;
 
 import java.util.List;
@@ -41,6 +42,9 @@ public class SiteSurveylqtReport extends Fragment {
     private TextView date;
     private TextView lat;
     private TextView log;
+
+    private String stSurveyType="";
+
     private SharedPreferenceUtils sharedPreferences;
     public SiteSurveylqtReport() {
         // Required empty public constructor
@@ -55,15 +59,14 @@ public class SiteSurveylqtReport extends Fragment {
         databaseHandler = new DatabaseHandler(getActivity());
        List<SurveyForm>  siteIDandDate = databaseHandler.getLastSurveyformData();
        if(siteIDandDate.size() > 0){
-          VariableSet.siteid = siteIDandDate.get(0).getSiteid();
-          VariableSet.date = siteIDandDate.get(0).getDate();
-          String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
+          String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator()
+                  +siteIDandDate.get(0).getTechnology()+siteIDandDate.get(0).getTechnologytype()+siteIDandDate.get(0).getSiteid()+siteIDandDate.get(0).getCusterid()+siteIDandDate.get(0).getDate();
            sharedPreferences = SharedPreferenceUtils.getInstance();
            sharedPreferences.setContext(getActivity());
-           sharedPreferences.putString(AppConstants.SITEID,VariableSet.siteid );
-           sharedPreferences.putString(AppConstants.DATE,VariableSet.date );
+           sharedPreferences.putString(AppConstants.SITEID,siteIDandDate.get(0).getSiteid() );
+           sharedPreferences.putString(AppConstants.DATE,siteIDandDate.get(0).getDate() );
            sharedPreferences.putString(AppConstants.surveytpeandcustomerandoperator,surveytype_customer_operator );
-           sharedPreferences.putString(AppConstants.operator,siteIDandDate.get(0).getOperator() );
+           sharedPreferences.putString(AppConstants.operators,siteIDandDate.get(0).getOperator() );
 
        }
 
@@ -88,8 +91,8 @@ public class SiteSurveylqtReport extends Fragment {
         Button btn_save =(Button) v.findViewById(R.id.btn_sitesurveyreport);
 
         List<SurveyForm> listdata = databaseHandler.getLastSurveyformData();
-
-        surveytype.setText(listdata.get(0).getSurveytype());
+        stSurveyType= listdata.get(0).getSurveytype();
+        surveytype.setText(stSurveyType);
         customer.setText(listdata.get(0).getCustomer());
         operator.setText(listdata.get(0).getOperator());
         circle.setText(listdata.get(0).getCircle());
@@ -130,8 +133,19 @@ public class SiteSurveylqtReport extends Fragment {
                                 // current activity
                                 // startActivity(new Intent(CardLogin.this, MainActivity.class));
 
-                                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteDetailFragment()).commit();
-                                dialog.cancel();
+                                if (stSurveyType.equalsIgnoreCase("Site Audit")) {
+                                    getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteDetailFragment()).commit();
+                                    dialog.cancel();
+                                }
+                                if (stSurveyType.equalsIgnoreCase("LOS Survey")) {
+                                    CustomClass.getCustomclass().setNotifyData("LOS Survey");
+                                    getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new LOSDetailFragment()).commit();
+                                    dialog.cancel();
+                                }
+                                if (stSurveyType.equalsIgnoreCase("RF Survey")) {
+                                    getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new RFSiteDetailFragment()).commit();
+                                    dialog.cancel();
+                                }
                             }
                         })
                 .setNegativeButton("back",

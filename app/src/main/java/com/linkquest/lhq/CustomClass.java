@@ -2,14 +2,14 @@ package com.linkquest.lhq;
 
 public class CustomClass {
 
-    public interfaceCustom interfaceCustom;
+    public static  interfaceCustom minterfaceCustom;
 
    public interface  interfaceCustom{
         void setData(String Data);
     }
     public static CustomClass customClass;
 
-    public static CustomClass geCustomclass(){
+    public static CustomClass getCustomclass(){
 
      if(customClass == null){
          customClass = new CustomClass();
@@ -17,13 +17,13 @@ public class CustomClass {
      return customClass;
     }
 
-    public void setInterfaceCustom(interfaceCustom interfaceCustom){
-        this.interfaceCustom = interfaceCustom;
+    public static void setInterfaceCustom(interfaceCustom interfaceCustom){
+        minterfaceCustom = interfaceCustom;
     }
 
     public void setNotifyData(String data){
-        if(interfaceCustom != null) {
-            interfaceCustom.setData(data);
+        if(minterfaceCustom != null) {
+            minterfaceCustom.setData(data);
         }
      //  interfaceCustom.setData(data);
     }

@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:layout_margin="@dimen/margin_small"
     android:orientation="vertical"
-    tools:context=".fragment.SectorDetailFragment">
+    tools:context=".SiteAudit.SectorDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -537,7 +537,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/sectordeatail_tv_postelectrical_tilt4gf2"
                     android:layout_width="0dp"
@@ -1668,8 +1667,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Attach Configuration Dump of Node"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1684,8 +1684,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_ACD"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -1881,9 +1881,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:id="@+id/sectordeatail_tv_extra1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Extra 1"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1898,8 +1899,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_extra1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -1917,9 +1918,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:id="@+id/sectordeatail_tv_extra2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Extra2"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1934,8 +1936,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_extra2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 

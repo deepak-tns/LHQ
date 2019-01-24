@@ -1,17 +1,14 @@
-package com.linkquest.lhq.fragment;
+package com.linkquest.lhq.SiteAudit;
 
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -27,25 +24,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.linkquest.lhq.GPSTracker;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.Utils.DrawBitmapAll;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
 import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SiteDetailForm;
+import com.linkquest.lhq.database.SurveyForm;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -161,23 +152,21 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private  LinearLayout linear_extra2;
     private  LinearLayout linear_remark1;
     private  LinearLayout linear_remark2;
-
-
     private SiteDetailForm siteDetailForm;
 
     private Button btnsitedetail;
     private Button btnsitedetailsave;
     private TextView tv_sitedetail_count;
     private TextView tv_sitedetail_count_previous;
-
     DatabaseHandler db;
     private  SharedPreferenceUtils sharedPreferences;
-    private  String changetempleteName;
-    private  String changetempleteName_Operator;
+    private  String changetempleteName="";
+    private  String changetempleteName_Operator="";
     private  TextView tvsectorid;
     private  TextView tvtype_id_od;
     private  TextView tvextra1;
     private  TextView tvextra2;
+    private TextView tvremark1;
 
     public SiteDetailFragment() {
         // Required empty public constructor
@@ -217,8 +206,12 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         findviewIDS(v);
         db = new DatabaseHandler(getActivity());
-        siteDetailForm = new SiteDetailForm();
 
+
+
+
+
+        siteDetailForm = new SiteDetailForm();
         tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString()+db.getCountSiteDetail());
 
 
@@ -372,12 +365,20 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     }
 
     private void changeTemplete(View v){
-        sharedPreferences = SharedPreferenceUtils.getInstance();
+
+      sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
-        // String empId = sharedPreferences.getString(AppConstraint.EMPID);
-        changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
-        changetempleteName_Operator = sharedPreferences.getString(AppConstants.operator);
-        // Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+       // changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
+      //  changetempleteName_Operator = sharedPreferences.getString(AppConstants.operators);
+         Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+        List<SurveyForm> siteIDandDate = db.getLastSurveyformData();
+        if(siteIDandDate.size() > 0){
+            String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
+            changetempleteName =surveytype_customer_operator;
+           changetempleteName_Operator=siteIDandDate.get(0).getOperator();
+
+        }
+
         //  start change templete code
         linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
         linear_towersiteid =v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
@@ -409,12 +410,14 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         tvtype_id_od =v.findViewById(R.id.sitedeatail_tv_typeindoor);
         tvextra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
         tvextra2 = v.findViewById(R.id.sitedeatail_tv_extra2);
+        tvremark1 = v.findViewById(R.id.sitedeatail_tv_remark1);
         //  end change templete code
         if(changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")){
            tvsectorid.setText("No of Sectors");
            tvtype_id_od.setText("Zone");
            tvextra1.setText("DT Name");
            tvextra2.setText("RNO Name");
+           tvremark1.setText("GPS");
 
            linear_towersiteid.setVisibility(View.GONE);
            linear_sitetype.setVisibility(View.GONE);
@@ -533,6 +536,12 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         }
 
         if (v == btnsitedetailsave) {
+
+            if(db.getCountSiteDetail()> 2){
+                db.deleteSomeRow_SiteDetail();
+
+            }
+
 
             db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo()+"", sitename.getText().toString(), siteDetailForm.getSitename_photo()+"",
                     towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo()+"", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo()+"",
@@ -2890,7 +2899,6 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
     @Override
     public void onResume() {
         super.onResume();
-
 
         //  GPSTracker.BUS.register(this);
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter(GoogleGPSService.BROADCAST_ACTION));

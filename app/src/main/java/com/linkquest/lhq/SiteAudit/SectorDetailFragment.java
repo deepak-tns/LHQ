@@ -1,4 +1,4 @@
-package com.linkquest.lhq.fragment;
+package com.linkquest.lhq.SiteAudit;
 
 
 import android.content.BroadcastReceiver;
@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
@@ -27,18 +26,14 @@ import android.widget.Toast;
 
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.Utils.DrawBitmapAll;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
-import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SectorDetailData;
+import com.linkquest.lhq.database.SurveyForm;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 
@@ -405,8 +400,8 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     String time;
     DatabaseHandler db;
     private SharedPreferenceUtils sharedPreferences;
-    private String changetempleteName;
-    private String changetempleteName_Operator;
+    private String changetempleteName ="";
+    private String changetempleteName_Operator="";
     private  TextView tvextra1;
     private  TextView tvextra2;
     private  TextView tvremark1;
@@ -699,12 +694,18 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     }
 
     private void changeTemplete(View v){
-        sharedPreferences = SharedPreferenceUtils.getInstance();
+        /* sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
-        // String empId = sharedPreferences.getString(AppConstraint.EMPID);
         changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
-        changetempleteName_Operator = sharedPreferences.getString(AppConstants.operator);
-        // Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+        changetempleteName_Operator = sharedPreferences.getString(AppConstants.operators);*/
+        List<SurveyForm> siteIDandDate = db.getLastSurveyformData();
+        if(siteIDandDate.size() > 0){
+            String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
+            changetempleteName =surveytype_customer_operator;
+            changetempleteName_Operator=siteIDandDate.get(0).getOperator();
+
+        }
+
         //  start change templete code
         linear_sectordetail_techavailable =v.findViewById(R.id.sectordetail_linear_techavailable);
         linear_sectordetail_bandavailable = v.findViewById(R.id.sectordetail_linear_bandavailable);
@@ -833,14 +834,14 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tvremark2.setText("Antenna");
 
             linear_sectordetail_bandavailable.setVisibility(View.GONE);
-          /*  linear_sectordetail_preelectrical_tilt2g.setVisibility(View.GONE);
+           linear_sectordetail_preelectrical_tilt2g.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt2g.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt3g.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt3g.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt4gf2.setVisibility(View.GONE);
-            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);*/
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
             linear_sectordetail_mimotype.setVisibility(View.GONE);
             linear_sectordetail_ret.setVisibility(View.GONE);
             linear_sectordetail_enodebband.setVisibility(View.GONE);
@@ -875,7 +876,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_preelectrical_tilt3g.setText("DC 3G (Yes/No)");
             tv_sectordetail_postelectrical_tilt3g .setText("Power RS Boost (Pb value)");
             tv_sectordetail_preelectrical_tilt4gf1 .setText("Uplink RSSI all Antenna Port (below-115dbm)");
-
             tv_sectordetail_postelectrical_tilt4gf1 .setText("Antenna Element (xTxR) (x=32;64;128)");
 
             tv_sectordetail_preelectrical_tilt4gf2 .setText("Backhaul Bandwidth");
@@ -884,7 +884,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_buildingheight.setText("UL RSSI interference check");
 
             tv_sectordetail_enodebband.setText("No of Dedicated TSL for Data");
-            tv_sectordetail_enodebband.setHeight(60);
             tv_sectordetail_MOP .setText("Config. Radio Power 4G");
             tv_sectordetail_COP .setText("Config. Radio Power 3G");
             tv_sectordetail_multiplexer_avail.setText("No of TRX");
@@ -892,9 +891,8 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tvremark1.setText("Remark");
            // tvremark2.setText("");
             tvextra1.setText("Node B Power cell wise (20W/40W/60W)");
-            tvextra1.setHeight(60);
             tvextra2.setText("Node B transmitter output power measurement test.");
-            tvextra2.setHeight(60);
+
            // tv_sdbasebandtype .setText("");
            // tv_sdrnc .setText("");
            // tv_sdnoofchannelelement .setText("");
@@ -1104,13 +1102,17 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
 
 
             int count = db.getCountSectorDetail();
-        tv_sectordetail_count.setText(count+"");
+            tv_sectordetail_count.setText(count+"");
             Toast.makeText(getActivity(),sectordeatailfrgamentname,Toast.LENGTH_LONG).show();
             if(sectordeatailfrgamentname.equalsIgnoreCase( "Sector4"))
             {
                 btnsectordetail.setVisibility(View.VISIBLE);
             }
-            Toast.makeText(getActivity(),sectordeatailfrgamentname,Toast.LENGTH_LONG).show();
+          //  Toast.makeText(getActivity(),sectordeatailfrgamentname,Toast.LENGTH_LONG).show();
+
+          /*  TabLayout tabs = (TabLayout)((MainActivity)getActivity()).findViewById(R.id.tabs);
+            tabs.getTabAt(1).select();*/
+
         }
         if (v == btnsectordetail) {
             getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, SitePanoramicFragment.newInstance(1000)).addToBackStack(null).commit();

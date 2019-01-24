@@ -31,12 +31,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.linkquest.lhq.CustomClass;
-import com.linkquest.lhq.GPSTracker;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.Utils.AppSingleton;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.SurveyForm;
 
@@ -174,7 +171,7 @@ public class SiteSurveylqt extends Fragment   {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-               // todatasppinerTechnology(selectitem);
+             // todatasppinerTechnology(selectitem);
                 todatasppinerLocation(selectitem);
 
                 listtechnology.clear();
@@ -205,7 +202,7 @@ public class SiteSurveylqt extends Fragment   {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectitem = parent.getItemAtPosition(position).toString();
-             //   todatasppinerTechnologyType(selectitem);
+         //     todatasppinerTechnologyType(selectitem);
                 listtechnogytype.clear();
                 listtechnogytype.add("SCFT");
                 listtechnogytype.add("CLUSTER");
@@ -402,23 +399,42 @@ public class SiteSurveylqt extends Fragment   {
                     TextView selectedTextView = (TextView) selectedView;
                     selectedTextView.setError("Please Select");
                     return;
-                } else if (!spi_location.getSelectedItem().toString().trim().equalsIgnoreCase("")) {
-                    getcustomLocation = spi_location.getSelectedItem().toString();
+                } else if (spi_location.getSelectedItem().toString().trim().equalsIgnoreCase(SELECT)) {
+                    View selectedView = spi_location.getSelectedView();
+                    TextView selectedTextView = (TextView) selectedView;
+                    selectedTextView.setError("Please Select");
 
-                } else if (spi_location.getSelectedItem().toString().trim().equalsIgnoreCase("other")) {
+                    return;
+                    //getcustomLocation = spi_location.getSelectedItem().toString();
+
+                } else if (!spi_location.getSelectedItem().toString().trim().equalsIgnoreCase(SELECT)) {
+                    getcustomLocation = spi_location.getSelectedItem().toString();
+                }
+
+                else if (spi_location.getSelectedItem().toString().trim().equalsIgnoreCase("other")) {
                     if (edt_other.getText().toString().equals("")) {
                         edt_other.setError("Please Enter other location");
                     } else {
-
-                        String s = edtsiteid.getText().toString().trim();
+                      //  String s = edtsiteid.getText().toString().trim();
                         getcustomLocation = edt_other.getText().toString();
                     }
-
                 }
-                if (edtsiteid.getText().toString().trim().equalsIgnoreCase("")) {
+
+                if (spi_techtype.getSelectedItem().toString().trim().equalsIgnoreCase("CLUSTER")) {
+
+                    if (edt_clusterid.getText().toString().equals("")) {
+                        edt_clusterid.setError("Please Enter ClusterId");
+                        return;
+                    } else {
+
+                    }
+
+                } if (edtsiteid.getText().toString().trim().equalsIgnoreCase("")) {
                     edtsiteid.setError("Please Enter SiteId");
                     return;
-                } else {
+                }
+
+                else {
                     Toast.makeText(getActivity(), "Result : " +
                                     "\nSpinner 1 : " + String.valueOf(spinner_siteaudit.getSelectedItem()) +
                                     "\nSpinner 2 : " + String.valueOf(spinner_customer.getSelectedItem()),
@@ -834,9 +850,7 @@ public class SiteSurveylqt extends Fragment   {
     private JSONObject JSonobjParametertechnology(String type) {
         JSONObject jsonObject = new JSONObject();
         try {
-
             jsonObject.put("Circles", type);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -877,8 +891,6 @@ public class SiteSurveylqt extends Fragment   {
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
                 AppConstants.TECHNOLOGYTYPE, JSonobjParametertechnologyType(type),
                 new Response.Listener<JSONArray>() {
-
-
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponsetechnologyType(response);
@@ -939,7 +951,6 @@ public class SiteSurveylqt extends Fragment   {
                 String surveyType = jsonObject.getString("TechType");
                 Log.v(TAG, surveyType);
                 listtechnogytype.add(surveyType);
-
             }
             final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listtechnogytype);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -979,6 +990,10 @@ public class SiteSurveylqt extends Fragment   {
                 listlocation.clear();
                 listlocation.add(SELECT);
                 listlocation.add("Other");
+                final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listlocation);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spi_location.setAdapter(dataAdapter);
+                dataAdapter.notifyDataSetChanged();
                 pDialog.hide();
             }
 
@@ -1068,7 +1083,6 @@ public class SiteSurveylqt extends Fragment   {
             log = intent.getStringExtra("LOG");
             lat_log.setText(lat + "," + log);
             //  Toast.makeText(getActivity(), "Lat : "+lat+","+ "Long : "+ log, Toast.LENGTH_LONG).show();
-
 
         }
 
