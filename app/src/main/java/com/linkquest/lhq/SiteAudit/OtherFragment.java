@@ -1244,7 +1244,92 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("tvBearing300", sitePanoramicData.get(0).getTvBearing300());
             jsonObject.put("tvBearing330", sitePanoramicData.get(0).getTvBearing330());
 
-            jsonObject.put("btnBearing0Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing0Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing0Image().equals("")){
+                jsonObject.put("btnBearing0Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing0Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing0Image",sitePanoramicData.get(0).getBtnBearing0Image() );
+            }
+
+            //   jsonObject.put("btnBearing30Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing30Image().equals("")){
+                jsonObject.put("btnBearing30Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing30Image",sitePanoramicData.get(0).getBtnBearing30Image() );
+            }
+            // jsonObject.put("btnBearing60Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing60Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing60Image().equals("")){
+                jsonObject.put("btnBearing60Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing60Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing60Image",sitePanoramicData.get(0).getBtnBearing60Image() );
+            }
+            // jsonObject.put("btnBearing90Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing90Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing90Image().equals("")){
+                jsonObject.put("btnBearing90Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing90Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing90Image",sitePanoramicData.get(0).getBtnBearing90Image() );
+            }
+            //    jsonObject.put("btnBearing120Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing120Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing120Image().equals("")){
+                jsonObject.put("btnBearing120Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing120Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing120Image",sitePanoramicData.get(0).getBtnBearing120Image() );
+            }
+            // jsonObject.put("btnBearing150Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing150Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing150Image().equals("")){
+                jsonObject.put("btnBearing150Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing150Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing150Image",sitePanoramicData.get(0).getBtnBearing150Image() );
+            }
+            //     jsonObject.put("btnBearing180Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing180Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing180Image().equals("")){
+                jsonObject.put("btnBearing180Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing180Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing180Image",sitePanoramicData.get(0).getBtnBearing180Image() );
+            }
+            //   jsonObject.put("btnBearing210Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing210Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing210Image().equals("")){
+                jsonObject.put("btnBearing210Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing210Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing210Image",sitePanoramicData.get(0).getBtnBearing210Image() );
+            }
+            //  jsonObject.put("btnBearing240Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing240Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing240Image().equals("")){
+                jsonObject.put("btnBearing240Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing240Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing240Image",sitePanoramicData.get(0).getBtnBearing240Image() );
+            }
+            //      jsonObject.put("btnBearing270Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing270Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing270Image().equals("")){
+                jsonObject.put("btnBearing270Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing270Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing270Image",sitePanoramicData.get(0).getBtnBearing270Image() );
+            }
+            //     jsonObject.put("btnBearing300Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing300Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing300Image().equals("")){
+                jsonObject.put("btnBearing300Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing300Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing300Image",sitePanoramicData.get(0).getBtnBearing300Image() );
+            }
+            //      jsonObject.put("btnBearing330Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing330Image()), Bitmap.CompressFormat.JPEG, 100));
+            if(!sitePanoramicData.get(0).getBtnBearing330Image().equals("")){
+                jsonObject.put("btnBearing330Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing330Image()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("btnBearing330Image",sitePanoramicData.get(0).getBtnBearing330Image() );
+            }
+
+           /* jsonObject.put("btnBearing0Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing0Image()), Bitmap.CompressFormat.JPEG, 100));
             jsonObject.put("btnBearing30Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100) );
             jsonObject.put("btnBearing60Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing60Image()), Bitmap.CompressFormat.JPEG, 100) );
             jsonObject.put("btnBearing90Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing90Image()), Bitmap.CompressFormat.JPEG, 100));
@@ -1256,7 +1341,7 @@ private JSONObject jsondataSitePanaromic(){
             jsonObject.put("btnBearing270Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing270Image()), Bitmap.CompressFormat.JPEG, 100));
             jsonObject.put("btnBearing300Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing300Image()), Bitmap.CompressFormat.JPEG, 100));
             jsonObject.put("btnBearing330Image",BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing330Image()), Bitmap.CompressFormat.JPEG, 100));
-
+*/
             jsonObject.put("inputBearin_extra1", sitePanoramicData.get(0).getInputBearin_extra1());
             jsonObject.put("inputBearin_extra2", sitePanoramicData.get(0).getInputBearin_extra2());
             jsonObject.put("inputBearin_remark1", sitePanoramicData.get(0).getInputBearin_remark1());

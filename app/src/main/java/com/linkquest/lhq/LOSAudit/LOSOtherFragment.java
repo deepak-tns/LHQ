@@ -245,10 +245,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             Log.v("LosOtherFragLosDetail", losSiteDetailData.toString());
             try {
                 // jsonObject.put("siteid", siteDetailData.get(0).getSiteid());
-               // jsonObject.put("siteid_photo", losSiteDetailData.get(0).getSiteID_PIC());
+                jsonObject.put("SiteID_TXT", losSiteDetailData.get(0).getSiteID_TXT());
                 jsonObject.put("SiteName_TXT", losSiteDetailData.get(0).getSiteName_TXT());
                 jsonObject.put("Sharing_TXT", losSiteDetailData.get(0).getSharing_TXT());
-                jsonObject.put(" SiteType_TXT", losSiteDetailData.get(0).getSiteType_TXT());
+                jsonObject.put("SiteType_TXT", losSiteDetailData.get(0).getSiteType_TXT());
                 jsonObject.put("SurveyDate_TXT", losSiteDetailData.get(0).getSurveyDate_TXT());
                 jsonObject.put("TNPEngineer_TXT", losSiteDetailData.get(0).getTNPEngineer_TXT());
                 jsonObject.put("TNPEngineerTel_TXT", losSiteDetailData.get(0).getTNPEngineerTel_TXT());
@@ -1131,7 +1131,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
              //   jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1202,8 +1202,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link1", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link1 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink1", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink1 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1231,7 +1231,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
               //  jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1265,7 +1265,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseTransmissionNoLink2(response.toString());
-                        Log.v("res transmisiionLink2", response.toString());
+                        Log.v("res transmisiionNoLink2", response.toString());
                         pDialog.hide();
 
                     }
@@ -1304,8 +1304,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link2", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link2 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink2", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink2 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1332,7 +1332,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
             //    jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1365,7 +1365,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseTransmissionNoLink3(response.toString());
-                        Log.v("res transmisiionLink3", response.toString());
+                        Log.v("res transmisiionNoLink3", response.toString());
                         pDialog.hide();
 
                     }
@@ -1404,8 +1404,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link3", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link3 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink3", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink3 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1432,7 +1432,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
             //    jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1465,7 +1465,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseTransmissionNoLink4(response.toString());
-                        Log.v("res transmisiionLink4", response.toString());
+                        Log.v("res transmisiionNoLink4", response.toString());
                         pDialog.hide();
 
                     }
@@ -1504,8 +1504,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link4", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link4 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink4", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink4 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1532,7 +1532,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
             //    jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1566,7 +1566,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseTransmissionNoLink5(response.toString());
-                        Log.v("res transmisiionLink5", response.toString());
+                        Log.v("res transmisiionNoLink5", response.toString());
                         pDialog.hide();
 
                     }
@@ -1605,8 +1605,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link5", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link5 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink5", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink5 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1633,7 +1633,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_AntennaHeight",  transmissionNoLinkData.get(0).getImg_AntennaHeight());
                 jsonObject.put("img_Altitude",  transmissionNoLinkData.get(0).getImg_Altitude());
 
-                jsonObject.put("TransmissionNoLink _name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
+                jsonObject.put("transmissionNoLink_name", transmissionNoLinkData.get(0).getTransmissionNoLink_name());
             //    jsonObject.put("date", transmissionNoLinkData.get(0).getDate());
                 jsonObject.put("flag", transmissionNoLinkData.get(0).getFlag());
 
@@ -1666,7 +1666,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseTransmissionNoLink6(response.toString());
-                        Log.v("res transmisiionLink6", response.toString());
+                        Log.v("res transmisiionNoLink6", response.toString());
                         pDialog.hide();
 
                     }
@@ -1705,8 +1705,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "Link6", Toast.LENGTH_LONG).show();
-            tv_show_status.append("Link6 :" + status + "\n");
+            Toast.makeText(getActivity(), status + "NoLink6", Toast.LENGTH_LONG).show();
+            tv_show_status.append("NoLink6 :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
