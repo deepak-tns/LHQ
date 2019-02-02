@@ -61,6 +61,13 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private  EditText edt_PanaromicPhoto;
     private  EditText edt_ExisitngNoofMWAntennatypewithsizeandPhotograph;
     private  EditText edt_ExisitngMWAntennaheightandPolemountPhotograph;
+   //...............add 2/02/19
+    private EditText edt_Commentsaddnew;
+    private EditText edt_MWAntennaht;
+    private EditText edt_towerexistingnew;
+    private EditText edt_Towertype;
+    private EditText edt_remarks;
+
 
     private ImageView iv_SiteID;
     private  ImageView iv_SiteName;
@@ -85,6 +92,13 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private  ImageView iv_PanaromicPhoto;
     private  ImageView iv_ExisitngNoofMWAntennatypewithsizeandPhotograph;
     private  ImageView iv_ExisitngMWAntennaheightandPolemountPhotograph;
+    //  add 2/02/2019........................
+    private ImageView  iv_Commentsaddnew;
+    private ImageView  iv_MWAntennaht;
+    private ImageView  iv_towerexistingnew;
+    private ImageView  iv_Towertype;
+    private ImageView  iv_remarks;
+
 
     private ImageButton ib_SiteID;
     private  ImageButton ib_SiteName;
@@ -95,8 +109,6 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private  ImageButton ib_TNPEngineerTel;
     private  ImageButton ib_Customerrepresentative;
     private  ImageButton ib_Nearenddetails;
-    private  ImageButton ib_Lat;
-    private  ImageButton ib_Long;
     private  ImageButton ib_CandidateName;
     private  ImageButton ib_Address;
     private  ImageButton ib_Bldght;
@@ -109,6 +121,12 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private  ImageButton ib_PanaromicPhoto;
     private  ImageButton ib_ExisitngNoofMWAntennatypewithsizeandPhotograph;
     private ImageButton ib_ExisitngMWAntennaheightandPolemountPhotograph;
+    //  add 2/02/2019........................
+    private ImageButton ib_Commentsaddnew;
+    private ImageButton ib_MWAntennaht;
+    private ImageButton ib_towerexistingnew;
+    private ImageButton ib_Towertype;
+    private ImageButton ib_remarks;
 
     private String img_SiteID= "";
     private  String img_SiteName= "";
@@ -131,6 +149,12 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private  String img_PanaromicPhoto= "";
     private  String img_ExisitngNoofMWAntennatypewithsizeandPhotograph= "";
     private  String img_ExisitngMWAntennaheightandPolemountPhotograph= "";
+    //  add 2/02/2019........................
+    private String img_Commentsaddnew ="";
+    private String img_MWAntennaht ="";
+    private String img_towerexistingnew ="";
+    private String img_Towertype ="";
+    private String img_remarks ="";
 
     private  String lat, log;
     private DatabaseHandler db;
@@ -161,7 +185,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_losdetail, container, false);
           db = new DatabaseHandler(getActivity());
-        final Handler handler = new Handler();
+         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -202,6 +226,13 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         edt_PanaromicPhoto = v.findViewById(R.id.losdetail_edt_PanaromicPhoto);
         edt_ExisitngNoofMWAntennatypewithsizeandPhotograph = v.findViewById(R.id.losdetail_edt_ExisitngNoofMWAntennatypewithsizeandPhotograph);
         edt_ExisitngMWAntennaheightandPolemountPhotograph = v.findViewById(R.id.losdetail__edt_ExisitngMWAntennaheightandPolemountPhotograph);
+        //  add 2/02/2019........................
+        edt_Commentsaddnew  = v.findViewById(R.id.losdetail__edt_Commentsaddnew);
+        edt_MWAntennaht  = v.findViewById(R.id.losdetail__edt_MWAntennaht);
+        edt_towerexistingnew  = v.findViewById(R.id.losdetail__edt_towerexistingnew);
+        edt_Towertype  = v.findViewById(R.id.losdetail__edt_Towertype);
+        edt_remarks = v.findViewById(R.id.losdetail__edt_remarks);
+
         btn_save = v.findViewById(R.id.btnlosdetailsave);
         btnlosdetail_next = v.findViewById(R.id.btnlosdetail_next);
         tv_previouscount = v.findViewById(R.id.tv_losdetail_count_previous);
@@ -228,6 +259,14 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         ib_PanaromicPhoto = v.findViewById(R.id.losdetail_img_PanaromicPhoto);
         ib_ExisitngNoofMWAntennatypewithsizeandPhotograph = v.findViewById(R.id.losdetail_img_ExisitngNoofMWAntennatypewithsizeandPhotograph);
         ib_ExisitngMWAntennaheightandPolemountPhotograph = v.findViewById(R.id.losdetail_img_ExisitngMWAntennaheightandPolemountPhotograph);
+        //  add 2/02/2019........................
+        ib_Commentsaddnew  = v.findViewById(R.id.losdetail__ib_Commentsaddnew);
+        ib_MWAntennaht  = v.findViewById(R.id.losdetail__ib_MWAntennaht);
+        ib_towerexistingnew  = v.findViewById(R.id.losdetail__ib_towerexistingnew);
+        ib_Towertype  = v.findViewById(R.id.losdetail__ib_Towertype);
+        ib_remarks = v.findViewById(R.id.losdetail__ib_remarks);
+
+
 
         ib_SiteID.setOnClickListener(this);
         ib_SiteName .setOnClickListener(this);
@@ -250,6 +289,12 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         ib_PanaromicPhoto.setOnClickListener(this);
         ib_ExisitngNoofMWAntennatypewithsizeandPhotograph .setOnClickListener(this);
         ib_ExisitngMWAntennaheightandPolemountPhotograph .setOnClickListener(this);
+        //  add 2/02/2019........................
+        ib_Commentsaddnew.setOnClickListener(this);
+        ib_MWAntennaht.setOnClickListener(this);
+        ib_towerexistingnew.setOnClickListener(this);
+        ib_Towertype.setOnClickListener(this);
+        ib_remarks.setOnClickListener(this);
         btn_save .setOnClickListener(this);
         btnlosdetail_next .setOnClickListener(this);
 
@@ -275,6 +320,13 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         iv_PanaromicPhoto = v.findViewById(R.id.losdetail_ivPanaromicPhoto);
         iv_ExisitngNoofMWAntennatypewithsizeandPhotograph = v.findViewById(R.id.losdetail_ivExisitngNoofMWAntennatypewithsizeandPhotograph);
         iv_ExisitngMWAntennaheightandPolemountPhotograph = v.findViewById(R.id.losdetail_ivExisitngMWAntennaheightandPolemountPhotograph);
+        //  add 2/02/2019........................
+        iv_Commentsaddnew  = v.findViewById(R.id.losdetail__iv_Commentsaddnew);
+        iv_MWAntennaht  = v.findViewById(R.id.losdetail__iv_MWAntennaht);
+        iv_towerexistingnew  = v.findViewById(R.id.losdetail__iv_towerexistingnew);
+        iv_Towertype  = v.findViewById(R.id.losdetail__iv_Towertype);
+        iv_remarks = v.findViewById(R.id.losdetail__iv_remarks);
+
 
     }
 
@@ -344,9 +396,30 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         if(view == ib_ExisitngMWAntennaheightandPolemountPhotograph){
             selectImage("21");
         }
+        if(view == ib_Commentsaddnew){
+            selectImage("22");
+        }
+        if(view == ib_MWAntennaht){
+            selectImage("23");
+        }
+        if(view == ib_towerexistingnew){
+            selectImage("24");
+        }
+        if(view == ib_Towertype){
+            selectImage("25");
+        }
+        if(view == ib_remarks){
+            selectImage("26");
+        }
+
+
+
+
         if(view == btn_save){
             db.insertLOSSiteDetailData( new LOSSiteDetailData(edt_SiteID.getText()+"",edt_SiteName.getText()+"",edt_Sharing.getText()+"",edt_SiteType.getText()+"",edt_SurveyDate.getText()+"",edt_TNPEngineer.getText()+"", edt_TNPEngineerTel.getText()+"",edt_Customerrepresentative.getText()+"",edt_Nearenddetails.getText()+"", edt_Lat.getText()+"",edt_Long.getText()+"",edt_CandidateName.getText()+"",edt_Address.getText()+"",edt_Bldght.getText()+"", edt_Totalht.getText()+"",edt_AMSL.getText()+"",edt_Buildingsideviewphoto.getText()+"",edt_AntennaTowerlocationphoto.getText()+"",edt_Possibleobstacle.getText()+"", edt_HeightofObstruction.getText()+"",edt_PanaromicPhoto.getText()+"", edt_ExisitngNoofMWAntennatypewithsizeandPhotograph.getText()+"", edt_ExisitngMWAntennaheightandPolemountPhotograph.getText()+"",
-            img_SiteID, img_SiteName, img_Sharing, img_SiteType, img_SurveyDate, img_TNPEngineer,img_TNPEngineerTel,img_Customerrepresentative,img_Nearenddetails, img_CandidateName,img_Address,img_Bldght,img_Totalht,img_AMSL, img_Buildingsideviewphoto, img_AntennaTowerlocationphoto,img_Possimgleobstacle, img_HeightofObstruction, img_PanaromicPhoto,img_ExisitngNoofMWAntennatypewithsizeandPhotograph,img_ExisitngMWAntennaheightandPolemountPhotograph, time, 1)) ;
+            img_SiteID, img_SiteName, img_Sharing, img_SiteType, img_SurveyDate, img_TNPEngineer,img_TNPEngineerTel,img_Customerrepresentative,img_Nearenddetails, img_CandidateName,img_Address,img_Bldght,img_Totalht,img_AMSL, img_Buildingsideviewphoto, img_AntennaTowerlocationphoto,img_Possimgleobstacle, img_HeightofObstruction, img_PanaromicPhoto,img_ExisitngNoofMWAntennatypewithsizeandPhotograph,img_ExisitngMWAntennaheightandPolemountPhotograph,
+                    edt_Commentsaddnew.getText()+"",edt_MWAntennaht.getText()+"", edt_towerexistingnew.getText()+"" ,edt_Towertype.getText()+"",edt_remarks.getText()+"",img_Commentsaddnew,img_MWAntennaht,img_towerexistingnew,img_Towertype,img_remarks ,   time, 1)) ;
+
 
             int aftercount = db.getCountLosSiteDetail();
             tv_aftercount.setText(aftercount+"");
@@ -476,6 +549,32 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
             i.putExtra("pos",21);
             startActivityForResult(i, 21);
         }
+        if (Value.equals("22")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",22);
+            startActivityForResult(i, 22);
+        }
+        if (Value.equals("23")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",23);
+            startActivityForResult(i, 23);
+        }
+        if (Value.equals("24")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",24);
+            startActivityForResult(i, 24);
+        }
+        if (Value.equals("25")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",25);
+            startActivityForResult(i, 25);
+        }
+        if (Value.equals("26")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",26);
+            startActivityForResult(i, 26);
+        }
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -620,6 +719,36 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "21", angle);
+            }
+            if (requestCode == 22) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "22", angle);
+            }
+            if (requestCode == 23) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "23", angle);
+            }
+            if (requestCode == 24) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "24", angle);
+            }
+            if (requestCode == 25) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "25", angle);
+            }
+            if (requestCode == 26) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "26", angle);
             }
 
         }
@@ -897,6 +1026,71 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_ExisitngMWAntennaheightandPolemountPhotograph = thumbnail;
                 Log.v("img-encode", img_ExisitngMWAntennaheightandPolemountPhotograph);
+            }
+        }
+        if (name.equals("22")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_Commentsaddnew.setImageBitmap( out);
+                //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Customerrepresentative = thumbnail;
+                Log.v("img-encode", img_Commentsaddnew);
+            }
+        }
+        if (name.equals("23")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_MWAntennaht.setImageBitmap( out);
+                //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_MWAntennaht = thumbnail;
+                Log.v("img-encode", img_MWAntennaht);
+            }
+        }
+        if (name.equals("24")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_towerexistingnew.setImageBitmap( out);
+                //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_towerexistingnew = thumbnail;
+                Log.v("img-encode", img_towerexistingnew);
+            }
+        }
+        if (name.equals("25")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_Towertype.setImageBitmap( out);
+                //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Towertype = thumbnail;
+                Log.v("img-encode", img_Towertype);
+            }
+        }
+        if (name.equals("26")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_remarks.setImageBitmap( out);
+                //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_remarks = thumbnail;
+                Log.v("img-encode", img_remarks);
             }
         }
     }

@@ -369,13 +369,14 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private TextView tv_sectordetail_ACD;
     private TextView tv_sectordetail_VSWRtest;
     private TextView tv_sectordetail_URS;
-   /* private TextView tv_sectordetail_extra1;
-    private TextView tv_sectordetail_extra2;
-    private TextView tv_sectordetail_remark1;
-    private TextView tv_sectordetail_remark2;*/
+
     private TextView tv_sdbasebandtype;
     private TextView tv_sdrnc ;
     private TextView tv_sdnoofchannelelement;
+    private  TextView tvextra1;
+    private  TextView tvextra2;
+    private  TextView tvremark1;
+    private  TextView tvremark2;
 
 
 
@@ -402,10 +403,8 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private SharedPreferenceUtils sharedPreferences;
     private String changetempleteName ="";
     private String changetempleteName_Operator="";
-    private  TextView tvextra1;
-    private  TextView tvextra2;
-    private  TextView tvremark1;
-    private  TextView tvremark2;
+    private String activityType="";
+
 
     public SectorDetailFragment() {
         // Required empty public constructor
@@ -703,6 +702,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
             changetempleteName =surveytype_customer_operator;
             changetempleteName_Operator=siteIDandDate.get(0).getOperator();
+            activityType=siteIDandDate.get(0).getTechnologytype();
 
         }
 
@@ -794,30 +794,30 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     //    tv_sectordetail_antenamodel;
      //   tv_sectordetail_cullterpic;
       //  tv_sectordetail_txbandwidth;
-     //   tv_sectordetail_AST;
-      //  tv_sectordetail_APST;
-     //   tv_sectordetail_typeenodeb;
+        tv_sectordetail_AST  =  v.findViewById(R.id.sectordeatail_tv_AST) ;
+       tv_sectordetail_APST =  v.findViewById(R.id.sectordeatail_tv_APST) ;
+       tv_sectordetail_typeenodeb =  v.findViewById(R.id.sectordeatail_tv_typ_enodeb) ;
       //  tv_sectordetail_mimotype;
-      //  tv_sectordetail_ret;
+        tv_sectordetail_ret =  v.findViewById(R.id.sectordeatail_tv_ret) ;
         tv_sectordetail_enodebband=  v.findViewById(R.id.sectordeatail_tv_enodebband) ;
         tv_sectordetail_MOP =   v.findViewById(R.id.sectordeatail_tv_MOP) ;
         tv_sectordetail_COP =   v.findViewById(R.id.sectordeatail_tv_COP) ;
         tv_sectordetail_multiplexer_avail =   v.findViewById(R.id.sectordeatail_tv_multiplexer_avail) ;
         tv_sectordetail_antennapicleg =   v.findViewById(R.id.sectordeatail_tv_antennapicleg) ;
      //   tv_sectordetail_CRP ;
-     //   tv_sectordetail_powerdeboosting;
-     //   tv_sectordetail_DFS;
-     //   tv_sectordetail_rb_percell;
-    //    tv_sectordetail_m_mimo;
+       tv_sectordetail_powerdeboosting=   v.findViewById(R.id.sectordeatail_tv_powerdeboosting) ;
+       tv_sectordetail_DFS =v.findViewById(R.id.sectordeatail_tv_DFS) ;
+       tv_sectordetail_rb_percell =v.findViewById(R.id.sectordeatail_tv_rb_percell) ;
+       tv_sectordetail_m_mimo = v.findViewById(R.id.sectordeatail_tv_m_mimo) ;
     //    tv_sectordetail_FCT;
     //    tv_sectordetail_JCT;
     //    tv_sectordetail_FCL;
     //    tv_sectordetail_jumperlength;
-  //      tv_sectordetail_prachconfig_index;
+    //      tv_sectordetail_prachconfig_index;
     //    tv_sectordetail_carrieraggregation;
-   //     tv_sectordetail_ACD;
-    //    tv_sectordetail_VSWRtest;
-    //    tv_sectordetail_URS;
+         tv_sectordetail_ACD =v.findViewById(R.id.sectordeatail_tv_ACD) ;
+         tv_sectordetail_VSWRtest= v.findViewById(R.id.sectordeatail_tv_VSWRtest) ;
+         tv_sectordetail_URS =v.findViewById(R.id.sectordeatail_tv_URS) ;
         tv_sdbasebandtype =v.findViewById(R.id.tv_sd_basebandunittype);
         tv_sdrnc = v.findViewById(R.id.tv_sd_rncname);
         tv_sdnoofchannelelement = v.findViewById(R.id.tv_noofchannelelement);
@@ -838,10 +838,18 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             linear_sectordetail_postelectrical_tilt2g.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt3g.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt3g.setVisibility(View.GONE);
-            linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
+
+           /* linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt4gf2.setVisibility(View.GONE);
-            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);*/
+            tv_sectordetail_preelectrical_tilt4gf1.setText("Pre Electrical Tilt 2G F1");
+            tv_sectordetail_postelectrical_tilt4gf1.setText("Post Electrical Tilt 2G F1");
+            tv_sectordetail_preelectrical_tilt4gf2.setText("Pre Electrical Tilt 2G F2");
+            tv_sectordetail_postelectrical_tilt4gf2.setText("Post Electrical Tilt 2G F2");
+
+
+
             linear_sectordetail_mimotype.setVisibility(View.GONE);
             linear_sectordetail_ret.setVisibility(View.GONE);
             linear_sectordetail_enodebband.setVisibility(View.GONE);
@@ -898,7 +906,54 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
            // tv_sdnoofchannelelement .setText("");
 
             linear_sectordetail_remark2.setVisibility(View.GONE);
+            linear_sdnoofchannelelement.setVisibility(View.VISIBLE);
 
+
+        }
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL")&& activityType.equalsIgnoreCase("SCFT")) {
+
+            tv_sectordetail_preelectrical_tilt2g .setText("CGI");
+            tv_sectordetail_postelectrical_tilt2g.setText("Antenna Quantity");
+            tv_sectordetail_preelectrical_tilt3g.setText("Antenna Gain -dBi");
+            tv_sectordetail_postelectrical_tilt3g .setText("TX Power (On Top of BTS Cabinet)");
+            tv_sectordetail_preelectrical_tilt4gf1 .setText("BCCH/PSC/PCI");
+            tv_sectordetail_postelectrical_tilt4gf1 .setText("Bandwidth(Mhz)");
+            tv_sectordetail_preelectrical_tilt4gf2 .setText("Cell ID");
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
+
+            linear_sectordetail_MOP.setVisibility(View.GONE);
+            linear_sectordetail_antennapicleg.setVisibility(View.GONE);
+            linear_sdnoofchannelelement.setVisibility(View.GONE);
+
+
+            tv_sectordetail_AST.setText("Allocated BW");
+                    tv_sectordetail_APST.setText("CPRI Cable/Feeder Solution");
+            tv_sectordetail_typeenodeb.setText("BTS/NodeB/eNodeB Type");
+
+                    tv_sectordetail_ret.setText("TMA Planned");
+            tv_sectordetail_enodebband.setText("TMA Installed");
+
+                    tv_sectordetail_multiplexer_avail.setText("No of TRX");
+
+            tv_sectordetail_powerdeboosting.setText("Combiners Fitted");
+                    tv_sectordetail_DFS.setText("Combined/Uncombined Mode");
+            tv_sectordetail_rb_percell.setText("eNode B Hardware Details");
+                    tv_sectordetail_m_mimo.setText("Tower Unit (Model No)");
+
+                    tv_sectordetail_ACD.setText("Number of UL Channel Elements (CE's)");
+            tv_sectordetail_VSWRtest.setText("Number of DL Channel Elements (CE's)");
+                    tv_sectordetail_URS.setText("Parented BSC");
+
+            tv_sdbasebandtype.setText("Base Unit (Model No)");
+                    tv_sdrnc.setText("RNC/BSC Name");
+     //       tv_sdnoofchannelelement.setText("");
+
+
+            tvextra1.setText("UE Model");
+            tvextra2.setText("UE IMEI No");
+
+            tvremark1.setText("Phone Number");
+            tvremark2.setText("SIM Number");
 
         }
 

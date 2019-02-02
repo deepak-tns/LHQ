@@ -1,6 +1,5 @@
 package com.linkquest.lhq.LOSAudit;
 
-
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,11 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.linkquest.lhq.LOSAudit.TransmissionLinkFragment;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.SiteAudit.SectorDetailFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

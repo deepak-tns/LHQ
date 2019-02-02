@@ -791,6 +791,184 @@
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Comments add new"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/losdetail__edt_Commentsaddnew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/losdetail__iv_Commentsaddnew"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/losdetail__ib_Commentsaddnew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="MW Antenna ht"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/losdetail__edt_MWAntennaht"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/losdetail__iv_MWAntennaht"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/losdetail__ib_MWAntennaht"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="tower existingnew"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/losdetail__edt_towerexistingnew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/losdetail__iv_towerexistingnew"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/losdetail__ib_towerexistingnew"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Tower type"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/losdetail__edt_Towertype"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/losdetail__iv_Towertype"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/losdetail__ib_Towertype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:text="Remarks"
+                    android:textSize="@dimen/font_small"></TextView>
+
+                <EditText
+                    android:id="@+id/losdetail__edt_remarks"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/font_small"></EditText>
+
+                <ImageView
+                    android:id="@+id/losdetail__iv_remarks"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:tag="imgView,Bearing0" />
+
+                <ImageButton
+                    android:id="@+id/losdetail__ib_remarks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+
+
             <LinearLayout
                 android:layout_weight="1"
                 android:textColor="@color/white"

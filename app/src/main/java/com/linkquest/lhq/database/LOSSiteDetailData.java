@@ -3,12 +3,12 @@ package com.linkquest.lhq.database;
 public class LOSSiteDetailData {
 
     private  int    id;
-    private  String    SiteID_TXT;
-    private  String     SiteName_TXT;
-    private  String  Sharing_TXT;
-    private  String  SiteType_TXT;
+    private  String SiteID_TXT;
+    private  String SiteName_TXT;
+    private  String Sharing_TXT;
+    private  String SiteType_TXT;
     private  String SurveyDate_TXT;
-    private  String  TNPEngineer_TXT;
+    private  String TNPEngineer_TXT;
     private  String TNPEngineerTel_TXT;
     private  String Customerrepresentative_TXT;
     private  String Nearenddetails_TXT;
@@ -48,6 +48,18 @@ public class LOSSiteDetailData {
     private  String PanaromicPhoto_PIC;
     private  String ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC;
     private  String ExisitngMWAntennaheightandPolemountPhotograph_PIC;
+    // add coloum 2/2/2019 by deepak
+    private String edt_Commentsaddnew;
+    private String edt_MWAntennaht;
+    private String edt_towerexistingnew;
+    private String edt_Towertype;
+    private String edt_remarks;
+    private String img_Commentsaddnew;
+    private String img_MWAntennaht;
+    private String img_towerexistingnew;
+    private String img_Towertype;
+    private String img_remarks;
+
     private String date;
     private int flag;
 
@@ -100,6 +112,65 @@ public class LOSSiteDetailData {
         PanaromicPhoto_PIC = panaromicPhoto_PIC;
         ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC = exisitngNoofMWAntennatypewithsizeandPhotograph_PIC;
         ExisitngMWAntennaheightandPolemountPhotograph_PIC = exisitngMWAntennaheightandPolemountPhotograph_PIC;
+        this.date = date;
+        this.flag = flag;
+    }
+
+    public LOSSiteDetailData(String siteID_TXT, String siteName_TXT, String sharing_TXT, String siteType_TXT, String surveyDate_TXT, String TNPEngineer_TXT, String TNPEngineerTel_TXT, String customerrepresentative_TXT, String nearenddetails_TXT, String lat, String aLong, String candidateName_TXT, String address_TXT, String bldght_TXT, String totalht_TXT, String AMSL_TXT, String buildingsideviewphoto_TXT, String antennaTowerlocationphoto_TXT, String possibleobstacle_TXT, String heightofObstruction_TXT, String panaromicPhoto_TXT, String exisitngNoofMWAntennatypewithsizeandPhotograph_TXT, String exisitngMWAntennaheightandPolemountPhotograph_TXT, String siteID_PIC, String siteName_PIC, String sharing_PIC, String siteType_PIC, String surveyDate_PIC, String TNPEngineer_PIC, String TNPEngineerTel_PIC, String customerrepresentative_PIC, String nearenddetails_PIC, String candidateName_PIC, String address_PIC, String bldght_PIC, String totalht_PIC, String AMSL_PIC, String buildingsideviewphoto_PIC, String antennaTowerlocationphoto_PIC, String possibleobstacle_PIC, String heightofObstruction_PIC, String panaromicPhoto_PIC, String exisitngNoofMWAntennatypewithsizeandPhotograph_PIC, String exisitngMWAntennaheightandPolemountPhotograph_PIC, String edt_Commentsaddnew, String edt_MWAntennaht, String edt_towerexistingnew, String edt_Towertype, String edt_remarks, String img_Commentsaddnew, String img_MWAntennaht, String img_towerexistingnew, String img_Towertype, String img_remarks, String date, int flag) {
+        SiteID_TXT = siteID_TXT;
+        SiteName_TXT = siteName_TXT;
+        Sharing_TXT = sharing_TXT;
+        SiteType_TXT = siteType_TXT;
+        SurveyDate_TXT = surveyDate_TXT;
+        this.TNPEngineer_TXT = TNPEngineer_TXT;
+        this.TNPEngineerTel_TXT = TNPEngineerTel_TXT;
+        Customerrepresentative_TXT = customerrepresentative_TXT;
+        Nearenddetails_TXT = nearenddetails_TXT;
+        Lat = lat;
+        Long = aLong;
+        CandidateName_TXT = candidateName_TXT;
+        Address_TXT = address_TXT;
+        Bldght_TXT = bldght_TXT;
+        Totalht_TXT = totalht_TXT;
+        this.AMSL_TXT = AMSL_TXT;
+        Buildingsideviewphoto_TXT = buildingsideviewphoto_TXT;
+        AntennaTowerlocationphoto_TXT = antennaTowerlocationphoto_TXT;
+        Possibleobstacle_TXT = possibleobstacle_TXT;
+        HeightofObstruction_TXT = heightofObstruction_TXT;
+        PanaromicPhoto_TXT = panaromicPhoto_TXT;
+        ExisitngNoofMWAntennatypewithsizeandPhotograph_TXT = exisitngNoofMWAntennatypewithsizeandPhotograph_TXT;
+        ExisitngMWAntennaheightandPolemountPhotograph_TXT = exisitngMWAntennaheightandPolemountPhotograph_TXT;
+        SiteID_PIC = siteID_PIC;
+        SiteName_PIC = siteName_PIC;
+        Sharing_PIC = sharing_PIC;
+        SiteType_PIC = siteType_PIC;
+        SurveyDate_PIC = surveyDate_PIC;
+        this.TNPEngineer_PIC = TNPEngineer_PIC;
+        this.TNPEngineerTel_PIC = TNPEngineerTel_PIC;
+        Customerrepresentative_PIC = customerrepresentative_PIC;
+        Nearenddetails_PIC = nearenddetails_PIC;
+        CandidateName_PIC = candidateName_PIC;
+        Address_PIC = address_PIC;
+        Bldght_PIC = bldght_PIC;
+        Totalht_PIC = totalht_PIC;
+        this.AMSL_PIC = AMSL_PIC;
+        Buildingsideviewphoto_PIC = buildingsideviewphoto_PIC;
+        AntennaTowerlocationphoto_PIC = antennaTowerlocationphoto_PIC;
+        Possibleobstacle_PIC = possibleobstacle_PIC;
+        HeightofObstruction_PIC = heightofObstruction_PIC;
+        PanaromicPhoto_PIC = panaromicPhoto_PIC;
+        ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC = exisitngNoofMWAntennatypewithsizeandPhotograph_PIC;
+        ExisitngMWAntennaheightandPolemountPhotograph_PIC = exisitngMWAntennaheightandPolemountPhotograph_PIC;
+        this.edt_Commentsaddnew = edt_Commentsaddnew;
+        this.edt_MWAntennaht = edt_MWAntennaht;
+        this.edt_towerexistingnew = edt_towerexistingnew;
+        this.edt_Towertype = edt_Towertype;
+        this.edt_remarks = edt_remarks;
+        this.img_Commentsaddnew = img_Commentsaddnew;
+        this.img_MWAntennaht = img_MWAntennaht;
+        this.img_towerexistingnew = img_towerexistingnew;
+        this.img_Towertype = img_Towertype;
+        this.img_remarks = img_remarks;
         this.date = date;
         this.flag = flag;
     }
@@ -462,6 +533,86 @@ public class LOSSiteDetailData {
 
     public void setExisitngMWAntennaheightandPolemountPhotograph_PIC(String exisitngMWAntennaheightandPolemountPhotograph_PIC) {
         ExisitngMWAntennaheightandPolemountPhotograph_PIC = exisitngMWAntennaheightandPolemountPhotograph_PIC;
+    }
+
+    public String getEdt_Commentsaddnew() {
+        return edt_Commentsaddnew;
+    }
+
+    public void setEdt_Commentsaddnew(String edt_Commentsaddnew) {
+        this.edt_Commentsaddnew = edt_Commentsaddnew;
+    }
+
+    public String getEdt_MWAntennaht() {
+        return edt_MWAntennaht;
+    }
+
+    public void setEdt_MWAntennaht(String edt_MWAntennaht) {
+        this.edt_MWAntennaht = edt_MWAntennaht;
+    }
+
+    public String getEdt_towerexistingnew() {
+        return edt_towerexistingnew;
+    }
+
+    public void setEdt_towerexistingnew(String edt_towerexistingnew) {
+        this.edt_towerexistingnew = edt_towerexistingnew;
+    }
+
+    public String getEdt_Towertype() {
+        return edt_Towertype;
+    }
+
+    public void setEdt_Towertype(String edt_Towertype) {
+        this.edt_Towertype = edt_Towertype;
+    }
+
+    public String getEdt_remarks() {
+        return edt_remarks;
+    }
+
+    public void setEdt_remarks(String edt_remarks) {
+        this.edt_remarks = edt_remarks;
+    }
+
+    public String getImg_Commentsaddnew() {
+        return img_Commentsaddnew;
+    }
+
+    public void setImg_Commentsaddnew(String img_Commentsaddnew) {
+        this.img_Commentsaddnew = img_Commentsaddnew;
+    }
+
+    public String getImg_MWAntennaht() {
+        return img_MWAntennaht;
+    }
+
+    public void setImg_MWAntennaht(String img_MWAntennaht) {
+        this.img_MWAntennaht = img_MWAntennaht;
+    }
+
+    public String getImg_towerexistingnew() {
+        return img_towerexistingnew;
+    }
+
+    public void setImg_towerexistingnew(String img_towerexistingnew) {
+        this.img_towerexistingnew = img_towerexistingnew;
+    }
+
+    public String getImg_Towertype() {
+        return img_Towertype;
+    }
+
+    public void setImg_Towertype(String img_Towertype) {
+        this.img_Towertype = img_Towertype;
+    }
+
+    public String getImg_remarks() {
+        return img_remarks;
+    }
+
+    public void setImg_remarks(String img_remarks) {
+        this.img_remarks = img_remarks;
     }
 
     public String getDate() {

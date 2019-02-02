@@ -25,6 +25,21 @@ public class TransmissionLinkData {
     private  String img_TotalhtForGBTRTTRTPATFarEnd;
     private  String img_AMSLatFarEnd;
     private  String transmissionLink_name;
+
+    // add coloum 2/2/2019 by deepak
+    private  String edt_Commentadd;
+    private  String edt_Towertype;
+    private  String edt_towerexistingnew;
+    private  String edt_Azimuthfromfarend;
+    private  String edt_losstatus;
+    private  String edt_remarks;
+    private  String img_Commentadd;
+    private  String img_Towertype;
+    private  String img_towerexistingnew;
+    private  String img_Azimuthfromfarend;
+    private  String img_losstatus;
+    private  String img_remarks;
+    //........................................
     private String date;
     private int flag;
 
@@ -55,6 +70,46 @@ public class TransmissionLinkData {
         this.img_TotalhtForGBTRTTRTPATFarEnd = img_TotalhtForGBTRTTRTPATFarEnd;
         this.img_AMSLatFarEnd = img_AMSLatFarEnd;
         this.transmissionLink_name = transmissionLink_name;
+        this.date = date;
+        this.flag = flag;
+    }
+
+    public TransmissionLinkData(String edt_SiteID, String edt_Sitename, String edt_Latitude, String edt_Longitude, String edt_Azimuthfromnearend, String edt_Distance, String edt_AntennaHeightatFarend, String edt_PoleFixtureRequirementatFarend, String edt_IFLengthatFarend, String edt_BuildingHeightatFarend, String edt_TotalhtForGBTRTTRTPATFarEnd, String edt_AMSLatFarEnd, String img_SiteID, String img_Sitename, String img_Azimuthfromnearend, String img_Distance, String img_AntennaHeightatFarend, String img_PoleFixtureRequirementatFarend, String img_IFLengthatFarend, String img_BuildingHeightatFarend, String img_TotalhtForGBTRTTRTPATFarEnd, String img_AMSLatFarEnd, String transmissionLink_name, String edt_Commentadd, String edt_Towertype, String edt_towerexistingnew, String edt_Azimuthfromfarend, String edt_losstatus, String edt_remarks, String img_Commentadd, String img_Towertype, String img_towerexistingnew, String img_Azimuthfromfarend, String img_losstatus, String img_remarks, String date, int flag) {
+        this.edt_SiteID = edt_SiteID;
+        this.edt_Sitename = edt_Sitename;
+        this.edt_Latitude = edt_Latitude;
+        this.edt_Longitude = edt_Longitude;
+        this.edt_Azimuthfromnearend = edt_Azimuthfromnearend;
+        this.edt_Distance = edt_Distance;
+        this.edt_AntennaHeightatFarend = edt_AntennaHeightatFarend;
+        this.edt_PoleFixtureRequirementatFarend = edt_PoleFixtureRequirementatFarend;
+        this.edt_IFLengthatFarend = edt_IFLengthatFarend;
+        this.edt_BuildingHeightatFarend = edt_BuildingHeightatFarend;
+        this.edt_TotalhtForGBTRTTRTPATFarEnd = edt_TotalhtForGBTRTTRTPATFarEnd;
+        this.edt_AMSLatFarEnd = edt_AMSLatFarEnd;
+        this.img_SiteID = img_SiteID;
+        this.img_Sitename = img_Sitename;
+        this.img_Azimuthfromnearend = img_Azimuthfromnearend;
+        this.img_Distance = img_Distance;
+        this.img_AntennaHeightatFarend = img_AntennaHeightatFarend;
+        this.img_PoleFixtureRequirementatFarend = img_PoleFixtureRequirementatFarend;
+        this.img_IFLengthatFarend = img_IFLengthatFarend;
+        this.img_BuildingHeightatFarend = img_BuildingHeightatFarend;
+        this.img_TotalhtForGBTRTTRTPATFarEnd = img_TotalhtForGBTRTTRTPATFarEnd;
+        this.img_AMSLatFarEnd = img_AMSLatFarEnd;
+        this.transmissionLink_name = transmissionLink_name;
+        this.edt_Commentadd = edt_Commentadd;
+        this.edt_Towertype = edt_Towertype;
+        this.edt_towerexistingnew = edt_towerexistingnew;
+        this.edt_Azimuthfromfarend = edt_Azimuthfromfarend;
+        this.edt_losstatus = edt_losstatus;
+        this.edt_remarks = edt_remarks;
+        this.img_Commentadd = img_Commentadd;
+        this.img_Towertype = img_Towertype;
+        this.img_towerexistingnew = img_towerexistingnew;
+        this.img_Azimuthfromfarend = img_Azimuthfromfarend;
+        this.img_losstatus = img_losstatus;
+        this.img_remarks = img_remarks;
         this.date = date;
         this.flag = flag;
     }
@@ -249,6 +304,102 @@ public class TransmissionLinkData {
 
     public void setTransmissionLink_name(String transmissionLink_name) {
         this.transmissionLink_name = transmissionLink_name;
+    }
+
+    public String getEdt_Commentadd() {
+        return edt_Commentadd;
+    }
+
+    public void setEdt_Commentadd(String edt_Commentadd) {
+        this.edt_Commentadd = edt_Commentadd;
+    }
+
+    public String getEdt_Towertype() {
+        return edt_Towertype;
+    }
+
+    public void setEdt_Towertype(String edt_Towertype) {
+        this.edt_Towertype = edt_Towertype;
+    }
+
+    public String getEdt_towerexistingnew() {
+        return edt_towerexistingnew;
+    }
+
+    public void setEdt_towerexistingnew(String edt_towerexistingnew) {
+        this.edt_towerexistingnew = edt_towerexistingnew;
+    }
+
+    public String getEdt_Azimuthfromfarend() {
+        return edt_Azimuthfromfarend;
+    }
+
+    public void setEdt_Azimuthfromfarend(String edt_Azimuthfromfarend) {
+        this.edt_Azimuthfromfarend = edt_Azimuthfromfarend;
+    }
+
+    public String getEdt_losstatus() {
+        return edt_losstatus;
+    }
+
+    public void setEdt_losstatus(String edt_losstatus) {
+        this.edt_losstatus = edt_losstatus;
+    }
+
+    public String getEdt_remarks() {
+        return edt_remarks;
+    }
+
+    public void setEdt_remarks(String edt_remarks) {
+        this.edt_remarks = edt_remarks;
+    }
+
+    public String getImg_Commentadd() {
+        return img_Commentadd;
+    }
+
+    public void setImg_Commentadd(String img_Commentadd) {
+        this.img_Commentadd = img_Commentadd;
+    }
+
+    public String getImg_Towertype() {
+        return img_Towertype;
+    }
+
+    public void setImg_Towertype(String img_Towertype) {
+        this.img_Towertype = img_Towertype;
+    }
+
+    public String getImg_towerexistingnew() {
+        return img_towerexistingnew;
+    }
+
+    public void setImg_towerexistingnew(String img_towerexistingnew) {
+        this.img_towerexistingnew = img_towerexistingnew;
+    }
+
+    public String getImg_Azimuthfromfarend() {
+        return img_Azimuthfromfarend;
+    }
+
+    public void setImg_Azimuthfromfarend(String img_Azimuthfromfarend) {
+        this.img_Azimuthfromfarend = img_Azimuthfromfarend;
+    }
+
+    public String getImg_losstatus() {
+        return img_losstatus;
+    }
+
+    public void setImg_losstatus(String img_losstatus) {
+        this.img_losstatus = img_losstatus;
+    }
+
+    public String getImg_remarks() {
+        return img_remarks;
+    }
+
+    public void setImg_remarks(String img_remarks) {
+        this.img_remarks = img_remarks;
     }
 
     public String getDate() {

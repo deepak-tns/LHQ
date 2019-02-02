@@ -1,7 +1,6 @@
 package com.linkquest.lhq.RFSurvey;
 
 public class RFSiteDetailData {
-
     private int id;
     private String edt_SiteID;
     private String edt_SiteName;
@@ -59,7 +58,6 @@ public class RFSiteDetailData {
     private String img_Hostoperator;
     private String img_Anyguestoperators;
     private String img_NoofGSMAntenna;
-
     private String Date;
     private int flag;
 

@@ -185,6 +185,8 @@ public class SiteSurveylqt extends Fragment   {
                 listtechnology.add("VoLTE TDD");
                 listtechnology.add("4G & VoLTE");
                 listtechnology.add("Air Scale");
+                listtechnology.add("4G CA");
+                listtechnology.add("4G Swap");
 
                 final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, listtechnology);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

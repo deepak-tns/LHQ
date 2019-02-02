@@ -290,7 +290,18 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("PanaromicPhoto_PIC", losSiteDetailData.get(0).getPanaromicPhoto_PIC());
                 jsonObject.put("ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC", losSiteDetailData.get(0).getExisitngNoofMWAntennatypewithsizeandPhotograph_TXT());
                 jsonObject.put("ExisitngMWAntennaheightandPolemountPhotograph_PIC", losSiteDetailData.get(0).getExisitngMWAntennaheightandPolemountPhotograph_TXT());
-                //jsonObject.put("date", losSiteDetailData.get(0).getSiteid_photo());
+                // add  2/02/2019................................................
+                jsonObject.put("edt_Commentaddnew", losSiteDetailData.get(0).getEdt_Commentsaddnew());
+                jsonObject.put("edt_MWAntennaht", losSiteDetailData.get(0).getEdt_MWAntennaht());
+                jsonObject.put("edt_towerexistingnew", losSiteDetailData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Towertype", losSiteDetailData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_remarks", losSiteDetailData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentaddnew", losSiteDetailData.get(0).getImg_Commentsaddnew());
+                jsonObject.put("img_MWAntennaht", losSiteDetailData.get(0).getImg_MWAntennaht());
+                jsonObject.put("img_towerexistingnew", losSiteDetailData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Towertype", losSiteDetailData.get(0).getImg_Towertype());
+                jsonObject.put("img_remarks", losSiteDetailData.get(0).getImg_remarks());
+
                 jsonObject.put("flag", losSiteDetailData.get(0).getFlag());
 
 
@@ -478,7 +489,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("edt_BuildingHeightatFarend", transmissionLinkData.get(0).getEdt_BuildingHeightatFarend());
                 jsonObject.put("edt_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getEdt_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("edt_AMSLatFarEnd", transmissionLinkData.get(0).getEdt_AMSLatFarEnd());
-
                 jsonObject.put("img_SiteID", transmissionLinkData.get(0).getImg_SiteID());
                 jsonObject.put("img_Sitename", transmissionLinkData.get(0).getImg_Sitename());
                 jsonObject.put("img_Azimuthfromnearend", transmissionLinkData.get(0).getImg_Azimuthfromnearend());
@@ -490,11 +500,23 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-            //    jsonObject.put("date", transmissionLinkData.get(0).getDate());
-                jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
+            // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
 
-                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
-                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
+                jsonObject.put("siteid",sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("date",  sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("idall", sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 

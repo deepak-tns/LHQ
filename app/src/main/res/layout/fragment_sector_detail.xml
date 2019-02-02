@@ -927,6 +927,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_AST"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -962,6 +963,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_APST"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -997,6 +999,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_typ_enodeb"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1032,6 +1035,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_mimo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1067,6 +1071,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_ret"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1282,8 +1287,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_CRP"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Configured Radio Power"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1317,8 +1324,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_powerdeboosting"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Power de-boosting (Y/N) with Value"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1352,8 +1361,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_DFS"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="Dynamic Frequency Share(Yes/no)"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1387,8 +1398,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sectordeatail_tv_rb_percell"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="RB per Cell configured"
                     android:textSize="@dimen/font_small"></TextView>
@@ -1422,6 +1435,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_m_mimo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1667,6 +1681,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_ACD"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1703,6 +1718,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_VSWRtest"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1738,6 +1754,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/sectordeatail_tv_URS"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

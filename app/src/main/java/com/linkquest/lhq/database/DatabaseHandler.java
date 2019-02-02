@@ -337,6 +337,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String losdetail_PanaromicPhoto_PIC = "PanaromicPhoto_PIC";
     private String losdetail_ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC = "ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC";
     private String losdetail_ExisitngMWAntennaheightandPolemountPhotograph_PIC = "ExisitngMWAntennaheightandPolemountPhotograph_PIC";
+    // add coloum 2/2/2019 by deepak
+    private String losdetail_edt_Commentsaddnew ="edt_Commentsaddnew";
+    private String losdetail_edt_MWAntennaht ="edt_MWAntennaht";
+    private String losdetail_edt_towerexistingnew ="edt_towerexistingnew";
+    private String losdetail_edt_Towertype ="edt_Towertype";
+    private String losdetail_edt_remarks ="edt_remarks";
+    private String losdetail_img_Commentsaddnew ="img_Commentsaddnew";
+    private String losdetail_img_MWAntennaht ="img_MWAntennaht";
+    private String losdetail_img_towerexistingnew ="img_towerexistingnew";
+    private String losdetail_img_Towertype ="img_Towertype";
+    private String losdetail_img_remarks ="img_remarks";
     private String losdetail_date = "date";
     private String losdetail_flag = "flag";
     //los Transmission Link ..........................................................
@@ -364,6 +375,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private  String tranLink_img_TotalhtForGBTRTTRTPATFarEnd = "img_TotalhtForGBTRTTRTPATFarEnd";
     private  String tranLink_img_AMSLatFarEnd="img_AMSLatFarEnd";
     private  String tranLink_name="transmissionLink_name";
+    // add coloum 2/2/2019 by deepak
+    private  String tranLink_edt_Commentadd = "edt_Commentadd";
+    private  String tranLink_edt_Towertype = "edt_Towertype";
+    private  String tranLink_edt_towerexistingnew = "edt_towerexistingnew";
+    private  String tranLink_edt_Azimuthfromfarend = "edt_Azimuthfromfarend";
+    private  String tranLink_edt_losstatus = "edt_losstatus";
+    private  String tranLink_edt_remarks = "edt_remarks";
+    private  String tranLink_img_Commentadd = "img_Commentadd";
+    private  String tranLink_img_Towertype = "img_Towertype";
+    private  String tranLink_img_towerexistingnew = "img_towerexistingnew";
+    private  String tranLink_img_Azimuthfromfarend = "img_Azimuthfromfarend";
+    private  String tranLink_img_losstatus = "img_losstatus";
+    private  String tranLink_img_remarks = "img_remarks";
     private String tranLink_date = "date";
     private String tranLink_flag = "flag";
 //LOS Transmission No Link.................................
@@ -517,7 +541,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String rfs_img_3G_Existing_antenna_Mechanical_tilt ="rfs_img_3G_Existing_antenna_Mechanical_tilt";
     private String rfs_img_Space_Available_for_3G_Antenna ="rfs_img_Space_Available_for_3G_Antenna";
     private String rfs_img_Addl_Poles_reqd_for_3G_Antenna ="rfs_img_Addl_Poles_reqd_for_3G_Antenna";
-    private String rfs_img_3GAntenna_Swap_Required ="rfs_img_Addl_Poles_reqd_for_3G_Antenna";
+    private String rfs_img_3GAntenna_Swap_Required ="rfs_img_3GAntenna_Swap_Required";
     private String rfs_img_3GApproximate_Cable_Lenth ="rfs_img_3GApproximate_Cable_Lenth";
     private String rfs_img_3GAntenna_Port_EmptyDamaged ="rfs_img_3GAntenna_Port_EmptyDamaged";
     private String rfs_img_4GBand ="rfs_img_4GBand";
@@ -539,7 +563,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public DatabaseHandler(Context context) {
-        super(context, "/mnt/sdcard/lhqdatabase14.db", null, DATABASE_VERSION);
+        super(context, "/mnt/sdcard/lhqdatabase16.db", null, DATABASE_VERSION);
         // super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.v(TAG, "Databaser object created");
     }
@@ -618,10 +642,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + losdetail_Long + " TEXT," + losdetail_CandidateName_TXT + " TEXT," + losdetail_Address_TXT + " TEXT," + losdetail_Bldght_TXT + " TEXT," + losdetail_Totalht_TXT + " TEXT," + losdetail_AMSL_TXT + " TEXT,"
                 + losdetail_Buildingsideviewphoto_TXT + " TEXT," + losdetail_AntennaTowerlocationphoto_TXT + " TEXT," + losdetail_Possibleobstacle_TXT + " TEXT," + losdetail_HeightofObstruction_TXT + " TEXT," + losdetail_PanaromicPhoto_TXT + " TEXT,"
                 + losdetail_ExisitngNoofMWAntennatypewithsizeandPhotograph_TXT + " TEXT," + losdetail_ExisitngMWAntennaheightandPolemountPhotograph_TXT + " TEXT," + losdetail_SiteID_PIC + " TEXT," + losdetail_SiteName_PIC + " TEXT," + losdetail_Sharing_PIC + " TEXT," + losdetail_SiteType_PIC + " TEXT," + losdetail_SurveyDate_PIC + " TEXT,"
-                + losdetail_TNPEngineer_PIC + " TEXT," + losdetail_TNPEngineerTel_PIC + " TEXT," + losdetail_Customerrepresentative_PIC + " TEXT," + losdetail_Nearenddetails_PIC + " TEXT," +
-                losdetail_CandidateName_PIC + " TEXT," + losdetail_Address_PIC + " TEXT," + losdetail_Bldght_PIC + " TEXT," + losdetail_Totalht_PIC + " TEXT," + losdetail_AMSL_PIC + " TEXT,"
+                + losdetail_TNPEngineer_PIC + " TEXT," + losdetail_TNPEngineerTel_PIC + " TEXT," + losdetail_Customerrepresentative_PIC + " TEXT," + losdetail_Nearenddetails_PIC + " TEXT,"
+                + losdetail_CandidateName_PIC + " TEXT," + losdetail_Address_PIC + " TEXT," + losdetail_Bldght_PIC + " TEXT," + losdetail_Totalht_PIC + " TEXT," + losdetail_AMSL_PIC + " TEXT,"
                 + losdetail_Buildingsideviewphoto_PIC + " TEXT," + losdetail_AntennaTowerlocationphoto_PIC + " TEXT," + losdetail_Possibleobstacle_PIC + " TEXT," + losdetail_HeightofObstruction_PIC + " TEXT," + losdetail_PanaromicPhoto_PIC + " TEXT,"
-                + losdetail_ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC + " TEXT," + losdetail_ExisitngMWAntennaheightandPolemountPhotograph_PIC + " TEXT," + losdetail_date + " TEXT," + losdetail_flag + " integer" + ")";
+                + losdetail_ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC + " TEXT," + losdetail_ExisitngMWAntennaheightandPolemountPhotograph_PIC + " TEXT,"
+                + losdetail_edt_Commentsaddnew + " TEXT," + losdetail_edt_MWAntennaht + " TEXT," + losdetail_edt_towerexistingnew + " TEXT," + losdetail_edt_Towertype + " TEXT,"+ losdetail_edt_remarks + " TEXT,"
+                + losdetail_img_Commentsaddnew + " TEXT," + losdetail_img_MWAntennaht + " TEXT," + losdetail_img_towerexistingnew + " TEXT," + losdetail_img_Towertype + " TEXT,"+ losdetail_img_remarks + " TEXT,"
+                + losdetail_date + " TEXT," + losdetail_flag + " integer" + ")";
 
         String CREATE_TABLE_LOSTRANSMISSIONLINK = "CREATE TABLE " + TABLE_LOSSTRANSMISSIONLINK + "(" + tranLink_ID + " integer primary key autoincrement,"
                 + tranLink_edt_SiteID + " TEXT," + tranLink_edt_Sitename + " TEXT," + tranLink_edt_Latitude + " TEXT," + tranLink_edt_Longitude + " TEXT," + tranLink_edt_Azimuthfromnearend + " TEXT,"
@@ -629,6 +656,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + tranLink_edt_TotalhtForGBTRTTRTPATFarEnd + " TEXT," + tranLink_edt_AMSLatFarEnd + " TEXT," + tranLink_img_SiteID + " TEXT," + tranLink_img_Sitename + " TEXT," + tranLink_img_Azimuthfromnearend + " TEXT,"
                 + tranLink_img_Distance + " TEXT," + tranLink_img_AntennaHeightatFarend + " TEXT," + tranLink_img_PoleFixtureRequirementatFarend + " TEXT," + tranLink_img_IFLengthatFarend + " TEXT," + tranLink_img_BuildingHeightatFarend + " TEXT,"
                 + tranLink_img_TotalhtForGBTRTTRTPATFarEnd + " TEXT,"   + tranLink_img_AMSLatFarEnd + " TEXT,"  + tranLink_name + " TEXT,"
+                + tranLink_edt_Commentadd + " TEXT,"   + tranLink_edt_Towertype + " TEXT,"  + tranLink_edt_towerexistingnew + " TEXT," + tranLink_edt_Azimuthfromfarend + " TEXT,"   + tranLink_edt_losstatus + " TEXT,"  + tranLink_edt_remarks + " TEXT,"
+                + tranLink_img_Commentadd + " TEXT,"   + tranLink_img_Towertype + " TEXT,"  + tranLink_img_towerexistingnew + " TEXT," + tranLink_img_Azimuthfromfarend + " TEXT,"   + tranLink_img_losstatus + " TEXT,"  + tranLink_img_remarks + " TEXT,"
                 + tranLink_date + " TEXT," + tranLink_flag + " integer" + ")";
 
         String CREATE_TABLE_LOSTRANSMISSIONNOLINK = "CREATE TABLE " + TABLE_LOSSTRANSMISSIONNOLINK + "(" + transnoLink_id + " integer primary key autoincrement,"
@@ -2032,6 +2061,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(losdetail_PanaromicPhoto_PIC, losSiteDetailData.getPanaromicPhoto_PIC());
             values.put(losdetail_ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC, losSiteDetailData.getExisitngNoofMWAntennatypewithsizeandPhotograph_PIC());
             values.put(losdetail_ExisitngMWAntennaheightandPolemountPhotograph_PIC, losSiteDetailData.getExisitngMWAntennaheightandPolemountPhotograph_PIC());
+//...............add 02/02/2019...................................................
+            values.put(losdetail_edt_Commentsaddnew, losSiteDetailData.getEdt_Commentsaddnew());
+            values.put(losdetail_edt_MWAntennaht, losSiteDetailData.getEdt_MWAntennaht());
+            values.put(losdetail_edt_towerexistingnew, losSiteDetailData.getEdt_towerexistingnew());
+            values.put(losdetail_edt_Towertype, losSiteDetailData.getEdt_Towertype());
+            values.put(losdetail_edt_remarks, losSiteDetailData.getEdt_remarks());
+            values.put(losdetail_img_Commentsaddnew, losSiteDetailData.getImg_Commentsaddnew());
+            values.put(losdetail_img_MWAntennaht, losSiteDetailData.getImg_MWAntennaht());
+            values.put(losdetail_img_towerexistingnew, losSiteDetailData.getImg_towerexistingnew());
+            values.put(losdetail_img_Towertype, losSiteDetailData.getImg_Towertype());
+            values.put(losdetail_img_remarks, losSiteDetailData.getImg_remarks());
 
             values.put(losdetail_date, losSiteDetailData.getDate());
             values.put(losdetail_flag, losSiteDetailData.getFlag());
@@ -2110,9 +2150,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         losSiteDetailData.setPanaromicPhoto_PIC(cursor.getString(42));
                         losSiteDetailData.setExisitngNoofMWAntennatypewithsizeandPhotograph_PIC(cursor.getString(43));
                         losSiteDetailData.setExisitngMWAntennaheightandPolemountPhotograph_PIC(cursor.getString(44));
+                        // add 2/02/2019
+                        losSiteDetailData.setEdt_Commentsaddnew(cursor.getString(45));
+                        losSiteDetailData.setEdt_MWAntennaht(cursor.getString(45));
+                        losSiteDetailData.setEdt_towerexistingnew(cursor.getString(46));
+                        losSiteDetailData.setEdt_Towertype(cursor.getString(47));
+                        losSiteDetailData.setEdt_remarks(cursor.getString(48));
+                        losSiteDetailData.setImg_Commentsaddnew(cursor.getString(49));
+                        losSiteDetailData.setImg_MWAntennaht(cursor.getString(50));
+                        losSiteDetailData.setImg_towerexistingnew(cursor.getString(51));
+                        losSiteDetailData.setImg_Towertype(cursor.getString(52));
+                        losSiteDetailData.setImg_remarks(cursor.getString(53));
 
-                        losSiteDetailData.setDate(cursor.getString(45));
-                        losSiteDetailData.setFlag(cursor.getInt(46));
+                        losSiteDetailData.setDate(cursor.getString(54));
+                        losSiteDetailData.setFlag(cursor.getInt(55));
 
 
                         // Adding contact to list
@@ -2184,6 +2235,19 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
         values.put(tranLink_img_TotalhtForGBTRTTRTPATFarEnd ,transmissionLinkData.getImg_TotalhtForGBTRTTRTPATFarEnd());
         values.put(tranLink_img_AMSLatFarEnd ,transmissionLinkData.getImg_AMSLatFarEnd());
         values.put(tranLink_name,transmissionLinkData.getTransmissionLink_name());
+        // add 2/02/19....................................................../
+        values.put(tranLink_edt_Commentadd,transmissionLinkData.getEdt_Commentadd());
+        values.put(tranLink_edt_Towertype,transmissionLinkData.getEdt_Towertype());
+        values.put(tranLink_edt_towerexistingnew,transmissionLinkData.getEdt_towerexistingnew());
+        values.put(tranLink_edt_Azimuthfromfarend,transmissionLinkData.getEdt_Azimuthfromfarend());
+        values.put(tranLink_edt_losstatus,transmissionLinkData.getEdt_losstatus());
+        values.put(tranLink_edt_remarks,transmissionLinkData.getEdt_remarks());
+        values.put(tranLink_img_Commentadd,transmissionLinkData.getImg_Commentadd());
+        values.put(tranLink_img_Towertype,transmissionLinkData.getImg_Towertype());
+        values.put(tranLink_img_towerexistingnew,transmissionLinkData.getImg_towerexistingnew());
+        values.put(tranLink_img_Azimuthfromfarend,transmissionLinkData.getImg_Azimuthfromfarend());
+        values.put(tranLink_img_losstatus,transmissionLinkData.getImg_losstatus());
+        values.put(tranLink_img_remarks,transmissionLinkData.getImg_remarks());
         values.put(tranLink_date,transmissionLinkData.getDate());
         values.put(tranLink_flag ,transmissionLinkData.getFlag());
 
@@ -2237,8 +2301,22 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
                         transmissionLinkData.setImg_TotalhtForGBTRTTRTPATFarEnd(cursor.getString(21));
                         transmissionLinkData.setImg_AMSLatFarEnd(cursor.getString(22));
                         transmissionLinkData.setTransmissionLink_name(cursor.getString(23));
-                        transmissionLinkData.setDate(cursor.getString(24));
-                        transmissionLinkData.setFlag(cursor.getInt(25));
+                        //add.........2/02/2019
+                        transmissionLinkData.setEdt_Commentadd(cursor.getString(24));
+                        transmissionLinkData.setEdt_Towertype(cursor.getString(25));
+                        transmissionLinkData.setEdt_towerexistingnew(cursor.getString(26));
+                        transmissionLinkData.setEdt_Azimuthfromfarend(cursor.getString(27));
+                        transmissionLinkData.setEdt_losstatus(cursor.getString(27));
+                        transmissionLinkData.setEdt_remarks(cursor.getString(28));
+                        transmissionLinkData.setImg_Commentadd(cursor.getString(29));
+                        transmissionLinkData.setImg_Towertype(cursor.getString(30));
+                        transmissionLinkData.setImg_towerexistingnew(cursor.getString(31));
+                        transmissionLinkData.setImg_Azimuthfromfarend(cursor.getString(32));
+                        transmissionLinkData.setImg_losstatus(cursor.getString(33));
+                        transmissionLinkData.setImg_remarks(cursor.getString(34));
+
+                        transmissionLinkData.setDate(cursor.getString(35));
+                        transmissionLinkData.setFlag(cursor.getInt(36));
 
                         // Adding contact to list
                         list.add(transmissionLinkData);

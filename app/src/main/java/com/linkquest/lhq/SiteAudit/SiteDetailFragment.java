@@ -127,31 +127,31 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private ImageView ivremark1;
     private ImageView ivremark2;
 
-    private  LinearLayout linear_sitename;
-    private  LinearLayout linear_towersiteid;
-    private  LinearLayout linear_towercompanyname;
-    private  LinearLayout linear_siteaddress;
-    private  LinearLayout linear_sectorid;
-    private  LinearLayout linear_edt_lat_long;
-    private  LinearLayout linear_sitetype;
-    private  LinearLayout linear_buildingfloor;
-    private  LinearLayout linear_buildingheight;
-    private  LinearLayout linear_towerheight;
-    private  LinearLayout linear_fulltowerphoto;
-    private  LinearLayout linear_nodebtype;
-    private  LinearLayout linear_classical;
-    private  LinearLayout linear_enodebtype;
-    private  LinearLayout linear_anchoroperator;
-    private  LinearLayout linear_sharingopco1;
-    private  LinearLayout linear_sharingopco2;
-    private  LinearLayout linear_sharingopco3;
-    private  LinearLayout linear_infraprovider;
-    private  LinearLayout linear_type_id_od;
-    private  LinearLayout linear_infrashared;
-    private  LinearLayout linear_extra1;
-    private  LinearLayout linear_extra2;
-    private  LinearLayout linear_remark1;
-    private  LinearLayout linear_remark2;
+    private LinearLayout linear_sitename;
+    private LinearLayout linear_towersiteid;
+    private LinearLayout linear_towercompanyname;
+    private LinearLayout linear_siteaddress;
+    private LinearLayout linear_sectorid;
+    private LinearLayout linear_edt_lat_long;
+    private LinearLayout linear_sitetype;
+    private LinearLayout linear_buildingfloor;
+    private LinearLayout linear_buildingheight;
+    private LinearLayout linear_towerheight;
+    private LinearLayout linear_fulltowerphoto;
+    private LinearLayout linear_nodebtype;
+    private LinearLayout linear_classical;
+    private LinearLayout linear_enodebtype;
+    private LinearLayout linear_anchoroperator;
+    private LinearLayout linear_sharingopco1;
+    private LinearLayout linear_sharingopco2;
+    private LinearLayout linear_sharingopco3;
+    private LinearLayout linear_infraprovider;
+    private LinearLayout linear_type_id_od;
+    private LinearLayout linear_infrashared;
+    private LinearLayout linear_extra1;
+    private LinearLayout linear_extra2;
+    private LinearLayout linear_remark1;
+    private LinearLayout linear_remark2;
     private SiteDetailForm siteDetailForm;
 
     private Button btnsitedetail;
@@ -159,14 +159,38 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private TextView tv_sitedetail_count;
     private TextView tv_sitedetail_count_previous;
     DatabaseHandler db;
-    private  SharedPreferenceUtils sharedPreferences;
-    private  String changetempleteName="";
-    private  String changetempleteName_Operator="";
-    private  TextView tvsectorid;
-    private  TextView tvtype_id_od;
-    private  TextView tvextra1;
-    private  TextView tvextra2;
-    private TextView tvremark1;
+    private SharedPreferenceUtils sharedPreferences;
+    private String changetempleteName = "";
+    private String changetempleteName_Operator = "";
+    private String activityType = "";
+
+
+    private TextView tvsectorid;
+    private TextView tvtype_id_od;
+    private TextView tv_siteid;
+    private TextView tv_sitename;
+    private TextView tv_towersiteid;
+    private TextView tv_towercompanyname;
+    private TextView tv_siteaddress;
+    private TextView tv_sitetype;
+    private TextView tv_buildingfloor;
+    private TextView tv_buildingheight;
+    private TextView tv_towerheight;
+    private TextView tv_fulltowerphoto;
+    private TextView tv_nodebtype;
+    private TextView tv_classical;
+    private TextView tv_enodebtype;
+    private TextView tv_anchoroperator;
+    private TextView tv_sharingopco1;
+    private TextView tv_sharingopco2;
+    private TextView tv_sharingopco3;
+    private TextView tv_infraprovider;
+    private TextView tv_infrashared;
+    ;
+    private TextView tv_extra1;
+    private TextView tv_extra2;
+    private TextView tv_remark1;
+    private TextView tv_remark2;
 
     public SiteDetailFragment() {
         // Required empty public constructor
@@ -208,11 +232,8 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         db = new DatabaseHandler(getActivity());
 
 
-
-
-
         siteDetailForm = new SiteDetailForm();
-        tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString()+db.getCountSiteDetail());
+        tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString() + db.getCountSiteDetail());
 
 
         changeTemplete(v);
@@ -221,32 +242,63 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
     private void findviewIDS(View v) {
 
-      //  start change templete code
-        linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
-        linear_towersiteid =v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
-        linear_towercompanyname=v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
-        linear_siteaddress=v.findViewById(R.id.linear_sitedeatail_edt_site_address);
-        linear_sectorid=v.findViewById(R.id.linear_sitedeatail_edt_sectorid);
-        linear_edt_lat_long=v.findViewById(R.id.linear_sitedeatail_edt_lat_long);
-        linear_sitetype =v.findViewById(R.id.linear_sitedeatail_edt_sitetype);
-        linear_buildingfloor =v.findViewById(R.id.linear_sitedeatail_edt_building_floor);
-        linear_buildingheight =v.findViewById(R.id.linear_sitedeatail_edt_buildingheight);
-        linear_towerheight =v.findViewById(R.id.linear_sitedeatail_edt_towerheight);
-        linear_fulltowerphoto =v.findViewById(R.id.linear_sitedeatail_edt_fulltowerphoto);
-        linear_nodebtype =v.findViewById(R.id.linear_sitedeatail_edt_nodebtype);
-        linear_classical =v.findViewById(R.id.linear_sitedeatail_edt_clasicalRRH);
-        linear_enodebtype =v.findViewById(R.id.linear_sitedeatail_edt_enodebtype);
-        linear_anchoroperator=v.findViewById(R.id.linear_sitedeatail_edt_anchoroperator);
-        linear_sharingopco1 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco1);
-        linear_sharingopco2 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco2);
-        linear_sharingopco3 =v.findViewById(R.id.linear_sitedeatail_edt_sharingopco3);
-        linear_infraprovider =v.findViewById(R.id.linear_sitedeatail_edt_infraprovider);
-        linear_type_id_od =v.findViewById(R.id.linear_sitedeatail_edt_typeindoor);
-        linear_infrashared =v.findViewById(R.id.linear_sitedeatail_edt_infrashared);
-        linear_extra1 =v.findViewById(R.id.linear_sitedeatail_edt_extra1);
-        linear_extra2 =v.findViewById(R.id.linear_sitedeatail_edt_extra2);
-        linear_remark1 =v.findViewById(R.id.linear_sitedeatail_edt_remark1);
-        linear_remark2 =v.findViewById(R.id.linear_sitedeatail_edt_remark2);
+        //  start change templete code
+        linear_sitename = v.findViewById(R.id.linear_sitedeatail_edt_site_name);
+        linear_towersiteid = v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
+        linear_towercompanyname = v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
+        linear_siteaddress = v.findViewById(R.id.linear_sitedeatail_edt_site_address);
+        linear_sectorid = v.findViewById(R.id.linear_sitedeatail_edt_sectorid);
+        linear_edt_lat_long = v.findViewById(R.id.linear_sitedeatail_edt_lat_long);
+        linear_sitetype = v.findViewById(R.id.linear_sitedeatail_edt_sitetype);
+        linear_buildingfloor = v.findViewById(R.id.linear_sitedeatail_edt_building_floor);
+        linear_buildingheight = v.findViewById(R.id.linear_sitedeatail_edt_buildingheight);
+        linear_towerheight = v.findViewById(R.id.linear_sitedeatail_edt_towerheight);
+        linear_fulltowerphoto = v.findViewById(R.id.linear_sitedeatail_edt_fulltowerphoto);
+        linear_nodebtype = v.findViewById(R.id.linear_sitedeatail_edt_nodebtype);
+        linear_classical = v.findViewById(R.id.linear_sitedeatail_edt_clasicalRRH);
+        linear_enodebtype = v.findViewById(R.id.linear_sitedeatail_edt_enodebtype);
+        linear_anchoroperator = v.findViewById(R.id.linear_sitedeatail_edt_anchoroperator);
+        linear_sharingopco1 = v.findViewById(R.id.linear_sitedeatail_edt_sharingopco1);
+        linear_sharingopco2 = v.findViewById(R.id.linear_sitedeatail_edt_sharingopco2);
+        linear_sharingopco3 = v.findViewById(R.id.linear_sitedeatail_edt_sharingopco3);
+        linear_infraprovider = v.findViewById(R.id.linear_sitedeatail_edt_infraprovider);
+        linear_type_id_od = v.findViewById(R.id.linear_sitedeatail_edt_typeindoor);
+        linear_infrashared = v.findViewById(R.id.linear_sitedeatail_edt_infrashared);
+        linear_extra1 = v.findViewById(R.id.linear_sitedeatail_edt_extra1);
+        linear_extra2 = v.findViewById(R.id.linear_sitedeatail_edt_extra2);
+        linear_remark1 = v.findViewById(R.id.linear_sitedeatail_edt_remark1);
+        linear_remark2 = v.findViewById(R.id.linear_sitedeatail_edt_remark2);
+
+
+        tv_siteid = v.findViewById(R.id.sitedeatail_tv_site_id);
+        tv_sitename = v.findViewById(R.id.sitedeatail_tv_site_name);
+        tv_towersiteid = v.findViewById(R.id.sitedeatail_tv_towersiteid);
+        tv_towercompanyname = v.findViewById(R.id.sitedeatail_tv_towercompanyname);
+        tv_siteaddress = v.findViewById(R.id.sitedeatail_tv_site_address);
+        //  tv_sectorid=v.findViewById(R.id.sitedeatail_tv_sectorid);
+        tv_sitetype = v.findViewById(R.id.sitedeatail_tv_sitetype);
+        tv_buildingfloor = v.findViewById(R.id.sitedeatail_tv_building_floor);
+        tv_buildingheight = v.findViewById(R.id.sitedeatail_tv_buildingheight);
+        tv_towerheight = v.findViewById(R.id.sitedeatail_tv_towerheight);
+        tv_fulltowerphoto = v.findViewById(R.id.sitedeatail_tv_fulltowerphoto);
+        tv_nodebtype = v.findViewById(R.id.sitedeatail_tv_nodebtype);
+        tv_classical = v.findViewById(R.id.sitedeatail_tv_clasicalRRH);
+        tv_enodebtype = v.findViewById(R.id.sitedeatail_tv_enodebtype);
+        tv_anchoroperator = v.findViewById(R.id.sitedeatail_tv_anchoroperator);
+        tv_sharingopco1 = v.findViewById(R.id.sitedeatail_tv_sharingopco1);
+        tv_sharingopco2 = v.findViewById(R.id.sitedeatail_tv_sharingopco2);
+        tv_sharingopco3 = v.findViewById(R.id.sitedeatail_tv_sharingopco3);
+        tv_infraprovider = v.findViewById(R.id.sitedeatail_tv_infraprovider);
+//    tv_type_id_od =v.findViewById(R.id.tv_sitedeatail_tv_typeindoor);
+        tv_infrashared = v.findViewById(R.id.sitedeatail_tv_infrashared);
+        tv_extra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
+        tv_extra2 = v.findViewById(R.id.sitedeatail_tv_extra2);
+        tv_remark1 = v.findViewById(R.id.sitedeatail_tv_remark1);
+        tv_remark2 = v.findViewById(R.id.sitedeatail_tv_remark2);
+        tvsectorid = v.findViewById(R.id.sitedeatail_tv_sectorid);
+        tvtype_id_od = v.findViewById(R.id.sitedeatail_tv_typeindoor);
+
+
         //  end change templete code
 
 
@@ -305,30 +357,30 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         btnsitedetail = v.findViewById(R.id.btnsitedetail);
         btnsitedetailsave = v.findViewById(R.id.btnsitedetailsave);
 
-         ivsiteid = v.findViewById(R.id.ivsiteid);
-         ivsitename = v.findViewById(R.id.ivsitename);
+        ivsiteid = v.findViewById(R.id.ivsiteid);
+        ivsitename = v.findViewById(R.id.ivsitename);
         ivtowersiteid = v.findViewById(R.id.ivtowersiteid);
         ivtowercompnyname = v.findViewById(R.id.ivtowercompnyname);
-       ivsiteaddress = v.findViewById(R.id.ivsiteaddress);
-         ivsectorid = v.findViewById(R.id.ivsectorid);
+        ivsiteaddress = v.findViewById(R.id.ivsiteaddress);
+        ivsectorid = v.findViewById(R.id.ivsectorid);
         ivsitetype = v.findViewById(R.id.ivsitetype);
         ivbuildingfloor = v.findViewById(R.id.ivbuildingfloor);
-      ivbuildingheight = v.findViewById(R.id.ivbuildingheight);
-      ivtowerheight = v.findViewById(R.id.ivtowerheight);
-         ivfulltowerphoto = v.findViewById(R.id.ivfulltowerphoto);
-         ivnodebtype = v.findViewById(R.id.ivnodebtype);
+        ivbuildingheight = v.findViewById(R.id.ivbuildingheight);
+        ivtowerheight = v.findViewById(R.id.ivtowerheight);
+        ivfulltowerphoto = v.findViewById(R.id.ivfulltowerphoto);
+        ivnodebtype = v.findViewById(R.id.ivnodebtype);
         ivclassicalrrm = v.findViewById(R.id.ivclassicalrrm);
         ivenodebtype = v.findViewById(R.id.ivenodebtype);
-         ivanchoroper = v.findViewById(R.id.ivanchoroper);
-      ivsharingopco1 = v.findViewById(R.id.ivsharingopco1);
-       ivsharingopco2 = v.findViewById(R.id.ivsharingopco2);
-         ivsharingopco3 = v.findViewById(R.id.ivsharingopco3);
-         ivinfraprovider = v.findViewById(R.id.ivinfraprovider);
-         ivtypeindoor = v.findViewById(R.id.ivtypeindoor);
-         ivinfrashared = v.findViewById(R.id.ivinfrashared);
+        ivanchoroper = v.findViewById(R.id.ivanchoroper);
+        ivsharingopco1 = v.findViewById(R.id.ivsharingopco1);
+        ivsharingopco2 = v.findViewById(R.id.ivsharingopco2);
+        ivsharingopco3 = v.findViewById(R.id.ivsharingopco3);
+        ivinfraprovider = v.findViewById(R.id.ivinfraprovider);
+        ivtypeindoor = v.findViewById(R.id.ivtypeindoor);
+        ivinfrashared = v.findViewById(R.id.ivinfrashared);
         ivextra1 = v.findViewById(R.id.ivextra1);
         ivextra2 = v.findViewById(R.id.ivextra2);
-         ivremark1 = v.findViewById(R.id.ivremark1);
+        ivremark1 = v.findViewById(R.id.ivremark1);
         ivremark2 = v.findViewById(R.id.ivremark2);
 
         tv_sitedetail_count = v.findViewById(R.id.tv_sitedetail_count);
@@ -364,23 +416,24 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
     }
 
-    private void changeTemplete(View v){
+    private void changeTemplete(View v) {
 
-      sharedPreferences = SharedPreferenceUtils.getInstance();
+        sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
-       // changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
-      //  changetempleteName_Operator = sharedPreferences.getString(AppConstants.operators);
-         Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator),Toast.LENGTH_LONG).show();
+        // changetempleteName = sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator);
+        //  changetempleteName_Operator = sharedPreferences.getString(AppConstants.operators);
+        Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator), Toast.LENGTH_LONG).show();
         List<SurveyForm> siteIDandDate = db.getLastSurveyformData();
-        if(siteIDandDate.size() > 0){
-            String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype()+siteIDandDate.get(0).getCustomer()+siteIDandDate.get(0).getOperator();
-            changetempleteName =surveytype_customer_operator;
-           changetempleteName_Operator=siteIDandDate.get(0).getOperator();
+        if (siteIDandDate.size() > 0) {
+            String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype() + siteIDandDate.get(0).getCustomer() + siteIDandDate.get(0).getOperator();
+            changetempleteName = surveytype_customer_operator;
+            changetempleteName_Operator = siteIDandDate.get(0).getOperator();
+            activityType =  siteIDandDate.get(0).getTechnologytype();
 
         }
 
         //  start change templete code
-        linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
+     /*   linear_sitename =v.findViewById(R.id.linear_sitedeatail_edt_site_name);
         linear_towersiteid =v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
         linear_towercompanyname=v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
         linear_siteaddress=v.findViewById(R.id.linear_sitedeatail_edt_site_address);
@@ -405,41 +458,40 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         linear_extra2 =v.findViewById(R.id.linear_sitedeatail_edt_extra2);
         linear_remark1 =v.findViewById(R.id.linear_sitedeatail_edt_remark1);
         linear_remark2 =v.findViewById(R.id.linear_sitedeatail_edt_remark2);
+*/
 
-        tvsectorid =v.findViewById(R.id.sitedeatail_tv_sectorid);
-        tvtype_id_od =v.findViewById(R.id.sitedeatail_tv_typeindoor);
-        tvextra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
+      /*  tvextra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
         tvextra2 = v.findViewById(R.id.sitedeatail_tv_extra2);
-        tvremark1 = v.findViewById(R.id.sitedeatail_tv_remark1);
+        tvremark1 = v.findViewById(R.id.sitedeatail_tv_remark1);*/
         //  end change templete code
-        if(changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")){
-           tvsectorid.setText("No of Sectors");
-           tvtype_id_od.setText("Zone");
-           tvextra1.setText("DT Name");
-           tvextra2.setText("RNO Name");
-           tvremark1.setText("GPS");
-
-           linear_towersiteid.setVisibility(View.GONE);
-           linear_sitetype.setVisibility(View.GONE);
-           linear_buildingfloor.setVisibility(View.GONE);
-           linear_buildingheight.setVisibility(View.GONE);
-           linear_towerheight.setVisibility(View.GONE);
-           linear_classical.setVisibility(View.GONE);
-           linear_nodebtype.setVisibility(View.GONE);
-           linear_anchoroperator.setVisibility(View.GONE);
-           linear_sharingopco1.setVisibility(View.GONE);
-            linear_sharingopco2.setVisibility(View.GONE);
-            linear_sharingopco3.setVisibility(View.GONE);
-       }
-        if(changetempleteName_Operator.equalsIgnoreCase("VFI")){
+        if (changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")) {
             tvsectorid.setText("No of Sectors");
             tvtype_id_od.setText("Zone");
-            tvextra1.setText("DT Name");
-            tvextra2.setText("RNO Name");
+            tv_extra1.setText("DT Name");
+            tv_extra2.setText("RNO Name");
+            tv_remark1.setText("GPS");
 
             linear_towersiteid.setVisibility(View.GONE);
-          //  linear_sitetype.setVisibility(View.GONE);
-           // linear_buildingfloor.setVisibility(View.GONE);
+            linear_sitetype.setVisibility(View.GONE);
+            linear_buildingfloor.setVisibility(View.GONE);
+            linear_buildingheight.setVisibility(View.GONE);
+            linear_towerheight.setVisibility(View.GONE);
+            linear_classical.setVisibility(View.GONE);
+            linear_nodebtype.setVisibility(View.GONE);
+            linear_anchoroperator.setVisibility(View.GONE);
+            linear_sharingopco1.setVisibility(View.GONE);
+            linear_sharingopco2.setVisibility(View.GONE);
+            linear_sharingopco3.setVisibility(View.GONE);
+        }
+        if (changetempleteName_Operator.equalsIgnoreCase("VFI")) {
+            tvsectorid.setText("No of Sectors");
+            tvtype_id_od.setText("Zone");
+            tv_extra1.setText("DT Name");
+            tv_extra2.setText("RNO Name");
+
+            linear_towersiteid.setVisibility(View.GONE);
+            //  linear_sitetype.setVisibility(View.GONE);
+            // linear_buildingfloor.setVisibility(View.GONE);
             linear_buildingheight.setVisibility(View.GONE);
             linear_towerheight.setVisibility(View.GONE);
             linear_classical.setVisibility(View.GONE);
@@ -450,7 +502,37 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
             linear_sharingopco3.setVisibility(View.GONE);
             linear_type_id_od.setVisibility(View.GONE);
             linear_infraprovider.setVisibility(View.GONE);
-             linear_infrashared .setVisibility(View.GONE);
+            linear_infrashared.setVisibility(View.GONE);
+        }
+
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL")&& activityType.equalsIgnoreCase("SCFT")) {
+            tvsectorid.setText("No of Sectors");
+            tvtype_id_od.setText("Zone");
+        //    tv_siteid.setText("Zone");
+       //     tv_sitename.setText("Zone");
+       //     tv_towersiteid.setText("Zone");
+      //      tv_towercompanyname.setText("Zone");
+      //      tv_siteaddress.setText("Zone");
+            tv_sitetype.setText("IBS/Macro");
+            tv_buildingfloor.setText("Airtel 2G Site ID");
+            tv_buildingheight.setText("Airtel 3G Site ID");
+            tv_towerheight.setText("Airtel 4G Site ID");
+            tv_fulltowerphoto.setText("FDD/TDD Site ID");
+            tv_nodebtype.setText("EARFCN");
+      //      tv_classical.setText("Zone");
+      //      tv_enodebtype.setText("Zone");
+      //      tv_anchoroperator.setText("Zone");
+      //      tv_sharingopco1.setText("Zone");
+      //      tv_sharingopco2.setText("Zone");
+      //      tv_sharingopco3.setText("Zone");
+            tv_infraprovider.setText("FDD Site ID");
+      //      tv_infrashared.setText("Zone");
+            tv_extra1.setText("DTE Name");
+            tv_extra2.setText("Team Lead Name");
+            tv_remark1.setText("Team Lead Number");
+            tv_remark2.setText("Remarks");
+
+
         }
 
     }
@@ -537,29 +619,29 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         if (v == btnsitedetailsave) {
 
-            if(db.getCountSiteDetail()> 2){
+            if (db.getCountSiteDetail() > 2) {
                 db.deleteSomeRow_SiteDetail();
 
             }
 
 
-            db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo()+"", sitename.getText().toString(), siteDetailForm.getSitename_photo()+"",
-                    towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo()+"", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo()+"",
-                    siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo()+"", sectorid.getText() + "", siteDetailForm.getSectorid_photo()+"",
-                    edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo()+"", buildingfloor.getText() + "",
-                    siteDetailForm.getBuildingfloor_photo()+"", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo()+"", towerheight.getText() + "",
-                    siteDetailForm.getTowerheight_photo()+"", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo()+"", nodebtype.getText() + "",
-                    siteDetailForm.getNodebtype_photo()+"", classical.getText() + "", siteDetailForm.getClassical_photo()+"", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo()+"",
-                    anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo()+"", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo()+"",
-                    sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo()+"", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo()+"",
-                    infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo()+"", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo()+"",
-                    infrashared.getText() + "", siteDetailForm.getInfrashared_photo()+"", extra1.getText() + "", siteDetailForm.getExtra1_photo()+"",
-                    extra2.getText() + "", siteDetailForm.getExtra2_photo()+"", remark1.getText() + "", siteDetailForm.getRemark1_photo()+"", remark2.getText() + "",
-                    siteDetailForm.getRemark2_photo()+"", 1,time));
+            db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo() + "", sitename.getText().toString(), siteDetailForm.getSitename_photo() + "",
+                    towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo() + "", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo() + "",
+                    siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo() + "", sectorid.getText() + "", siteDetailForm.getSectorid_photo() + "",
+                    edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo() + "", buildingfloor.getText() + "",
+                    siteDetailForm.getBuildingfloor_photo() + "", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo() + "", towerheight.getText() + "",
+                    siteDetailForm.getTowerheight_photo() + "", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo() + "", nodebtype.getText() + "",
+                    siteDetailForm.getNodebtype_photo() + "", classical.getText() + "", siteDetailForm.getClassical_photo() + "", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo() + "",
+                    anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo() + "", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo() + "",
+                    sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo() + "", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo() + "",
+                    infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo() + "", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo() + "",
+                    infrashared.getText() + "", siteDetailForm.getInfrashared_photo() + "", extra1.getText() + "", siteDetailForm.getExtra1_photo() + "",
+                    extra2.getText() + "", siteDetailForm.getExtra2_photo() + "", remark1.getText() + "", siteDetailForm.getRemark1_photo() + "", remark2.getText() + "",
+                    siteDetailForm.getRemark2_photo() + "", 1, time));
 
 
-        int count =db.getCountSiteDetail();
-        tv_sitedetail_count.setText(count+"");
+            int count = db.getCountSiteDetail();
+            tv_sitedetail_count.setText(count + "");
 
 
             /*
@@ -569,7 +651,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
   */
         }
         if (v == btnsitedetail) {
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabFragment()).addToBackStack(null).commit();
+            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabFragment()).addToBackStack(null).commit();
         }
     }
 
@@ -578,9 +660,9 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
         if (Value.equals("one")) {
          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);*/
-           // com.derekr.AngleCam
-           Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",1);
+            // com.derekr.AngleCam
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 1);
             startActivityForResult(i, 1);
 
 
@@ -591,168 +673,168 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
 
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",2);
+            i.putExtra("pos", 2);
             startActivityForResult(i, 2);
         }
         if (Value.equals("3")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 3);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",3);
+            i.putExtra("pos", 3);
             startActivityForResult(i, 3);
         }
         if (Value.equals("4")) {
          /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 4);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",4);
+            i.putExtra("pos", 4);
             startActivityForResult(i, 4);
         }
         if (Value.equals("5")) {
             /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 5);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",5);
+            i.putExtra("pos", 5);
             startActivityForResult(i, 5);
         }
         if (Value.equals("6")) {
           /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 6);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",6);
+            i.putExtra("pos", 6);
             startActivityForResult(i, 6);
         }
         if (Value.equals("7")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 7);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",7);
+            i.putExtra("pos", 7);
             startActivityForResult(i, 7);
         }
         if (Value.equals("8")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 8);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",8);
+            i.putExtra("pos", 8);
             startActivityForResult(i, 8);
         }
         if (Value.equals("9")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 9);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",9);
+            i.putExtra("pos", 9);
             startActivityForResult(i, 9);
         }
         if (Value.equals("10")) {
             /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 10);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",10);
+            i.putExtra("pos", 10);
             startActivityForResult(i, 10);
         }
         if (Value.equals("11")) {
             /*Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 11);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",11);
+            i.putExtra("pos", 11);
             startActivityForResult(i, 11);
         }
         if (Value.equals("12")) {
          /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 12);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",12);
+            i.putExtra("pos", 12);
             startActivityForResult(i, 12);
         }
         if (Value.equals("13")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 13);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",13);
+            i.putExtra("pos", 13);
             startActivityForResult(i, 13);
         }
         if (Value.equals("14")) {
        /*     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 14);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",14);
+            i.putExtra("pos", 14);
             startActivityForResult(i, 14);
         }
         if (Value.equals("15")) {
           /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 15);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",15);
+            i.putExtra("pos", 15);
             startActivityForResult(i, 15);
         }
         if (Value.equals("16")) {
         /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 16);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",16);
+            i.putExtra("pos", 16);
             startActivityForResult(i, 16);
         }
         if (Value.equals("17")) {
           /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 17);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",17);
+            i.putExtra("pos", 17);
             startActivityForResult(i, 17);
         }
         if (Value.equals("18")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 18);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",18);
+            i.putExtra("pos", 18);
             startActivityForResult(i, 18);
         }
         if (Value.equals("19")) {
        /*     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 19);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",19);
+            i.putExtra("pos", 19);
             startActivityForResult(i, 19);
         }
         if (Value.equals("20")) {
          /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 20);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",20);
+            i.putExtra("pos", 20);
             startActivityForResult(i, 20);
         }
         if (Value.equals("21")) {
          /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 21);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",21);
+            i.putExtra("pos", 21);
             startActivityForResult(i, 21);
         }
         if (Value.equals("22")) {
          /*   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 22);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",22);
+            i.putExtra("pos", 22);
             startActivityForResult(i, 22);
         }
         if (Value.equals("23")) {
            /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 23);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",23);
+            i.putExtra("pos", 23);
             startActivityForResult(i, 23);
         }
         if (Value.equals("24")) {
           /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 24);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",24);
+            i.putExtra("pos", 24);
             startActivityForResult(i, 24);
         }
         if (Value.equals("25")) {
         /*    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 25);*/
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",25);
+            i.putExtra("pos", 25);
             startActivityForResult(i, 25);
         }
     }
@@ -760,7 +842,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_CANCELED) {
+        if (resultCode != RESULT_CANCELED) {
             //  Log.v("logtest", data.getStringExtra("path")+","+requestCode);
             if (requestCode == 1) {
 
@@ -783,14 +865,14 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "3", angle);
-               // onCaptureImageResult(data, "3");
+                // onCaptureImageResult(data, "3");
             }
             if (requestCode == 4) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "4", angle);
-              //  onCaptureImageResult(data, "4");
+                //  onCaptureImageResult(data, "4");
             }
             if (requestCode == 5) {
                 String path = data.getStringExtra("path");
@@ -804,140 +886,140 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "6", angle);
-               // onCaptureImageResult(data, "6");
+                // onCaptureImageResult(data, "6");
             }
             if (requestCode == 7) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "7", angle);
-               // onCaptureImageResult(data, "7");
+                // onCaptureImageResult(data, "7");
             }
             if (requestCode == 8) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "8", angle);
-               // onCaptureImageResult(data, "8");
+                // onCaptureImageResult(data, "8");
             }
             if (requestCode == 9) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "9", angle);
-              //  onCaptureImageResult(data, "9");
+                //  onCaptureImageResult(data, "9");
             }
             if (requestCode == 10) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "10", angle);
-               // onCaptureImageResult(data, "10");
+                // onCaptureImageResult(data, "10");
             }
             if (requestCode == 11) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "11", angle);
-             //   onCaptureImageResult(data, "11");
+                //   onCaptureImageResult(data, "11");
             }
             if (requestCode == 12) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "12", angle);
-            //    onCaptureImageResult(data, "12");
+                //    onCaptureImageResult(data, "12");
             }
             if (requestCode == 13) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "13", angle);
-           //     onCaptureImageResult(data, "13");
+                //     onCaptureImageResult(data, "13");
             }
             if (requestCode == 14) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "14", angle);
-            //    onCaptureImageResult(data, "14");
+                //    onCaptureImageResult(data, "14");
             }
             if (requestCode == 15) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "15", angle);
-            //    onCaptureImageResult(data, "15");
+                //    onCaptureImageResult(data, "15");
             }
             if (requestCode == 16) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "16", angle);
-            //    onCaptureImageResult(data, "16");
+                //    onCaptureImageResult(data, "16");
             }
             if (requestCode == 17) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "17", angle);
-            //    onCaptureImageResult(data, "17");
+                //    onCaptureImageResult(data, "17");
             }
             if (requestCode == 18) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "18", angle);
-            //    onCaptureImageResult(data, "18");
+                //    onCaptureImageResult(data, "18");
             }
             if (requestCode == 19) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "19", angle);
-            //    onCaptureImageResult(data, "19");
+                //    onCaptureImageResult(data, "19");
             }
             if (requestCode == 20) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "20", angle);
-           //     onCaptureImageResult(data, "20");
+                //     onCaptureImageResult(data, "20");
             }
             if (requestCode == 21) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "21", angle);
-            //    onCaptureImageResult(data, "21");
+                //    onCaptureImageResult(data, "21");
             }
             if (requestCode == 22) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "22", angle);
-               // onCaptureImageResult(data, "22");
+                // onCaptureImageResult(data, "22");
             }
             if (requestCode == 23) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "23", angle);
-           //     onCaptureImageResult(data, "23");
+                //     onCaptureImageResult(data, "23");
             }
             if (requestCode == 24) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "24", angle);
-           //     onCaptureImageResult(data, "24");
+                //     onCaptureImageResult(data, "24");
             }
             if (requestCode == 25) {
                 String path = data.getStringExtra("path");
                 String angle = data.getStringExtra("angle");
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "25", angle);
-           //     onCaptureImageResult(data, "25");
+                //     onCaptureImageResult(data, "25");
             }
         }
 
@@ -1904,7 +1986,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
         //......................................25................................................................
     }*/
 
-    private void onCameraSurfaceViewActivity(String thumbnail, String name, String angle){
+    private void onCameraSurfaceViewActivity(String thumbnail, String name, String angle) {
 
         if (name.equals("one")) {
 
@@ -2882,7 +2964,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             }
         }
 
-        }
+    }
 
 
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
@@ -2921,7 +3003,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
             lat = intent.getStringExtra("LAT");
             log = intent.getStringExtra("LOG");
 
-        //    Toast.makeText(getActivity(), "Lat : " + lat + "," + "Long : " + log, Toast.LENGTH_LONG).show();
+            //    Toast.makeText(getActivity(), "Lat : " + lat + "," + "Long : " + log, Toast.LENGTH_LONG).show();
         }
 
 

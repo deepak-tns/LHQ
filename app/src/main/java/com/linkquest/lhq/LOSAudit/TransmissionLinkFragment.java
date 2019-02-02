@@ -53,6 +53,14 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
     private  EditText edt_BuildingHeightatFarend;
     private  EditText edt_TotalhtForGBTRTTRTPATFarEnd;
     private  EditText edt_AMSLatFarEnd;
+    // add coloum 2/2/2019 by deepak
+    private  EditText edt_Commentadd;
+    private  EditText edt_Towertype;
+    private  EditText edt_towerexistingnew;
+    private  EditText edt_Azimuthfromfarend;
+    private  EditText edt_losstatus;
+    private  EditText edt_remarks;
+
 
     private  ImageButton ib_SiteID;
     private  ImageButton ib_Sitename;
@@ -64,6 +72,13 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
     private  ImageButton ib_BuildingHeightatFarend;
     private  ImageButton ib_TotalhtForGBTRTTRTPATFarEnd;
     private  ImageButton ib_AMSLatFarEnd;
+    // add coloum 2/2/2019 by deepak
+    private  ImageButton ib_Commentadd;
+    private  ImageButton ib_Towertype;
+    private  ImageButton ib_towerexistingnew;
+    private  ImageButton ib_Azimuthfromfarend;
+    private  ImageButton ib_losstatus;
+    private  ImageButton ib_remarks;
 
     private  ImageView iv_SiteID;
     private  ImageView iv_Sitename;
@@ -75,6 +90,13 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
     private  ImageView iv_BuildingHeightatFarend;
     private  ImageView iv_TotalhtForGBTRTTRTPATFarEnd;
     private  ImageView iv_AMSLatFarEnd;
+    // add coloum 2/2/2019 by deepak
+    private  ImageView iv_Commentadd;
+    private  ImageView iv_Towertype;
+    private  ImageView iv_towerexistingnew;
+    private  ImageView iv_Azimuthfromfarend;
+    private  ImageView iv_losstatus;
+    private  ImageView iv_remarks;
 
     private  String img_SiteID ="";
     private  String img_Sitename ="";
@@ -86,6 +108,13 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
     private  String img_BuildingHeightatFarend ="";
     private  String img_TotalhtForGBTRTTRTPATFarEnd ="";
     private  String img_AMSLatFarEnd="";
+    // add coloum 2/2/2019 by deepak
+    private  String img_Commentadd ="";
+    private  String img_Towertype ="";
+    private  String img_towerexistingnew ="";
+    private  String img_Azimuthfromfarend ="";
+    private  String img_losstatus ="";
+    private  String img_remarks ="";
 
     private String transName  ="";
     private String lat ,log,time;
@@ -143,6 +172,14 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
         edt_BuildingHeightatFarend = v.findViewById(R.id.translink_edt_buildingheight);
         edt_TotalhtForGBTRTTRTPATFarEnd = v.findViewById(R.id.translink_edt_totalheight);
         edt_AMSLatFarEnd = v.findViewById(R.id.translink_edt_AMSL);
+        // add coloum 2/2/2019 by deepak
+       edt_Commentadd  = v.findViewById(R.id.translink_edt_Commentsadd);
+        edt_Towertype = v.findViewById(R.id.translink_edt_Towertype);
+       edt_towerexistingnew = v.findViewById(R.id.translink_edt_towerexistingnew);
+       edt_Azimuthfromfarend = v.findViewById(R.id.translink_edt_Azimuthfromnearend);
+       edt_losstatus = v.findViewById(R.id.translink_edt_losstatus);
+       edt_remarks  = v.findViewById(R.id.translink_edt_remarks);
+
         tv_precount = v.findViewById(R.id.translink_tv_count_previous);
         tv_aftercount = v.findViewById(R.id.translink_tv_aftercount);
         btn_save = v.findViewById(R.id.translink_btn_save);
@@ -158,6 +195,13 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
         ib_BuildingHeightatFarend = v.findViewById(R.id.translink_ib_buildingheight);
         ib_TotalhtForGBTRTTRTPATFarEnd = v.findViewById(R.id.translink_ib_totalheight);
         ib_AMSLatFarEnd = v.findViewById(R.id.translink_ib_AMSL);
+        //  add 2/02/2019........................
+        ib_Commentadd  = v.findViewById(R.id.translink_ib_Commentsadd);
+        ib_Towertype = v.findViewById(R.id.translink_ib_Towertype);
+        ib_towerexistingnew = v.findViewById(R.id.translink_ib_towerexistingnew);
+        ib_Azimuthfromfarend = v.findViewById(R.id.translink_ib_Azimuthfromnearend);
+        ib_losstatus = v.findViewById(R.id.translink_ib_losstatus);
+        ib_remarks  = v.findViewById(R.id.translink_ib_remarks);
 
         iv_SiteID = v.findViewById(R.id.translink_iv_sectorid);
         iv_Sitename = v.findViewById(R.id.translink_iv_sectorname);
@@ -169,6 +213,15 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
         iv_BuildingHeightatFarend = v.findViewById(R.id.translink_iv_buildingheight);
         iv_TotalhtForGBTRTTRTPATFarEnd = v.findViewById(R.id.translink_iv_totalheight);
         iv_AMSLatFarEnd = v.findViewById(R.id.translink_iv_AMSL);
+        //  add 2/02/2019........................
+        iv_Commentadd  = v.findViewById(R.id.translink_iv_Commentsadd);
+        iv_Towertype = v.findViewById(R.id.translink_iv_Towertype);
+        iv_towerexistingnew = v.findViewById(R.id.translink_iv_towerexistingnew);
+        iv_Azimuthfromfarend = v.findViewById(R.id.translink_iv_Azimuthfromnearend);
+        iv_losstatus = v.findViewById(R.id.translink_iv_losstatus);
+        iv_remarks  = v.findViewById(R.id.translink_iv_remarks);
+
+
 
         ib_SiteID.setOnClickListener(this);
         ib_Sitename.setOnClickListener(this);
@@ -180,8 +233,16 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
         ib_BuildingHeightatFarend.setOnClickListener(this);
         ib_TotalhtForGBTRTTRTPATFarEnd.setOnClickListener(this);
         ib_AMSLatFarEnd.setOnClickListener(this);
+        //  add 2/02/2019........................
+        ib_Commentadd.setOnClickListener(this);
+        ib_Towertype .setOnClickListener(this);
+        ib_towerexistingnew .setOnClickListener(this);
+        ib_Azimuthfromfarend .setOnClickListener(this);
+        ib_losstatus .setOnClickListener(this);
+        ib_remarks .setOnClickListener(this);
         btn_save.setOnClickListener(this);
         translink_btnnext.setOnClickListener(this);
+
 
     }
 
@@ -218,10 +279,31 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
         if(view == ib_AMSLatFarEnd){
             selectImage("10");
         }
+        if(view == ib_Commentadd){
+            selectImage("11");
+        }
+        if(view == ib_Towertype){
+            selectImage("12");
+        }
+        if(view == ib_towerexistingnew){
+            selectImage("13");
+        }
+        if(view == ib_Azimuthfromfarend){
+            selectImage("14");
+        }
+        if(view == ib_losstatus){
+            selectImage("15");
+        }
+        if(view == ib_remarks){
+            selectImage("16");
+        }
         if(view == btn_save){
 
        db.insertLOSTransmissionLinkData( new TransmissionLinkData(edt_SiteID.getText()+"",edt_Sitename.getText()+"",  edt_Latitude.getText()+"", edt_Longitude.getText()+"",  edt_Azimuthfromnearend.getText()+"",  edt_Distance.getText()+"",  edt_AntennaHeightatFarend.getText()+"", edt_PoleFixtureRequirementatFarend.getText()+"",  edt_IFLengthatFarend.getText().toString(),  edt_BuildingHeightatFarend.getText()+"",  edt_TotalhtForGBTRTTRTPATFarEnd.getText()+"", edt_AMSLatFarEnd.getText()+"",
-             img_SiteID,  img_Sitename,  img_Azimuthfromnearend, img_Distance, img_AntennaHeightatFarend, img_PoleFixtureRequirementatFarend, img_IFLengthatFarend, img_BuildingHeightatFarend, img_TotalhtForGBTRTTRTPATFarEnd, img_AMSLatFarEnd, transName,  time,  1));
+             img_SiteID,  img_Sitename,  img_Azimuthfromnearend, img_Distance, img_AntennaHeightatFarend, img_PoleFixtureRequirementatFarend, img_IFLengthatFarend, img_BuildingHeightatFarend, img_TotalhtForGBTRTTRTPATFarEnd, img_AMSLatFarEnd, transName,
+               edt_Commentadd.getText()+"",edt_Towertype.getText()+"",edt_towerexistingnew.getText()+"",edt_Azimuthfromnearend.getText()+"",edt_losstatus.getText()+"",edt_remarks.getText()+"",img_Commentadd,img_Towertype,img_towerexistingnew,img_Azimuthfromfarend,img_losstatus,img_remarks,  time,  1));
+
+
 
            int aftercount = db.getCountLOSTransmissionLink();
            tv_aftercount.setText(aftercount+"");
@@ -305,6 +387,42 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
             i.putExtra("pos",10);
             startActivityForResult(i, 10);
         }
+        if (Value.equals("11")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",11);
+            startActivityForResult(i, 11);
+        }
+        if (Value.equals("12")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",12);
+            startActivityForResult(i, 12);
+        }
+        if (Value.equals("13")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",13);
+            startActivityForResult(i, 13);
+        }
+        if (Value.equals("14")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",14);
+            startActivityForResult(i, 14);
+        }
+        if (Value.equals("15")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",15);
+            startActivityForResult(i, 15);
+        }
+        if (Value.equals("16")) {
+
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos",16);
+            startActivityForResult(i, 16);
+        }
 
     }
 
@@ -382,7 +500,50 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "10", angle);
             }
+            if (requestCode == 11) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "11", angle);
+            }
+            if (requestCode == 12) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "12", angle);
+            }
+            if (requestCode == 13) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "13", angle);
+            }
+            if (requestCode == 14) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "14", angle);
+            }
+            if (requestCode == 15) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "15", angle);
+            }
+            if (requestCode == 16) {
+                //   onCaptureImageResult(data, "10");
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "16", angle);
+            }
         }
+
     }
 
     private void onCameraSurfaceViewActivity(String thumbnail, String name, String angle) {
@@ -514,6 +675,84 @@ public class TransmissionLinkFragment extends Fragment implements View.OnClickLi
                 //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_AMSLatFarEnd = thumbnail;
                 Log.v("img-encode", img_AMSLatFarEnd);
+            }
+        }
+        if (name.equals("11")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_Commentadd.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Commentadd = thumbnail;
+                Log.v("img-encode", img_Commentadd);
+            }
+        }
+        if (name.equals("12")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_Towertype.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Towertype = thumbnail;
+                Log.v("img-encode", img_Towertype);
+            }
+        }
+        if (name.equals("13")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_towerexistingnew.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_towerexistingnew = thumbnail;
+                Log.v("img-encode", img_towerexistingnew);
+            }
+        }
+        if (name.equals("14")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_Azimuthfromfarend.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Azimuthfromfarend = thumbnail;
+                Log.v("img-encode", img_Azimuthfromfarend);
+            }
+        }
+        if (name.equals("15")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_losstatus.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_losstatus = thumbnail;
+                Log.v("img-encode", img_losstatus);
+            }
+        }
+        if (name.equals("16")) {
+
+            if (lat == null) {
+                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
+            } else {
+
+                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                iv_remarks.setImageBitmap( out);
+                //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_remarks = thumbnail;
+                Log.v("img-encode", img_remarks);
             }
         }
 

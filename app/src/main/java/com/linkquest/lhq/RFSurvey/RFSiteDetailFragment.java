@@ -1,6 +1,5 @@
 package com.linkquest.lhq.RFSurvey;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -22,13 +21,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.linkquest.lhq.GoogleGPSService;
-import com.linkquest.lhq.LOSAudit.TabTransmissionLinkFragment;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
 import com.linkquest.lhq.database.DatabaseHandler;
-import com.linkquest.lhq.database.LOSSiteDetailData;
+
 
 import java.io.ByteArrayOutputStream;
 
@@ -272,6 +269,35 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
         iv_Hostoperator= v.findViewById(R.id.rfdetail_iv_hostoperator);
         iv_Anyguestoperators = v.findViewById(R.id.rfdetail_iv_anyguestoperators);
         iv_NoofGSMAntenna= v.findViewById(R.id.rfdetail_iv_NoofGSMAntenna);
+
+        ib_SiteID .setOnClickListener(this);
+        ib_SiteName .setOnClickListener(this);
+        ib_SurveyDate .setOnClickListener(this);
+        ib_City .setOnClickListener(this);
+        ib_IMID .setOnClickListener(this);
+        ib_Cluttertype .setOnClickListener(this);
+        ib_SiteType .setOnClickListener(this);
+        ib_Zone .setOnClickListener(this);
+        ib_SiteCandidate .setOnClickListener(this);
+        ib_BldgHeight .setOnClickListener(this);
+        ib_BldgStructure .setOnClickListener(this);
+        ib_AGL .setOnClickListener(this);
+        ib_SiteContact .setOnClickListener(this);
+        ib_AMSL .setOnClickListener(this);
+        ib_SiteAddress .setOnClickListener(this);
+        ib_SiteIndoor .setOnClickListener(this);
+        ib_SiteOutdoor .setOnClickListener(this);
+        ib_ShelterConcrete .setOnClickListener(this);
+        ib_shelterFabricated .setOnClickListener(this);
+        ib_Numerofotheroperator .setOnClickListener(this);
+        ib_IPSite .setOnClickListener(this);
+        ib_Others .setOnClickListener(this);
+        ib_Sharing .setOnClickListener(this);
+        ib_Hostoperator .setOnClickListener(this);
+        ib_Anyguestoperators .setOnClickListener(this);
+        ib_NoofGSMAntenna .setOnClickListener(this);
+        btn_save .setOnClickListener(this);
+        btnrfdetail_next .setOnClickListener(this);
 
 
     }

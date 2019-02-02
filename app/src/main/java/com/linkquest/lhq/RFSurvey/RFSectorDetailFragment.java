@@ -1,6 +1,6 @@
 package com.linkquest.lhq.RFSurvey;
 
-
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,17 +20,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.SiteAudit.SectorDetailFragment;
+import com.linkquest.lhq.Utils.AppSingleton;
+import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
+import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.database.DatabaseHandler;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 
@@ -38,6 +47,7 @@ import static android.app.Activity.RESULT_CANCELED;
  * A simple {@link Fragment} subclass.
  */
 public class RFSectorDetailFragment extends Fragment implements View.OnClickListener {
+
     private EditText edt_Antenna_Type;
     private EditText edt_2GBand;
     private EditText edt_2GCoverge;
@@ -55,8 +65,8 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
     private EditText edt_3G_Existing_Antenna_Direction;
     private EditText edt_3G_Existing_antenna_Electrical_tilt;
     private EditText edt_3G_Existing_antenna_Mechanical_tilt;
-    private EditText  edt_Space_Available_for_3G_Antenna;
-    private EditText  edt_Addl_Poles_req_for_3G_Antenna;
+    private EditText edt_Space_Available_for_3G_Antenna;
+    private EditText edt_Addl_Poles_req_for_3G_Antenna;
     private EditText edt_3GAntenna_Swap_Required;
     private EditText edt_3GApproximate_Cable_Lenth;
     private EditText edt_3GAntenna_Port_EmptyDamaged;
@@ -148,52 +158,55 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
     private ImageView iv_4GAntennaedt_Port_EmptyDamaged;
 
 
+    private String img_Antenna_Type = "";
+    private String img_2GBand = "";
+    private String img_2GCoverge = "";
+    private String img_2GObstruction = "";
+    private String img_2G_Existing_Antenna_Height = "";
+    private String img_2G_Antenna_Make_and_Model = "";
+    private String img_2G_Existing_Antenna_Direction = "";
+    private String img_2G_Existing_antenna_tilt_Electrical = "";
+    private String img_2G_Existing_antenna_tilt_Mechanical = "";
+    private String img_3GBand = "";
+    private String img_3GCoverge = "";
+    private String img_3GObstruction = "";
+    private String img_3G_Existing_Antenna_Ht = "";
+    private String img_3G_Antenna_Make_and_Model = "";
+    private String img_3G_Existing_Antenna_Direction = "";
+    private String img_3G_Existing_antenna_Electrical_tilt = "";
+    private String img_3G_Existing_antenna_Mechanical_tilt = "";
+    private String img_Space_Available_for_3G_Antenna = "";
+    private String img_Addl_Poles_reqd_for_3G_Antenna = "";
+    private String img_3GAntenna_Swap_Required = "";
+    private String img_3GApproximate_Cable_Lenth = "";
+    private String img_3GAntenna_Port_EmptyDamaged = "";
+    private String img_4GBand = "";
+    private String img_4GCoverge = "";
+    private String img_4GObstruction = "";
+    private String img_4G_Existing_Antenna_Ht = "";
+    private String img_4G_Antenna_Make_and_Model = "";
+    private String img_4G_Existing_Antenna_Direction = "";
+    private String img_4G_Existing_antenna_Electrical_tilt = "";
+    private String img_4G_Existing_antenna_Mechanical_tilt = "";
+    private String img_Space_Available_for_4G_Antenna = "";
+    private String img_Addl_Poles_reqd_for_4G_Antenna = "";
+    private String img_4GAntenna_Swap_Required = "";
+    private String img_4GApproximate_Cable_Lenth = "";
+    private String img_4GAntenna_Port_EmptyDamaged = "";
 
-    private String img_Antenna_Type;
-    private String img_2GBand;
-    private String img_2GCoverge;
-    private String img_2GObstruction;
-    private String img_2G_Existing_Antenna_Height;
-    private String img_2G_Antenna_Make_and_Model;
-    private String img_2G_Existing_Antenna_Direction;
-    private String img_2G_Existing_antenna_tilt_Electrical;
-    private String img_2G_Existing_antenna_tilt_Mechanical;
-    private String img_3GBand;
-    private String img_3GCoverge;
-    private String img_3GObstruction;
-    private String img_3G_Existing_Antenna_Ht;
-    private String img_3G_Antenna_Make_and_Model;
-    private String img_3G_Existing_Antenna_Direction;
-    private String img_3G_Existing_antenna_Electrical_tilt;
-    private String img_3G_Existing_antenna_Mechanical_tilt;
-    private String  img_Space_Available_for_3G_Antenna;
-    private String  img_Addl_Poles_reqd_for_3G_Antenna;
-    private String img_3GAntenna_Swap_Required;
-    private String img_3GApproximate_Cable_Lenth;
-    private String img_3GAntenna_Port_EmptyDamaged;
-    private String img_4GBand;
-    private String img_4GCoverge;
-    private String img_4GObstruction;
-    private String img_4G_Existing_Antenna_Ht;
-    private String img_4G_Antenna_Make_and_Model;
-    private String img_4G_Existing_Antenna_Direction;
-    private String img_4G_Existing_antenna_Electrical_tilt;
-    private String img_4G_Existing_antenna_Mechanical_tilt;
-    private String  img_Space_Available_for_4G_Antenna;
-    private String  img_Addl_Poles_reqd_for_4G_Antenna;
-    private String img_4GAntenna_Swap_Required;
-    private String img_4GApproximate_Cable_Lenth;
-    private String img_4GAntenna_Port_EmptyDamaged;
-    private String date;
-    private int flag;
-
-
+    private final String SECTOR1 ="Sector1";
+    private final String SECTOR2 ="Sector2";
+    private final String SECTOR3 ="Sector3";
+    private final String SECTOR4 ="Sector4";
+    String rf_sectorDetail_name;
     String lat, log;
     Handler handler;
     String time;
-    Text tvprecount,tvaftercount;
-    Button btn_save,btn_next;
+    TextView tvprecount, tvaftercount;
+    Button btn_save, btn_next;
     DatabaseHandler db;
+    SharedPreferenceUtils sharedPreferences;
+
     public RFSectorDetailFragment() {
         // Required empty public constructor
     }
@@ -212,6 +225,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_rfsector_detail, container, false);
+        rf_sectorDetail_name = getArguments().getString("name");
         db = new DatabaseHandler(getActivity());
         handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -224,7 +238,9 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         }, 1000);
 
         findIds(v);
-        
+        tvprecount.setText(tvprecount.getText().toString() + db.getCountRFSectorDetail());
+        sharedPreferences = SharedPreferenceUtils.getInstance();
+        sharedPreferences.setContext(getActivity());
         return v;
     }
 
@@ -233,7 +249,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         edt_Antenna_Type = v.findViewById(R.id.edt_Antenna_Type);
         edt_2GBand = v.findViewById(R.id.edt_2GBand);
         edt_2GCoverge = v.findViewById(R.id.edt_2GCoverge);
-        edt_2GObstruction  = v.findViewById(R.id.edt_2GObstruction);
+        edt_2GObstruction = v.findViewById(R.id.edt_2GObstruction);
         edt_2G_Existing_Antenna_Height = v.findViewById(R.id.edt_2G_Existing_Antenna_Height);
         edt_2G_Antenna_Make_and_Model = v.findViewById(R.id.edt_2G_Antenna_Make_and_Model);
         edt_2G_Existing_Antenna_Direction = v.findViewById(R.id.edt_2G_Existing_Antenna_Direction);
@@ -250,7 +266,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         edt_Space_Available_for_3G_Antenna = v.findViewById(R.id.edt_Space_Available_for_3G_Antenna);
         edt_Addl_Poles_req_for_3G_Antenna = v.findViewById(R.id.edt_Addl_Poles_req_for_3G_Antenna);
         edt_3GAntenna_Swap_Required = v.findViewById(R.id.edt_3GAntenna_Swap_Required);
-        edt_3GApproximate_Cable_Lenth  = v.findViewById(R.id.edt_3GApproximate_Cable_Lenth);
+        edt_3GApproximate_Cable_Lenth = v.findViewById(R.id.edt_3GApproximate_Cable_Lenth);
         edt_3GAntenna_Port_EmptyDamaged = v.findViewById(R.id.edt_3GAntenna_Port_EmptyDamaged);
         edt_4GBand = v.findViewById(R.id.edt_4GBand);
         edt_4GCoverge = v.findViewById(R.id.edt_4GCoverge);
@@ -266,15 +282,15 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         edt_4GApproximate_Cable_Lenth = v.findViewById(R.id.edt_4GApproximate_Cable_Lenth);
         edt_4GAntennaedt_Port_EmptyDamaged = v.findViewById(R.id.edt_4GAntenna_Port_EmptyDamaged);
 
-        btn_save =v.findViewById(R.id.btnrfsectordetailsave);
-        btn_next =v.findViewById(R.id.btnrfsectordetailnext);
-        tvprecount =v.findViewById(R.id.tv_rfsectordetail_count_previous);
-        tvaftercount =v.findViewById(R.id.tv_rfsectordetail_count);
+        btn_save = v.findViewById(R.id.btnrfsectordetailsave);
+        btn_next = v.findViewById(R.id.btnrfsectordetailnext);
+        tvprecount = v.findViewById(R.id.tv_rfsectordetail_count_previous);
+        tvaftercount = v.findViewById(R.id.tv_rfsectordetail_count);
 
         ib_Antenna_Type = v.findViewById(R.id.ib_Antenna_Type);
         ib_2GBand = v.findViewById(R.id.ib_2GBand);
         ib_2GCoverge = v.findViewById(R.id.ib_2GCoverge);
-        ib_2GObstruction  = v.findViewById(R.id.ib_2GObstruction);
+        ib_2GObstruction = v.findViewById(R.id.ib_2GObstruction);
         ib_2G_Existing_Antenna_Height = v.findViewById(R.id.ib_2G_Existing_Antenna_Height);
         ib_2G_Antenna_Make_and_Model = v.findViewById(R.id.ib_2G_Antenna_Make_and_Model);
         ib_2G_Existing_Antenna_Direction = v.findViewById(R.id.ib_2G_Existing_Antenna_Direction);
@@ -291,7 +307,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         ib_Space_Available_for_3G_Antenna = v.findViewById(R.id.ib_Space_Available_for_3G_Antenna);
         ib_3GAntennaedt_Port_EmptyDamaged = v.findViewById(R.id.ib_Addl_Poles_req_for_3G_Antenna);
         ib_3GAntenna_Swap_Required = v.findViewById(R.id.ib_3GAntenna_Swap_Required);
-        ib_3GApproximate_Cable_Lenth  = v.findViewById(R.id.ib_3GApproximate_Cable_Lenth);
+        ib_3GApproximate_Cable_Lenth = v.findViewById(R.id.ib_3GApproximate_Cable_Lenth);
         ib_3GAntenna_Port_EmptyDamaged = v.findViewById(R.id.ib_3GAntenna_Port_EmptyDamaged);
         ib_4GBand = v.findViewById(R.id.ib_4GBand);
         ib_4GCoverge = v.findViewById(R.id.ib_4GCoverge);
@@ -310,7 +326,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         iv_Antenna_Type = v.findViewById(R.id.iv_Antenna_Type);
         iv_2GBand = v.findViewById(R.id.iv_2GBand);
         iv_2GCoverge = v.findViewById(R.id.iv_2GCoverge);
-        iv_2GObstruction  = v.findViewById(R.id.iv_2GObstruction);
+        iv_2GObstruction = v.findViewById(R.id.iv_2GObstruction);
         iv_2G_Existing_Antenna_Height = v.findViewById(R.id.iv_2G_Existing_Antenna_Height);
         iv_2G_Antenna_Make_and_Model = v.findViewById(R.id.iv_2G_Antenna_Make_and_Model);
         iv_2G_Existing_Antenna_Direction = v.findViewById(R.id.iv_2G_Existing_Antenna_Direction);
@@ -327,7 +343,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         iv_Space_Available_for_3G_Antenna = v.findViewById(R.id.iv_Space_Available_for_3G_Antenna);
         iv_Addl_Poles_req_for_3G_Antenna = v.findViewById(R.id.iv_Addl_Poles_req_for_3G_Antenna);
         iv_3GAntenna_Swap_Required = v.findViewById(R.id.iv_3GAntenna_Swap_Required);
-        iv_3GApproximate_Cable_Lenth  = v.findViewById(R.id.iv_3GApproximate_Cable_Lenth);
+        iv_3GApproximate_Cable_Lenth = v.findViewById(R.id.iv_3GApproximate_Cable_Lenth);
         iv_3GAntenna_Port_EmptyDamaged = v.findViewById(R.id.iv_3GAntenna_Port_EmptyDamaged);
         iv_4GBand = v.findViewById(R.id.iv_4GBand);
         iv_4GCoverge = v.findViewById(R.id.iv_4GCoverge);
@@ -343,280 +359,1124 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         iv_4GApproximate_Cable_Lenth = v.findViewById(R.id.iv_4GApproximate_Cable_Lenth);
         iv_4GAntennaedt_Port_EmptyDamaged = v.findViewById(R.id.iv_4GAntenna_Port_EmptyDamaged);
 
-
-
-
+        btn_save.setOnClickListener(this);
+        btn_next.setOnClickListener(this);
+        ib_Antenna_Type.setOnClickListener(this);
+        ib_2GBand.setOnClickListener(this);
+        ib_2GCoverge.setOnClickListener(this);
+        ib_2GObstruction.setOnClickListener(this);
+        ib_2G_Existing_Antenna_Height.setOnClickListener(this);
+        ib_2G_Antenna_Make_and_Model.setOnClickListener(this);
+        ib_2G_Existing_Antenna_Direction.setOnClickListener(this);
+        ib_2G_Existing_antenna_tilt_Electrical.setOnClickListener(this);
+        ib_2G_Existing_antenna_tilt_Mechanical.setOnClickListener(this);
+        ib_3GBand.setOnClickListener(this);
+        ib_3GCoverge.setOnClickListener(this);
+        ib_3GObstruction.setOnClickListener(this);
+        ib_3G_Existing_Antenna_Ht.setOnClickListener(this);
+        ib_3G_Antenna_Make_and_Model.setOnClickListener(this);
+        ib_3G_Existing_Antenna_Direction.setOnClickListener(this);
+        ib_3G_Existing_antenna_Electrical_tilt.setOnClickListener(this);
+        ib_3G_Existing_antenna_Mechanical_tilt.setOnClickListener(this);
+        ib_Space_Available_for_3G_Antenna.setOnClickListener(this);
+        ib_3GAntennaedt_Port_EmptyDamaged.setOnClickListener(this);
+        ib_3GAntenna_Swap_Required.setOnClickListener(this);
+        ib_3GApproximate_Cable_Lenth.setOnClickListener(this);
+        ib_3GAntenna_Port_EmptyDamaged.setOnClickListener(this);
+        ib_4GBand.setOnClickListener(this);
+        ib_4GCoverge.setOnClickListener(this);
+        ib_4GObstruction.setOnClickListener(this);
+        ib_4G_Existing_Antenna_Ht.setOnClickListener(this);
+        ib_4G_Antenna_Make_and_Model.setOnClickListener(this);
+        ib_4G_Existing_Antenna_Direction.setOnClickListener(this);
+        ib_4G_Existing_antenna_Electrical_tilt.setOnClickListener(this);
+        ib_4G_Existing_antenna_Mechanical_tilt.setOnClickListener(this);
+        ib_Space_Available_for_4G_Antenna.setOnClickListener(this);
+        ib_Addl_Poles_reqd_for_4G_Antenna.setOnClickListener(this);
+        ib_4GAntenna_Swap_Required.setOnClickListener(this);
+        ib_4GApproximate_Cable_Lenth.setOnClickListener(this);
+        ib_4GAntennaedt_Port_EmptyDamaged.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
-       if(view == ib_Antenna_Type){
+        if (view == ib_Antenna_Type) {
+            selectImage("1");
+        }
+        if (view == ib_2GBand) {
+            selectImage("2");
+        }
+        if (view == ib_2GCoverge) {
+            selectImage("3");
+        }
+        if (view == ib_2GObstruction) {
+            selectImage("4");
+        }
+        if (view == ib_2G_Existing_Antenna_Height) {
+            selectImage("5");
+        }
+        if (view == ib_2G_Antenna_Make_and_Model) {
+            selectImage("6");
+        }
+        if (view == ib_2G_Existing_Antenna_Direction) {
+            selectImage("7");
+        }
+        if (view == ib_2G_Existing_antenna_tilt_Electrical) {
+            selectImage("8");
+        }
+        if (view == ib_2G_Existing_antenna_tilt_Mechanical) {
+            selectImage("9");
+        }
+        if (view == ib_3GBand) {
+            selectImage("10");
+        }
+        if (view == ib_3GCoverge) {
+            selectImage("11");
+        }
+        if (view == ib_3GObstruction) {
+            selectImage("12");
+        }
+        if (view == ib_3G_Existing_Antenna_Ht) {
+            selectImage("13");
+        }
+        if (view == ib_3G_Antenna_Make_and_Model) {
+            selectImage("14");
+        }
+        if (view == ib_3G_Existing_Antenna_Direction) {
+            selectImage("15");
+        }
+        if (view == ib_3G_Existing_antenna_Electrical_tilt) {
+            selectImage("16");
+        }
+        if (view == ib_3G_Existing_antenna_Mechanical_tilt) {
+            selectImage("17");
+        }
+        if (view == ib_Space_Available_for_3G_Antenna) {
+            selectImage("18");
+        }
+        if (view == ib_3GAntennaedt_Port_EmptyDamaged) {
+            selectImage("19");
+        }
+        if (view == ib_3GAntenna_Swap_Required) {
+            selectImage("20");
+        }
+        if (view == ib_3GApproximate_Cable_Lenth) {
+            selectImage("21");
+        }
+        if (view == ib_3GAntenna_Port_EmptyDamaged) {
+            selectImage("22");
+        }
+        if (view == ib_4GBand) {
+            selectImage("23");
+        }
+        if (view == ib_4GCoverge) {
+            selectImage("24");
+        }
+        if (view == ib_4GObstruction) {
+            selectImage("25");
+        }
+        if (view == ib_4G_Existing_Antenna_Ht) {
+            selectImage("26");
+        }
+        if (view == ib_4G_Antenna_Make_and_Model) {
+            selectImage("27");
+        }
+        if (view == ib_4G_Existing_Antenna_Direction) {
+            selectImage("28");
+        }
+        if (view == ib_4G_Existing_antenna_Electrical_tilt) {
+            selectImage("29");
+        }
+        if (view == ib_4G_Existing_antenna_Mechanical_tilt) {
+            selectImage("30");
+        }
+        if (view == ib_Space_Available_for_4G_Antenna) {
+            selectImage("31");
+        }
+        if (view == ib_Addl_Poles_reqd_for_4G_Antenna) {
+            selectImage("32");
+        }
+        if (view == ib_4GAntenna_Swap_Required) {
+            selectImage("33");
+        }
+        if (view == ib_4GApproximate_Cable_Lenth) {
+            selectImage("34");
+        }
+        if (view == ib_4GAntennaedt_Port_EmptyDamaged) {
+            selectImage("35");
+        }
+        if (view == btn_save) {
+            db.insertRFSectorDetail(new RFSectorAntennaDetailData(edt_Antenna_Type.getText().toString(), edt_2GBand.getText().toString(), edt_2GCoverge.getText().toString(), edt_2GObstruction.getText().toString(), edt_2G_Existing_Antenna_Height.getText().toString(),
+                    edt_2G_Antenna_Make_and_Model.getText().toString(), edt_2G_Existing_Antenna_Direction.getText().toString(), edt_2G_Existing_antenna_tilt_Electrical.getText().toString(), edt_2G_Existing_antenna_tilt_Mechanical.getText().toString(),
+                    edt_3GBand.getText().toString(), edt_3GCoverge.getText().toString(), edt_3GObstruction.getText().toString(), edt_3G_Existing_Antenna_Ht.getText().toString(), edt_3G_Antenna_Make_and_Model.getText().toString(), edt_3G_Existing_Antenna_Direction.getText().toString(),
+                    edt_3G_Existing_antenna_Electrical_tilt.getText().toString(), edt_3G_Existing_antenna_Mechanical_tilt.getText().toString(), edt_Space_Available_for_3G_Antenna.getText().toString(), edt_Addl_Poles_req_for_3G_Antenna.getText().toString(), edt_3GAntenna_Swap_Required.getText().toString(),
+                    edt_3GApproximate_Cable_Lenth.getText().toString(), edt_3GAntenna_Port_EmptyDamaged.getText().toString(), edt_4GBand.getText().toString(), edt_4GCoverge.getText().toString(), edt_4GObstruction.getText().toString(), edt_4G_Existing_Antenna_Ht.getText().toString(),
+                    edt_4G_Antenna_Make_and_Model.getText().toString(), edt_4G_Existing_Antenna_Direction.getText().toString(), edt_4G_Existing_antenna_Electrical_tilt.getText().toString(), edt_4G_Existing_antenna_Mechanical_tilt.getText().toString(), edt_Space_Available_for_4G_Antenna.getText().toString(),
+                    edt_Addl_Poles_reqd_for_4G_Antenna.getText().toString(), edt_4GAntenna_Swap_Required.getText().toString(), edt_4GApproximate_Cable_Lenth.getText().toString(), edt_4GAntennaedt_Port_EmptyDamaged.getText().toString(),
+                    img_Antenna_Type, img_2GBand, img_2GCoverge, img_2GObstruction, img_2G_Existing_Antenna_Height, img_2G_Antenna_Make_and_Model, img_2G_Existing_Antenna_Direction, img_2G_Existing_antenna_tilt_Electrical, img_2G_Existing_antenna_tilt_Mechanical, img_3GBand, img_3GCoverge,
+                    img_3GObstruction, img_3G_Existing_Antenna_Ht, img_3G_Antenna_Make_and_Model, img_3G_Existing_Antenna_Direction, img_3G_Existing_antenna_Electrical_tilt, img_3G_Existing_antenna_Mechanical_tilt, img_Space_Available_for_3G_Antenna, img_Addl_Poles_reqd_for_3G_Antenna, img_3GAntenna_Swap_Required,
+                    img_3GApproximate_Cable_Lenth, img_3GAntenna_Port_EmptyDamaged, img_4GBand, img_4GCoverge, img_4GObstruction, img_4G_Existing_Antenna_Ht, img_4G_Antenna_Make_and_Model, img_4G_Existing_Antenna_Direction, img_4G_Existing_antenna_Electrical_tilt, img_4G_Existing_antenna_Mechanical_tilt,
+                    img_Space_Available_for_4G_Antenna, img_Addl_Poles_reqd_for_4G_Antenna, img_4GAntenna_Swap_Required, img_4GApproximate_Cable_Lenth, img_4GAntenna_Port_EmptyDamaged, rf_sectorDetail_name, time, 1));
 
-       }
-        if(view == ib_2GBand){
+            Toast.makeText(getActivity(), rf_sectorDetail_name, Toast.LENGTH_LONG).show();
+            if (rf_sectorDetail_name.equalsIgnoreCase("Sector4")) {
+                btn_next.setVisibility(View.VISIBLE);
+            }
+            tvaftercount.setText(db.getCountRFSectorDetail());
+        }
+        if (view == btn_next) {
 
         }
-        if(view ==  ib_2GCoverge){
-
-        }
-        if(view == ib_2GObstruction){
-
-        }
-        if(view == ib_2G_Existing_Antenna_Height){
-
-        }
-        if(view ==  ib_2G_Antenna_Make_and_Model){
-
-        }
-        if(view == ib_2G_Existing_Antenna_Direction){
-
-        }
-        if(view ==  ib_2G_Existing_antenna_tilt_Electrical){
-
-        }
-        if(view ==  ib_2G_Existing_antenna_tilt_Mechanical){
-
-        }
-        if(view ==  ib_3GBand){
-
-        }
-        if(view == ib_3GCoverge){
-
-        }
-        if(view == ib_3GObstruction){
-
-        }
-        if(view == ib_3G_Existing_Antenna_Ht){
-
-        }
-        if(view == ib_3G_Antenna_Make_and_Model){
-
-        }
-        if(view ==  ib_3G_Existing_Antenna_Direction){
-
-        }
-        if(view == ib_3G_Existing_antenna_Electrical_tilt){
-
-        }
-        if(view == ib_3G_Existing_antenna_Mechanical_tilt){
-
-        }
-        if(view == ib_Space_Available_for_3G_Antenna){
-
-        }
-        if(view ==  ib_3GAntennaedt_Port_EmptyDamaged){
-
-        }
-        if(view ==  ib_3GAntenna_Swap_Required){
-
-        }
-        if(view == ib_3GApproximate_Cable_Lenth){
-
-        }
-        if(view == ib_3GAntenna_Port_EmptyDamaged){
-
-        }
-        if(view ==  ib_4GBand){
-
-        }
-        if(view == ib_4GCoverge){
-
-        }
-        if(view == ib_4GObstruction){
-
-        }
-        if(view == ib_4G_Existing_Antenna_Ht){
-
-        }
-        if(view == ib_4G_Antenna_Make_and_Model){
-
-        }
-        if(view == ib_4G_Existing_Antenna_Direction){
-
-        }
-        if(view == ib_4G_Existing_antenna_Electrical_tilt){
-
-        }
-        if(view == ib_4G_Existing_antenna_Mechanical_tilt){
-
-        }
-        if(view ==  ib_Space_Available_for_4G_Antenna){
-
-        }
-        if(view == ib_Addl_Poles_reqd_for_4G_Antenna){
-
-        }
-        if(view == ib_4GAntenna_Swap_Required){
-
-        }
-        if(view == ib_4GApproximate_Cable_Lenth){
-
-        }
-        if(view == ib_4GAntennaedt_Port_EmptyDamaged){
-
-        }
-
-
     }
-    private void selectImage(String Value) {
 
+    private JSONObject jsondataRFSiteDetail() {
+        JSONObject jsonObject = new JSONObject();
+        List<RFSiteDetailData> rfSiteDetailData = db.getLastRFSiteDetail();
+        try {
+
+            jsonObject.put("edt_SiteName", rfSiteDetailData.get(0).getEdt_SiteName());
+            jsonObject.put("edt_SurveyDate", rfSiteDetailData.get(0).getEdt_SurveyDate());
+            jsonObject.put("edt_City", rfSiteDetailData.get(0).getEdt_City());
+            jsonObject.put("edt_IMID", rfSiteDetailData.get(0).getEdt_IMID());
+            jsonObject.put("edt_Cluttertype", rfSiteDetailData.get(0).getEdt_City());
+            jsonObject.put("edt_SiteType", rfSiteDetailData.get(0).getEdt_SiteType());
+            jsonObject.put("edt_Zone", rfSiteDetailData.get(0).getEdt_Zone());
+            jsonObject.put("edt_SiteCandidate", rfSiteDetailData.get(0).getEdt_SiteCandidate());
+            jsonObject.put("edt_BldgHeight", rfSiteDetailData.get(0).getEdt_BldgHeight());
+            jsonObject.put("edt_BldgStructure", rfSiteDetailData.get(0).getEdt_BldgStructure());
+            jsonObject.put("edt_AGL", rfSiteDetailData.get(0).getEdt_AGL());
+            jsonObject.put("edt_SiteContact", rfSiteDetailData.get(0).getEdt_SiteContact());
+            jsonObject.put("edt_AMSL", rfSiteDetailData.get(0).getEdt_AMSL());
+            jsonObject.put("edt_SiteAddress", rfSiteDetailData.get(0).getEdt_SiteAddress());
+            jsonObject.put("edt_SiteIndoor", rfSiteDetailData.get(0).getEdt_SiteIndoor());
+            jsonObject.put("edt_SiteOutdoor", rfSiteDetailData.get(0).getEdt_SiteOutdoor());
+            jsonObject.put("edt_ShelterConcrete", rfSiteDetailData.get(0).getEdt_ShelterConcrete());
+            jsonObject.put("edt_shelterFabricated", rfSiteDetailData.get(0).getEdt_shelterFabricated());
+            jsonObject.put("edt_Numerofotheroperator", rfSiteDetailData.get(0).getEdt_Numerofotheroperator());
+            jsonObject.put("edt_IPSite", rfSiteDetailData.get(0).getEdt_IPSite());
+            jsonObject.put("edt_Others", rfSiteDetailData.get(0).getEdt_Others());
+            jsonObject.put("edt_Sharing", rfSiteDetailData.get(0).getEdt_Sharing());
+            jsonObject.put("edt_Hostoperator", rfSiteDetailData.get(0).getEdt_Hostoperator());
+            jsonObject.put("edt_Anyguestoperators", rfSiteDetailData.get(0).getEdt_Anyguestoperators());
+            jsonObject.put("edt_NoofGSMAntenna", rfSiteDetailData.get(0).getEdt_NoofGSMAntenna());
+            jsonObject.put("edt_Lat", rfSiteDetailData.get(0).getEdt_Lat());
+            jsonObject.put("edt_Long", rfSiteDetailData.get(0).getEdt_Long());
+            jsonObject.put("img_SiteName", rfSiteDetailData.get(0).getImg_SiteName());
+            jsonObject.put("img_SurveyDate", rfSiteDetailData.get(0).getImg_SurveyDate());
+            jsonObject.put("img_City", rfSiteDetailData.get(0).getImg_City());
+            jsonObject.put("img_IMID", rfSiteDetailData.get(0).getImg_IMID());
+            jsonObject.put("img_Cluttertype", rfSiteDetailData.get(0).getImg_City());
+            jsonObject.put("img_SiteType", rfSiteDetailData.get(0).getImg_SiteType());
+            jsonObject.put("img_Zone", rfSiteDetailData.get(0).getImg_Zone());
+            jsonObject.put("img_SiteCandidate", rfSiteDetailData.get(0).getImg_SiteCandidate());
+            jsonObject.put("img_BldgHeight", rfSiteDetailData.get(0).getImg_BldgHeight());
+            jsonObject.put("img_BldgStructure", rfSiteDetailData.get(0).getImg_BldgStructure());
+            jsonObject.put("img_AGL", rfSiteDetailData.get(0).getImg_AGL());
+            jsonObject.put("img_SiteContact", rfSiteDetailData.get(0).getImg_SiteContact());
+            jsonObject.put("img_AMSL", rfSiteDetailData.get(0).getImg_AMSL());
+            jsonObject.put("img_SiteAddress", rfSiteDetailData.get(0).getImg_SiteAddress());
+            jsonObject.put("img_SiteIndoor", rfSiteDetailData.get(0).getImg_SiteIndoor());
+            jsonObject.put("img_SiteOutdoor", rfSiteDetailData.get(0).getImg_SiteOutdoor());
+            jsonObject.put("img_ShelterConcrete", rfSiteDetailData.get(0).getImg_ShelterConcrete());
+            jsonObject.put("img_shelterFabricated", rfSiteDetailData.get(0).getImg_shelterFabricated());
+            jsonObject.put("img_Numerofotheroperator", rfSiteDetailData.get(0).getImg_Numerofotheroperator());
+            jsonObject.put("img_IPSite", rfSiteDetailData.get(0).getImg_IPSite());
+            jsonObject.put("img_Others", rfSiteDetailData.get(0).getImg_Others());
+            jsonObject.put("img_Sharing", rfSiteDetailData.get(0).getImg_Sharing());
+            jsonObject.put("img_Hostoperator", rfSiteDetailData.get(0).getImg_Hostoperator());
+            jsonObject.put("img_Anyguestoperators", rfSiteDetailData.get(0).getImg_Anyguestoperators());
+            jsonObject.put("img_NoofGSMAntenna", rfSiteDetailData.get(0).getImg_NoofGSMAntenna());
+
+            jsonObject.put("flag", rfSiteDetailData.get(0).getFlag());
+            jsonObject.put("date",sharedPreferences.getString(AppConstants.DATE));
+            jsonObject.put("empid",sharedPreferences.getString(AppConstants.EMPID));
+            jsonObject.put("siteid",sharedPreferences.getString(AppConstants.SITEID));
+            jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+
+        } catch (Exception e) {
+
+        }
+
+        return jsonObject;
+    }
+
+    private void toSendDataRFSiteDetail() {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("json rfsitedetail", jsondataRFSiteDetail().toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SITEPANAROMIC, jsondataRFSiteDetail(),
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseRFSiteDetail(response.toString());
+                        Log.v("res rfsitedetail", response.toString());
+                        pDialog.hide();
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("error rfsitedetail", error.toString());
+                pDialog.hide();
+            }
+
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
+
+    private void parseSettingResponseRFSiteDetail(String s) {
+        try {
+            JSONArray jsonArray = new JSONArray(s);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String status = jsonObject.getString("Status");
+            Toast.makeText(getActivity(), status + " RF SiteDetail", Toast.LENGTH_LONG).show();
+            // String password = jsonObject.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//.....................................................................................
+
+    //.................................RF SectorDetail1.......................
+    private JSONObject jsondataRFSectorDetail1(){
+        JSONObject jsonObject = new JSONObject();
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR1);
+        if(sectorDetailData.size()>0){
+            Log.v("RFSectorDetailData1",sectorDetailData.toString());
+            try {
+                jsonObject.put("edt_Antenna_Type", sectorDetailData.get(0).getEdt_Antenna_Type());
+                jsonObject.put("edt_2GBand", sectorDetailData.get(0).getEdt_2GBand());
+                jsonObject.put("edt_2GCoverge", sectorDetailData.get(0).getEdt_2GCoverge());
+                jsonObject.put("edt_2GObstruction", sectorDetailData.get(0).getEdt_2GObstruction());
+                jsonObject.put("edt_2G_Existing_Antenna_Height", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Height());
+                jsonObject.put("edt_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_2G_Antenna_Makeedt_and_Model());
+                jsonObject.put("edt_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Direction());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("edt_3GBand", sectorDetailData.get(0).getEdt_3GBand());
+                jsonObject.put("edt_3GCoverge", sectorDetailData.get(0).getEdt_3GCoverge());
+                jsonObject.put("edt_3GObstruction", sectorDetailData.get(0).getEdt_3GObstruction());
+                jsonObject.put("edt_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Ht());
+                jsonObject.put("edt_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_3G_Antenna_Make_and_Model());
+                jsonObject.put("edt_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Direction());
+                jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
+                jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("edt_4GBand", sectorDetailData.get(0).getEdt_4GBand());
+                jsonObject.put("edt_4GCoverge", sectorDetailData.get(0).getEdt_4GCoverge());
+                jsonObject.put("edt_4GObstruction", sectorDetailData.get(0).getEdt_4GObstruction());
+                jsonObject.put("edt_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Ht());
+                jsonObject.put("edt_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_4G_Antenna_Make_and_Model());
+                jsonObject.put("edt_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Direction());
+                jsonObject.put("edt_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_4G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("edt_4GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_4GAntenna_Swap_Required());
+                jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
+
+                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+
+                jsonObject.put("flag", sectorDetailData.get(0).getFlag());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+
+
+
+            }catch (Exception e){
+                Log.e("Exception",e.toString());
+            }
+        }
+        return jsonObject;
+    }
+    private void toSendDataRFSectorDetail1() {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("json rfsectordetail1", jsondataRFSectorDetail1().toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail1(),
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseRFSectorDetail1(response.toString());
+                        Log.v("res rfsectordetail1", response.toString());
+                        pDialog.hide();
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("error rfsectordetail1", error.toString());
+                pDialog.hide();
+            }
+
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
+
+    private void parseSettingResponseRFSectorDetail1(String s) {
+        try {
+            JSONArray jsonArray = new JSONArray(s);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String status = jsonObject.getString("Status");
+            Toast.makeText(getActivity(), status + " RF SectorDetail1", Toast.LENGTH_LONG).show();
+            // String password = jsonObject.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //.................................END RF SectorDetail1.......................
+
+//.................................RF SectorDetail2.......................
+
+    private JSONObject jsondataRFSectorDetail2(){
+        JSONObject jsonObject = new JSONObject();
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR2);
+        if(sectorDetailData.size()>0){
+            Log.v("RFSectorDetailData2",sectorDetailData.toString());
+            try {
+                jsonObject.put("edt_Antenna_Type", sectorDetailData.get(0).getEdt_Antenna_Type());
+                jsonObject.put("edt_2GBand", sectorDetailData.get(0).getEdt_2GBand());
+                jsonObject.put("edt_2GCoverge", sectorDetailData.get(0).getEdt_2GCoverge());
+                jsonObject.put("edt_2GObstruction", sectorDetailData.get(0).getEdt_2GObstruction());
+                jsonObject.put("edt_2G_Existing_Antenna_Height", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Height());
+                jsonObject.put("edt_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_2G_Antenna_Makeedt_and_Model());
+                jsonObject.put("edt_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Direction());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("edt_3GBand", sectorDetailData.get(0).getEdt_3GBand());
+                jsonObject.put("edt_3GCoverge", sectorDetailData.get(0).getEdt_3GCoverge());
+                jsonObject.put("edt_3GObstruction", sectorDetailData.get(0).getEdt_3GObstruction());
+                jsonObject.put("edt_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Ht());
+                jsonObject.put("edt_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_3G_Antenna_Make_and_Model());
+                jsonObject.put("edt_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Direction());
+                jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
+                jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("edt_4GBand", sectorDetailData.get(0).getEdt_4GBand());
+                jsonObject.put("edt_4GCoverge", sectorDetailData.get(0).getEdt_4GCoverge());
+                jsonObject.put("edt_4GObstruction", sectorDetailData.get(0).getEdt_4GObstruction());
+                jsonObject.put("edt_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Ht());
+                jsonObject.put("edt_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_4G_Antenna_Make_and_Model());
+                jsonObject.put("edt_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Direction());
+                jsonObject.put("edt_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_4G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("edt_4GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_4GAntenna_Swap_Required());
+                jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
+
+                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+
+                jsonObject.put("flag", sectorDetailData.get(0).getFlag());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+
+
+
+            }catch (Exception e){
+                Log.e("Exception",e.toString());
+            }
+        }
+        return jsonObject;
+    }
+    private void toSendDataRFSectorDetail2() {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"2234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("json rfsectordetail2", jsondataRFSectorDetail2().toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail2(),
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseRFSectorDetail2(response.toString());
+                        Log.v("res rfsectordetail2", response.toString());
+                        pDialog.hide();
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("error rfsectordetail2", error.toString());
+                pDialog.hide();
+            }
+
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
+
+    private void parseSettingResponseRFSectorDetail2(String s) {
+        try {
+            JSONArray jsonArray = new JSONArray(s);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String status = jsonObject.getString("Status");
+            Toast.makeText(getActivity(), status + " RF SectorDetail2", Toast.LENGTH_LONG).show();
+            // String password = jsonObject.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//.................................RF SectorDetail3.......................
+    private JSONObject jsondataRFSectorDetail3(){
+        JSONObject jsonObject = new JSONObject();
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR2);
+        if(sectorDetailData.size()>0){
+            Log.v("RFSectorDetailData3",sectorDetailData.toString());
+            try {
+                jsonObject.put("edt_Antenna_Type", sectorDetailData.get(0).getEdt_Antenna_Type());
+                jsonObject.put("edt_2GBand", sectorDetailData.get(0).getEdt_2GBand());
+                jsonObject.put("edt_2GCoverge", sectorDetailData.get(0).getEdt_2GCoverge());
+                jsonObject.put("edt_2GObstruction", sectorDetailData.get(0).getEdt_2GObstruction());
+                jsonObject.put("edt_2G_Existing_Antenna_Height", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Height());
+                jsonObject.put("edt_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_2G_Antenna_Makeedt_and_Model());
+                jsonObject.put("edt_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Direction());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("edt_3GBand", sectorDetailData.get(0).getEdt_3GBand());
+                jsonObject.put("edt_3GCoverge", sectorDetailData.get(0).getEdt_3GCoverge());
+                jsonObject.put("edt_3GObstruction", sectorDetailData.get(0).getEdt_3GObstruction());
+                jsonObject.put("edt_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Ht());
+                jsonObject.put("edt_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_3G_Antenna_Make_and_Model());
+                jsonObject.put("edt_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Direction());
+                jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
+                jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("edt_4GBand", sectorDetailData.get(0).getEdt_4GBand());
+                jsonObject.put("edt_4GCoverge", sectorDetailData.get(0).getEdt_4GCoverge());
+                jsonObject.put("edt_4GObstruction", sectorDetailData.get(0).getEdt_4GObstruction());
+                jsonObject.put("edt_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Ht());
+                jsonObject.put("edt_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_4G_Antenna_Make_and_Model());
+                jsonObject.put("edt_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Direction());
+                jsonObject.put("edt_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_4G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("edt_4GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_4GAntenna_Swap_Required());
+                jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
+
+                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+
+                jsonObject.put("flag", sectorDetailData.get(0).getFlag());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+
+
+
+            }catch (Exception e){
+                Log.e("Exception",e.toString());
+            }
+        }
+        return jsonObject;
+    }
+    private void toSendDataRFSectorDetail3() {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"2234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("json rfsectordetail3", jsondataRFSectorDetail3().toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail3(),
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseRFSectorDetail3(response.toString());
+                        Log.v("res rfsectordetail3", response.toString());
+                        pDialog.hide();
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("error rfsectordetail3", error.toString());
+                pDialog.hide();
+            }
+
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
+
+    private void parseSettingResponseRFSectorDetail3(String s) {
+        try {
+            JSONArray jsonArray = new JSONArray(s);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String status = jsonObject.getString("Status");
+            Toast.makeText(getActivity(), status + " RF SectorDetail3", Toast.LENGTH_LONG).show();
+            // String password = jsonObject.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//.................................RF SectorDetail4.......................
+
+    private JSONObject jsondataRFSectorDetail4(){
+        JSONObject jsonObject = new JSONObject();
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR2);
+        if(sectorDetailData.size()>0){
+            Log.v("RFSectorDetailData4",sectorDetailData.toString());
+            try {
+                jsonObject.put("edt_Antenna_Type", sectorDetailData.get(0).getEdt_Antenna_Type());
+                jsonObject.put("edt_2GBand", sectorDetailData.get(0).getEdt_2GBand());
+                jsonObject.put("edt_2GCoverge", sectorDetailData.get(0).getEdt_2GCoverge());
+                jsonObject.put("edt_2GObstruction", sectorDetailData.get(0).getEdt_2GObstruction());
+                jsonObject.put("edt_2G_Existing_Antenna_Height", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Height());
+                jsonObject.put("edt_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_2G_Antenna_Makeedt_and_Model());
+                jsonObject.put("edt_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_2G_Existing_Antenna_Direction());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("edt_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getEdt_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("edt_3GBand", sectorDetailData.get(0).getEdt_3GBand());
+                jsonObject.put("edt_3GCoverge", sectorDetailData.get(0).getEdt_3GCoverge());
+                jsonObject.put("edt_3GObstruction", sectorDetailData.get(0).getEdt_3GObstruction());
+                jsonObject.put("edt_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Ht());
+                jsonObject.put("edt_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_3G_Antenna_Make_and_Model());
+                jsonObject.put("edt_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_3G_Existing_Antenna_Direction());
+                jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
+                jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("edt_4GBand", sectorDetailData.get(0).getEdt_4GBand());
+                jsonObject.put("edt_4GCoverge", sectorDetailData.get(0).getEdt_4GCoverge());
+                jsonObject.put("edt_4GObstruction", sectorDetailData.get(0).getEdt_4GObstruction());
+                jsonObject.put("edt_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Ht());
+                jsonObject.put("edt_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getEdt_4G_Antenna_Make_and_Model());
+                jsonObject.put("edt_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getEdt_4G_Existing_Antenna_Direction());
+                jsonObject.put("edt_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("edt_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("edt_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_4G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("edt_4GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_4GAntenna_Swap_Required());
+                jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
+                jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
+
+                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+
+                jsonObject.put("flag", sectorDetailData.get(0).getFlag());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
+
+                jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+                jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+                jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+                jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+
+
+
+            }catch (Exception e){
+                Log.e("Exception",e.toString());
+            }
+        }
+        return jsonObject;
+    }
+    private void toSendDataRFSectorDetail4() {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"2234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("json rfsectordetail4", jsondataRFSectorDetail4().toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail4(),
+                new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseRFSectorDetail4(response.toString());
+                        Log.v("res rfsectordetail4", response.toString());
+                        pDialog.hide();
+
+                    }
+                }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("error rfsectordetail4", error.toString());
+                pDialog.hide();
+            }
+
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
+
+    private void parseSettingResponseRFSectorDetail4(String s) {
+        try {
+            JSONArray jsonArray = new JSONArray(s);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            String status = jsonObject.getString("Status");
+            Toast.makeText(getActivity(), status + " RF SectorDetail4", Toast.LENGTH_LONG).show();
+            // String password = jsonObject.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void selectImage(String Value) {
         if (Value.equals("1")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",1);
+            i.putExtra("pos", 1);
             startActivityForResult(i, 1);
         }
         if (Value.equals("2")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",2);
+            i.putExtra("pos", 2);
             startActivityForResult(i, 2);
 
         }
         if (Value.equals("3")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",3);
+            i.putExtra("pos", 3);
             startActivityForResult(i, 3);
         }
         if (Value.equals("4")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",4);
+            i.putExtra("pos", 4);
             startActivityForResult(i, 4);
         }
         if (Value.equals("5")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",5);
+            i.putExtra("pos", 5);
             startActivityForResult(i, 5);
         }
         if (Value.equals("6")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",6);
+            i.putExtra("pos", 6);
             startActivityForResult(i, 6);
         }
         if (Value.equals("7")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",7);
+            i.putExtra("pos", 7);
             startActivityForResult(i, 7);
         }
         if (Value.equals("8")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",8);
+            i.putExtra("pos", 8);
             startActivityForResult(i, 8);
         }
         if (Value.equals("9")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",9);
+            i.putExtra("pos", 9);
             startActivityForResult(i, 9);
         }
         if (Value.equals("10")) {
 
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",10);
+            i.putExtra("pos", 10);
             startActivityForResult(i, 10);
         }
         if (Value.equals("11")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",11);
+            i.putExtra("pos", 11);
             startActivityForResult(i, 11);
         }
         if (Value.equals("12")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",12);
+            i.putExtra("pos", 12);
             startActivityForResult(i, 12);
         }
         if (Value.equals("13")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",13);
+            i.putExtra("pos", 13);
             startActivityForResult(i, 13);
         }
         if (Value.equals("14")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",14);
+            i.putExtra("pos", 14);
             startActivityForResult(i, 14);
         }
         if (Value.equals("15")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",15);
+            i.putExtra("pos", 15);
             startActivityForResult(i, 15);
         }
         if (Value.equals("16")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",16);
+            i.putExtra("pos", 16);
             startActivityForResult(i, 16);
         }
         if (Value.equals("17")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",17);
+            i.putExtra("pos", 17);
             startActivityForResult(i, 17);
         }
         if (Value.equals("18")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",18);
+            i.putExtra("pos", 18);
             startActivityForResult(i, 18);
         }
         if (Value.equals("19")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",19);
+            i.putExtra("pos", 19);
             startActivityForResult(i, 19);
         }
         if (Value.equals("20")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",20);
+            i.putExtra("pos", 20);
             startActivityForResult(i, 20);
         }
         if (Value.equals("21")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",21);
+            i.putExtra("pos", 21);
             startActivityForResult(i, 21);
         }
         if (Value.equals("22")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",22);
+            i.putExtra("pos", 22);
             startActivityForResult(i, 22);
         }
         if (Value.equals("23")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",23);
+            i.putExtra("pos", 23);
             startActivityForResult(i, 23);
         }
         if (Value.equals("24")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",24);
+            i.putExtra("pos", 24);
             startActivityForResult(i, 24);
         }
         if (Value.equals("25")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",25);
+            i.putExtra("pos", 25);
             startActivityForResult(i, 25);
         }
         if (Value.equals("26")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",26);
+            i.putExtra("pos", 26);
             startActivityForResult(i, 26);
         }
         if (Value.equals("27")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",27);
+            i.putExtra("pos", 27);
             startActivityForResult(i, 27);
         }
         if (Value.equals("28")) {
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
-            i.putExtra("pos",28);
+            i.putExtra("pos", 28);
             startActivityForResult(i, 28);
+        }
+        if (Value.equals("29")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 29);
+            startActivityForResult(i, 29);
+        }
+        if (Value.equals("30")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 30);
+            startActivityForResult(i, 30);
+        }
+        if (Value.equals("31")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 31);
+            startActivityForResult(i, 31);
+        }
+        if (Value.equals("32")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 32);
+            startActivityForResult(i, 32);
+        }
+        if (Value.equals("33")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 33);
+            startActivityForResult(i, 33);
+        }
+        if (Value.equals("34")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 34);
+            startActivityForResult(i, 34);
+        }
+        if (Value.equals("35")) {
+            Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
+            i.putExtra("pos", 35);
+            startActivityForResult(i, 35);
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_CANCELED) {
+        if (resultCode != RESULT_CANCELED) {
             //  Log.v("logtest", data.getStringExtra("path")+","+requestCode);
             if (requestCode == 1) {
                 // onCaptureImageResult(data, "1");
@@ -787,8 +1647,60 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
                 onCameraSurfaceViewActivity(path, "26", angle);
             }
-
-
+            if (requestCode == 27) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "27", angle);
+            }
+            if (requestCode == 28) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "28", angle);
+            }
+            if (requestCode == 29) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "29", angle);
+            }
+            if (requestCode == 30) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "30", angle);
+            }
+            if (requestCode == 31) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "31", angle);
+            }
+            if (requestCode == 32) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "32", angle);
+            }
+            if (requestCode == 33) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "33", angle);
+            }
+            if (requestCode == 34) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "34", angle);
+            }
+            if (requestCode == 35) {
+                String path = data.getStringExtra("path");
+                String angle = data.getStringExtra("angle");
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                onCameraSurfaceViewActivity(path, "35", angle);
+            }
         }
     }
 
@@ -801,7 +1713,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_Antenna_Type.setImageBitmap( out);
+                iv_Antenna_Type.setImageBitmap(out);
                 img_Antenna_Type = thumbnail;
                 Log.v("img-encode", img_Antenna_Type);
             }
@@ -826,7 +1738,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2GCoverge.setImageBitmap( out);
+                iv_2GCoverge.setImageBitmap(out);
                 //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2GCoverge = thumbnail;
                 Log.v("img-encode", img_2GCoverge);
@@ -839,7 +1751,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2GObstruction.setImageBitmap( out);
+                iv_2GObstruction.setImageBitmap(out);
                 //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2GObstruction = thumbnail;
                 Log.v("img-encode", img_2GObstruction);
@@ -852,7 +1764,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2G_Existing_Antenna_Height.setImageBitmap( out);
+                iv_2G_Existing_Antenna_Height.setImageBitmap(out);
                 //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2G_Existing_Antenna_Height = thumbnail;
                 Log.v("img-encode", img_2G_Existing_Antenna_Height);
@@ -865,7 +1777,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2G_Antenna_Make_and_Model.setImageBitmap( out);
+                iv_2G_Antenna_Make_and_Model.setImageBitmap(out);
                 //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2G_Antenna_Make_and_Model = thumbnail;
                 Log.v("img-encode", img_2G_Antenna_Make_and_Model);
@@ -878,7 +1790,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2G_Existing_Antenna_Direction.setImageBitmap( out);
+                iv_2G_Existing_Antenna_Direction.setImageBitmap(out);
                 //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2G_Existing_Antenna_Direction = thumbnail;
                 Log.v("img-encode", img_2G_Existing_Antenna_Direction);
@@ -891,7 +1803,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2G_Existing_antenna_tilt_Electrical.setImageBitmap( out);
+                iv_2G_Existing_antenna_tilt_Electrical.setImageBitmap(out);
                 //   imgBearing210 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2G_Existing_antenna_tilt_Electrical = thumbnail;
                 Log.v("img-encode", img_2G_Existing_antenna_tilt_Electrical);
@@ -904,7 +1816,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_2G_Existing_antenna_tilt_Mechanical.setImageBitmap( out);
+                iv_2G_Existing_antenna_tilt_Mechanical.setImageBitmap(out);
                 // imgBearing240 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_2G_Existing_antenna_tilt_Mechanical = thumbnail;
                 Log.v("img-encode", img_2G_Existing_antenna_tilt_Mechanical);
@@ -917,7 +1829,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GBand.setImageBitmap( out);
+                iv_3GBand.setImageBitmap(out);
                 //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GBand = thumbnail;
                 Log.v("img-encode", img_3GBand);
@@ -930,7 +1842,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GCoverge.setImageBitmap( out);
+                iv_3GCoverge.setImageBitmap(out);
                 //    imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GCoverge = thumbnail;
                 Log.v("img-encode", img_3GCoverge);
@@ -943,7 +1855,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GObstruction.setImageBitmap( out);
+                iv_3GObstruction.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GObstruction = thumbnail;
                 Log.v("img-encode", img_3GObstruction);
@@ -956,7 +1868,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3G_Existing_Antenna_Ht.setImageBitmap( out);
+                iv_3G_Existing_Antenna_Ht.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3G_Existing_Antenna_Ht = thumbnail;
                 Log.v("img-encode", img_3G_Existing_Antenna_Ht);
@@ -969,7 +1881,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3G_Antenna_Make_and_Model.setImageBitmap( out);
+                iv_3G_Antenna_Make_and_Model.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3G_Antenna_Make_and_Model = thumbnail;
                 Log.v("img-encode", img_3G_Antenna_Make_and_Model);
@@ -982,7 +1894,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3G_Existing_Antenna_Direction.setImageBitmap( out);
+                iv_3G_Existing_Antenna_Direction.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3G_Existing_Antenna_Direction = thumbnail;
                 Log.v("img-encode", img_3G_Existing_Antenna_Direction);
@@ -995,7 +1907,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3G_Existing_antenna_Electrical_tilt.setImageBitmap( out);
+                iv_3G_Existing_antenna_Electrical_tilt.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3G_Existing_antenna_Electrical_tilt = thumbnail;
                 Log.v("img-encode", img_3G_Existing_antenna_Electrical_tilt);
@@ -1008,7 +1920,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3G_Existing_antenna_Mechanical_tilt.setImageBitmap( out);
+                iv_3G_Existing_antenna_Mechanical_tilt.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3G_Existing_antenna_Mechanical_tilt = thumbnail;
                 Log.v("img-encode", img_3G_Existing_antenna_Mechanical_tilt);
@@ -1021,7 +1933,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_Space_Available_for_3G_Antenna.setImageBitmap( out);
+                iv_Space_Available_for_3G_Antenna.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_Space_Available_for_3G_Antenna = thumbnail;
                 Log.v("img-encode", img_Space_Available_for_3G_Antenna);
@@ -1034,7 +1946,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_Addl_Poles_req_for_3G_Antenna.setImageBitmap( out);
+                iv_Addl_Poles_req_for_3G_Antenna.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_Addl_Poles_reqd_for_3G_Antenna = thumbnail;
                 Log.v("img-encode", img_Addl_Poles_reqd_for_3G_Antenna);
@@ -1047,7 +1959,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GAntenna_Swap_Required.setImageBitmap( out);
+                iv_3GAntenna_Swap_Required.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GAntenna_Swap_Required = thumbnail;
                 Log.v("img-encode", img_3GAntenna_Swap_Required);
@@ -1060,7 +1972,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GApproximate_Cable_Lenth.setImageBitmap( out);
+                iv_3GApproximate_Cable_Lenth.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GApproximate_Cable_Lenth = thumbnail;
                 Log.v("img-encode", img_3GApproximate_Cable_Lenth);
@@ -1073,7 +1985,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_3GAntenna_Port_EmptyDamaged.setImageBitmap( out);
+                iv_3GAntenna_Port_EmptyDamaged.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_3GAntenna_Port_EmptyDamaged = thumbnail;
                 Log.v("img-encode", img_3GAntenna_Port_EmptyDamaged);
@@ -1087,7 +1999,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GBand.setImageBitmap( out);
+                iv_4GBand.setImageBitmap(out);
                 //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GBand = thumbnail;
                 Log.v("img-encode", img_4GBand);
@@ -1100,7 +2012,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GCoverge.setImageBitmap( out);
+                iv_4GCoverge.setImageBitmap(out);
                 //    imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GCoverge = thumbnail;
                 Log.v("img-encode", img_4GCoverge);
@@ -1113,7 +2025,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GObstruction.setImageBitmap( out);
+                iv_4GObstruction.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GObstruction = thumbnail;
                 Log.v("img-encode", img_4GObstruction);
@@ -1126,7 +2038,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4G_Existing_Antenna_Ht.setImageBitmap( out);
+                iv_4G_Existing_Antenna_Ht.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4G_Existing_Antenna_Ht = thumbnail;
                 Log.v("img-encode", img_4G_Existing_Antenna_Ht);
@@ -1139,7 +2051,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4G_Antenna_Make_and_Model.setImageBitmap( out);
+                iv_4G_Antenna_Make_and_Model.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4G_Antenna_Make_and_Model = thumbnail;
                 Log.v("img-encode", img_4G_Antenna_Make_and_Model);
@@ -1152,7 +2064,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4G_Existing_Antenna_Direction.setImageBitmap( out);
+                iv_4G_Existing_Antenna_Direction.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4G_Existing_Antenna_Direction = thumbnail;
                 Log.v("img-encode", img_4G_Existing_Antenna_Direction);
@@ -1165,7 +2077,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4G_Existing_antenna_Electrical_tilt.setImageBitmap( out);
+                iv_4G_Existing_antenna_Electrical_tilt.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4G_Existing_antenna_Electrical_tilt = thumbnail;
                 Log.v("img-encode", img_4G_Existing_antenna_Electrical_tilt);
@@ -1178,7 +2090,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4G_Existing_antenna_Mechanical_tilt.setImageBitmap( out);
+                iv_4G_Existing_antenna_Mechanical_tilt.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4G_Existing_antenna_Mechanical_tilt = thumbnail;
                 Log.v("img-encode", img_4G_Existing_antenna_Mechanical_tilt);
@@ -1191,7 +2103,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_Space_Available_for_4G_Antenna.setImageBitmap( out);
+                iv_Space_Available_for_4G_Antenna.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_Space_Available_for_4G_Antenna = thumbnail;
                 Log.v("img-encode", img_Space_Available_for_4G_Antenna);
@@ -1204,7 +2116,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_Addl_Poles_reqd_for_4G_Antenna.setImageBitmap( out);
+                iv_Addl_Poles_reqd_for_4G_Antenna.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_Addl_Poles_reqd_for_4G_Antenna = thumbnail;
                 Log.v("img-encode", img_Addl_Poles_reqd_for_4G_Antenna);
@@ -1217,7 +2129,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GAntenna_Swap_Required.setImageBitmap( out);
+                iv_4GAntenna_Swap_Required.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GAntenna_Swap_Required = thumbnail;
                 Log.v("img-encode", img_4GAntenna_Swap_Required);
@@ -1230,7 +2142,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GApproximate_Cable_Lenth.setImageBitmap( out);
+                iv_4GApproximate_Cable_Lenth.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GApproximate_Cable_Lenth = thumbnail;
                 Log.v("img-encode", img_4GApproximate_Cable_Lenth);
@@ -1243,7 +2155,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             } else {
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_4GAntennaedt_Port_EmptyDamaged.setImageBitmap( out);
+                iv_4GAntennaedt_Port_EmptyDamaged.setImageBitmap(out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_4GAntenna_Port_EmptyDamaged = thumbnail;
                 Log.v("img-encode", img_4GAntenna_Port_EmptyDamaged);
@@ -1268,6 +2180,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         //  GPSTracker.BUS.register(this);
         getActivity().registerReceiver(broadcastReceiver, new IntentFilter(GoogleGPSService.BROADCAST_ACTION));
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -1277,6 +2190,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             e.printStackTrace();
         }
     }
+
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
