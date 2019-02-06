@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -64,6 +65,16 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
     private EditText edt_NoofGSMAntenna;
     private EditText edt_Lat;
     private EditText edt_Long;
+   // add 050219.................
+   private EditText edt_Commentsadd;
+    private EditText edt_SNo;
+    private EditText edt_NominalLat;
+    private EditText edt_NominalLong;
+    private EditText edt_TaLuk;
+    private EditText edt_AntennaType;
+    private EditText edt_CheckedBy;
+    private EditText edt_SuveyedBy;
+    private EditText edt_Surveytype;
 
     private ImageButton ib_SiteID;
     private ImageButton ib_SiteName;
@@ -210,7 +221,19 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
         edt_Anyguestoperators = v.findViewById(R.id.rfdetail__edt_anyguestoperators);
         edt_NoofGSMAntenna= v.findViewById(R.id.rfdetail__edt_NoofGSMAntenna);
         edt_Lat = v.findViewById(R.id.rfdetail__edt_lat);
+        edt_Lat.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         edt_Long= v.findViewById(R.id.rfdetail_edt_log);
+        edt_Long.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        edt_Commentsadd= v.findViewById(R.id.rfdetail__edt_commentadd);
+        edt_SNo= v.findViewById(R.id.rfdetail__edt_sno);
+        edt_NominalLat= v.findViewById(R.id.rfdetail__edt_nominallat);
+        edt_NominalLong= v.findViewById(R.id.rfdetail_edt_nominallog);
+        edt_TaLuk= v.findViewById(R.id.rfdetail__edt_taluk);
+        edt_AntennaType= v.findViewById(R.id.rfdetail__edt_antennatype);
+        edt_CheckedBy= v.findViewById(R.id.rfdetail__edt_checkedby);
+        edt_SuveyedBy= v.findViewById(R.id.rfdetail__edt_surveyedby);
+        edt_Surveytype= v.findViewById(R.id.rfdetail__edt_surveytype);
+
         btn_save = v.findViewById(R.id.btnrfdetailsave);
         btnrfdetail_next = v.findViewById(R.id.btnrfdetail_next);
         tv_previouscount = v.findViewById(R.id.tv_rfdetail_count_previous);
@@ -385,12 +408,29 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
         }
 
         if(view == btn_save){
-         db.insertRFSiteDetail(new RFSiteDetailData( edt_SiteID.getText().toString(), edt_SiteName.getText().toString(), edt_SurveyDate.getText().toString(), edt_City.getText().toString(), edt_IMID.getText().toString(), edt_Cluttertype.getText().toString(),edt_SiteType.getText().toString(),edt_Zone.getText().toString(),edt_SiteCandidate.getText().toString(),edt_BldgHeight.getText().toString(),edt_BldgStructure.getText().toString(),edt_AGL.getText().toString(),edt_SiteContact.getText().toString(),edt_AMSL.getText().toString(),edt_SiteAddress.getText().toString(),edt_SiteIndoor.getText().toString(),edt_SiteOutdoor.getText().toString(), edt_ShelterConcrete.getText().toString(),edt_shelterFabricated.getText().toString(),edt_Numerofotheroperator.getText().toString(),edt_IPSite.getText().toString(),edt_Others.getText().toString(),edt_Sharing.getText().toString(),edt_Hostoperator.getText().toString(),edt_Anyguestoperators.getText().toString(),edt_NoofGSMAntenna.getText().toString(),edt_Lat.getText().toString(),edt_Long.getText().toString(),  img_SiteID,  img_SiteName,  img_SurveyDate,  img_City,  img_IMID,  img_Cluttertype,  img_SiteType,  img_Zone, img_SiteCandidate,  img_BldgHeight,  img_BldgStructure,  img_AGL,  img_SiteContact,  img_AMSL, img_SiteAddress, img_SiteIndoor,img_SiteOutdoor,img_ShelterConcrete,img_shelterFabricated, img_Numerofotheroperator, img_IPSite, img_Others, img_Sharing, img_Hostoperator,img_Anyguestoperators, img_NoofGSMAntenna, time, 1));
-            int aftercount = db.getCountRFSiteDetail();
-            tv_aftercount.setText(aftercount+"");
+            if (edt_Lat.getText().toString().equalsIgnoreCase("")) {
+                edt_Lat.setError("Please Enter Valid Value");
+                btnrfdetail_next.setVisibility(View.GONE);
+                return;
+            }
+            if (edt_Long.getText().toString().equalsIgnoreCase("")) {
+                edt_Long.setError("Please Enter Valid Value");
+                btnrfdetail_next.setVisibility(View.GONE);
+                return;
+            } else {
+                btnrfdetail_next.setVisibility(View.VISIBLE);
+                db.insertRFSiteDetail(new RFSiteDetailData(edt_SiteID.getText().toString(), edt_SiteName.getText().toString(), edt_SurveyDate.getText().toString(), edt_City.getText().toString(), edt_IMID.getText().toString(), edt_Cluttertype.getText().toString(), edt_SiteType.getText().toString(), edt_Zone.getText().toString(), edt_SiteCandidate.getText().toString(), edt_BldgHeight.getText().toString(), edt_BldgStructure.getText().toString(), edt_AGL.getText().toString(), edt_SiteContact.getText().toString(), edt_AMSL.getText().toString(), edt_SiteAddress.getText().toString(), edt_SiteIndoor.getText().toString(), edt_SiteOutdoor.getText().toString(), edt_ShelterConcrete.getText().toString(), edt_shelterFabricated.getText().toString(), edt_Numerofotheroperator.getText().toString(), edt_IPSite.getText().toString(), edt_Others.getText().toString(), edt_Sharing.getText().toString(), edt_Hostoperator.getText().toString(), edt_Anyguestoperators.getText().toString(), edt_NoofGSMAntenna.getText().toString(), edt_Lat.getText().toString(), edt_Long.getText().toString(), img_SiteID, img_SiteName, img_SurveyDate, img_City, img_IMID, img_Cluttertype, img_SiteType, img_Zone, img_SiteCandidate, img_BldgHeight, img_BldgStructure, img_AGL, img_SiteContact, img_AMSL, img_SiteAddress, img_SiteIndoor, img_SiteOutdoor, img_ShelterConcrete, img_shelterFabricated, img_Numerofotheroperator, img_IPSite, img_Others, img_Sharing, img_Hostoperator, img_Anyguestoperators, img_NoofGSMAntenna,
+                        edt_Commentsadd.getText().toString(),edt_SNo.getText().toString(),edt_NominalLat.getText().toString(),edt_NominalLong.getText().toString(),edt_TaLuk.getText().toString(),edt_AntennaType.getText().toString(),edt_CheckedBy.getText().toString(),edt_SuveyedBy.getText().toString(),edt_Surveytype.getText().toString(), time, 1));
+
+
+                int aftercount = db.getCountRFSiteDetail();
+                tv_aftercount.setText(aftercount + "");
+
+            }
         }
         if(view == btnrfdetail_next) {
-           getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new RFTabFragment()).addToBackStack(null).commit();
+
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new RFTabFragment()).addToBackStack(null).commit();
 
         }
     }
@@ -737,7 +777,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteID.setImageBitmap( out);
-                img_SiteID = thumbnail;
+                img_SiteID = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteID);
             }
         }
@@ -750,7 +790,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteName.setImageBitmap(out);
                 //  imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteName = thumbnail;
+                img_SiteName = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteName);
             }
         }
@@ -763,7 +803,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SurveyDate.setImageBitmap( out);
                 //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SurveyDate = thumbnail;
+                img_SurveyDate = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SurveyDate);
             }
         }
@@ -776,7 +816,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_City.setImageBitmap( out);
                 //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_City = thumbnail;
+                img_City = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_City);
             }
         }
@@ -789,7 +829,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_IMID.setImageBitmap( out);
                 //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_IMID = thumbnail;
+                img_IMID = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_IMID);
             }
         }
@@ -802,7 +842,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Cluttertype.setImageBitmap( out);
                 //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Cluttertype = thumbnail;
+                img_Cluttertype = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Cluttertype);
             }
         }
@@ -815,7 +855,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteType.setImageBitmap( out);
                 //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteType = thumbnail;
+                img_SiteType = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteType);
             }
         }
@@ -828,7 +868,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Zone.setImageBitmap( out);
                 //   imgBearing210 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Zone = thumbnail;
+                img_Zone = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Zone);
             }
         }
@@ -841,7 +881,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteCandidate.setImageBitmap( out);
                 // imgBearing240 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteCandidate = thumbnail;
+                img_SiteCandidate = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteCandidate);
             }
         }
@@ -854,7 +894,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_BldgHeight.setImageBitmap( out);
                 //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_BldgHeight = thumbnail;
+                img_BldgHeight = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_BldgHeight);
             }
         }
@@ -867,7 +907,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_BldgStructure.setImageBitmap( out);
                 //    imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_BldgStructure = thumbnail;
+                img_BldgStructure = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_BldgStructure);
             }
         }
@@ -880,7 +920,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_AGL.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_AGL = thumbnail;
+                img_AGL = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_AGL);
             }
         }
@@ -893,7 +933,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteContact.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteContact = thumbnail;
+                img_SiteContact = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteContact);
             }
         }
@@ -906,7 +946,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_AMSL.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_AMSL = thumbnail;
+                img_AMSL = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_AMSL);
             }
         }
@@ -919,7 +959,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteAddress.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteAddress = thumbnail;
+                img_SiteAddress = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteAddress);
             }
         }
@@ -932,7 +972,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteIndoor.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteIndoor = thumbnail;
+                img_SiteIndoor = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteIndoor);
             }
         }
@@ -945,7 +985,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteOutdoor.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteOutdoor = thumbnail;
+                img_SiteOutdoor = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteOutdoor);
             }
         }
@@ -958,7 +998,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_ShelterConcrete.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_ShelterConcrete = thumbnail;
+                img_ShelterConcrete = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_ShelterConcrete);
             }
         }
@@ -971,7 +1011,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_shelterFabricated.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_shelterFabricated = thumbnail;
+                img_shelterFabricated = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_shelterFabricated);
             }
         }
@@ -984,7 +1024,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Numerofotheroperator.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Numerofotheroperator = thumbnail;
+                img_Numerofotheroperator = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Numerofotheroperator);
             }
         }
@@ -997,7 +1037,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_IPSite.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_IPSite = thumbnail;
+                img_IPSite = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_IPSite);
             }
         }
@@ -1010,7 +1050,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Others.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Others = thumbnail;
+                img_Others = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Others);
             }
         }
@@ -1023,7 +1063,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Sharing.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Sharing = thumbnail;
+                img_Sharing = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Sharing);
             }
         }
@@ -1036,7 +1076,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Hostoperator.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Hostoperator = thumbnail;
+                img_Hostoperator = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Hostoperator);
             }
         }
@@ -1049,7 +1089,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Anyguestoperators.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Anyguestoperators = thumbnail;
+                img_Anyguestoperators = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Anyguestoperators);
             }
         }
@@ -1062,7 +1102,7 @@ public class RFSiteDetailFragment extends Fragment implements View.OnClickListen
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_NoofGSMAntenna.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_NoofGSMAntenna = thumbnail;
+                img_NoofGSMAntenna = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_IPSite);
             }
         }

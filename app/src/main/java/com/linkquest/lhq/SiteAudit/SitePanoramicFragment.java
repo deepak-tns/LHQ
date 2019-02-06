@@ -304,6 +304,11 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
 
         if(v == btnSave){
 
+            if (db.getCountSitePanaromic() > 2) {
+                db.deleteSomeRow_SitePanoramic();
+
+            }
+
             if(chkBlockingBearing0.isChecked())
             {
                 chktext0="Blocking0";

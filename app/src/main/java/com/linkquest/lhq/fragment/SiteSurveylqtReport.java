@@ -144,6 +144,7 @@ public class SiteSurveylqtReport extends Fragment {
                                     dialog.cancel();
                                 }
                                 if (stSurveyType.equalsIgnoreCase("RF Survey")) {
+                                    CustomClass.getCustomclass().setNotifyData("RF Survey");
                                     getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new RFSiteDetailFragment()).commit();
                                     dialog.cancel();
                                 }

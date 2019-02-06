@@ -184,6 +184,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
 
         if(view == btn_save){
 
+
            db.insertLOSTransmissionNOLinkData(new TransmissionNoLinkData( edt_SiteID.getText()+"",  edt_Sitename.getText()+"",  edt_ObstructionDetails.getText()+"",  edt_Azimuth.getText()+"",  edt_Distance.getText()+"",  edt_AntennaHeight.getText()+"",  edt_Altitude.getText()+"",  img_SiteID,  img_Sitename,  img_ObstructionDetails,  img_Azimuth,  img_Distance,  img_AntennaHeight,  img_Altitude, transmissionNoLink_name,  time,  1));
 
                 int aftercount = db.getCountLOSTransmissionNOLink();
@@ -319,7 +320,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteID.setImageBitmap( out);
-                img_SiteID = thumbnail;
+                img_SiteID = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteID);
             }
         }
@@ -332,7 +333,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Sitename.setImageBitmap(out);
                 //  imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Sitename = thumbnail;
+                img_Sitename = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Sitename);
             }
         }
@@ -345,7 +346,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_ObstructionDetails.setImageBitmap( out);
                 //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_ObstructionDetails = thumbnail;
+                img_ObstructionDetails = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_ObstructionDetails);
             }
         }
@@ -358,7 +359,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Azimuth.setImageBitmap( out);
                 //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Azimuth = thumbnail;
+                img_Azimuth = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Azimuth);
             }
         }
@@ -371,7 +372,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Distance.setImageBitmap( out);
                 //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Distance = thumbnail;
+                img_Distance = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Distance);
             }
         }
@@ -384,7 +385,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_AntennaHeight.setImageBitmap( out);
                 //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_AntennaHeight = thumbnail;
+                img_AntennaHeight = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_AntennaHeight);
             }
         }
@@ -397,7 +398,7 @@ public class TransmissionNoLinkFragment extends Fragment implements View.OnClick
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Altitude.setImageBitmap( out);
                 //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Altitude = thumbnail;
+                img_Altitude = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Altitude);
             }
         }

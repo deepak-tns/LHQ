@@ -31,7 +31,6 @@ public class RFSiteDetailData {
     private String edt_Lat;
     private String edt_Long;
 
-
     private String img_SiteID;
     private String img_SiteName;
     private String img_SurveyDate;
@@ -58,6 +57,17 @@ public class RFSiteDetailData {
     private String img_Hostoperator;
     private String img_Anyguestoperators;
     private String img_NoofGSMAntenna;
+
+    private String edt_Commentsadd;
+    private String edt_SNo;
+    private String edt_NominalLat;
+    private String edt_NominalLong;
+    private String edt_TaLuk;
+    private String edt_AntennaType;
+    private String edt_CheckedBy;
+    private String edt_SurveyedBy;
+    private String edt_Surveytype;
+
     private String Date;
     private int flag;
 
@@ -120,6 +130,74 @@ public class RFSiteDetailData {
         this.img_Hostoperator = img_Hostoperator;
         this.img_Anyguestoperators = img_Anyguestoperators;
         this.img_NoofGSMAntenna = img_NoofGSMAntenna;
+        Date = date;
+        this.flag = flag;
+    }
+
+    public RFSiteDetailData(String edt_SiteID, String edt_SiteName, String edt_SurveyDate, String edt_City, String edt_IMID, String edt_Cluttertype, String edt_SiteType, String edt_Zone, String edt_SiteCandidate, String edt_BldgHeight, String edt_BldgStructure, String edt_AGL, String edt_SiteContact, String edt_AMSL, String edt_SiteAddress, String edt_SiteIndoor, String edt_SiteOutdoor, String edt_ShelterConcrete, String edt_shelterFabricated, String edt_Numerofotheroperator, String edt_IPSite, String edt_Others, String edt_Sharing, String edt_Hostoperator, String edt_Anyguestoperators, String edt_NoofGSMAntenna, String edt_Lat, String edt_Long, String img_SiteID, String img_SiteName, String img_SurveyDate, String img_City, String img_IMID, String img_Cluttertype, String img_SiteType, String img_Zone, String img_SiteCandidate, String img_BldgHeight, String img_BldgStructure, String img_AGL, String img_SiteContact, String img_AMSL, String img_SiteAddress, String img_SiteIndoor, String img_SiteOutdoor, String img_ShelterConcrete, String img_shelterFabricated, String img_Numerofotheroperator, String img_IPSite, String img_Others, String img_Sharing, String img_Hostoperator, String img_Anyguestoperators, String img_NoofGSMAntenna, String edt_Commentsadd, String edt_SNo, String edt_NominalLat, String edt_NominalLong, String edt_TaLuk, String edt_AntennaType, String edt_CheckedBy, String edt_SurveyedBy, String edt_Surveytype, String date, int flag) {
+        this.edt_SiteID = edt_SiteID;
+        this.edt_SiteName = edt_SiteName;
+        this.edt_SurveyDate = edt_SurveyDate;
+        this.edt_City = edt_City;
+        this.edt_IMID = edt_IMID;
+        this.edt_Cluttertype = edt_Cluttertype;
+        this.edt_SiteType = edt_SiteType;
+        this.edt_Zone = edt_Zone;
+        this.edt_SiteCandidate = edt_SiteCandidate;
+        this.edt_BldgHeight = edt_BldgHeight;
+        this.edt_BldgStructure = edt_BldgStructure;
+        this.edt_AGL = edt_AGL;
+        this.edt_SiteContact = edt_SiteContact;
+        this.edt_AMSL = edt_AMSL;
+        this.edt_SiteAddress = edt_SiteAddress;
+        this.edt_SiteIndoor = edt_SiteIndoor;
+        this.edt_SiteOutdoor = edt_SiteOutdoor;
+        this.edt_ShelterConcrete = edt_ShelterConcrete;
+        this.edt_shelterFabricated = edt_shelterFabricated;
+        this.edt_Numerofotheroperator = edt_Numerofotheroperator;
+        this.edt_IPSite = edt_IPSite;
+        this.edt_Others = edt_Others;
+        this.edt_Sharing = edt_Sharing;
+        this.edt_Hostoperator = edt_Hostoperator;
+        this.edt_Anyguestoperators = edt_Anyguestoperators;
+        this.edt_NoofGSMAntenna = edt_NoofGSMAntenna;
+        this.edt_Lat = edt_Lat;
+        this.edt_Long = edt_Long;
+        this.img_SiteID = img_SiteID;
+        this.img_SiteName = img_SiteName;
+        this.img_SurveyDate = img_SurveyDate;
+        this.img_City = img_City;
+        this.img_IMID = img_IMID;
+        this.img_Cluttertype = img_Cluttertype;
+        this.img_SiteType = img_SiteType;
+        this.img_Zone = img_Zone;
+        this.img_SiteCandidate = img_SiteCandidate;
+        this.img_BldgHeight = img_BldgHeight;
+        this.img_BldgStructure = img_BldgStructure;
+        this.img_AGL = img_AGL;
+        this.img_SiteContact = img_SiteContact;
+        this.img_AMSL = img_AMSL;
+        this.img_SiteAddress = img_SiteAddress;
+        this.img_SiteIndoor = img_SiteIndoor;
+        this.img_SiteOutdoor = img_SiteOutdoor;
+        this.img_ShelterConcrete = img_ShelterConcrete;
+        this.img_shelterFabricated = img_shelterFabricated;
+        this.img_Numerofotheroperator = img_Numerofotheroperator;
+        this.img_IPSite = img_IPSite;
+        this.img_Others = img_Others;
+        this.img_Sharing = img_Sharing;
+        this.img_Hostoperator = img_Hostoperator;
+        this.img_Anyguestoperators = img_Anyguestoperators;
+        this.img_NoofGSMAntenna = img_NoofGSMAntenna;
+        this.edt_Commentsadd = edt_Commentsadd;
+        this.edt_SNo = edt_SNo;
+        this.edt_NominalLat = edt_NominalLat;
+        this.edt_NominalLong = edt_NominalLong;
+        this.edt_TaLuk = edt_TaLuk;
+        this.edt_AntennaType = edt_AntennaType;
+        this.edt_CheckedBy = edt_CheckedBy;
+        this.edt_SurveyedBy = edt_SurveyedBy;
+        this.edt_Surveytype = edt_Surveytype;
         Date = date;
         this.flag = flag;
     }
@@ -562,6 +640,78 @@ public class RFSiteDetailData {
 
     public void setImg_NoofGSMAntenna(String img_NoofGSMAntenna) {
         this.img_NoofGSMAntenna = img_NoofGSMAntenna;
+    }
+
+    public String getEdt_Commentsadd() {
+        return edt_Commentsadd;
+    }
+
+    public void setEdt_Commentsadd(String edt_Commentsadd) {
+        this.edt_Commentsadd = edt_Commentsadd;
+    }
+
+    public String getEdt_SNo() {
+        return edt_SNo;
+    }
+
+    public void setEdt_SNo(String edt_SNo) {
+        this.edt_SNo = edt_SNo;
+    }
+
+    public String getEdt_NominalLat() {
+        return edt_NominalLat;
+    }
+
+    public void setEdt_NominalLat(String edt_NominalLat) {
+        this.edt_NominalLat = edt_NominalLat;
+    }
+
+    public String getEdt_NominalLong() {
+        return edt_NominalLong;
+    }
+
+    public void setEdt_NominalLong(String edt_NominalLong) {
+        this.edt_NominalLong = edt_NominalLong;
+    }
+
+    public String getEdt_TaLuk() {
+        return edt_TaLuk;
+    }
+
+    public void setEdt_TaLuk(String edt_TaLuk) {
+        this.edt_TaLuk = edt_TaLuk;
+    }
+
+    public String getEdt_AntennaType() {
+        return edt_AntennaType;
+    }
+
+    public void setEdt_AntennaType(String edt_AntennaType) {
+        this.edt_AntennaType = edt_AntennaType;
+    }
+
+    public String getEdt_CheckedBy() {
+        return edt_CheckedBy;
+    }
+
+    public void setEdt_CheckedBy(String edt_CheckedBy) {
+        this.edt_CheckedBy = edt_CheckedBy;
+    }
+
+    public String getEdt_SurveyedBy() {
+        return edt_SurveyedBy;
+    }
+
+    public void setEdt_SurveyedBy(String edt_SurveyedBy) {
+        this.edt_SurveyedBy = edt_SurveyedBy;
+    }
+
+    public String getEdt_Surveytype() {
+        return edt_Surveytype;
+    }
+
+    public void setEdt_Surveytype(String edt_Surveytype) {
+        this.edt_Surveytype = edt_Surveytype;
     }
 
     public String getDate() {

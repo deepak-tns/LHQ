@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -315,7 +316,9 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         sectorid = v.findViewById(R.id.sitedeatail_edt_sectorid);
         sectorid_photo = v.findViewById(R.id.sitedeatail_img_sectorid);
         edt_lat = v.findViewById(R.id.sitedeatail_edt_lat);
+        edt_lat.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         edt_log = v.findViewById(R.id.sitedeatail_edt_log);
+        edt_log.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         sitetype = v.findViewById(R.id.sitedeatail_edt_sitetype);
         sitetype_photo = v.findViewById(R.id.sitedeatail_img_sitetype);
         buildingfloor = v.findViewById(R.id.sitedeatail_building_floor);
@@ -619,29 +622,44 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         if (v == btnsitedetailsave) {
 
-            if (db.getCountSiteDetail() > 2) {
-                db.deleteSomeRow_SiteDetail();
+            if (edt_lat.getText().toString().equalsIgnoreCase("")) {
+                edt_lat.setError("Please Enter Valid Value");
+
+                btnsitedetail.setVisibility(View.GONE);
+
+                return;
+            }
+            if (edt_log.getText().toString().equalsIgnoreCase("")) {
+                edt_log.setError("Please Enter Valid Value");
+                btnsitedetail.setVisibility(View.GONE);
+                return;
+            } else{
+                btnsitedetail.setVisibility(View.VISIBLE);
+                if (db.getCountSiteDetail() > 2) {
+                    db.deleteSomeRow_SiteDetail();
+
+                }
+
+                db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo() + "", sitename.getText().toString(), siteDetailForm.getSitename_photo() + "",
+                        towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo() + "", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo() + "",
+                        siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo() + "", sectorid.getText() + "", siteDetailForm.getSectorid_photo() + "",
+                        edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo() + "", buildingfloor.getText() + "",
+                        siteDetailForm.getBuildingfloor_photo() + "", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo() + "", towerheight.getText() + "",
+                        siteDetailForm.getTowerheight_photo() + "", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo() + "", nodebtype.getText() + "",
+                        siteDetailForm.getNodebtype_photo() + "", classical.getText() + "", siteDetailForm.getClassical_photo() + "", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo() + "",
+                        anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo() + "", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo() + "",
+                        sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo() + "", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo() + "",
+                        infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo() + "", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo() + "",
+                        infrashared.getText() + "", siteDetailForm.getInfrashared_photo() + "", extra1.getText() + "", siteDetailForm.getExtra1_photo() + "",
+                        extra2.getText() + "", siteDetailForm.getExtra2_photo() + "", remark1.getText() + "", siteDetailForm.getRemark1_photo() + "", remark2.getText() + "",
+                        siteDetailForm.getRemark2_photo() + "", 1, time));
+
+
+                int count = db.getCountSiteDetail();
+                tv_sitedetail_count.setText(count + "");
 
             }
 
-
-            db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo() + "", sitename.getText().toString(), siteDetailForm.getSitename_photo() + "",
-                    towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo() + "", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo() + "",
-                    siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo() + "", sectorid.getText() + "", siteDetailForm.getSectorid_photo() + "",
-                    edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo() + "", buildingfloor.getText() + "",
-                    siteDetailForm.getBuildingfloor_photo() + "", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo() + "", towerheight.getText() + "",
-                    siteDetailForm.getTowerheight_photo() + "", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo() + "", nodebtype.getText() + "",
-                    siteDetailForm.getNodebtype_photo() + "", classical.getText() + "", siteDetailForm.getClassical_photo() + "", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo() + "",
-                    anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo() + "", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo() + "",
-                    sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo() + "", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo() + "",
-                    infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo() + "", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo() + "",
-                    infrashared.getText() + "", siteDetailForm.getInfrashared_photo() + "", extra1.getText() + "", siteDetailForm.getExtra1_photo() + "",
-                    extra2.getText() + "", siteDetailForm.getExtra2_photo() + "", remark1.getText() + "", siteDetailForm.getRemark1_photo() + "", remark2.getText() + "",
-                    siteDetailForm.getRemark2_photo() + "", 1, time));
-
-
-            int count = db.getCountSiteDetail();
-            tv_sitedetail_count.setText(count + "");
 
 
             /*
@@ -651,7 +669,9 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
   */
         }
         if (v == btnsitedetail) {
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabFragment()).addToBackStack(null).commit();
+
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabFragment()).addToBackStack(null).commit();
+
         }
     }
 

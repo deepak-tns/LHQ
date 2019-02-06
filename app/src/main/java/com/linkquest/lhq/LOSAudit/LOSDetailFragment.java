@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -213,12 +214,14 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         edt_Customerrepresentative=v.findViewById(R.id.losdetail_edt_Customerrepresentative);
         edt_Nearenddetails = v.findViewById(R.id.losdetail_edt_Nearenddetails);
         edt_Lat =v.findViewById(R.id.losdetail__edt_lat);
+        edt_Lat.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         edt_Long = v.findViewById(R.id.losdetail_edt_log);
+        edt_Long.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         edt_CandidateName = v.findViewById(R.id.losdetail_edt_candidatename);
         edt_Address = v.findViewById(R.id.losdetail_edt_address);
         edt_Bldght= v.findViewById(R.id.losdetail_edt_buildingheight);
         edt_Totalht = v.findViewById(R.id.losdetail_edt_totalheight);
-        edt_AMSL= v.findViewById(R.id.losdetail_edt_ASML);
+        edt_AMSL= v.findViewById(R.id.losdetail_edt_AMSL);
         edt_Buildingsideviewphoto= v.findViewById(R.id.losdetail_edt_Buildingsideviewphoto);
         edt_AntennaTowerlocationphoto= v.findViewById(R.id.losdetail_edt_AntennaTowerlocationphoto);
         edt_Possibleobstacle= v.findViewById(R.id.losdetail_edt_Possibleobstacle);
@@ -251,7 +254,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         ib_Address = v.findViewById(R.id.losdetail_img_address);
         ib_Bldght= v.findViewById(R.id.losdetail_img_buildingheight);
         ib_Totalht = v.findViewById(R.id.losdetail_img_totalheight);
-        ib_AMSL= v.findViewById(R.id.losdetail_img_ASML);
+        ib_AMSL= v.findViewById(R.id.losdetail_img_AMSL);
         ib_Buildingsideviewphoto= v.findViewById(R.id.losdetail_img_Buildingsideviewphoto);
         ib_AntennaTowerlocationphoto= v.findViewById(R.id.losdetail_img_AntennaTowerlocationphoto);
         ib_Possibleobstacle= v.findViewById(R.id.losdetail_img_Possibleobstacle);
@@ -265,8 +268,6 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         ib_towerexistingnew  = v.findViewById(R.id.losdetail__ib_towerexistingnew);
         ib_Towertype  = v.findViewById(R.id.losdetail__ib_Towertype);
         ib_remarks = v.findViewById(R.id.losdetail__ib_remarks);
-
-
 
         ib_SiteID.setOnClickListener(this);
         ib_SiteName .setOnClickListener(this);
@@ -312,7 +313,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         iv_Address = v.findViewById(R.id.losdetail_ivaddress);
         iv_Bldght= v.findViewById(R.id.losdetail_ivbuildingheight);
         iv_Totalht = v.findViewById(R.id.losdetail_ivtotalheight);
-        iv_AMSL= v.findViewById(R.id.losdetail_ivASML);
+        iv_AMSL= v.findViewById(R.id.losdetail_ivAMSL);
         iv_Buildingsideviewphoto= v.findViewById(R.id.losdetail_ivBuildingsideviewphoto);
         iv_AntennaTowerlocationphoto= v.findViewById(R.id.losdetail_ivAntennaTowerlocationphoto);
         iv_Possibleobstacle= v.findViewById(R.id.losdetail_ivPossibleobstacle);
@@ -320,7 +321,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         iv_PanaromicPhoto = v.findViewById(R.id.losdetail_ivPanaromicPhoto);
         iv_ExisitngNoofMWAntennatypewithsizeandPhotograph = v.findViewById(R.id.losdetail_ivExisitngNoofMWAntennatypewithsizeandPhotograph);
         iv_ExisitngMWAntennaheightandPolemountPhotograph = v.findViewById(R.id.losdetail_ivExisitngMWAntennaheightandPolemountPhotograph);
-        //  add 2/02/2019........................
+        //  add 2/02/2019................................................................................................
         iv_Commentsaddnew  = v.findViewById(R.id.losdetail__iv_Commentsaddnew);
         iv_MWAntennaht  = v.findViewById(R.id.losdetail__iv_MWAntennaht);
         iv_towerexistingnew  = v.findViewById(R.id.losdetail__iv_towerexistingnew);
@@ -413,22 +414,37 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         }
 
 
-
-
         if(view == btn_save){
-            db.insertLOSSiteDetailData( new LOSSiteDetailData(edt_SiteID.getText()+"",edt_SiteName.getText()+"",edt_Sharing.getText()+"",edt_SiteType.getText()+"",edt_SurveyDate.getText()+"",edt_TNPEngineer.getText()+"", edt_TNPEngineerTel.getText()+"",edt_Customerrepresentative.getText()+"",edt_Nearenddetails.getText()+"", edt_Lat.getText()+"",edt_Long.getText()+"",edt_CandidateName.getText()+"",edt_Address.getText()+"",edt_Bldght.getText()+"", edt_Totalht.getText()+"",edt_AMSL.getText()+"",edt_Buildingsideviewphoto.getText()+"",edt_AntennaTowerlocationphoto.getText()+"",edt_Possibleobstacle.getText()+"", edt_HeightofObstruction.getText()+"",edt_PanaromicPhoto.getText()+"", edt_ExisitngNoofMWAntennatypewithsizeandPhotograph.getText()+"", edt_ExisitngMWAntennaheightandPolemountPhotograph.getText()+"",
-            img_SiteID, img_SiteName, img_Sharing, img_SiteType, img_SurveyDate, img_TNPEngineer,img_TNPEngineerTel,img_Customerrepresentative,img_Nearenddetails, img_CandidateName,img_Address,img_Bldght,img_Totalht,img_AMSL, img_Buildingsideviewphoto, img_AntennaTowerlocationphoto,img_Possimgleobstacle, img_HeightofObstruction, img_PanaromicPhoto,img_ExisitngNoofMWAntennatypewithsizeandPhotograph,img_ExisitngMWAntennaheightandPolemountPhotograph,
-                    edt_Commentsaddnew.getText()+"",edt_MWAntennaht.getText()+"", edt_towerexistingnew.getText()+"" ,edt_Towertype.getText()+"",edt_remarks.getText()+"",img_Commentsaddnew,img_MWAntennaht,img_towerexistingnew,img_Towertype,img_remarks ,   time, 1)) ;
 
+            if (edt_Lat.getText().toString().equalsIgnoreCase("")) {
+                edt_Lat.setError("Please Enter Valid Value");
+                btnlosdetail_next.setVisibility(View.GONE);
+                return;
+            }
+            if (edt_Long.getText().toString().equalsIgnoreCase("")) {
+                edt_Long.setError("Please Enter Valid Value");
+                btnlosdetail_next.setVisibility(View.GONE);
+                return;
+            } else {
+                btnlosdetail_next.setVisibility(View.VISIBLE);
+                if (db.getCountLosSiteDetail() > 2) {
+                    db.deleteSomeRow_LosSiteDetail();
 
-            int aftercount = db.getCountLosSiteDetail();
-            tv_aftercount.setText(aftercount+"");
+                }
+
+                db.insertLOSSiteDetailData(new LOSSiteDetailData(edt_SiteID.getText() + "", edt_SiteName.getText() + "", edt_Sharing.getText() + "", edt_SiteType.getText() + "", edt_SurveyDate.getText() + "", edt_TNPEngineer.getText() + "", edt_TNPEngineerTel.getText() + "", edt_Customerrepresentative.getText() + "", edt_Nearenddetails.getText() + "", edt_Lat.getText() + "", edt_Long.getText() + "", edt_CandidateName.getText() + "", edt_Address.getText() + "", edt_Bldght.getText() + "", edt_Totalht.getText() + "", edt_AMSL.getText() + "", edt_Buildingsideviewphoto.getText() + "", edt_AntennaTowerlocationphoto.getText() + "", edt_Possibleobstacle.getText() + "", edt_HeightofObstruction.getText() + "", edt_PanaromicPhoto.getText() + "", edt_ExisitngNoofMWAntennatypewithsizeandPhotograph.getText() + "", edt_ExisitngMWAntennaheightandPolemountPhotograph.getText() + "",
+                        img_SiteID, img_SiteName, img_Sharing, img_SiteType, img_SurveyDate, img_TNPEngineer, img_TNPEngineerTel, img_Customerrepresentative, img_Nearenddetails, img_CandidateName, img_Address, img_Bldght, img_Totalht, img_AMSL, img_Buildingsideviewphoto, img_AntennaTowerlocationphoto, img_Possimgleobstacle, img_HeightofObstruction, img_PanaromicPhoto, img_ExisitngNoofMWAntennatypewithsizeandPhotograph, img_ExisitngMWAntennaheightandPolemountPhotograph,
+                        edt_Commentsaddnew.getText() + "", edt_MWAntennaht.getText() + "", edt_towerexistingnew.getText() + "", edt_Towertype.getText() + "", edt_remarks.getText() + "", img_Commentsaddnew, img_MWAntennaht, img_towerexistingnew, img_Towertype, img_remarks, time, 1));
+
+                int aftercount = db.getCountLosSiteDetail();
+                tv_aftercount.setText(aftercount + "");
+            }
         }
         if(view == btnlosdetail_next) {
-            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabTransmissionLinkFragment()).addToBackStack(null).commit();
+
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabTransmissionLinkFragment()).addToBackStack(null).commit();
 
         }
-
 
     }
     private void selectImage(String Value) {
@@ -764,7 +780,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteID.setImageBitmap( out);
-                img_SiteID = thumbnail;
+                img_SiteID = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteID);
             }
         }
@@ -777,7 +793,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteName.setImageBitmap(out);
                 //  imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteName = thumbnail;
+                img_SiteName = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteName);
             }
         }
@@ -790,7 +806,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Sharing.setImageBitmap( out);
                 //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Sharing = thumbnail;
+                img_Sharing = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Sharing);
             }
         }
@@ -803,7 +819,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SiteType.setImageBitmap( out);
                 //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SiteType = thumbnail;
+                img_SiteType = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SiteType);
             }
         }
@@ -816,7 +832,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_SurveyDate.setImageBitmap( out);
                 //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_SurveyDate = thumbnail;
+                img_SurveyDate = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_SurveyDate);
             }
         }
@@ -829,7 +845,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TNPEngineer.setImageBitmap( out);
                 //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TNPEngineer = thumbnail;
+                img_TNPEngineer =encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_TNPEngineer);
             }
         }
@@ -842,7 +858,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TNPEngineerTel.setImageBitmap( out);
                 //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TNPEngineerTel = thumbnail;
+                img_TNPEngineerTel = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_TNPEngineerTel);
             }
         }
@@ -855,7 +871,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Customerrepresentative.setImageBitmap( out);
                 //   imgBearing210 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Customerrepresentative = thumbnail;
+                img_Customerrepresentative = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Customerrepresentative);
             }
         }
@@ -868,7 +884,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Nearenddetails.setImageBitmap( out);
                 // imgBearing240 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Nearenddetails = thumbnail;
+                img_Nearenddetails =encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Nearenddetails);
             }
         }
@@ -881,7 +897,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_CandidateName.setImageBitmap( out);
                 //    imgBearing270 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_CandidateName = thumbnail;
+                img_CandidateName = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_CandidateName);
             }
         }
@@ -894,7 +910,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Address.setImageBitmap( out);
                 //    imgBearing300 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Address = thumbnail;
+                img_Address = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Address);
             }
         }
@@ -907,7 +923,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Bldght.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Bldght = thumbnail;
+                img_Bldght = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Bldght);
             }
         }
@@ -920,7 +936,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Totalht.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Totalht = thumbnail;
+                img_Totalht = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Totalht);
             }
         }
@@ -933,7 +949,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_AMSL.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_AMSL = thumbnail;
+                img_AMSL = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_AMSL);
             }
         }
@@ -946,7 +962,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Buildingsideviewphoto.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Buildingsideviewphoto = thumbnail;
+                img_Buildingsideviewphoto = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Buildingsideviewphoto);
             }
         }
@@ -959,7 +975,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_AntennaTowerlocationphoto.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_AntennaTowerlocationphoto = thumbnail;
+                img_AntennaTowerlocationphoto = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_AntennaTowerlocationphoto);
             }
         }
@@ -972,7 +988,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Possibleobstacle.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Possimgleobstacle = thumbnail;
+                img_Possimgleobstacle = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Possimgleobstacle);
             }
         }
@@ -985,7 +1001,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_HeightofObstruction.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_HeightofObstruction = thumbnail;
+                img_HeightofObstruction = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_HeightofObstruction);
             }
         }
@@ -998,7 +1014,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_PanaromicPhoto.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_PanaromicPhoto = thumbnail;
+                img_PanaromicPhoto = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_PanaromicPhoto);
             }
         }
@@ -1011,7 +1027,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_ExisitngNoofMWAntennatypewithsizeandPhotograph.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_ExisitngNoofMWAntennatypewithsizeandPhotograph = thumbnail;
+                img_ExisitngNoofMWAntennatypewithsizeandPhotograph = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_ExisitngNoofMWAntennatypewithsizeandPhotograph);
             }
         }
@@ -1024,7 +1040,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_ExisitngMWAntennaheightandPolemountPhotograph.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_ExisitngMWAntennaheightandPolemountPhotograph = thumbnail;
+                img_ExisitngMWAntennaheightandPolemountPhotograph = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_ExisitngMWAntennaheightandPolemountPhotograph);
             }
         }
@@ -1037,7 +1053,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Commentsaddnew.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Customerrepresentative = thumbnail;
+                img_Customerrepresentative = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Commentsaddnew);
             }
         }
@@ -1050,7 +1066,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_MWAntennaht.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_MWAntennaht = thumbnail;
+                img_MWAntennaht = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_MWAntennaht);
             }
         }
@@ -1063,7 +1079,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_towerexistingnew.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_towerexistingnew = thumbnail;
+                img_towerexistingnew = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_towerexistingnew);
             }
         }
@@ -1076,7 +1092,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Towertype.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Towertype = thumbnail;
+                img_Towertype = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Towertype);
             }
         }
@@ -1089,7 +1105,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_remarks.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_remarks = thumbnail;
+                img_remarks = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_remarks);
             }
         }

@@ -474,13 +474,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp" />
 
-            <TextView
-                android:visibility="gone"
-                android:textColor="@color/red"
-                android:id="@+id/tv_show_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp" />
+
 
         </LinearLayout>
 

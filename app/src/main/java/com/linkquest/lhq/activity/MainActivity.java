@@ -17,9 +17,13 @@ import com.linkquest.lhq.CustomClass;
 import com.linkquest.lhq.LOSAudit.LOSDetailFragment;
 import com.linkquest.lhq.LOSAudit.LOSOtherFragment;
 import com.linkquest.lhq.LOSAudit.LosPhotoFragment;
+import com.linkquest.lhq.LOSAudit.TabTransmissionLinkFragment;
+import com.linkquest.lhq.LOSAudit.TabTransmissionNoLinkFragment;
 import com.linkquest.lhq.LOSAudit.TransmissionLinkFragment;
 import com.linkquest.lhq.LOSAudit.TransmissionNoLinkFragment;
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.RFSurvey.RFSectorDetailFragment;
+import com.linkquest.lhq.RFSurvey.RFSiteDetailFragment;
 import com.linkquest.lhq.SiteAudit.OtherFragment;
 import com.linkquest.lhq.SiteAudit.SiteDetailFragment;
 import com.linkquest.lhq.SiteAudit.SitePanoramicFragment;
@@ -34,20 +38,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActionBarDrawerToggle mDrawerToggle;
     Toolbar toolbar;
     private TextView tvsiteinfo;
-
     private TextView tv_sitedetail;
     private TextView tv_sitepanoramic;
     private TextView tv_sectordetail;
     private TextView tv_otherdetail;
-
     private TextView tv_los_sitedetail;
     private TextView tv_tranmissionlink;
     private TextView tv_tranmission_nolink;
     private TextView tv_los_sitepanoramic;
     private TextView tv_los_photos;
     private TextView tv_losotherdetail;
+    private TextView tv_rf_sitedetail;
+    private TextView tv_rf_sectorDetail;
     private LinearLayout linear_surveyaudit;
     private LinearLayout linear_losaudit;
+    private LinearLayout linear_RFSurvey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-
     }
-
-
 
     private void findIds(){
 
-         tvsiteinfo=(TextView)findViewById(R.id.tv_siteinfo);
+        tvsiteinfo=(TextView)findViewById(R.id.tv_siteinfo);
         tv_sitedetail=(TextView)findViewById(R.id.tv_sitedetail);
         tv_sitepanoramic=(TextView)findViewById(R.id.tv_sitepanoramic);
         tv_sectordetail=(TextView)findViewById(R.id.tv_sectordetail);
@@ -94,13 +95,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_los_sitepanoramic=(TextView)findViewById(R.id.tv_los_sitepanoramic);
         tv_los_photos=(TextView)findViewById(R.id.tv_losphotos);
         tv_losotherdetail=(TextView)findViewById(R.id.tv_losotherdetail);
+
+        tv_rf_sitedetail=(TextView)findViewById(R.id.tv_rf_sitedetail);
+        tv_rf_sectorDetail=(TextView)findViewById(R.id.tv_rf_sectorDetail);
+
         linear_surveyaudit=(LinearLayout) findViewById(R.id.linear_surveyaudit);
         linear_losaudit=(LinearLayout) findViewById(R.id.linear_los);
+        linear_RFSurvey=(LinearLayout) findViewById(R.id.linear_RFSurvey);
 
          tvsiteinfo.setOnClickListener(this);
         tv_sitedetail.setOnClickListener(this);
         tv_sitepanoramic.setOnClickListener(this);
         tv_sectordetail.setOnClickListener(this);
+        tv_otherdetail.setOnClickListener(this);
 
 
         tv_los_sitedetail.setOnClickListener(this);
@@ -109,8 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_los_sitepanoramic.setOnClickListener(this);
         tv_los_photos.setOnClickListener(this);
         tv_losotherdetail.setOnClickListener(this);
+        tv_rf_sitedetail.setOnClickListener(this);
+        tv_rf_sectorDetail.setOnClickListener(this);
+
+
         linear_surveyaudit.setOnClickListener(this);
         linear_losaudit.setOnClickListener(this);
+        linear_RFSurvey.setOnClickListener(this);
     }
 
     private void navigationdrawer() {
@@ -177,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == tv_tranmissionlink){
 
             //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,TransmissionLinkFragment.newInstance(1000,"Transmission Link")).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabTransmissionLinkFragment()).addToBackStack(null).commit();
             mDrawerLayout.closeDrawer(mDrawerPane);
             // startActivity(new Intent (this,RegisterActivity.class));
 
@@ -185,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == tv_tranmission_nolink){
 
             //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,TransmissionNoLinkFragment.newInstance(1000,"Transmission NoLink")).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new TabTransmissionNoLinkFragment()).addToBackStack(null).commit();
             mDrawerLayout.closeDrawer(mDrawerPane);
             // startActivity(new Intent (this,RegisterActivity.class));
 
@@ -215,7 +227,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // startActivity(new Intent (this,RegisterActivity.class));
 
         }
+        if(v == tv_rf_sitedetail){
 
+            //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new RFSiteDetailFragment()).addToBackStack(null).commit();
+            mDrawerLayout.closeDrawer(mDrawerPane);
+            // startActivity(new Intent (this,RegisterActivity.class));
+
+        }
+        if(v == tv_rf_sectorDetail){
+
+            //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, RFSectorDetailFragment.newInstance(1000,"SectorDetail")).addToBackStack(null).commit();
+            mDrawerLayout.closeDrawer(mDrawerPane);
+            // startActivity(new Intent (this,RegisterActivity.class));
+        }
     }
 
     @Override
@@ -244,10 +270,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(data.equals("LOS Survey")){
             linear_surveyaudit.setVisibility(View.GONE);
             linear_losaudit.setVisibility(View.VISIBLE);
+            linear_RFSurvey.setVisibility(View.GONE);
         }
         if(data.equals("Site Audit")){
             linear_surveyaudit.setVisibility(View.VISIBLE);
             linear_losaudit.setVisibility(View.GONE);
+            linear_RFSurvey.setVisibility(View.GONE);
+        }
+        if(data.equals("RF Survey")){
+            linear_surveyaudit.setVisibility(View.GONE);
+            linear_losaudit.setVisibility(View.GONE);
+            linear_RFSurvey.setVisibility(View.VISIBLE);
         }
     }
 

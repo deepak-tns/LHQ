@@ -204,6 +204,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             selectImage("5");
         }
         if (v == btnothersave) {
+            if (db.getCountOtherDetail() > 2) {
+                db.deleteSomeRow_OtherDetail();
+
+            }
 
             db.insertOtherData(new OtherDetailData(edtRiggerPic.getText().toString(), edtEngineerPic.getText().toString(), edtCarPic.getText().toString(),
                     edt_RiggerPicwithclimbingTower.getText().toString(), edtRiggerPicduringWah.getText().toString(), pic_RiggerPic, pic_EngineerPic, pic_CarPic,
@@ -478,6 +482,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLinkl", transmissionLinkData.toString());
             try {
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -598,6 +603,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLink2", transmissionLinkData.toString());
             try {
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -706,6 +712,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLink3", transmissionLinkData.toString());
             try {
+
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -814,6 +822,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLink4", transmissionLinkData.toString());
             try {
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -922,6 +931,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLink5", transmissionLinkData.toString());
             try {
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -1030,6 +1040,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionLinkData.size() > 0) {
             Log.v("OtherFragTransLink6", transmissionLinkData.toString());
             try {
+                jsonObject.put("linksiteid", transmissionLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename", transmissionLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_Latitude", transmissionLinkData.get(0).getEdt_Latitude());
                 jsonObject.put("edt_Longitude", transmissionLinkData.get(0).getEdt_Longitude());
@@ -1126,6 +1137,12 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + "Link6", Toast.LENGTH_LONG).show();
             tv_show_status.append("Link6 :" + status + "\n");
+
+
+            if (db.getCountLOSTransmissionLink() > 6) {
+                db.deleteSomeRow_LOSTransmissionLink();
+
+            }
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1139,6 +1156,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink 1", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1239,6 +1257,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink 2", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1340,6 +1359,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink 3", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1440,6 +1460,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink4", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1540,6 +1561,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink 5", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1641,6 +1663,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         if (transmissionNoLinkData.size() > 0) {
             Log.v("OtherFragTransNoLink 6", transmissionNoLinkData.toString());
             try {
+                jsonObject.put("nolinksiteid", transmissionNoLinkData.get(0).getEdt_SiteID());
                 jsonObject.put("edt_Sitename",  transmissionNoLinkData.get(0).getEdt_Sitename());
                 jsonObject.put("edt_ObstructionDetails",  transmissionNoLinkData.get(0).getEdt_ObstructionDetails());
                 jsonObject.put("edt_Azimuth",  transmissionNoLinkData.get(0).getEdt_Azimuth());
@@ -1730,6 +1753,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), status + "NoLink6", Toast.LENGTH_LONG).show();
             tv_show_status.append("NoLink6 :" + status + "\n");
             // String password = jsonObject.getString("password");
+            if (db.getCountLOSTransmissionNOLink() > 6) {
+                db.deleteSomeRow_LOSTransmissionNOLink();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -875,22 +875,17 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             linear_sdnoofchannelelement.setVisibility(View.GONE);
         }
         if(changetempleteName_Operator.equalsIgnoreCase("VFI")) {
-
-
             tv_sectordetail_bandavailable.setText("Multi Layer Supported (8, 16, 24, 32)");
-
             tv_sectordetail_preelectrical_tilt2g .setText("Pcell carrier Bandwidth");
             tv_sectordetail_postelectrical_tilt2g.setText("Scell carrier Bandwidth");
             tv_sectordetail_preelectrical_tilt3g.setText("DC 3G (Yes/No)");
             tv_sectordetail_postelectrical_tilt3g .setText("Power RS Boost (Pb value)");
             tv_sectordetail_preelectrical_tilt4gf1 .setText("Uplink RSSI all Antenna Port (below-115dbm)");
             tv_sectordetail_postelectrical_tilt4gf1 .setText("Antenna Element (xTxR) (x=32;64;128)");
-
             tv_sectordetail_preelectrical_tilt4gf2 .setText("Backhaul Bandwidth");
             tv_sectordetail_postelectrical_tilt4gf2.setText("Carrier Aggregation (mention Band & BW of CC)");
             tv_sectordetail_poleheight .setText("Scell Configurations (2CC, 3CC, 4CC dual F+T)");
             tv_sectordetail_buildingheight.setText("UL RSSI interference check");
-
             tv_sectordetail_enodebband.setText("No of Dedicated TSL for Data");
             tv_sectordetail_MOP .setText("Config. Radio Power 4G");
             tv_sectordetail_COP .setText("Config. Radio Power 3G");
@@ -898,7 +893,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_antennapicleg .setText("No of SDCCH");
             tvremark1.setText("Remark");
            // tvremark2.setText("");
-            tvextra1.setText("Node B Power cell wise (20W/40W/60W)");
+            tvextra1.setText("Node B Power cell wise(20W/40W/60W)");
             tvextra2.setText("Node B transmitter output power measurement test.");
 
            // tv_sdbasebandtype .setText("");
@@ -926,32 +921,26 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             linear_sdnoofchannelelement.setVisibility(View.GONE);
 
 
-            tv_sectordetail_AST.setText("Allocated BW");
+                    tv_sectordetail_AST.setText("Allocated BW");
                     tv_sectordetail_APST.setText("CPRI Cable/Feeder Solution");
-            tv_sectordetail_typeenodeb.setText("BTS/NodeB/eNodeB Type");
-
+                    tv_sectordetail_typeenodeb.setText("BTS/NodeB/eNodeB Type");
                     tv_sectordetail_ret.setText("TMA Planned");
-            tv_sectordetail_enodebband.setText("TMA Installed");
-
+                    tv_sectordetail_enodebband.setText("TMA Installed");
                     tv_sectordetail_multiplexer_avail.setText("No of TRX");
-
-            tv_sectordetail_powerdeboosting.setText("Combiners Fitted");
+                    tv_sectordetail_powerdeboosting.setText("Combiners Fitted");
                     tv_sectordetail_DFS.setText("Combined/Uncombined Mode");
-            tv_sectordetail_rb_percell.setText("eNode B Hardware Details");
+                    tv_sectordetail_rb_percell.setText("eNode B Hardware Details");
                     tv_sectordetail_m_mimo.setText("Tower Unit (Model No)");
-
                     tv_sectordetail_ACD.setText("Number of UL Channel Elements (CE's)");
-            tv_sectordetail_VSWRtest.setText("Number of DL Channel Elements (CE's)");
+                    tv_sectordetail_VSWRtest.setText("Number of DL Channel Elements (CE's)");
                     tv_sectordetail_URS.setText("Parented BSC");
-
-            tv_sdbasebandtype.setText("Base Unit (Model No)");
+                    tv_sdbasebandtype.setText("Base Unit (Model No)");
                     tv_sdrnc.setText("RNC/BSC Name");
      //       tv_sdnoofchannelelement.setText("");
 
 
             tvextra1.setText("UE Model");
             tvextra2.setText("UE IMEI No");
-
             tvremark1.setText("Phone Number");
             tvremark2.setText("SIM Number");
 
@@ -1141,6 +1130,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             selectImage("56");
         }
         if (v == btnsectordetailsave) {
+
 
 /*
         db.insertSectorDetailData(new  SectorDetailData( sectordetail_edt_techavailable.getText()+"", sectordetail_techavailable, sectordetail_edt_bandavailable.getText()+"",  sectordetail_bandavailable ,  sectordeatail_edt_APC.getText()+"",  sectordetail_APC,  sectoreatail_edt_preazimuth.getText()+"",  sectordetail_preazimuth,  sectordeatail_edt_postazimuth.getText()+"", sectordetail_postazimuth,  sectordeatail_edt_premechanical_tilt.getText()+"", sectordetail_premechanical_tilt,  sectordeatail_edt_postmechanical_tilt.getText()+"",  sectordetail_postmechanical_tilt,sectordeatail_edt_preelectrical_tilt2g.getText()+"", sectordetail_preelectrical_tilt2g,  sectordeatail_edt_postelectrical_tilt2g.getText()+"", sectordetail_postelectrical_tilt2g,  sectordeatail_edt_preelectrical_tilt3g.getText()+"",  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_postelectrical_tilt3g.getText()+"",

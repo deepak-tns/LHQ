@@ -299,6 +299,46 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/linear_RFSurvey"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:padding="10dp"
+                        android:text="RF SiteDetail"
+                        android:id="@+id/tv_rf_sitedetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+                    <TextView
+                        android:visibility="visible"
+                        android:id="@+id/tv_rf_sectorDetail"
+                        android:padding="10dp"
+                        android:text="RF SectorDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray"/>
+
+
+
+                </LinearLayout>
+
             </LinearLayout>
         </ScrollView>
 

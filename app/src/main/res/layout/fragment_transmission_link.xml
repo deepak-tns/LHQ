@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -33,11 +33,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="Sector ID"
+                    android:text="LinkSite ID"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/translink_edt_sectorid"
+                    android:id="@+id/translink_edt_linksiteid"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -68,11 +68,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    android:text="Sector Name"
+                    android:text="Site Name"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/translink_edt_sectorname"
+                    android:id="@+id/translink_edt_sitename"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -85,7 +85,6 @@
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0"
                     />
-
 
                 <ImageButton
                     android:id="@+id/translink_ib_sectorname"

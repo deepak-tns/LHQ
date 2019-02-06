@@ -192,6 +192,10 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             selectImage("5");
         }
         if(v==btnothersave) {
+            if (db.getCountOtherDetail() > 2) {
+                db.deleteSomeRow_OtherDetail();
+
+            }
 
         db.insertOtherData(new OtherDetailData(edtRiggerPic.getText().toString(),edtEngineerPic.getText().toString(),edtCarPic.getText().toString(),
         edt_RiggerPicwithclimbingTower.getText().toString(),edtRiggerPicduringWah.getText().toString(),pic_RiggerPic,pic_EngineerPic,pic_CarPic,
@@ -629,6 +633,10 @@ private void toSendDataSectorDetail1(String secname) {
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail1",Toast.LENGTH_LONG).show();
             tv_show_status.append("Sector Detail1 :" +status+"\n");
+            if (db.getCountSectorDetail() > 8) {
+                db.deleteSomeRow_SectorDetail();
+
+            }
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -640,7 +648,7 @@ private void toSendDataSectorDetail1(String secname) {
         JSONObject jsonObject = new JSONObject();
         List<SectorDetailData> sectorDetailData = db.getLastSectordetail(secname);
         if(sectorDetailData.size()>0){
-            Log.v("OtherFragSectorDetail",sectorDetailData.toString());
+            Log.v("OtherFragSectorDetail2",sectorDetailData.toString());
             try {
                 jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
                 jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());

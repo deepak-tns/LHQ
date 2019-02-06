@@ -482,6 +482,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String img_rf_Hostoperator ="img_rf_Hostoperator";
     private String img_rf_Anyguestoperators ="img_rf_Anyguestoperators";
     private String img_rf_NoofGSMAntenna ="img_rf_NoofGSMAntenna";
+    private String edt_rf_Commentsadd="edt_Commentsadd";
+    private String edt_rf_SNo="edt_SNo";
+    private String edt_rf_NominalLat="edt_NominalLat";
+    private String edt_rf_NominalLong="edt_NominalLong";
+    private String edt_rf_TaLuk="edt_TaLuk";
+    private String edt_rf_AntennaType="edt_AntennaType";
+    private String edt_rf_CheckedBy="edt_CheckedBy";
+    private String edt_rf_SuveyedBy="edt_SuveyedBy";
+    private String edt_rf_Surveytype="edt_Surveytype";
     private String rf_date ="date";
     private String rf_flag ="flag";
 
@@ -558,12 +567,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String rfs_img_4GApproximate_Cable_Lenth ="rfs_img_4GApproximate_Cable_Lenth";
     private String rfs_img_4GAntenna_Port_EmptyDamaged ="rfs_img_4GAntenna_Port_EmptyDamaged";
     private String rf_sectorDetail_name ="rf_sectorDetail_name";
+    private String rfs_edt_commentadd ="edt_commentadd";
+    private String rfs_edt_orientaion ="edt_orientaion";
     private String rfs_date ="rfs_date";
     private String rfs_flag ="rfs_flag";
 
 
+
     public DatabaseHandler(Context context) {
-        super(context, "/mnt/sdcard/lhqdatabase16.db", null, DATABASE_VERSION);
+        super(context, "/mnt/sdcard/lhqdatabase18.db", null, DATABASE_VERSION);
         // super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.v(TAG, "Databaser object created");
     }
@@ -683,11 +695,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + img_rf_BldgStructure + " TEXT," + img_rf_AGL + " TEXT," + img_rf_SiteContact + " TEXT," + img_rf_AMSL + " TEXT," + img_rf_SiteAddress + " TEXT," + img_rf_SiteIndoor + " TEXT,"
                 + img_rf_SiteOutdoor + " TEXT," + img_rf_ShelterConcrete + " TEXT," + img_rf_shelterFabricated + " TEXT," + img_rf_Numerofotheroperator + " TEXT," + img_rf_IPSite + " TEXT,"
                 + img_rf_Others + " TEXT," + img_rf_Sharing + " TEXT," + img_rf_Hostoperator + " TEXT," + img_rf_Anyguestoperators + " TEXT," + img_rf_NoofGSMAntenna + " TEXT,"
+                + edt_rf_Commentsadd + " TEXT,"  + edt_rf_SNo + " TEXT,"  + edt_rf_NominalLat + " TEXT,"  + edt_rf_NominalLong + " TEXT,"  + edt_rf_TaLuk + " TEXT,"  + edt_rf_AntennaType + " TEXT,"+ edt_rf_CheckedBy + " TEXT,"+ edt_rf_SuveyedBy+ " TEXT,"+ edt_rf_Surveytype + " TEXT,"
                 + rf_date + " TEXT," + rf_flag + " integer" + ")";
-
-
-
-
 
         String CREATE_TABLE_RFSECTORDETAIL = "CREATE TABLE " + TABLE_RFSECTORDETAIL + "(" + rfs_id  + " integer primary key autoincrement," + rfs_edt_Antenna_Type
                 + " TEXT," + rfs_edt_2GBand + " TEXT," + rfs_edt_2GCoverge + " TEXT," + rfs_edt_2GObstruction + " TEXT," + rfs_edt_2G_Existing_Antenna_Height
@@ -708,9 +717,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + " TEXT," + rfs_img_3GAntenna_Swap_Required + " TEXT," + rfs_img_3GApproximate_Cable_Lenth + " TEXT," + rfs_img_3GAntenna_Port_EmptyDamaged
                 + " TEXT," + rfs_img_4GBand + " TEXT," + rfs_img_4GCoverge + " TEXT," + rfs_img_4GObstruction
                 + " TEXT," + rfs_img_4G_Existing_Antenna_Ht + " TEXT," + rfs_img_4G_Antenna_Make_and_Model + " TEXT," + rfs_img_4G_Existing_Antenna_Direction
-                + " TEXT," + rfs_img_4G_Existing_antenna_Electrical_tilt + " TEXT," + rfs_img_4G_Existing_antenna_Mechanical_tilt +rfs_img_Space_Available_for_4G_Antenna+" TEXT,"+ " TEXT," + rfs_img_Addl_Poles_reqd_for_4G_Antenna
+                + " TEXT," + rfs_img_4G_Existing_antenna_Electrical_tilt + " TEXT," + rfs_img_4G_Existing_antenna_Mechanical_tilt+ " TEXT," +rfs_img_Space_Available_for_4G_Antenna+" TEXT," + rfs_img_Addl_Poles_reqd_for_4G_Antenna
                 + " TEXT," + rfs_img_4GAntenna_Swap_Required + " TEXT," + rfs_img_4GApproximate_Cable_Lenth + " TEXT," + rfs_img_4GAntenna_Port_EmptyDamaged
-                + " TEXT,"  + rf_sectorDetail_name  + " TEXT,"  + rfs_date +" TEXT," + rfs_flag + " integer" + ")";
+                + " TEXT,"  + rf_sectorDetail_name  + " TEXT," + rfs_edt_commentadd  + " TEXT,"+ rfs_edt_orientaion  + " TEXT,"
+                + rfs_date +" TEXT," + rfs_flag + " integer" + ")";
 
 
 
@@ -1870,6 +1880,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteSomeRow_SectorDetail() {
         SQLiteDatabase db = this.getWritableDatabase();
         //  db.execSQL("delete from "+ TABLE_SURVEYFORM+" where " +KEY_INCRI_ID+ " not in ( select " +KEY_INCRI_ID+" from "+ TABLE_SURVEYFORM+" order by "+KEY_DATE +" desc limit 100)");
+      //  String ALTER_TBL ="delete from " + TABLE_SECTORDETAIL +" where id IN (Select id from " + TABLE_SECTORDETAIL + " limit 10)";
+      //  db.execSQL(ALTER_TBL);
         db.execSQL("DELETE FROM " + TABLE_SECTORDETAIL + " ;");
         db.close();
     }
@@ -1970,7 +1982,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteSomeRow_OtherDetail() {
         SQLiteDatabase db = this.getWritableDatabase();
         //  db.execSQL("delete from "+ TABLE_SURVEYFORM+" where " +KEY_INCRI_ID+ " not in ( select " +KEY_INCRI_ID+" from "+ TABLE_SURVEYFORM+" order by "+KEY_DATE +" desc limit 100)");
-        db.execSQL("DELETE FROM " + TABLE_SITEDETAIL + " ;");
+        db.execSQL("DELETE FROM " + TABLE_OTHERDETAIL + " ;");
         db.close();
     }
 
@@ -2633,6 +2645,18 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
             values.put(img_rf_Hostoperator ,rfSiteDetailData.getImg_Hostoperator());
             values.put(img_rf_Anyguestoperators ,rfSiteDetailData.getImg_Anyguestoperators());
             values.put(img_rf_NoofGSMAntenna ,rfSiteDetailData.getImg_NoofGSMAntenna());
+
+
+            values.put(edt_rf_Commentsadd ,rfSiteDetailData.getEdt_Commentsadd());
+            values.put(edt_rf_SNo ,rfSiteDetailData.getEdt_SNo());
+            values.put(edt_rf_NominalLat ,rfSiteDetailData.getEdt_NominalLat());
+            values.put(edt_rf_NominalLong ,rfSiteDetailData.getEdt_NominalLong());
+            values.put(edt_rf_TaLuk ,rfSiteDetailData.getEdt_TaLuk());
+            values.put(edt_rf_AntennaType ,rfSiteDetailData.getEdt_AntennaType());
+            values.put(edt_rf_CheckedBy ,rfSiteDetailData.getEdt_CheckedBy());
+            values.put(edt_rf_SuveyedBy ,rfSiteDetailData.getEdt_SurveyedBy());
+            values.put(edt_rf_Surveytype ,rfSiteDetailData.getEdt_Surveytype());
+
             values.put(rf_date ,rfSiteDetailData.getDate());
             values.put(rf_flag ,rfSiteDetailData.getFlag());
 
@@ -2718,8 +2742,19 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
                         rfSiteDetailData.setImg_Hostoperator(cursor.getString(52));
                         rfSiteDetailData.setImg_Anyguestoperators(cursor.getString(53));
                         rfSiteDetailData.setImg_NoofGSMAntenna(cursor.getString(54));
-                        rfSiteDetailData.setDate(cursor.getString(55));
-                        rfSiteDetailData.setFlag(cursor.getInt(56));
+
+                        rfSiteDetailData.setEdt_Commentsadd(cursor.getString(55));
+                        rfSiteDetailData.setEdt_SNo(cursor.getString(56));
+                        rfSiteDetailData.setEdt_NominalLat(cursor.getString(57));
+                        rfSiteDetailData.setEdt_NominalLong(cursor.getString(58));
+                        rfSiteDetailData.setEdt_TaLuk(cursor.getString(59));
+                        rfSiteDetailData.setEdt_AntennaType(cursor.getString(60));
+                        rfSiteDetailData.setEdt_CheckedBy(cursor.getString(61));
+                        rfSiteDetailData.setEdt_SurveyedBy(cursor.getString(62));
+                        rfSiteDetailData.setEdt_Surveytype(cursor.getString(63));
+
+                        rfSiteDetailData.setDate(cursor.getString(64));
+                        rfSiteDetailData.setFlag(cursor.getInt(65));
 
 
 
@@ -2843,6 +2878,8 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
             values.put(rfs_img_4GAntenna_Port_EmptyDamaged , rfSectorAntennaDetailData.getImg_4GAntenna_Port_EmptyDamaged());
 
             values.put(rf_sectorDetail_name,rfSectorAntennaDetailData.getRf_sectorDetail_name());
+            values.put(rfs_edt_commentadd,rfSectorAntennaDetailData.getEdt_commentadd());
+            values.put(rfs_edt_orientaion,rfSectorAntennaDetailData.getEdt_orientation());
             values.put(rfs_date,rfSectorAntennaDetailData.getDate());
             values.put(rfs_flag ,rfSectorAntennaDetailData.getFlag());
 
@@ -2946,8 +2983,10 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
                         rfSectorAntennaDetailData.setImg_4GAntenna_Port_EmptyDamaged(cursor.getString(71));
 
                         rfSectorAntennaDetailData.setRf_sectorDetail_name(cursor.getString(72));
-                        rfSectorAntennaDetailData.setDate(cursor.getString(73));
-                        rfSectorAntennaDetailData.setFlag(cursor.getInt(74));
+                        rfSectorAntennaDetailData.setEdt_commentadd(cursor.getString(73));
+                        rfSectorAntennaDetailData.setEdt_orientation(cursor.getString(74));
+                        rfSectorAntennaDetailData.setDate(cursor.getString(75));
+                        rfSectorAntennaDetailData.setFlag(cursor.getInt(76));
 
 
 

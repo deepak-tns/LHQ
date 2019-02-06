@@ -520,11 +520,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
-                    android:text="ASML"
+                    android:text="AMSL"
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/losdetail_edt_ASML"
+                    android:id="@+id/losdetail_edt_AMSL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -532,14 +532,14 @@
                     android:textSize="@dimen/font_small"></EditText>
 
                 <ImageView
-                    android:id="@+id/losdetail_ivASML"
+                    android:id="@+id/losdetail_ivAMSL"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/losdetail_img_ASML"
+                    android:id="@+id/losdetail_img_AMSL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />

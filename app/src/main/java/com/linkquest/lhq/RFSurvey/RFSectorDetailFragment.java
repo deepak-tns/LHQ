@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.linkquest.lhq.BitmapEncodedDecoded;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.Utils.AppSingleton;
@@ -83,6 +84,8 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
     private EditText edt_4GAntenna_Swap_Required;
     private EditText edt_4GApproximate_Cable_Lenth;
     private EditText edt_4GAntennaedt_Port_EmptyDamaged;
+    private EditText edt_commentadd;
+    private EditText edt_orientation;
 
     private ImageButton ib_Antenna_Type;
     private ImageButton ib_2GBand;
@@ -281,6 +284,8 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         edt_4GAntenna_Swap_Required = v.findViewById(R.id.edt_4GAntenna_Swap_Required);
         edt_4GApproximate_Cable_Lenth = v.findViewById(R.id.edt_4GApproximate_Cable_Lenth);
         edt_4GAntennaedt_Port_EmptyDamaged = v.findViewById(R.id.edt_4GAntenna_Port_EmptyDamaged);
+        edt_commentadd = v.findViewById(R.id.edt_commentadd);
+        edt_orientation = v.findViewById(R.id.edt_orientation);
 
         btn_save = v.findViewById(R.id.btnrfsectordetailsave);
         btn_next = v.findViewById(R.id.btnrfsectordetailnext);
@@ -517,13 +522,13 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                     img_Antenna_Type, img_2GBand, img_2GCoverge, img_2GObstruction, img_2G_Existing_Antenna_Height, img_2G_Antenna_Make_and_Model, img_2G_Existing_Antenna_Direction, img_2G_Existing_antenna_tilt_Electrical, img_2G_Existing_antenna_tilt_Mechanical, img_3GBand, img_3GCoverge,
                     img_3GObstruction, img_3G_Existing_Antenna_Ht, img_3G_Antenna_Make_and_Model, img_3G_Existing_Antenna_Direction, img_3G_Existing_antenna_Electrical_tilt, img_3G_Existing_antenna_Mechanical_tilt, img_Space_Available_for_3G_Antenna, img_Addl_Poles_reqd_for_3G_Antenna, img_3GAntenna_Swap_Required,
                     img_3GApproximate_Cable_Lenth, img_3GAntenna_Port_EmptyDamaged, img_4GBand, img_4GCoverge, img_4GObstruction, img_4G_Existing_Antenna_Ht, img_4G_Antenna_Make_and_Model, img_4G_Existing_Antenna_Direction, img_4G_Existing_antenna_Electrical_tilt, img_4G_Existing_antenna_Mechanical_tilt,
-                    img_Space_Available_for_4G_Antenna, img_Addl_Poles_reqd_for_4G_Antenna, img_4GAntenna_Swap_Required, img_4GApproximate_Cable_Lenth, img_4GAntenna_Port_EmptyDamaged, rf_sectorDetail_name, time, 1));
+                    img_Space_Available_for_4G_Antenna, img_Addl_Poles_reqd_for_4G_Antenna, img_4GAntenna_Swap_Required, img_4GApproximate_Cable_Lenth, img_4GAntenna_Port_EmptyDamaged, rf_sectorDetail_name,edt_commentadd.getText().toString(), edt_orientation.getText().toString(),time, 1));
 
             Toast.makeText(getActivity(), rf_sectorDetail_name, Toast.LENGTH_LONG).show();
             if (rf_sectorDetail_name.equalsIgnoreCase("Sector4")) {
                 btn_next.setVisibility(View.VISIBLE);
             }
-            tvaftercount.setText(db.getCountRFSectorDetail());
+            tvaftercount.setText(db.getCountRFSectorDetail()+"");
         }
         if (view == btn_next) {
 
@@ -562,6 +567,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             jsonObject.put("edt_NoofGSMAntenna", rfSiteDetailData.get(0).getEdt_NoofGSMAntenna());
             jsonObject.put("edt_Lat", rfSiteDetailData.get(0).getEdt_Lat());
             jsonObject.put("edt_Long", rfSiteDetailData.get(0).getEdt_Long());
+            jsonObject.put("img_SiteID", rfSiteDetailData.get(0).getImg_SiteID());
             jsonObject.put("img_SiteName", rfSiteDetailData.get(0).getImg_SiteName());
             jsonObject.put("img_SurveyDate", rfSiteDetailData.get(0).getImg_SurveyDate());
             jsonObject.put("img_City", rfSiteDetailData.get(0).getImg_City());
@@ -587,6 +593,16 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             jsonObject.put("img_Hostoperator", rfSiteDetailData.get(0).getImg_Hostoperator());
             jsonObject.put("img_Anyguestoperators", rfSiteDetailData.get(0).getImg_Anyguestoperators());
             jsonObject.put("img_NoofGSMAntenna", rfSiteDetailData.get(0).getImg_NoofGSMAntenna());
+
+            jsonObject.put("edt_Commentsadd", rfSiteDetailData.get(0).getEdt_Commentsadd());
+            jsonObject.put("edt_SNo", rfSiteDetailData.get(0).getEdt_SNo());
+            jsonObject.put("edt_NominalLat", rfSiteDetailData.get(0).getEdt_NominalLat());
+            jsonObject.put("edt_NominalLong", rfSiteDetailData.get(0).getEdt_NominalLong());
+            jsonObject.put("edt_TaLuk", rfSiteDetailData.get(0).getEdt_TaLuk());
+            jsonObject.put("edt_AntennaType", rfSiteDetailData.get(0).getEdt_AntennaType());
+            jsonObject.put("edt_CheckedBy", rfSiteDetailData.get(0).getEdt_CheckedBy());
+            jsonObject.put("edt_SurveyedBy", rfSiteDetailData.get(0).getEdt_SurveyedBy());
+            jsonObject.put("edt_Surveytype", rfSiteDetailData.get(0).getEdt_Surveytype());
 
             jsonObject.put("flag", rfSiteDetailData.get(0).getFlag());
             jsonObject.put("date",sharedPreferences.getString(AppConstants.DATE));
@@ -705,7 +721,254 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
 
-                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                //  jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                if(!sectorDetailData.get(0).getImg_Antenna_Type().equals("")){
+                    jsonObject.put("img_Antenna_Type", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Antenna_Type()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Antenna_Type",sectorDetailData.get(0).getImg_Antenna_Type() );
+                }
+                // jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                if(!sectorDetailData.get(0).getImg_2GBand().equals("")){
+                    jsonObject.put("img_2GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GBand",sectorDetailData.get(0).getImg_2GBand() );
+                }
+                // jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                if(!sectorDetailData.get(0).getImg_2GCoverge().equals("")){
+                    jsonObject.put("img_2GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GCoverge",sectorDetailData.get(0).getImg_2GCoverge() );
+                }
+                //  jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                if(!sectorDetailData.get(0).getImg_2GObstruction().equals("")){
+                    jsonObject.put("img_2GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GObstruction",sectorDetailData.get(0).getImg_2GObstruction() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Height", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Height",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height() );
+                }
+                //  jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_2G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction() );
+                }
+                //  jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical() );
+                }
+                //   jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical() );
+                }
+                //   jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                if(!sectorDetailData.get(0).getImg_3GBand().equals("")){
+                    jsonObject.put("img_3GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GBand",sectorDetailData.get(0).getImg_3GBand() );
+                }
+                //   jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                if(!sectorDetailData.get(0).getImg_3GCoverge().equals("")){
+                    jsonObject.put("img_3GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GCoverge",sectorDetailData.get(0).getImg_3GCoverge() );
+                }
+                //   jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                if(!sectorDetailData.get(0).getImg_3GObstruction().equals("")){
+                    jsonObject.put("img_3GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GObstruction",sectorDetailData.get(0).getImg_3GObstruction() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Ht",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht() );
+                }
+                //    jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_3G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt() );
+                }
+                //     jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Space_Available_for_3G_Antenna",sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna() );
+                }
+                //  jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                }
+                //   jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_3GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                }
+                //   jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //   jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                }
+                //    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                if(!sectorDetailData.get(0).getImg_4GBand().equals("")){
+                    jsonObject.put("img_4GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                }
+                //      jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                if(!sectorDetailData.get(0).getImg_4GCoverge().equals("")){
+                    jsonObject.put("img_4GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                }
+                //      jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                if(!sectorDetailData.get(0).getImg_4GObstruction().equals("")){
+                    jsonObject.put("img_4GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                }
+                //     jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                }
+                //     jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                }
+                //    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                }
+                //      jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                }
+                //    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                }
+                //      jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_4GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                }
+                //    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //       jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                }
+
+
+            /*    jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
                 jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
                 jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
                 jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
@@ -739,8 +1002,11 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
                 jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
                 jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());*/
 
+                jsonObject.put("rf_sectorDetail_name", sectorDetailData.get(0).getRf_sectorDetail_name());
+                jsonObject.put("edt_commentadd", sectorDetailData.get(0).getEdt_commentadd());
+                jsonObject.put("edt_orientation", sectorDetailData.get(0).getEdt_orientation());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
                 // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
@@ -863,42 +1129,255 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
 
-                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
-                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
-                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
-                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
-                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
-                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
-                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
-                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
-                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
-                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
-                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
-                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
-                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
-                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
-                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
-                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
-                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
-                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
-                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
-                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
-                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
-                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
-                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
-                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
-                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
-                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
-                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                //  jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                if(!sectorDetailData.get(0).getImg_Antenna_Type().equals("")){
+                    jsonObject.put("img_Antenna_Type", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Antenna_Type()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Antenna_Type",sectorDetailData.get(0).getImg_Antenna_Type() );
+                }
+                // jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                if(!sectorDetailData.get(0).getImg_2GBand().equals("")){
+                    jsonObject.put("img_2GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GBand",sectorDetailData.get(0).getImg_2GBand() );
+                }
+                // jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                if(!sectorDetailData.get(0).getImg_2GCoverge().equals("")){
+                    jsonObject.put("img_2GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GCoverge",sectorDetailData.get(0).getImg_2GCoverge() );
+                }
+                //  jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                if(!sectorDetailData.get(0).getImg_2GObstruction().equals("")){
+                    jsonObject.put("img_2GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GObstruction",sectorDetailData.get(0).getImg_2GObstruction() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Height", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Height",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height() );
+                }
+                //  jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_2G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction() );
+                }
+                //  jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical() );
+                }
+                //   jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical() );
+                }
+                //   jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                if(!sectorDetailData.get(0).getImg_3GBand().equals("")){
+                    jsonObject.put("img_3GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GBand",sectorDetailData.get(0).getImg_3GBand() );
+                }
+                //   jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                if(!sectorDetailData.get(0).getImg_3GCoverge().equals("")){
+                    jsonObject.put("img_3GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GCoverge",sectorDetailData.get(0).getImg_3GCoverge() );
+                }
+                //   jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                if(!sectorDetailData.get(0).getImg_3GObstruction().equals("")){
+                    jsonObject.put("img_3GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GObstruction",sectorDetailData.get(0).getImg_3GObstruction() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Ht",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht() );
+                }
+                //    jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_3G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt() );
+                }
+                //     jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Space_Available_for_3G_Antenna",sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna() );
+                }
+                //  jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                }
+                //   jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_3GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                }
+                //   jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //   jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                }
+                //    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                if(!sectorDetailData.get(0).getImg_4GBand().equals("")){
+                    jsonObject.put("img_4GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                }
+                //      jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                if(!sectorDetailData.get(0).getImg_4GCoverge().equals("")){
+                    jsonObject.put("img_4GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                }
+                //      jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                if(!sectorDetailData.get(0).getImg_4GObstruction().equals("")){
+                    jsonObject.put("img_4GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                }
+                //     jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                }
+                //     jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                }
+                //    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                }
+                //      jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                }
+                //    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                }
+                //      jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_4GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                }
+                //    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //       jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                }
 
+                jsonObject.put("rf_sectorDetail_name", sectorDetailData.get(0).getRf_sectorDetail_name());
+                jsonObject.put("edt_commentadd", sectorDetailData.get(0).getEdt_commentadd());
+                jsonObject.put("edt_orientation", sectorDetailData.get(0).getEdt_orientation());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
                 // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
@@ -978,7 +1457,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
 //.................................RF SectorDetail3.......................
     private JSONObject jsondataRFSectorDetail3(){
         JSONObject jsonObject = new JSONObject();
-        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR2);
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR3);
         if(sectorDetailData.size()>0){
             Log.v("RFSectorDetailData3",sectorDetailData.toString());
             try {
@@ -1018,42 +1497,255 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
 
-                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
-                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
-                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
-                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
-                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
-                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
-                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
-                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
-                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
-                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
-                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
-                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
-                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
-                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
-                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
-                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
-                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
-                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
-                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
-                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
-                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
-                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
-                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
-                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
-                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
-                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
-                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                //  jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                if(!sectorDetailData.get(0).getImg_Antenna_Type().equals("")){
+                    jsonObject.put("img_Antenna_Type", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Antenna_Type()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Antenna_Type",sectorDetailData.get(0).getImg_Antenna_Type() );
+                }
+                // jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                if(!sectorDetailData.get(0).getImg_2GBand().equals("")){
+                    jsonObject.put("img_2GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GBand",sectorDetailData.get(0).getImg_2GBand() );
+                }
+                // jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                if(!sectorDetailData.get(0).getImg_2GCoverge().equals("")){
+                    jsonObject.put("img_2GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GCoverge",sectorDetailData.get(0).getImg_2GCoverge() );
+                }
+                //  jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                if(!sectorDetailData.get(0).getImg_2GObstruction().equals("")){
+                    jsonObject.put("img_2GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GObstruction",sectorDetailData.get(0).getImg_2GObstruction() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Height", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Height",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height() );
+                }
+                //  jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_2G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model() );
+                }
+                //  jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction() );
+                }
+                //  jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical() );
+                }
+                //   jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical() );
+                }
+                //   jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                if(!sectorDetailData.get(0).getImg_3GBand().equals("")){
+                    jsonObject.put("img_3GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GBand",sectorDetailData.get(0).getImg_3GBand() );
+                }
+                //   jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                if(!sectorDetailData.get(0).getImg_3GCoverge().equals("")){
+                    jsonObject.put("img_3GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GCoverge",sectorDetailData.get(0).getImg_3GCoverge() );
+                }
+                //   jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                if(!sectorDetailData.get(0).getImg_3GObstruction().equals("")){
+                    jsonObject.put("img_3GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GObstruction",sectorDetailData.get(0).getImg_3GObstruction() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Ht",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht() );
+                }
+                //    jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_3G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model() );
+                }
+                //   jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt() );
+                }
+                //    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt() );
+                }
+                //     jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Space_Available_for_3G_Antenna",sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna() );
+                }
+                //  jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                }
+                //   jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_3GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                }
+                //   jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //   jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                }
+                //    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                if(!sectorDetailData.get(0).getImg_4GBand().equals("")){
+                    jsonObject.put("img_4GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                }
+                //      jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                if(!sectorDetailData.get(0).getImg_4GCoverge().equals("")){
+                    jsonObject.put("img_4GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                }
+                //      jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                if(!sectorDetailData.get(0).getImg_4GObstruction().equals("")){
+                    jsonObject.put("img_4GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                }
+                //     jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                }
+                //     jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                }
+                //     jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                }
+                //    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                }
+                //      jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                }
+                //    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                }
+                //      jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_4GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                }
+                //    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+                //       jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                }
 
+                jsonObject.put("rf_sectorDetail_name", sectorDetailData.get(0).getRf_sectorDetail_name());
+                jsonObject.put("edt_commentadd", sectorDetailData.get(0).getEdt_commentadd());
+                jsonObject.put("edt_orientation", sectorDetailData.get(0).getEdt_orientation());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
                 // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
@@ -1133,7 +1825,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
 
     private JSONObject jsondataRFSectorDetail4(){
         JSONObject jsonObject = new JSONObject();
-        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR2);
+        List<RFSectorAntennaDetailData> sectorDetailData = db.getLast_RFSECTORDETAIL(SECTOR4);
         if(sectorDetailData.size()>0){
             Log.v("RFSectorDetailData4",sectorDetailData.toString());
             try {
@@ -1173,42 +1865,254 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_4GAntennaedt_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_4GAntennaedt_Port_EmptyDamaged());
 
-                jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
-                jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
-                jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
-                jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
-                jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
-                jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
-                jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
-                jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
-                jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
-                jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
-                jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
-                jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
-                jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
-                jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
-                jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
-                jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
-                jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
-                jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
-                jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
-                jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
-                jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
-                jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
-                jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
-                jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
-                jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
-                jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
-                jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
-                jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
-                jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
-                jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
-                jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
-
+              //  jsonObject.put("img_Antenna_Type", sectorDetailData.get(0).getImg_Antenna_Type());
+                if(!sectorDetailData.get(0).getImg_Antenna_Type().equals("")){
+                    jsonObject.put("img_Antenna_Type", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Antenna_Type()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Antenna_Type",sectorDetailData.get(0).getImg_Antenna_Type() );
+                }
+               // jsonObject.put("img_2GBand", sectorDetailData.get(0).getImg_2GBand());
+                if(!sectorDetailData.get(0).getImg_2GBand().equals("")){
+                    jsonObject.put("img_2GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GBand",sectorDetailData.get(0).getImg_2GBand() );
+                }
+               // jsonObject.put("img_2GCoverge", sectorDetailData.get(0).getImg_2GCoverge());
+                if(!sectorDetailData.get(0).getImg_2GCoverge().equals("")){
+                    jsonObject.put("img_2GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GCoverge",sectorDetailData.get(0).getImg_2GCoverge() );
+                }
+              //  jsonObject.put("img_2GObstruction", sectorDetailData.get(0).getImg_2GObstruction());
+                if(!sectorDetailData.get(0).getImg_2GObstruction().equals("")){
+                    jsonObject.put("img_2GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2GObstruction",sectorDetailData.get(0).getImg_2GObstruction() );
+                }
+              //  jsonObject.put("img_2G_Existing_Antenna_Height", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Height", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Height",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Height() );
+                }
+              //  jsonObject.put("img_2G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_2G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_2G_Antenna_Make_and_Model() );
+                }
+              //  jsonObject.put("img_2G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_2G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_2G_Existing_Antenna_Direction() );
+                }
+              //  jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Electrical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Electrical() );
+                }
+             //   jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical());
+                if(!sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical().equals("")){
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_2G_Existing_antenna_tilt_Mechanical",sectorDetailData.get(0).getImg_2G_Existing_antenna_tilt_Mechanical() );
+                }
+             //   jsonObject.put("img_3GBand", sectorDetailData.get(0).getImg_3GBand());
+                if(!sectorDetailData.get(0).getImg_3GBand().equals("")){
+                    jsonObject.put("img_3GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GBand",sectorDetailData.get(0).getImg_3GBand() );
+                }
+             //   jsonObject.put("img_3GCoverge", sectorDetailData.get(0).getImg_3GCoverge());
+                if(!sectorDetailData.get(0).getImg_3GCoverge().equals("")){
+                    jsonObject.put("img_3GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GCoverge",sectorDetailData.get(0).getImg_3GCoverge() );
+                }
+             //   jsonObject.put("img_3GObstruction", sectorDetailData.get(0).getImg_3GObstruction());
+                if(!sectorDetailData.get(0).getImg_3GObstruction().equals("")){
+                    jsonObject.put("img_3GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3GObstruction",sectorDetailData.get(0).getImg_3GObstruction() );
+                }
+             //   jsonObject.put("img_3G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Ht",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Ht() );
+                }
+            //    jsonObject.put("img_3G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_3G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Antenna_Make_and_Model",sectorDetailData.get(0).getImg_3G_Antenna_Make_and_Model() );
+                }
+             //   jsonObject.put("img_3G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_3G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_Antenna_Direction",sectorDetailData.get(0).getImg_3G_Existing_Antenna_Direction() );
+                }
+            //    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Electrical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Electrical_tilt() );
+                }
+            //    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_3G_Existing_antenna_Mechanical_tilt",sectorDetailData.get(0).getImg_3G_Existing_antenna_Mechanical_tilt() );
+                }
+           //     jsonObject.put("img_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else{
+                    jsonObject.put("img_Space_Available_for_3G_Antenna",sectorDetailData.get(0).getImg_Space_Available_for_3G_Antenna() );
+                }
+              //  jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_3G_Antenna());
+                }
+             //   jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_3GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Swap_Required", sectorDetailData.get(0).getImg_3GAntenna_Swap_Required());
+                }
+             //   jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+             //   jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_3GAntenna_Port_EmptyDamaged());
+                }
+            //    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                if(!sectorDetailData.get(0).getImg_4GBand().equals("")){
+                    jsonObject.put("img_4GBand", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GBand()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GBand", sectorDetailData.get(0).getImg_4GBand());
+                }
+          //      jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                if(!sectorDetailData.get(0).getImg_4GCoverge().equals("")){
+                    jsonObject.put("img_4GCoverge", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GCoverge()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GCoverge", sectorDetailData.get(0).getImg_4GCoverge());
+                }
+          //      jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                if(!sectorDetailData.get(0).getImg_4GObstruction().equals("")){
+                    jsonObject.put("img_4GObstruction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GObstruction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GObstruction", sectorDetailData.get(0).getImg_4GObstruction());
+                }
+           //     jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Ht", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Ht());
+                }
+           //     jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                if(!sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model().equals("")){
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Antenna_Make_and_Model", sectorDetailData.get(0).getImg_4G_Antenna_Make_and_Model());
+                }
+           //     jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction().equals("")){
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_Antenna_Direction", sectorDetailData.get(0).getImg_4G_Existing_Antenna_Direction());
+                }
+           //     jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Electrical_tilt());
+                }
+            //    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                if(!sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt().equals("")){
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getImg_4G_Existing_antenna_Mechanical_tilt());
+                }
+          //      jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Space_Available_for_4G_Antenna", sectorDetailData.get(0).getImg_Space_Available_for_4G_Antenna());
+                }
+            //    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                if(!sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna().equals("")){
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_Addl_Poles_reqd_for_4G_Antenna", sectorDetailData.get(0).getImg_Addl_Poles_reqd_for_4G_Antenna());
+                }
+          //      jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Swap_Required().equals("")){
+                    jsonObject.put("img_4GAntenna_Swap_Required", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Swap_Required()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Swap_Required", sectorDetailData.get(0).getImg_4GAntenna_Swap_Required());
+                }
+            //    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                if(!sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth().equals("")){
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GApproximate_Cable_Lenth", sectorDetailData.get(0).getImg_3GApproximate_Cable_Lenth());
+                }
+         //       jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                if(!sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged().equals("")){
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged()), Bitmap.CompressFormat.JPEG, 100));
+                }
+                else {
+                    jsonObject.put("img_4GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getImg_4GAntenna_Port_EmptyDamaged());
+                }
+                jsonObject.put("rf_sectorDetail_name", sectorDetailData.get(0).getRf_sectorDetail_name());
+                jsonObject.put("edt_commentadd", sectorDetailData.get(0).getEdt_commentadd());
+                jsonObject.put("edt_orientation", sectorDetailData.get(0).getEdt_orientation());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
                 // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
