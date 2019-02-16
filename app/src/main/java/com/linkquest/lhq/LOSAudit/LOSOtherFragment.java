@@ -141,7 +141,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         findIDS(v);
         tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString() + db.getCountOtherDetail());
 
-
         sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
         // String empId = sharedPreferences.getString(AppConstraint.EMPID);
@@ -153,7 +152,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
     private void findIDS(View v) {
 
         tv_show_status = v.findViewById(R.id.tv_show_status);
-
         edtRiggerPic = v.findViewById(R.id.other_riggerpic);
         edtEngineerPic = v.findViewById(R.id.other_engineerpic);
         edtCarPic = v.findViewById(R.id.other_carpic);
@@ -208,7 +206,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 db.deleteSomeRow_OtherDetail();
 
             }
-
             db.insertOtherData(new OtherDetailData(edtRiggerPic.getText().toString(), edtEngineerPic.getText().toString(), edtCarPic.getText().toString(),
                     edt_RiggerPicwithclimbingTower.getText().toString(), edtRiggerPicduringWah.getText().toString(), pic_RiggerPic, pic_EngineerPic, pic_CarPic,
                     pic_RiggerPicwithclimbingTower, pic_RiggerPicduringWah, time, 1));
@@ -627,7 +624,19 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-            //    jsonObject.put("date", transmissionLinkData.get(0).getDate());
+                // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
                 jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
 
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -737,7 +746,20 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-            //    jsonObject.put("date", transmissionLinkData.get(0).getDate());
+
+                // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
                 jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
 
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -846,7 +868,19 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-             //   jsonObject.put("date", transmissionLinkData.get(0).getDate());
+                // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
                 jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
 
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -955,7 +989,20 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-              //  jsonObject.put("date", transmissionLinkData.get(0).getDate());
+
+                // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
                 jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
 
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -1064,7 +1111,20 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_TotalhtForGBTRTTRTPATFarEnd", transmissionLinkData.get(0).getImg_TotalhtForGBTRTTRTPATFarEnd());
                 jsonObject.put("img_AMSLatFarEnd", transmissionLinkData.get(0).getImg_AMSLatFarEnd());
                 jsonObject.put("transmissionLink_name", transmissionLinkData.get(0).getTransmissionLink_name());
-               // jsonObject.put("date", transmissionLinkData.get(0).getDate());
+
+                // add  02/02/2019.......................................
+                jsonObject.put("edt_Commentadd", transmissionLinkData.get(0).getEdt_Commentadd());
+                jsonObject.put("edt_Towertype", transmissionLinkData.get(0).getEdt_Towertype());
+                jsonObject.put("edt_towerexistingnew", transmissionLinkData.get(0).getEdt_towerexistingnew());
+                jsonObject.put("edt_Azimuthfromfarend", transmissionLinkData.get(0).getEdt_Azimuthfromfarend());
+                jsonObject.put("edt_losstatus", transmissionLinkData.get(0).getEdt_losstatus());
+                jsonObject.put("edt_remarks", transmissionLinkData.get(0).getEdt_remarks());
+                jsonObject.put("img_Commentadd", transmissionLinkData.get(0).getImg_Commentadd());
+                jsonObject.put("img_Towertype", transmissionLinkData.get(0).getImg_Towertype());
+                jsonObject.put("img_towerexistingnew", transmissionLinkData.get(0).getImg_towerexistingnew());
+                jsonObject.put("img_Azimuthfromfarend", transmissionLinkData.get(0).getImg_Azimuthfromfarend());
+                jsonObject.put("img_losstatus", transmissionLinkData.get(0).getImg_losstatus());
+                jsonObject.put("img_remarks", transmissionLinkData.get(0).getImg_remarks());
                 jsonObject.put("flag", transmissionLinkData.get(0).getFlag());
 
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -1756,13 +1816,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (db.getCountLOSTransmissionNOLink() > 6) {
                 db.deleteSomeRow_LOSTransmissionNOLink();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 
     //......................................Start SitePanaromic........................
     private JSONObject jsondataSitePanaromic() {
@@ -1789,7 +1846,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             else{
                 jsonObject.put("btnBearing0Image",sitePanoramicData.get(0).getBtnBearing0Image() );
             }
-
          //   jsonObject.put("btnBearing30Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100));
             if(!sitePanoramicData.get(0).getBtnBearing30Image().equals("")){
                 jsonObject.put("btnBearing30Image", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(sitePanoramicData.get(0).getBtnBearing30Image()), Bitmap.CompressFormat.JPEG, 100));
@@ -2145,325 +2201,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
     }
 
 //.................................................................................
-
-    private JSONObject jsonDataAll() {
-
-        List<SurveyForm> surveyformData = db.getLastSurveyformData();
-        if (surveyformData.size() > 0) {
-            Log.v("OtherFragSurveyform", surveyformData.toString());
-        }
-        List<SiteDetailForm> siteDetailData = db.getLastSiteDetailData();
-        if (siteDetailData.size() > 0) {
-            Log.v("OtherFragSiteDetail", siteDetailData.toString());
-        }
-        List<SectorDetailData> sectorDetailData = db.getLastSectorDetailData();
-        if (sectorDetailData.size() > 0) {
-            Log.v("OtherFragSectorDetail", sectorDetailData.toString());
-        }
-
-        List<SitePanoramicData> sitePanoramicData = db.getLastSitePanaromicData();
-        List<SitePanoramicBlockingData> sitePanoramicBlockingData = db.getLastSitePanaromicBlockingData();
-        List<OtherDetailData> otherDetailData = db.getLastOtherdetaiData();
-        if (otherDetailData.size() > 0) {
-            Log.v("OtherFragotherDetail", otherDetailData.toString());
-        }
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-// survey aduit detail.....................................................................//
-            jsonObject.put("", surveyformData.get(0).getSurveytype());
-            jsonObject.put("", surveyformData.get(0).getCustomer());
-            jsonObject.put("", surveyformData.get(0).getOperator());
-            jsonObject.put("", surveyformData.get(0).getCircle());
-            jsonObject.put("", surveyformData.get(0).getTechnology());
-            jsonObject.put("", surveyformData.get(0).getTechnologytype());
-            jsonObject.put("", surveyformData.get(0).getLocation());
-            jsonObject.put("", surveyformData.get(0).getSiteid());
-            jsonObject.put("", surveyformData.get(0).getDate());
-            jsonObject.put("", surveyformData.get(0).getLat());
-            jsonObject.put("", surveyformData.get(0).getLog());
-            jsonObject.put("", surveyformData.get(0).getFlag());
-// site Detail detail.....................................................................//
-            jsonObject.put("", siteDetailData.get(0).getSiteid());
-            jsonObject.put("", siteDetailData.get(0).getSiteid_photo());
-            jsonObject.put("", siteDetailData.get(0).getSitename());
-            jsonObject.put("", siteDetailData.get(0).getSitename_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowersiteid());
-            jsonObject.put("", siteDetailData.get(0).getTowersiteid_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowercompanyname());
-            jsonObject.put("", siteDetailData.get(0).getTowercompanyname__photo());
-            jsonObject.put("", siteDetailData.get(0).getSiteaddress());
-            jsonObject.put("", siteDetailData.get(0).getSiteaddress_photo());
-            jsonObject.put("", siteDetailData.get(0).getSectorid());
-            jsonObject.put("", siteDetailData.get(0).getSectorid_photo());
-            jsonObject.put("", siteDetailData.get(0).getLat());
-            jsonObject.put("", siteDetailData.get(0).getLog());
-            jsonObject.put("", siteDetailData.get(0).getSitetype());
-            jsonObject.put("", siteDetailData.get(0).getSitetype_photo());
-            jsonObject.put("", siteDetailData.get(0).getBuildingfloor());
-            jsonObject.put("", siteDetailData.get(0).getBuildingfloor_photo());
-            jsonObject.put("", siteDetailData.get(0).getBuildingheight());
-            jsonObject.put("", siteDetailData.get(0).getBuildingheight_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowerheight());
-            jsonObject.put("", siteDetailData.get(0).getTowerheight_photo());
-            jsonObject.put("", siteDetailData.get(0).getFulltowerphoto());
-            jsonObject.put("", siteDetailData.get(0).getFulltowerphoto_photo());
-            jsonObject.put("", siteDetailData.get(0).getNodebtype());
-            jsonObject.put("", siteDetailData.get(0).getNodebtype_photo());
-            jsonObject.put("", siteDetailData.get(0).getClassical());
-            jsonObject.put("", siteDetailData.get(0).getClassical_photo());
-            jsonObject.put("", siteDetailData.get(0).getEnodebtype());
-            jsonObject.put("", siteDetailData.get(0).getEnodebtype_photo());
-            jsonObject.put("", siteDetailData.get(0).getAnchoroperator());
-            jsonObject.put("", siteDetailData.get(0).getAnchoroperator_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco1());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco1_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco2());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco2_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco3());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco3_photo());
-            jsonObject.put("", siteDetailData.get(0).getInfraprovider());
-            jsonObject.put("", siteDetailData.get(0).getInfraprovider_photo());
-            jsonObject.put("", siteDetailData.get(0).getType_id_od());
-            jsonObject.put("", siteDetailData.get(0).getType_id_od_photo());
-            jsonObject.put("", siteDetailData.get(0).getInfrashared());
-            jsonObject.put("", siteDetailData.get(0).getInfrashared_photo());
-            jsonObject.put("", siteDetailData.get(0).getExtra1());
-            jsonObject.put("", siteDetailData.get(0).getExtra1_photo());
-            jsonObject.put("", siteDetailData.get(0).getExtra2());
-            jsonObject.put("", siteDetailData.get(0).getExtra2_photo());
-            jsonObject.put("", siteDetailData.get(0).getRemark1());
-            jsonObject.put("", siteDetailData.get(0).getRemark1_photo());
-            jsonObject.put("", siteDetailData.get(0).getRemark2());
-            jsonObject.put("", siteDetailData.get(0).getRemark2_photo());
-            jsonObject.put("", siteDetailData.get(0).getFlag());
-            jsonObject.put("", siteDetailData.get(0).getDate());
-// sector Detail detail.....................................................................//
-            jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
-            jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
-            jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-            jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-            jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-            jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
-            jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-            jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-            jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-            jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-            jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-            jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-            jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-            jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-            jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-            jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-            jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-            jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-            jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-            jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-            jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-            jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-            jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-            jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-            jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-            jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-            jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-            jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-            jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-            jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-            jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-            jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-            jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-            jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-            jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-            jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-            jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-            jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-            jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-            jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-            jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-            jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-            jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-            jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-            jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-            jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-            jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-            jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-            jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-            jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-            jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-            jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-            jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-            jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-            jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-            jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-            jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-            jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-            jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-            jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-            jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-            jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-            jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-            jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-            jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-            jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-            jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-            jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-            jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-            jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-            jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-            jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-            jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-            jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-            jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-            jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-            jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-            jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-            jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-            jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-            jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-            jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-            jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-            jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-            jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-            jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-            jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-            jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
-            jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-            jsonObject.put("date", sectorDetailData.get(0).getDate());
-
-// site panoramic....................................................................................
-            jsonObject.put("tvBearing0", sitePanoramicData.get(0).getTvBearing0());
-            jsonObject.put("tvBearing30", sitePanoramicData.get(0).getTvBearing30());
-            jsonObject.put("tvBearing60", sitePanoramicData.get(0).getTvBearing60());
-            jsonObject.put("tvBearing90", sitePanoramicData.get(0).getTvBearing90());
-            jsonObject.put("tvBearing120", sitePanoramicData.get(0).getTvBearing120());
-            jsonObject.put("tvBearing150", sitePanoramicData.get(0).getTvBearing150());
-            jsonObject.put("tvBearing180", sitePanoramicData.get(0).getTvBearing180());
-            jsonObject.put("tvBearing210", sitePanoramicData.get(0).getTvBearing210());
-            jsonObject.put("tvBearing240", sitePanoramicData.get(0).getTvBearing240());
-            jsonObject.put("tvBearing270", sitePanoramicData.get(0).getTvBearing270());
-            jsonObject.put("tvBearing300", sitePanoramicData.get(0).getTvBearing300());
-            jsonObject.put("tvBearing330", sitePanoramicData.get(0).getTvBearing330());
-            jsonObject.put("inputBearin_extra1", sitePanoramicData.get(0).getInputBearin_extra1());
-            jsonObject.put("inputBearin_extra2", sitePanoramicData.get(0).getInputBearin_extra2());
-            jsonObject.put("inputBearin_remark1", sitePanoramicData.get(0).getInputBearin_remark1());
-            jsonObject.put("inputBearin_remark2", sitePanoramicData.get(0).getInputBearin_remark2());
-            jsonObject.put("flag", sitePanoramicData.get(0).getFlag());
-            jsonObject.put("date", sitePanoramicData.get(0).getDate());
-            //..................sitepanoramicBlocking................
-            jsonObject.put("blocking0", sitePanoramicBlockingData.get(0).getBlocking0());
-            jsonObject.put("blocking30", sitePanoramicBlockingData.get(0).getBlocking30());
-            jsonObject.put("blocking60", sitePanoramicBlockingData.get(0).getBlocking60());
-            jsonObject.put("blocking90", sitePanoramicBlockingData.get(0).getBlocking90());
-            jsonObject.put("blocking120", sitePanoramicBlockingData.get(0).getBlocking120());
-            jsonObject.put("blocking150", sitePanoramicBlockingData.get(0).getBlocking150());
-            jsonObject.put("blocking180", sitePanoramicBlockingData.get(0).getBlocking180());
-            jsonObject.put("blocking210", sitePanoramicBlockingData.get(0).getBlocking210());
-            jsonObject.put("blocking240", sitePanoramicBlockingData.get(0).getBlocking240());
-            jsonObject.put("blocking270", sitePanoramicBlockingData.get(0).getBlocking270());
-            jsonObject.put("blocking300", sitePanoramicBlockingData.get(0).getBlocking300());
-            jsonObject.put("blocking330", sitePanoramicBlockingData.get(0).getBlocking330());
-            jsonObject.put("flag", sitePanoramicBlockingData.get(0).getFlag());
-//  //..................sitepanoramicBlocking................
-            jsonObject.put("", otherDetailData.get(0).getEdtRiggerPic());
-            jsonObject.put("", otherDetailData.get(0).getEdtEngineerPic());
-            jsonObject.put("", otherDetailData.get(0).getEdtCarPic());
-            jsonObject.put("", otherDetailData.get(0).getEdt_RiggerPicwithclimbingTower());
-            jsonObject.put("", otherDetailData.get(0).getEdtRiggerPicduringWah());
-            jsonObject.put("", otherDetailData.get(0).getIv_RiggerPic());
-            jsonObject.put("", otherDetailData.get(0).getIv_EngineerPic());
-            jsonObject.put("", otherDetailData.get(0).getIv_CarPic());
-            jsonObject.put("", otherDetailData.get(0).getEdt_RiggerPicwithclimbingTower());
-            jsonObject.put("", otherDetailData.get(0).getEdtRiggerPicduringWah());
-            jsonObject.put("", otherDetailData.get(0).getDate());
-            jsonObject.put("", otherDetailData.get(0).getFlag());
-
-        } catch (Exception e) {
-
-        }
-        return jsonObject;
-    }
-
-    private void toSendDataAll() {
-        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.setCancelable(false);
-        pDialog.show();
-
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.VERIFYLOGINURL, jsonDataAll(),
-                new Response.Listener<JSONArray>() {
-
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        parseSettingResponse(response);
-                        Log.v("login response", response.toString());
-                        pDialog.hide();
-
-                    }
-                }, new Response.ErrorListener() {
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.v("login response error", error.toString());
-                pDialog.hide();
-            }
-
-        });
-        jsonObjReq.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-
-        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
-    }
-
-    private void parseSettingResponse(JSONArray response) {
-        try {
-            JSONArray jsonArray = new JSONArray(response.toString());
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            String status = jsonObject.getString("Status");
-
-            // String password = jsonObject.getString("password");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     private void selectImage(String Value) {
         if (Value.equals("1")) {
          /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -37,7 +37,6 @@ public class RFSectorAntennaDetailData {
     private String edt_4GAntenna_Swap_Required;
     private String edt_4GApproximate_Cable_Lenth;
     private String edt_4GAntennaedt_Port_EmptyDamaged;
-
     private String img_Antenna_Type;
     private String img_2GBand;
     private String img_2GCoverge;
@@ -74,7 +73,6 @@ public class RFSectorAntennaDetailData {
     private String img_4GApproximate_Cable_Lenth;
     private String img_4GAntenna_Port_EmptyDamaged;
     private String rf_sectorDetail_name;
-
     private String edt_commentadd;
     private String edt_orientation;
     private String date;
@@ -85,84 +83,7 @@ public class RFSectorAntennaDetailData {
 
     }
 
-    public RFSectorAntennaDetailData(String edt_Antenna_Type, String edt_2GBand, String edt_2GCoverge, String edt_2GObstruction, String edt_2G_Existing_Antenna_Height, String edt_2G_Antenna_Makeedt_and_Model, String edt_2G_Existing_Antenna_Direction, String edt_2G_Existing_antenna_tilt_Electrical, String edt_2G_Existing_antenna_tilt_Mechanical, String edt_3GBand, String edt_3GCoverge, String edt_3GObstruction, String edt_3G_Existing_Antenna_Ht, String edt_3G_Antenna_Make_and_Model, String edt_3G_Existing_Antenna_Direction, String edt_3G_Existing_antenna_Electrical_tilt, String edt_3G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_3G_Antenna, String edt_Addl_Poles_req_for_3G_Antenna, String edt_3GAntenna_Swap_Required, String edt_3GApproximate_Cable_Lenth, String edt_3GAntenna_Port_EmptyDamaged, String edt_4GBand, String edt_4GCoverge, String edt_4GObstruction, String edt_4G_Existing_Antenna_Ht, String edt_4G_Antenna_Make_and_Model, String edt_4G_Existing_Antenna_Direction, String edt_4G_Existing_antenna_Electrical_tilt, String edt_4G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_4G_Antenna, String edt_Addl_Poles_reqd_for_4G_Antenna, String edt_4GAntenna_Swap_Required, String edt_4GApproximate_Cable_Lenth, String edt_4GAntennaedt_Port_EmptyDamaged, String img_Antenna_Type, String img_2GBand, String img_2GCoverge, String img_2GObstruction, String img_2G_Existing_Antenna_Height, String img_2G_Antenna_Make_and_Model, String img_2G_Existing_Antenna_Direction, String img_2G_Existing_antenna_tilt_Electrical, String img_2G_Existing_antenna_tilt_Mechanical, String img_3GBand, String img_3GCoverge, String img_3GObstruction, String img_3G_Existing_Antenna_Ht, String img_3G_Antenna_Make_and_Model, String img_3G_Existing_Antenna_Direction, String img_3G_Existing_antenna_Electrical_tilt, String img_3G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_3G_Antenna, String img_Addl_Poles_reqd_for_3G_Antenna, String img_3GAntenna_Swap_Required, String img_3GApproximate_Cable_Lenth, String img_3GAntenna_Port_EmptyDamaged, String img_4GBand, String img_4GCoverge, String img_4GObstruction, String img_4G_Existing_Antenna_Ht, String img_4G_Antenna_Make_and_Model, String img_4G_Existing_Antenna_Direction, String img_4G_Existing_antenna_Electrical_tilt, String img_4G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_4G_Antenna, String img_Addl_Poles_reqd_for_4G_Antenna, String img_4GAntenna_Swap_Required, String img_4GApproximate_Cable_Lenth, String img_4GAntenna_Port_EmptyDamaged, String rf_sectorDetail_name, String date, int flag) {
-
-        this.edt_Antenna_Type = edt_Antenna_Type;
-        this.edt_2GBand = edt_2GBand;
-        this.edt_2GCoverge = edt_2GCoverge;
-        this.edt_2GObstruction = edt_2GObstruction;
-        this.edt_2G_Existing_Antenna_Height = edt_2G_Existing_Antenna_Height;
-        this.edt_2G_Antenna_Makeedt_and_Model = edt_2G_Antenna_Makeedt_and_Model;
-        this.edt_2G_Existing_Antenna_Direction = edt_2G_Existing_Antenna_Direction;
-        this.edt_2G_Existing_antenna_tilt_Electrical = edt_2G_Existing_antenna_tilt_Electrical;
-        this.edt_2G_Existing_antenna_tilt_Mechanical = edt_2G_Existing_antenna_tilt_Mechanical;
-        this.edt_3GBand = edt_3GBand;
-        this.edt_3GCoverge = edt_3GCoverge;
-        this.edt_3GObstruction = edt_3GObstruction;
-        this.edt_3G_Existing_Antenna_Ht = edt_3G_Existing_Antenna_Ht;
-        this.edt_3G_Antenna_Make_and_Model = edt_3G_Antenna_Make_and_Model;
-        this.edt_3G_Existing_Antenna_Direction = edt_3G_Existing_Antenna_Direction;
-        this.edt_3G_Existing_antenna_Electrical_tilt = edt_3G_Existing_antenna_Electrical_tilt;
-        this.edt_3G_Existing_antenna_Mechanical_tilt = edt_3G_Existing_antenna_Mechanical_tilt;
-        this.edt_Space_Available_for_3G_Antenna = edt_Space_Available_for_3G_Antenna;
-        this.edt_Addl_Poles_req_for_3G_Antenna = edt_Addl_Poles_req_for_3G_Antenna;
-        this.edt_3GAntenna_Swap_Required = edt_3GAntenna_Swap_Required;
-        this.edt_3GApproximate_Cable_Lenth = edt_3GApproximate_Cable_Lenth;
-        this.edt_3GAntenna_Port_EmptyDamaged = edt_3GAntenna_Port_EmptyDamaged;
-        this.edt_4GBand = edt_4GBand;
-        this.edt_4GCoverge = edt_4GCoverge;
-        this.edt_4GObstruction = edt_4GObstruction;
-        this.edt_4G_Existing_Antenna_Ht = edt_4G_Existing_Antenna_Ht;
-        this.edt_4G_Antenna_Make_and_Model = edt_4G_Antenna_Make_and_Model;
-        this.edt_4G_Existing_Antenna_Direction = edt_4G_Existing_Antenna_Direction;
-        this.edt_4G_Existing_antenna_Electrical_tilt = edt_4G_Existing_antenna_Electrical_tilt;
-        this.edt_4G_Existing_antenna_Mechanical_tilt = edt_4G_Existing_antenna_Mechanical_tilt;
-        this.edt_Space_Available_for_4G_Antenna = edt_Space_Available_for_4G_Antenna;
-        this.edt_Addl_Poles_reqd_for_4G_Antenna = edt_Addl_Poles_reqd_for_4G_Antenna;
-        this.edt_4GAntenna_Swap_Required = edt_4GAntenna_Swap_Required;
-        this.edt_4GApproximate_Cable_Lenth = edt_4GApproximate_Cable_Lenth;
-        this.edt_4GAntennaedt_Port_EmptyDamaged = edt_4GAntennaedt_Port_EmptyDamaged;
-        this.img_Antenna_Type = img_Antenna_Type;
-        this.img_2GBand = img_2GBand;
-        this.img_2GCoverge = img_2GCoverge;
-        this.img_2GObstruction = img_2GObstruction;
-        this.img_2G_Existing_Antenna_Height = img_2G_Existing_Antenna_Height;
-        this.img_2G_Antenna_Make_and_Model = img_2G_Antenna_Make_and_Model;
-        this.img_2G_Existing_Antenna_Direction = img_2G_Existing_Antenna_Direction;
-        this.img_2G_Existing_antenna_tilt_Electrical = img_2G_Existing_antenna_tilt_Electrical;
-        this.img_2G_Existing_antenna_tilt_Mechanical = img_2G_Existing_antenna_tilt_Mechanical;
-        this.img_3GBand = img_3GBand;
-        this.img_3GCoverge = img_3GCoverge;
-        this.img_3GObstruction = img_3GObstruction;
-        this.img_3G_Existing_Antenna_Ht = img_3G_Existing_Antenna_Ht;
-        this.img_3G_Antenna_Make_and_Model = img_3G_Antenna_Make_and_Model;
-        this.img_3G_Existing_Antenna_Direction = img_3G_Existing_Antenna_Direction;
-        this.img_3G_Existing_antenna_Electrical_tilt = img_3G_Existing_antenna_Electrical_tilt;
-        this.img_3G_Existing_antenna_Mechanical_tilt = img_3G_Existing_antenna_Mechanical_tilt;
-        this.img_Space_Available_for_3G_Antenna = img_Space_Available_for_3G_Antenna;
-        this.img_Addl_Poles_reqd_for_3G_Antenna = img_Addl_Poles_reqd_for_3G_Antenna;
-        this.img_3GAntenna_Swap_Required = img_3GAntenna_Swap_Required;
-        this.img_3GApproximate_Cable_Lenth = img_3GApproximate_Cable_Lenth;
-        this.img_3GAntenna_Port_EmptyDamaged = img_3GAntenna_Port_EmptyDamaged;
-        this.img_4GBand = img_4GBand;
-        this.img_4GCoverge = img_4GCoverge;
-        this.img_4GObstruction = img_4GObstruction;
-        this.img_4G_Existing_Antenna_Ht = img_4G_Existing_Antenna_Ht;
-        this.img_4G_Antenna_Make_and_Model = img_4G_Antenna_Make_and_Model;
-        this.img_4G_Existing_Antenna_Direction = img_4G_Existing_Antenna_Direction;
-        this.img_4G_Existing_antenna_Electrical_tilt = img_4G_Existing_antenna_Electrical_tilt;
-        this.img_4G_Existing_antenna_Mechanical_tilt = img_4G_Existing_antenna_Mechanical_tilt;
-        this.img_Space_Available_for_4G_Antenna = img_Space_Available_for_4G_Antenna;
-        this.img_Addl_Poles_reqd_for_4G_Antenna = img_Addl_Poles_reqd_for_4G_Antenna;
-        this.img_4GAntenna_Swap_Required = img_4GAntenna_Swap_Required;
-        this.img_4GApproximate_Cable_Lenth = img_4GApproximate_Cable_Lenth;
-        this.img_4GAntenna_Port_EmptyDamaged = img_4GAntenna_Port_EmptyDamaged;
-        this.rf_sectorDetail_name = rf_sectorDetail_name;
-        this.date = date;
-        this.flag = flag;
-    }
-
-    public RFSectorAntennaDetailData(String edt_Antenna_Type, String edt_2GBand, String edt_2GCoverge, String edt_2GObstruction, String edt_2G_Existing_Antenna_Height, String edt_2G_Antenna_Makeedt_and_Model, String edt_2G_Existing_Antenna_Direction, String edt_2G_Existing_antenna_tilt_Electrical, String edt_2G_Existing_antenna_tilt_Mechanical, String edt_3GBand, String edt_3GCoverge, String edt_3GObstruction, String edt_3G_Existing_Antenna_Ht, String edt_3G_Antenna_Make_and_Model, String edt_3G_Existing_Antenna_Direction, String edt_3G_Existing_antenna_Electrical_tilt, String edt_3G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_3G_Antenna, String edt_Addl_Poles_req_for_3G_Antenna, String edt_3GAntenna_Swap_Required, String edt_3GApproximate_Cable_Lenth, String edt_3GAntenna_Port_EmptyDamaged, String edt_4GBand, String edt_4GCoverge, String edt_4GObstruction, String edt_4G_Existing_Antenna_Ht, String edt_4G_Antenna_Make_and_Model, String edt_4G_Existing_Antenna_Direction, String edt_4G_Existing_antenna_Electrical_tilt, String edt_4G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_4G_Antenna, String edt_Addl_Poles_reqd_for_4G_Antenna, String edt_4GAntenna_Swap_Required, String edt_4GApproximate_Cable_Lenth, String edt_4GAntennaedt_Port_EmptyDamaged, String img_Antenna_Type, String img_2GBand, String img_2GCoverge, String img_2GObstruction, String img_2G_Existing_Antenna_Height, String img_2G_Antenna_Make_and_Model, String img_2G_Existing_Antenna_Direction, String img_2G_Existing_antenna_tilt_Electrical, String img_2G_Existing_antenna_tilt_Mechanical, String img_3GBand, String img_3GCoverge, String img_3GObstruction, String img_3G_Existing_Antenna_Ht, String img_3G_Antenna_Make_and_Model, String img_3G_Existing_Antenna_Direction, String img_3G_Existing_antenna_Electrical_tilt, String img_3G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_3G_Antenna, String img_Addl_Poles_reqd_for_3G_Antenna, String img_3GAntenna_Swap_Required, String img_3GApproximate_Cable_Lenth, String img_3GAntenna_Port_EmptyDamaged, String img_4GBand, String img_4GCoverge, String img_4GObstruction, String img_4G_Existing_Antenna_Ht, String img_4G_Antenna_Make_and_Model, String img_4G_Existing_Antenna_Direction, String img_4G_Existing_antenna_Electrical_tilt, String img_4G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_4G_Antenna, String img_Addl_Poles_reqd_for_4G_Antenna, String img_4GAntenna_Swap_Required, String img_4GApproximate_Cable_Lenth, String img_4GAntenna_Port_EmptyDamaged, String rf_sectorDetail_name, String edt_commentadd, String edt_orientation, String date, int flag) {
+      public RFSectorAntennaDetailData(String edt_Antenna_Type, String edt_2GBand, String edt_2GCoverge, String edt_2GObstruction, String edt_2G_Existing_Antenna_Height, String edt_2G_Antenna_Makeedt_and_Model, String edt_2G_Existing_Antenna_Direction, String edt_2G_Existing_antenna_tilt_Electrical, String edt_2G_Existing_antenna_tilt_Mechanical, String edt_3GBand, String edt_3GCoverge, String edt_3GObstruction, String edt_3G_Existing_Antenna_Ht, String edt_3G_Antenna_Make_and_Model, String edt_3G_Existing_Antenna_Direction, String edt_3G_Existing_antenna_Electrical_tilt, String edt_3G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_3G_Antenna, String edt_Addl_Poles_req_for_3G_Antenna, String edt_3GAntenna_Swap_Required, String edt_3GApproximate_Cable_Lenth, String edt_3GAntenna_Port_EmptyDamaged, String edt_4GBand, String edt_4GCoverge, String edt_4GObstruction, String edt_4G_Existing_Antenna_Ht, String edt_4G_Antenna_Make_and_Model, String edt_4G_Existing_Antenna_Direction, String edt_4G_Existing_antenna_Electrical_tilt, String edt_4G_Existing_antenna_Mechanical_tilt, String edt_Space_Available_for_4G_Antenna, String edt_Addl_Poles_reqd_for_4G_Antenna, String edt_4GAntenna_Swap_Required, String edt_4GApproximate_Cable_Lenth, String edt_4GAntennaedt_Port_EmptyDamaged, String img_Antenna_Type, String img_2GBand, String img_2GCoverge, String img_2GObstruction, String img_2G_Existing_Antenna_Height, String img_2G_Antenna_Make_and_Model, String img_2G_Existing_Antenna_Direction, String img_2G_Existing_antenna_tilt_Electrical, String img_2G_Existing_antenna_tilt_Mechanical, String img_3GBand, String img_3GCoverge, String img_3GObstruction, String img_3G_Existing_Antenna_Ht, String img_3G_Antenna_Make_and_Model, String img_3G_Existing_Antenna_Direction, String img_3G_Existing_antenna_Electrical_tilt, String img_3G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_3G_Antenna, String img_Addl_Poles_reqd_for_3G_Antenna, String img_3GAntenna_Swap_Required, String img_3GApproximate_Cable_Lenth, String img_3GAntenna_Port_EmptyDamaged, String img_4GBand, String img_4GCoverge, String img_4GObstruction, String img_4G_Existing_Antenna_Ht, String img_4G_Antenna_Make_and_Model, String img_4G_Existing_Antenna_Direction, String img_4G_Existing_antenna_Electrical_tilt, String img_4G_Existing_antenna_Mechanical_tilt, String img_Space_Available_for_4G_Antenna, String img_Addl_Poles_reqd_for_4G_Antenna, String img_4GAntenna_Swap_Required, String img_4GApproximate_Cable_Lenth, String img_4GAntenna_Port_EmptyDamaged, String rf_sectorDetail_name, String edt_commentadd, String edt_orientation, String date, int flag) {
         this.edt_Antenna_Type = edt_Antenna_Type;
         this.edt_2GBand = edt_2GBand;
         this.edt_2GCoverge = edt_2GCoverge;

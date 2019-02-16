@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.linkquest.lhq.CustomClass;
 import com.linkquest.lhq.LOSAudit.LOSDetailFragment;
@@ -67,7 +68,6 @@ public class SiteSurveylqtReport extends Fragment {
            sharedPreferences.putString(AppConstants.DATE,siteIDandDate.get(0).getDate() );
            sharedPreferences.putString(AppConstants.surveytpeandcustomerandoperator,surveytype_customer_operator );
            sharedPreferences.putString(AppConstants.operators,siteIDandDate.get(0).getOperator() );
-
        }
 
 
@@ -89,20 +89,25 @@ public class SiteSurveylqtReport extends Fragment {
         lat =(TextView)v.findViewById(R.id.tvsqreportlat);
         log =(TextView)v.findViewById(R.id.tvsqreportlog);
         Button btn_save =(Button) v.findViewById(R.id.btn_sitesurveyreport);
-
         List<SurveyForm> listdata = databaseHandler.getLastSurveyformData();
-        stSurveyType= listdata.get(0).getSurveytype();
-        surveytype.setText(stSurveyType);
-        customer.setText(listdata.get(0).getCustomer());
-        operator.setText(listdata.get(0).getOperator());
-        circle.setText(listdata.get(0).getCircle());
-        technology.setText(listdata.get(0).getTechnology());
-        technologytype.setText(listdata.get(0).getTechnologytype());
-        location.setText(listdata.get(0).getLocation());
-        siteid.setText(listdata.get(0).getSiteid());
-        date.setText(listdata.get(0).getDate());
-        lat.setText(listdata.get(0).getLat());
-        log.setText(listdata.get(0).getLog());
+
+        if(listdata.size()>0){
+            stSurveyType= listdata.get(0).getSurveytype();
+            surveytype.setText(stSurveyType);
+            customer.setText(listdata.get(0).getCustomer());
+            operator.setText(listdata.get(0).getOperator());
+            circle.setText(listdata.get(0).getCircle());
+            technology.setText(listdata.get(0).getTechnology());
+            technologytype.setText(listdata.get(0).getTechnologytype());
+            location.setText(listdata.get(0).getLocation());
+            siteid.setText(listdata.get(0).getSiteid());
+            date.setText(listdata.get(0).getDate());
+            lat.setText(listdata.get(0).getLat());
+            log.setText(listdata.get(0).getLog());
+        }else{
+            Toast.makeText(getActivity(),"Please Fill Survey Detail",Toast.LENGTH_LONG).show();
+        }
+
 
 
         btn_save.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +137,6 @@ public class SiteSurveylqtReport extends Fragment {
                                 // if this button is clicked, close
                                 // current activity
                                 // startActivity(new Intent(CardLogin.this, MainActivity.class));
-
                                 if (stSurveyType.equalsIgnoreCase("Site Audit")) {
                                     CustomClass.getCustomclass().setNotifyData("Site Audit");
                                     getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteDetailFragment()).commit();
@@ -156,7 +160,6 @@ public class SiteSurveylqtReport extends Fragment {
                                                 int id) {
                                 // if this button is clicked, just close
                                 // the dialog box and do nothing
-
                                 getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteSurveylqt()).commit();
                                 dialog.cancel();
                             }

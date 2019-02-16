@@ -1404,7 +1404,8 @@ private void toSendDataSitePanaromic() {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            Log.v("response errorsitepanaramic", error.toString());
+            Log.v("res errorsitepanaramic", error.toString());
+            tv_show_status.append("Site Panaromic :" +error.toString()+"\n");
             pDialog.hide();
         }
 
@@ -1412,12 +1413,12 @@ private void toSendDataSitePanaromic() {
     jsonObjReq.setRetryPolicy(new RetryPolicy() {
         @Override
         public int getCurrentTimeout() {
-            return 50000;
+            return 90000;
         }
 
         @Override
         public int getCurrentRetryCount() {
-            return 50000;
+            return 90000;
         }
 
         @Override
@@ -1459,17 +1460,15 @@ private void toSendDataSitePanaromic() {
            // jsonObject.put("date", otherDetailData.get(0).getDate());
             jsonObject.put("flag", otherDetailData.get(0).getFlag());
             jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
-            jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
-            jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+            jsonObject.put("empid",sharedPreferences.getString(AppConstants.EMPID));
+            jsonObject.put("siteid",sharedPreferences.getString(AppConstants.SITEID));
             jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
-
         } catch (Exception e) {
-
-
         }
         return jsonObject;
     }
+
     private void toSendDataOtherDetail() {
         //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
         final ProgressDialog pDialog = new ProgressDialog(getActivity());
@@ -1492,7 +1491,7 @@ private void toSendDataSitePanaromic() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.v("response error_otherdetail", error.toString());
+                Log.v("res error_otherdetail", error.toString());
                 pDialog.hide();
             }
 

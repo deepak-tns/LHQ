@@ -736,7 +736,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_LOSPHOTOS);
         db.execSQL(CREATE_TABLE_RFSITEDETAIL);
         db.execSQL(CREATE_TABLE_RFSECTORDETAIL);
-
         Log.v(TAG, "Database table created");
 
     }
@@ -755,7 +754,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOSPHOTOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RFSITEDETAIL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RFSECTORDETAIL);
-
         onCreate(db);
     }
 
@@ -2804,7 +2802,6 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
-
             values.put(rfs_edt_Antenna_Type, rfSectorAntennaDetailData.getEdt_Antenna_Type());
             values.put(rfs_edt_2GBand , rfSectorAntennaDetailData.getEdt_2GBand());
             values.put(rfs_edt_2GCoverge, rfSectorAntennaDetailData.getEdt_2GCoverge());
@@ -2920,75 +2917,71 @@ public void insertLOSTransmissionLinkData(TransmissionLinkData transmissionLinkD
                         rfSectorAntennaDetailData.setEdt_2G_Existing_antenna_tilt_Electrical(cursor.getString(8));
                         rfSectorAntennaDetailData.setEdt_2G_Existing_antenna_tilt_Mechanical(cursor.getString(9));
                         rfSectorAntennaDetailData.setEdt_3GBand(cursor.getString(10));
-                        rfSectorAntennaDetailData.setEdt_3GCoverge(cursor.getString(12));
-                        rfSectorAntennaDetailData.setEdt_3GObstruction(cursor.getString(13));
-                        rfSectorAntennaDetailData.setEdt_3G_Existing_Antenna_Ht(cursor.getString(14));
-                        rfSectorAntennaDetailData.setEdt_3G_Antenna_Make_and_Model(cursor.getString(15));
-                        rfSectorAntennaDetailData.setEdt_3G_Existing_Antenna_Direction(cursor.getString(16));
-                        rfSectorAntennaDetailData.setEdt_3G_Existing_antenna_Electrical_tilt(cursor.getString(17));
-                        rfSectorAntennaDetailData.setEdt_3G_Existing_antenna_Mechanical_tilt(cursor.getString(18));
-                        rfSectorAntennaDetailData.setEdt_Space_Available_for_3G_Antenna(cursor.getString(19));
-                        rfSectorAntennaDetailData.setEdt_Addl_Poles_req_for_3G_Antenna(cursor.getString(20));
-                        rfSectorAntennaDetailData.setEdt_3GAntenna_Swap_Required(cursor.getString(21));
-                        rfSectorAntennaDetailData.setEdt_3GApproximate_Cable_Lenth(cursor.getString(22));
-                        rfSectorAntennaDetailData.setEdt_3GAntenna_Port_EmptyDamaged(cursor.getString(23));
-                        rfSectorAntennaDetailData.setEdt_4GBand(cursor.getString(24));
-                        rfSectorAntennaDetailData.setEdt_4GCoverge(cursor.getString(25));
-                        rfSectorAntennaDetailData.setEdt_4GObstruction(cursor.getString(26));
-                        rfSectorAntennaDetailData.setEdt_4G_Existing_Antenna_Ht(cursor.getString(27));
-                        rfSectorAntennaDetailData.setEdt_4G_Antenna_Make_and_Model(cursor.getString(28));
-                        rfSectorAntennaDetailData.setEdt_4G_Existing_Antenna_Direction(cursor.getString(29));
-                        rfSectorAntennaDetailData.setEdt_4G_Existing_antenna_Electrical_tilt(cursor.getString(30));
-                        rfSectorAntennaDetailData.setEdt_4G_Existing_antenna_Mechanical_tilt(cursor.getString(31));
-                        rfSectorAntennaDetailData.setEdt_Space_Available_for_4G_Antenna(cursor.getString(32));
-                        rfSectorAntennaDetailData.setEdt_Addl_Poles_reqd_for_4G_Antenna(cursor.getString(33));
-                        rfSectorAntennaDetailData.setEdt_4GAntenna_Swap_Required(cursor.getString(34));
-                        rfSectorAntennaDetailData.setEdt_4GApproximate_Cable_Lenth(cursor.getString(35));
-                        rfSectorAntennaDetailData.setEdt_4GAntennaedt_Port_EmptyDamaged(cursor.getString(36));
-
-                        rfSectorAntennaDetailData.setImg_Antenna_Type(cursor.getString(37));
-                        rfSectorAntennaDetailData.setImg_2GBand(cursor.getString(38));
-                        rfSectorAntennaDetailData.setImg_2GCoverge(cursor.getString(39));
-                        rfSectorAntennaDetailData.setImg_2GObstruction(cursor.getString(40));
-                        rfSectorAntennaDetailData.setImg_2G_Existing_Antenna_Height(cursor.getString(41));
-                        rfSectorAntennaDetailData.setImg_2G_Antenna_Make_and_Model(cursor.getString(42));
-                        rfSectorAntennaDetailData.setImg_2G_Existing_Antenna_Direction(cursor.getString(43));
-                        rfSectorAntennaDetailData.setImg_2G_Existing_antenna_tilt_Electrical(cursor.getString(44));
-                        rfSectorAntennaDetailData.setImg_2G_Existing_antenna_tilt_Mechanical(cursor.getString(45));
-                        rfSectorAntennaDetailData.setImg_3GBand(cursor.getString(46));
-                        rfSectorAntennaDetailData.setImg_3GCoverge(cursor.getString(47));
-                        rfSectorAntennaDetailData.setImg_3GObstruction(cursor.getString(48));
-                        rfSectorAntennaDetailData.setImg_3G_Existing_Antenna_Ht(cursor.getString(49));
-                        rfSectorAntennaDetailData.setImg_3G_Antenna_Make_and_Model(cursor.getString(50));
-                        rfSectorAntennaDetailData.setImg_3G_Existing_Antenna_Direction(cursor.getString(51));
-                        rfSectorAntennaDetailData.setImg_3G_Existing_antenna_Electrical_tilt(cursor.getString(52));
-                        rfSectorAntennaDetailData.setImg_3G_Existing_antenna_Mechanical_tilt(cursor.getString(53));
-                        rfSectorAntennaDetailData.setImg_Space_Available_for_3G_Antenna(cursor.getString(54));
-                        rfSectorAntennaDetailData.setImg_Addl_Poles_reqd_for_3G_Antenna(cursor.getString(55));
-                        rfSectorAntennaDetailData.setImg_3GAntenna_Swap_Required(cursor.getString(56));
-                        rfSectorAntennaDetailData.setImg_3GApproximate_Cable_Lenth(cursor.getString(57));
-                        rfSectorAntennaDetailData.setImg_3GAntenna_Port_EmptyDamaged(cursor.getString(58));
-                        rfSectorAntennaDetailData.setImg_4GBand(cursor.getString(59));
-                        rfSectorAntennaDetailData.setImg_4GCoverge(cursor.getString(60));
-                        rfSectorAntennaDetailData.setImg_4GObstruction(cursor.getString(61));
-                        rfSectorAntennaDetailData.setImg_4G_Existing_Antenna_Ht(cursor.getString(62));
-                        rfSectorAntennaDetailData.setImg_4G_Antenna_Make_and_Model(cursor.getString(63));
-                        rfSectorAntennaDetailData.setImg_4G_Existing_Antenna_Direction(cursor.getString(64));
-                        rfSectorAntennaDetailData.setImg_4G_Existing_antenna_Electrical_tilt(cursor.getString(65));
-                        rfSectorAntennaDetailData.setImg_4G_Existing_antenna_Mechanical_tilt(cursor.getString(66));
-                        rfSectorAntennaDetailData.setImg_Space_Available_for_4G_Antenna(cursor.getString(67));
-                        rfSectorAntennaDetailData.setImg_Addl_Poles_reqd_for_4G_Antenna(cursor.getString(68));
-                        rfSectorAntennaDetailData.setImg_4GAntenna_Swap_Required(cursor.getString(69));
-                        rfSectorAntennaDetailData.setImg_4GApproximate_Cable_Lenth(cursor.getString(70));
-                        rfSectorAntennaDetailData.setImg_4GAntenna_Port_EmptyDamaged(cursor.getString(71));
-
-                        rfSectorAntennaDetailData.setRf_sectorDetail_name(cursor.getString(72));
-                        rfSectorAntennaDetailData.setEdt_commentadd(cursor.getString(73));
-                        rfSectorAntennaDetailData.setEdt_orientation(cursor.getString(74));
-                        rfSectorAntennaDetailData.setDate(cursor.getString(75));
-                        rfSectorAntennaDetailData.setFlag(cursor.getInt(76));
-
-
+                        rfSectorAntennaDetailData.setEdt_3GCoverge(cursor.getString(11));
+                        rfSectorAntennaDetailData.setEdt_3GObstruction(cursor.getString(12));
+                        rfSectorAntennaDetailData.setEdt_3G_Existing_Antenna_Ht(cursor.getString(13));
+                        rfSectorAntennaDetailData.setEdt_3G_Antenna_Make_and_Model(cursor.getString(14));
+                        rfSectorAntennaDetailData.setEdt_3G_Existing_Antenna_Direction(cursor.getString(15));
+                        rfSectorAntennaDetailData.setEdt_3G_Existing_antenna_Electrical_tilt(cursor.getString(16));
+                        rfSectorAntennaDetailData.setEdt_3G_Existing_antenna_Mechanical_tilt(cursor.getString(17));
+                        rfSectorAntennaDetailData.setEdt_Space_Available_for_3G_Antenna(cursor.getString(18));
+                        rfSectorAntennaDetailData.setEdt_Addl_Poles_req_for_3G_Antenna(cursor.getString(19));
+                        rfSectorAntennaDetailData.setEdt_3GAntenna_Swap_Required(cursor.getString(20));
+                        rfSectorAntennaDetailData.setEdt_3GApproximate_Cable_Lenth(cursor.getString(21));
+                        rfSectorAntennaDetailData.setEdt_3GAntenna_Port_EmptyDamaged(cursor.getString(22));
+                        rfSectorAntennaDetailData.setEdt_4GBand(cursor.getString(23));
+                        rfSectorAntennaDetailData.setEdt_4GCoverge(cursor.getString(24));
+                        rfSectorAntennaDetailData.setEdt_4GObstruction(cursor.getString(25));
+                        rfSectorAntennaDetailData.setEdt_4G_Existing_Antenna_Ht(cursor.getString(26));
+                        rfSectorAntennaDetailData.setEdt_4G_Antenna_Make_and_Model(cursor.getString(27));
+                        rfSectorAntennaDetailData.setEdt_4G_Existing_Antenna_Direction(cursor.getString(28));
+                        rfSectorAntennaDetailData.setEdt_4G_Existing_antenna_Electrical_tilt(cursor.getString(29));
+                        rfSectorAntennaDetailData.setEdt_4G_Existing_antenna_Mechanical_tilt(cursor.getString(30));
+                        rfSectorAntennaDetailData.setEdt_Space_Available_for_4G_Antenna(cursor.getString(31));
+                        rfSectorAntennaDetailData.setEdt_Addl_Poles_reqd_for_4G_Antenna(cursor.getString(32));
+                        rfSectorAntennaDetailData.setEdt_4GAntenna_Swap_Required(cursor.getString(33));
+                        rfSectorAntennaDetailData.setEdt_4GApproximate_Cable_Lenth(cursor.getString(34));
+                        rfSectorAntennaDetailData.setEdt_4GAntennaedt_Port_EmptyDamaged(cursor.getString(35));
+                        rfSectorAntennaDetailData.setImg_Antenna_Type(cursor.getString(36));
+                        rfSectorAntennaDetailData.setImg_2GBand(cursor.getString(37));
+                        rfSectorAntennaDetailData.setImg_2GCoverge(cursor.getString(38));
+                        rfSectorAntennaDetailData.setImg_2GObstruction(cursor.getString(39));
+                        rfSectorAntennaDetailData.setImg_2G_Existing_Antenna_Height(cursor.getString(40));
+                        rfSectorAntennaDetailData.setImg_2G_Antenna_Make_and_Model(cursor.getString(41));
+                        rfSectorAntennaDetailData.setImg_2G_Existing_Antenna_Direction(cursor.getString(42));
+                        rfSectorAntennaDetailData.setImg_2G_Existing_antenna_tilt_Electrical(cursor.getString(43));
+                        rfSectorAntennaDetailData.setImg_2G_Existing_antenna_tilt_Mechanical(cursor.getString(44));
+                        rfSectorAntennaDetailData.setImg_3GBand(cursor.getString(45));
+                        rfSectorAntennaDetailData.setImg_3GCoverge(cursor.getString(46));
+                        rfSectorAntennaDetailData.setImg_3GObstruction(cursor.getString(47));
+                        rfSectorAntennaDetailData.setImg_3G_Existing_Antenna_Ht(cursor.getString(48));
+                        rfSectorAntennaDetailData.setImg_3G_Antenna_Make_and_Model(cursor.getString(49));
+                        rfSectorAntennaDetailData.setImg_3G_Existing_Antenna_Direction(cursor.getString(50));
+                        rfSectorAntennaDetailData.setImg_3G_Existing_antenna_Electrical_tilt(cursor.getString(51));
+                        rfSectorAntennaDetailData.setImg_3G_Existing_antenna_Mechanical_tilt(cursor.getString(52));
+                        rfSectorAntennaDetailData.setImg_Space_Available_for_3G_Antenna(cursor.getString(53));
+                        rfSectorAntennaDetailData.setImg_Addl_Poles_reqd_for_3G_Antenna(cursor.getString(54));
+                        rfSectorAntennaDetailData.setImg_3GAntenna_Swap_Required(cursor.getString(55));
+                        rfSectorAntennaDetailData.setImg_3GApproximate_Cable_Lenth(cursor.getString(56));
+                        rfSectorAntennaDetailData.setImg_3GAntenna_Port_EmptyDamaged(cursor.getString(57));
+                        rfSectorAntennaDetailData.setImg_4GBand(cursor.getString(58));
+                        rfSectorAntennaDetailData.setImg_4GCoverge(cursor.getString(59));
+                        rfSectorAntennaDetailData.setImg_4GObstruction(cursor.getString(60));
+                        rfSectorAntennaDetailData.setImg_4G_Existing_Antenna_Ht(cursor.getString(61));
+                        rfSectorAntennaDetailData.setImg_4G_Antenna_Make_and_Model(cursor.getString(62));
+                        rfSectorAntennaDetailData.setImg_4G_Existing_Antenna_Direction(cursor.getString(63));
+                        rfSectorAntennaDetailData.setImg_4G_Existing_antenna_Electrical_tilt(cursor.getString(64));
+                        rfSectorAntennaDetailData.setImg_4G_Existing_antenna_Mechanical_tilt(cursor.getString(65));
+                        rfSectorAntennaDetailData.setImg_Space_Available_for_4G_Antenna(cursor.getString(66));
+                        rfSectorAntennaDetailData.setImg_Addl_Poles_reqd_for_4G_Antenna(cursor.getString(67));
+                        rfSectorAntennaDetailData.setImg_4GAntenna_Swap_Required(cursor.getString(68));
+                        rfSectorAntennaDetailData.setImg_4GApproximate_Cable_Lenth(cursor.getString(69));
+                        rfSectorAntennaDetailData.setImg_4GAntenna_Port_EmptyDamaged(cursor.getString(70));
+                        rfSectorAntennaDetailData.setRf_sectorDetail_name(cursor.getString(71));
+                        rfSectorAntennaDetailData.setEdt_commentadd(cursor.getString(72));
+                        rfSectorAntennaDetailData.setEdt_orientation(cursor.getString(73));
+                        rfSectorAntennaDetailData.setDate(cursor.getString(74));
+                        rfSectorAntennaDetailData.setFlag(cursor.getInt(75));
 
 
                         // Adding contact to list

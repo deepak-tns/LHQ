@@ -47,7 +47,6 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     int REQUEST_CAMERA = 1;
     private Handler handler;
     private String time;
-
     private EditText siteid;
     private ImageButton siteid_photo;
     private EditText sitename;
@@ -431,7 +430,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
             String surveytype_customer_operator = siteIDandDate.get(0).getSurveytype() + siteIDandDate.get(0).getCustomer() + siteIDandDate.get(0).getOperator();
             changetempleteName = surveytype_customer_operator;
             changetempleteName_Operator = siteIDandDate.get(0).getOperator();
-            activityType =  siteIDandDate.get(0).getTechnologytype();
+            activityType = siteIDandDate.get(0).getTechnologytype();
 
         }
 
@@ -508,32 +507,57 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
             linear_infrashared.setVisibility(View.GONE);
         }
 
-        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL")&& activityType.equalsIgnoreCase("SCFT")) {
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("SCFT")) {
             tvsectorid.setText("No of Sectors");
             tvtype_id_od.setText("Zone");
-        //    tv_siteid.setText("Zone");
-       //     tv_sitename.setText("Zone");
-       //     tv_towersiteid.setText("Zone");
-      //      tv_towercompanyname.setText("Zone");
-      //      tv_siteaddress.setText("Zone");
+            //   tv_siteid.setText("Zone");
+            //   tv_sitename.setText("Zone");
+            //   tv_towersiteid.setText("Zone");
+            //   tv_towercompanyname.setText("Zone");
+            //   tv_siteaddress.setText("Zone");
             tv_sitetype.setText("IBS/Macro");
             tv_buildingfloor.setText("Airtel 2G Site ID");
             tv_buildingheight.setText("Airtel 3G Site ID");
             tv_towerheight.setText("Airtel 4G Site ID");
             tv_fulltowerphoto.setText("FDD/TDD Site ID");
             tv_nodebtype.setText("EARFCN");
-      //      tv_classical.setText("Zone");
-      //      tv_enodebtype.setText("Zone");
-      //      tv_anchoroperator.setText("Zone");
-      //      tv_sharingopco1.setText("Zone");
-      //      tv_sharingopco2.setText("Zone");
-      //      tv_sharingopco3.setText("Zone");
+            //      tv_classical.setText("Zone");
+            //      tv_enodebtype.setText("Zone");
+            //      tv_anchoroperator.setText("Zone");
+            //      tv_sharingopco1.setText("Zone");
+            //      tv_sharingopco2.setText("Zone");
+            //      tv_sharingopco3.setText("Zone");
             tv_infraprovider.setText("FDD Site ID");
-      //      tv_infrashared.setText("Zone");
+            //      tv_infrashared.setText("Zone");
             tv_extra1.setText("DTE Name");
             tv_extra2.setText("Team Lead Name");
             tv_remark1.setText("Team Lead Number");
             tv_remark2.setText("Remarks");
+
+        }
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("CLUSTER")) {
+            tvsectorid.setText("No of Sectors");
+            //   tvtype_id_od.setText("Zone");
+            //   tv_siteid.setText("Zone");
+            //   tv_sitename.setText("Zone");
+            //   tv_towersiteid.setText("Zone");
+            //   tv_towercompanyname.setText("Zone");
+            //   tv_siteaddress.setText("Zone");
+            //   tv_sitetype.setText("IBS/Macro");
+            tv_buildingfloor.setText("Cluster Sites Planned");
+            tv_buildingheight.setText("Cluster Sites On-Air");
+
+            tv_nodebtype.setText("EARFCN");
+                 tv_classical.setText("FDD/TDD Site ID");
+            //      tv_enodebtype.setText("Zone");
+                 tv_anchoroperator.setText("DT Tool Used");
+                 tv_sharingopco1.setText("Post Processing Tool Used");
+                 tv_sharingopco2.setText("UE used for Testing");
+            //      tv_sharingopco3.setText("Zone");
+            tvtype_id_od.setText("Zone");
+            //      tv_infrashared.setText("Zone");
+            tv_extra1.setText("DTE Name");
+            tv_extra2.setText("Team Lead Name");
 
 
         }
@@ -545,9 +569,11 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         if (v == siteid_photo) {
             selectImage("one");
-        } else if (v == sitename_photo) {
+        }
+         if (v == sitename_photo) {
             selectImage("2");
         }
+
         if (v == towersiteid_photo) {
             selectImage("3");
         }
@@ -633,7 +659,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
                 edt_log.setError("Please Enter Valid Value");
                 btnsitedetail.setVisibility(View.GONE);
                 return;
-            } else{
+            } else {
                 btnsitedetail.setVisibility(View.VISIBLE);
                 if (db.getCountSiteDetail() > 2) {
                     db.deleteSomeRow_SiteDetail();
@@ -670,7 +696,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
         }
         if (v == btnsitedetail) {
 
-                getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabFragment()).addToBackStack(null).commit();
+            getFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new TabFragment()).addToBackStack(null).commit();
 
         }
     }

@@ -797,7 +797,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         tv_sectordetail_AST  =  v.findViewById(R.id.sectordeatail_tv_AST) ;
        tv_sectordetail_APST =  v.findViewById(R.id.sectordeatail_tv_APST) ;
        tv_sectordetail_typeenodeb =  v.findViewById(R.id.sectordeatail_tv_typ_enodeb) ;
-      //  tv_sectordetail_mimotype;
+        tv_sectordetail_mimotype  =  v.findViewById(R.id.sectordeatail_tv_mimo);
         tv_sectordetail_ret =  v.findViewById(R.id.sectordeatail_tv_ret) ;
         tv_sectordetail_enodebband=  v.findViewById(R.id.sectordeatail_tv_enodebband) ;
         tv_sectordetail_MOP =   v.findViewById(R.id.sectordeatail_tv_MOP) ;
@@ -818,9 +818,9 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
          tv_sectordetail_ACD =v.findViewById(R.id.sectordeatail_tv_ACD) ;
          tv_sectordetail_VSWRtest= v.findViewById(R.id.sectordeatail_tv_VSWRtest) ;
          tv_sectordetail_URS =v.findViewById(R.id.sectordeatail_tv_URS) ;
-        tv_sdbasebandtype =v.findViewById(R.id.tv_sd_basebandunittype);
-        tv_sdrnc = v.findViewById(R.id.tv_sd_rncname);
-        tv_sdnoofchannelelement = v.findViewById(R.id.tv_noofchannelelement);
+         tv_sdbasebandtype =v.findViewById(R.id.tv_sd_basebandunittype);
+         tv_sdrnc = v.findViewById(R.id.tv_sd_rncname);
+         tv_sdnoofchannelelement = v.findViewById(R.id.tv_noofchannelelement);
 
 
 
@@ -914,13 +914,12 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_preelectrical_tilt4gf1 .setText("BCCH/PSC/PCI");
             tv_sectordetail_postelectrical_tilt4gf1 .setText("Bandwidth(Mhz)");
             tv_sectordetail_preelectrical_tilt4gf2 .setText("Cell ID");
-            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
 
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
             linear_sectordetail_MOP.setVisibility(View.GONE);
             linear_sectordetail_antennapicleg.setVisibility(View.GONE);
             linear_sdnoofchannelelement.setVisibility(View.GONE);
-
-
+            tv_sectordetail_poleheight.setText("Pole/Tower Height");
                     tv_sectordetail_AST.setText("Allocated BW");
                     tv_sectordetail_APST.setText("CPRI Cable/Feeder Solution");
                     tv_sectordetail_typeenodeb.setText("BTS/NodeB/eNodeB Type");
@@ -936,13 +935,47 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
                     tv_sectordetail_URS.setText("Parented BSC");
                     tv_sdbasebandtype.setText("Base Unit (Model No)");
                     tv_sdrnc.setText("RNC/BSC Name");
-     //       tv_sdnoofchannelelement.setText("");
-
+     //             tv_sdnoofchannelelement.setText("");
 
             tvextra1.setText("UE Model");
             tvextra2.setText("UE IMEI No");
             tvremark1.setText("Phone Number");
             tvremark2.setText("SIM Number");
+
+        }
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL")&& activityType.equalsIgnoreCase("CLUSTER")) {
+
+            tv_sectordetail_preelectrical_tilt2g .setText("Planned Azimuth");
+            tv_sectordetail_postelectrical_tilt2g.setText("Changed Azimuth");
+            tv_sectordetail_preelectrical_tilt3g.setText("Planned Tilt-ET");
+            tv_sectordetail_postelectrical_tilt3g .setText("Changed E-Tilt");
+            tv_sectordetail_preelectrical_tilt4gf1 .setText("Planned Tilt-MT");
+            tv_sectordetail_postelectrical_tilt4gf1 .setText("Changed M-Tilt");
+            tv_sectordetail_preelectrical_tilt4gf2 .setText("Planned AGL (mtrs)");
+            tv_sectordetail_postelectrical_tilt4gf2 .setText("Changed AGL (mtrs)");
+
+            tv_sectordetail_poleheight.setText("Pole/Tower Height");
+            tv_sectordetail_MOP.setText("Planed PCI");
+            tv_sectordetail_AST.setText("TAC");
+            tv_sectordetail_APST.setText("BCCH/PSC/PCI");
+            tv_sectordetail_typeenodeb.setText("2G Cell ID");
+            tv_sectordetail_mimotype.setText("3G Cell ID");
+            tv_sectordetail_ret.setText("FDD EARFCN DL");
+            tv_sectordetail_enodebband.setText("FDD EARFCN UL");
+
+            tv_sectordetail_multiplexer_avail.setText("No of TRX");
+            linear_sectordetail_antennapicleg.setVisibility(View.GONE);
+            tv_sectordetail_powerdeboosting.setText("FDD dlChannelBandwidth(MHz)");
+            tv_sectordetail_DFS.setText("FDD ulChannelBandwidth(MHz)");
+            tv_sectordetail_rb_percell.setText("4G Cell Id ");
+
+            tv_sectordetail_URS.setText("Parented BSC");
+            tv_sdbasebandtype.setText("Base Unit (Model No)");
+            tv_sdrnc.setText("RNC/BSC Name");
+            //             tv_sdnoofchannelelement.setText("");
+
+         //   tvextra1.setText("UE Model");
+
 
         }
 

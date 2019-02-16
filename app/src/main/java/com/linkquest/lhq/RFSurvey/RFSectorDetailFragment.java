@@ -531,6 +531,8 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             tvaftercount.setText(db.getCountRFSectorDetail()+"");
         }
         if (view == btn_next) {
+            toSendDataRFSiteDetail();
+            toSendDataRFSectorDetail1();
 
         }
     }

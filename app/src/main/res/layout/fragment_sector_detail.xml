@@ -1718,9 +1718,10 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_horizontal"
                     android:id="@+id/sectordeatail_tv_VSWRtest"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".8"
                     android:text="VSWR Test"
                     android:textSize="@dimen/font_small"></TextView>

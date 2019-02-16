@@ -24,6 +24,7 @@ import com.linkquest.lhq.LOSAudit.TransmissionNoLinkFragment;
 import com.linkquest.lhq.R;
 import com.linkquest.lhq.RFSurvey.RFSectorDetailFragment;
 import com.linkquest.lhq.RFSurvey.RFSiteDetailFragment;
+import com.linkquest.lhq.RFSurvey.RFTabFragment;
 import com.linkquest.lhq.SiteAudit.OtherFragment;
 import com.linkquest.lhq.SiteAudit.SiteDetailFragment;
 import com.linkquest.lhq.SiteAudit.SitePanoramicFragment;
@@ -31,6 +32,7 @@ import com.linkquest.lhq.database.TransmissionLinkData;
 import com.linkquest.lhq.fragment.HomeFragment;
 import com.linkquest.lhq.fragment.SiteSurveylqt;
 import com.linkquest.lhq.SiteAudit.TabFragment;
+import com.linkquest.lhq.fragment.SiteSurveylqtReport;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CustomClass.interfaceCustom {
     private DrawerLayout mDrawerLayout;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Toolbar toolbar;
     private TextView tvsiteinfo;
     private TextView tv_sitedetail;
+    private TextView tv_siteinforeport;
     private TextView tv_sitepanoramic;
     private TextView tv_sectordetail;
     private TextView tv_otherdetail;
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_sitepanoramic=(TextView)findViewById(R.id.tv_sitepanoramic);
         tv_sectordetail=(TextView)findViewById(R.id.tv_sectordetail);
         tv_otherdetail=(TextView)findViewById(R.id.tv_otherdetail);
+        tv_siteinforeport=(TextView)findViewById(R.id.tv_siteinforeport);
 
         tv_los_sitedetail=(TextView)findViewById(R.id.tv_los_sitedetail);
         tv_tranmissionlink=(TextView)findViewById(R.id.tv_transmissionlink);
@@ -103,11 +107,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linear_losaudit=(LinearLayout) findViewById(R.id.linear_los);
         linear_RFSurvey=(LinearLayout) findViewById(R.id.linear_RFSurvey);
 
-         tvsiteinfo.setOnClickListener(this);
+        tvsiteinfo.setOnClickListener(this);
         tv_sitedetail.setOnClickListener(this);
         tv_sitepanoramic.setOnClickListener(this);
         tv_sectordetail.setOnClickListener(this);
         tv_otherdetail.setOnClickListener(this);
+        tv_siteinforeport.setOnClickListener(this);
 
 
         tv_los_sitedetail.setOnClickListener(this);
@@ -143,7 +148,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mDrawerLayout.closeDrawer(mDrawerPane);
         }
 
-        if(v == tv_sitedetail){
+        if(v == tv_siteinforeport){
+
+          //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, new SiteSurveylqtReport()).addToBackStack(null).commit();
+            mDrawerLayout.closeDrawer(mDrawerPane);
+          // startActivity(new Intent (this,RegisterActivity.class));
+
+        }  if(v == tv_sitedetail){
 
           //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, SiteDetailFragment.newInstance(1000)).addToBackStack(null).commit();
@@ -238,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == tv_rf_sectorDetail){
 
             //  getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag,SiteSurveyFragment.newInstance(1)).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag, RFSectorDetailFragment.newInstance(1000,"SectorDetail")).addToBackStack(null).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout_home_frag,new RFTabFragment()).addToBackStack(null).commit();
             mDrawerLayout.closeDrawer(mDrawerPane);
             // startActivity(new Intent (this,RegisterActivity.class));
         }
