@@ -241,7 +241,6 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
         btnUpload = v.findViewById(R.id.btnUpload);
 
 
-
         btnBearing0Image.setOnClickListener(this);
         btnBearing30Image.setOnClickListener(this);
         btnBearing60Image.setOnClickListener(this);
@@ -304,8 +303,12 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
 
         if(v == btnSave){
 
-            if (db.getCountSitePanaromic() > 2) {
+            if (db.getCountSitePanaromic() > 1) {
                 db.deleteSomeRow_SitePanoramic();
+
+            }
+            if (db.getCountSitePanaromicBlocking() > 1) {
+                db.deleteSomeRow_SitePanoramicBlocking();
 
             }
 
@@ -1100,7 +1103,7 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 imgBearing0Image.setImageBitmap( out);
             //    imgBearing0 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                 imgBearing0 = thumbnail;
+                imgBearing0 = thumbnail;
                 Log.v("img-encode", imgBearing0);
             }
         }

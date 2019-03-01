@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.linkquest.lhq.R;
 
 public class RegisterActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

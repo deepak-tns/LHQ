@@ -44,53 +44,45 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CameraSurfaceViewActivity extends AppCompatActivity implements SurfaceHolder.Callback, SensorEventListener  {
-    //  activity_camera_surface_view
-
-    Camera camera;
-    SurfaceView surfaceView;
-    SurfaceHolder surfaceHolder;
-
-    Camera.PictureCallback rawCallback;
-    Camera.ShutterCallback shutterCallback;
-    Camera.PictureCallback jpegCallback;
-    Button edt_result_save;
-    EditText edt_text;
-    String getPicturePath ="";
-    String current_date;
+   //activity_camera_surface_view
+    private Camera camera;
+    private SurfaceView surfaceView;
+    private SurfaceHolder surfaceHolder;
+    private Camera.PictureCallback rawCallback;
+    private Camera.ShutterCallback shutterCallback;
+    private Camera.PictureCallback jpegCallback;
+    private Button edt_result_save;
+    private EditText edt_text;
+    private String getPicturePath ="";
+    private String current_date ;
     private Calendar cal;
-
     private SensorManager sensorManager;
     private Sensor compass;
     private ImageView image;
     private TextView compassAngle;
     private float currentDegree = 0f;
-    Bitmap bitmap;
-    int pos;
+    private Bitmap bitmap;
+    private int pos;
     private Handler handler;
     private String time;
-
     private String lat ="Not Found",log= "Not Found" ;
     private long lastBackPressTime = 0;
 /////////////////////////////////////////03/12/18
-
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_camera_surface_view);
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
         cal = Calendar.getInstance();
         current_date = dateFormat.format(cal.getTime());
-
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 time = android.text.format.DateFormat.format("dd-MM-yyyy h:mm:ss:aa", System.currentTimeMillis()).toString();
-
                 handler.postDelayed(this, 1000);
             }
 
@@ -98,14 +90,11 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
 
         surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         surfaceHolder = surfaceView.getHolder();
-
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         surfaceHolder.addCallback(this);
-
         // deprecated setting, but required on Android versions prior to 3.0
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
         jpegCallback = new Camera.PictureCallback() {
             public void onPictureTaken(byte[] data, Camera camera) {
             /*   String capturepath = "";
@@ -213,12 +202,11 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         SimpleDateFormat time_formatter = new SimpleDateFormat("HH:mm:ss");
         String current_time_str = time_formatter.format(System.currentTimeMillis());
 
-
             String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + compassAngle.getText().toString();
             // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
             Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(this, finalBitmap, totalString);
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+       //     setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
         File destination = new File(destinationpath + "/LHQTEMP/");
         if (!destination.exists()) {
@@ -227,7 +215,7 @@ public class CameraSurfaceViewActivity extends AppCompatActivity implements Surf
         capturepath =destinationpath+"/LHQTEMP/"+time + ".jpg";
         try {
             FileOutputStream out = new FileOutputStream(capturepath);
-            setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 50, out);
+            setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 30, out);
             out.flush();
             out.close();
 

@@ -1309,6 +1309,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp" />
 
+            <TextView
+                android:id="@+id/tv_rfsectordetail_status"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"  />
+
         </LinearLayout>
 
     </ScrollView>

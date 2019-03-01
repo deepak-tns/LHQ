@@ -64,15 +64,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (savedInstanceState == null) {
-
             getSupportFragmentManager().beginTransaction().add(R.id.frameLayout_home_frag, new HomeFragment()).commit();
         }
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         navigationdrawer();
         findIds();
-
         CustomClass.setInterfaceCustom(this);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,11 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(),"Welcome",Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void findIds(){
-
         tvsiteinfo=(TextView)findViewById(R.id.tv_siteinfo);
         tv_sitedetail=(TextView)findViewById(R.id.tv_sitedetail);
         tv_sitepanoramic=(TextView)findViewById(R.id.tv_sitepanoramic);

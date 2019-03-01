@@ -493,7 +493,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private String edt_rf_Surveytype="edt_Surveytype";
     private String rf_date ="date";
     private String rf_flag ="flag";
-
     // RF Sector Detail..............................................................
     private String rfs_id ="rfs_id";
     private String rfs_edt_Antenna_Type ="rfs_edt_Antenna_Type";
@@ -1342,7 +1341,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteSomeRow_SitePanoramic() {
         SQLiteDatabase db = this.getWritableDatabase();
         //  db.execSQL("delete from "+ TABLE_SURVEYFORM+" where " +KEY_INCRI_ID+ " not in ( select " +KEY_INCRI_ID+" from "+ TABLE_SURVEYFORM+" order by "+KEY_DATE +" desc limit 100)");
-        db.execSQL("DELETE FROM " + TABLE_SITEPANOROMIC + " ;");
+      //  db.execSQL("DELETE FROM " + TABLE_SITEPANOROMIC + " ;");
+        String ALTER_TBL ="delete from " + TABLE_SITEPANOROMIC+" where id IN (Select id from " + TABLE_SITEPANOROMIC + " limit 2)";
+        db.execSQL(ALTER_TBL);
         db.close();
     }
 
@@ -1403,7 +1404,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         SitePanoramicBlockingData sitePanoramicBlockingData = new SitePanoramicBlockingData();
                         sitePanoramicBlockingData.setId(cursor.getInt(0));
                         sitePanoramicBlockingData.setBlocking0(cursor.getString(1));
-                        ;
                         sitePanoramicBlockingData.setBlocking30(cursor.getString(2));
                         sitePanoramicBlockingData.setBlocking60(cursor.getString(3));
                         sitePanoramicBlockingData.setBlocking90(cursor.getString(4));
@@ -1437,6 +1437,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
         }
         return list;
+    }
+
+    public void deleteSomeRow_SitePanoramicBlocking() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //  db.execSQL("delete from "+ TABLE_SURVEYFORM+" where " +KEY_INCRI_ID+ " not in ( select " +KEY_INCRI_ID+" from "+ TABLE_SURVEYFORM+" order by "+KEY_DATE +" desc limit 100)");
+        //  db.execSQL("DELETE FROM " + TABLE_SITEPANOROMICBLOCKING + " ;");
+        String ALTER_TBL ="delete from " + TABLE_SITEPANOROMICBLOCKING+" where id IN (Select id from " + TABLE_SITEPANOROMICBLOCKING + " limit 2)";
+        db.execSQL(ALTER_TBL);
+        db.close();
+    }
+
+    public int getCountSitePanaromicBlocking() {
+        String countQuery = "SELECT  * FROM " + TABLE_SITEPANOROMICBLOCKING;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        // return count
+        return count;
     }
 
     // code to add the new sitePanoramic

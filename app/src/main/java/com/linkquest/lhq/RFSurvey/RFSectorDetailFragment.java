@@ -205,7 +205,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
     String lat, log;
     Handler handler;
     String time;
-    TextView tvprecount, tvaftercount;
+    TextView tvprecount, tvaftercount, tv_rfsectordetail_status;
     Button btn_save, btn_next;
     DatabaseHandler db;
     SharedPreferenceUtils sharedPreferences;
@@ -291,6 +291,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         btn_next = v.findViewById(R.id.btnrfsectordetailnext);
         tvprecount = v.findViewById(R.id.tv_rfsectordetail_count_previous);
         tvaftercount = v.findViewById(R.id.tv_rfsectordetail_count);
+        tv_rfsectordetail_status = v.findViewById(R.id.tv_rfsectordetail_status);
 
         ib_Antenna_Type = v.findViewById(R.id.ib_Antenna_Type);
         ib_2GBand = v.findViewById(R.id.ib_2GBand);
@@ -533,6 +534,9 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         if (view == btn_next) {
             toSendDataRFSiteDetail();
             toSendDataRFSectorDetail1();
+            toSendDataRFSectorDetail2();
+            toSendDataRFSectorDetail3();
+            toSendDataRFSectorDetail4();
 
         }
     }
@@ -627,7 +631,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         pDialog.show();
         Log.v("json rfsitedetail", jsondataRFSiteDetail().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.SITEPANAROMIC, jsondataRFSiteDetail(),
+                AppConstants.RF_Site_Detail, jsondataRFSiteDetail(),
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -673,9 +677,11 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + " RF SiteDetail", Toast.LENGTH_LONG).show();
+            tv_rfsectordetail_status.append("Site Detail :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
+            tv_rfsectordetail_status.append("Site Detail :" + e.getMessage() + "\n");
         }
     }
 //.....................................................................................
@@ -705,7 +711,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
                 jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
                 jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
-                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
                 jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
                 jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
@@ -1033,7 +1039,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         pDialog.show();
         Log.v("json rfsectordetail1", jsondataRFSectorDetail1().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail1(),
+                AppConstants.RF_Sector_Detail, jsondataRFSectorDetail1(),
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -1079,8 +1085,10 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + " RF SectorDetail1", Toast.LENGTH_LONG).show();
+            tv_rfsectordetail_status.append("SectorDetail1:" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
+            tv_rfsectordetail_status.append("SectorDetail1 :" + e.getMessage() + "\n");
             e.printStackTrace();
         }
     }
@@ -1113,7 +1121,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
                 jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
                 jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
-                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
                 jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
                 jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
@@ -1404,7 +1412,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         pDialog.show();
         Log.v("json rfsectordetail2", jsondataRFSectorDetail2().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail2(),
+                AppConstants.RF_Sector_Detail, jsondataRFSectorDetail2(),
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -1450,9 +1458,11 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + " RF SectorDetail2", Toast.LENGTH_LONG).show();
+            tv_rfsectordetail_status.append("SectorDetail2:" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
+            tv_rfsectordetail_status.append("SectorDetail2:" + e.getMessage() + "\n");
         }
     }
 
@@ -1481,7 +1491,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
                 jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
                 jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
-                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
                 jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
                 jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
@@ -1772,13 +1782,14 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         pDialog.show();
         Log.v("json rfsectordetail3", jsondataRFSectorDetail3().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail3(),
+                AppConstants.RF_Sector_Detail, jsondataRFSectorDetail3(),
                 new Response.Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponseRFSectorDetail3(response.toString());
                         Log.v("res rfsectordetail3", response.toString());
+
                         pDialog.hide();
 
                     }
@@ -1818,9 +1829,11 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + " RF SectorDetail3", Toast.LENGTH_LONG).show();
+            tv_rfsectordetail_status.append("SectorDetail3:" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
+            tv_rfsectordetail_status.append("SectorDetail3:" + e.getMessage() + "\n");
         }
     }
 //.................................RF SectorDetail4.......................
@@ -1849,7 +1862,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
                 jsonObject.put("edt_3G_Existing_antenna_Electrical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Electrical_tilt());
                 jsonObject.put("edt_3G_Existing_antenna_Mechanical_tilt", sectorDetailData.get(0).getEdt_3G_Existing_antenna_Mechanical_tilt());
                 jsonObject.put("edt_Space_Available_for_3G_Antenna", sectorDetailData.get(0).getEdt_Space_Available_for_3G_Antenna());
-                jsonObject.put("edt_Addl_Poles_req_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
+                jsonObject.put("edt_Addl_Poles_reqd_for_3G_Antenna", sectorDetailData.get(0).getEdt_Addl_Poles_req_for_3G_Antenna());
                 jsonObject.put("edt_3GAntenna_Swap_Required", sectorDetailData.get(0).getEdt_3GAntenna_Swap_Required());
                 jsonObject.put("edt_3GApproximate_Cable_Lenth", sectorDetailData.get(0).getEdt_3GApproximate_Cable_Lenth());
                 jsonObject.put("edt_3GAntenna_Port_EmptyDamaged", sectorDetailData.get(0).getEdt_3GAntenna_Port_EmptyDamaged());
@@ -2139,7 +2152,7 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
         pDialog.show();
         Log.v("json rfsectordetail4", jsondataRFSectorDetail4().toString());
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.SITEPANAROMIC, jsondataRFSectorDetail4(),
+                AppConstants.RF_Sector_Detail, jsondataRFSectorDetail4(),
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -2185,9 +2198,11 @@ public class RFSectorDetailFragment extends Fragment implements View.OnClickList
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(), status + " RF SectorDetail4", Toast.LENGTH_LONG).show();
+            tv_rfsectordetail_status.append("SectorDetail4:" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
+            tv_rfsectordetail_status.append("SectorDetail4:" + e.getMessage() + "\n");
         }
     }
 

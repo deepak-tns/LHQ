@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             "android.permission.RECEIVE_SMS",
             "android.permission.READ_PHONE_STATE",
             "android.permission.CAMERA"
-
-
     };
     public static final int MULTIPLE_PERMISSIONS = 10;
     String emino;
@@ -67,17 +65,12 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         findIds();
         checkPermissions();
-
-
-
-        //  JSonobjParameter("18459","18459");
+        //JSonobjParameter("18459","18459");
 
     }
 
     public  String getIMEINumber(Context context) {
-
         String tmDeviceId;
-
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -96,11 +89,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void findIds() {
-
         edt_loginid = findViewById(R.id.editEmail);
         edt_password = findViewById(R.id.editPassword);
         btn_login = findViewById(R.id.buttonLogin);
-
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
 
     private void validatelogin() {
         if (Validator.isNetworkAvailable(this)) {
@@ -129,12 +119,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isMandatoryFields() {
-
         edt_loginid.setError(null);
         edt_password.setError(null);
-
         if (edt_loginid.getText().toString().equals("")) {
-
             edt_loginid.requestFocus();
             edt_loginid.setError("Enter LoginID");
             return false;
@@ -153,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
             builder.setTitle(title);
         }
 
-
         builder.setMessage(message);
         builder.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
             @Override
@@ -165,10 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         if (isNegativeButton) {
             builder.setNegativeButton(negativeButton, null);
         }
-
         builder.show();
-
-
     }
 
     private void toLogin(String empId, String empPassword) {
@@ -265,7 +248,7 @@ public class LoginActivity extends AppCompatActivity {
             jsonObject.put("password", password);
             jsonObject.put("imeno", emino);
 
-Log.v("imeno",emino);
+        Log.v("imeno",emino);
             // jsonObject.put("ParameterList",jsonArrayParameter);
 
         } catch (JSONException e) {
@@ -310,6 +293,4 @@ Log.v("imeno",emino);
             }
         }
     }
-
-
 }
