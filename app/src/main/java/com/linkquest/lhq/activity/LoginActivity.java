@@ -51,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
             "android.permission.CAMERA"
     };
     public static final int MULTIPLE_PERMISSIONS = 10;
-    String emino;
-    EditText edt_loginid;
-    EditText edt_password;
-    Button btn_login;
+    private String emino;
+    private EditText edt_loginid;
+    private EditText edt_password;
+    private Button btn_login;
     private SharedPreferenceUtils sharedPreferences;
 
     @Override
@@ -163,8 +163,6 @@ public class LoginActivity extends AppCompatActivity {
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
                 AppConstants.VERIFYLOGINURL, JSonobjParameter(empId, empPassword),
                 new Response.Listener<JSONArray>() {
-
-
                     @Override
                     public void onResponse(JSONArray response) {
                         parseSettingResponse(response);
@@ -293,4 +291,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 }
