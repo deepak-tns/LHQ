@@ -302,10 +302,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("img_towerexistingnew", losSiteDetailData.get(0).getImg_towerexistingnew());
                 jsonObject.put("img_Towertype", losSiteDetailData.get(0).getImg_Towertype());
                 jsonObject.put("img_remarks", losSiteDetailData.get(0).getImg_remarks());
-
                 jsonObject.put("flag", losSiteDetailData.get(0).getFlag());
-
-
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
@@ -384,7 +381,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         List<SurveyForm> surveyformData = db.getLastSurveyformData();
         if (surveyformData.size() > 0) {
             Log.v("OtherFragSurveyform", surveyformData.toString());
-
             try {
                 jsonObject.put("surveytype", surveyformData.get(0).getSurveytype());
                 jsonObject.put("customer", surveyformData.get(0).getCustomer());
@@ -399,7 +395,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("log", surveyformData.get(0).getLog());
                 jsonObject.put("flag", surveyformData.get(0).getFlag());
                 jsonObject.put("clusterid", surveyformData.get(0).getCusterid());
-
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
                 jsonObject.put("idall", sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));

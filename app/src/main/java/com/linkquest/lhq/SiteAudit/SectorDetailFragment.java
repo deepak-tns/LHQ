@@ -41,8 +41,6 @@ import static android.app.Activity.RESULT_CANCELED;
  * A simple {@link Fragment} subclass.
  */
 public class SectorDetailFragment extends Fragment implements View.OnClickListener {
-
-
     private EditText sectordetail_edt_techavailable;
     private ImageButton sectordetail_img_techavailable;
     private EditText sectordetail_edt_bandavailable;
@@ -377,24 +375,19 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     private TextView tvextra2;
     private TextView tvremark1;
     private TextView tvremark2;
-
-
     //insert new row 4/1/19
     private EditText sdbasebandtype_edt;
     private ImageButton sdbasebandtype_img;
     private ImageView sdbasebandtype_iv;
     private String sdbasebandtype_st = "";
-
     private EditText sdrnc_edt;
     private ImageButton sdrnc_img;
     private ImageView sdrnc_iv;
     private String sdrnc_st = "";
-
     private EditText sdnoofchannelelement_edt;
     private ImageButton sdnoofchannelelement_img;
     private ImageView sdnoofchannelelement_iv;
     private String sdnoofchannelelement_st = "";
-
     String lat, log;
     Handler handler;
     String time;
@@ -424,8 +417,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sector_detail, container, false);
         sectordeatailfrgamentname = getArguments().getString("name");
-
-
         db = new DatabaseHandler(getActivity());
         handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -434,19 +425,15 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
                 time = DateFormat.format("dd-MM-yyyy h:mm:ss:aa", System.currentTimeMillis()).toString();
                 handler.postDelayed(this, 1000);
             }
-
         }, 1000);
 
         findids(v);
-
         tv_sectordetail_count_previous.setText(tv_sectordetail_count_previous.getText().toString() + db.getCountSectorDetail());
-
         changeTemplete(v);
         return v;
     }
 
     private void findids(View v) {
-
         sectordetail_edt_techavailable = v.findViewById(R.id.sectordetail_edt_techavailable);
         sectordetail_img_techavailable = v.findViewById(R.id.sectordetail_img_techavailable);
         sectordetail_edt_bandavailable = v.findViewById(R.id.sectordetail_edt_bandavailable);
@@ -559,7 +546,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         btnsectordetailsave = v.findViewById(R.id.btnsectordetailsave);
         tv_sectordetail_count = v.findViewById(R.id.tv_sectordetail_count);
         tv_sectordetail_count_previous = v.findViewById(R.id.tv_sectordetail_count_previous);
-
 
         iv_sectordetail_techavailable = v.findViewById(R.id.iv_sectordetail_techavailable);
         iv_sectordetail_bandavailable = v.findViewById(R.id.iv_sectordetail_bandavailable);
@@ -686,7 +672,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         btnsectordetail.setOnClickListener(this);
         btnsectordetailsave.setOnClickListener(this);
 
-
     }
 
     private void changeTemplete(View v) {
@@ -700,7 +685,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             changetempleteName = surveytype_customer_operator;
             changetempleteName_Operator = siteIDandDate.get(0).getOperator();
             activityType = siteIDandDate.get(0).getTechnologytype();
-
         }
 
         //  start change templete code
@@ -765,11 +749,10 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         tvextra2 = v.findViewById(R.id.sectordeatail_tv_extra2);
         tvremark1 = v.findViewById(R.id.sectordeatail_tv_remak1);
         tvremark2 = v.findViewById(R.id.sectordeatail_tv_remak2);
-
         // tv_sectordetail_techavailable ;
         tv_sectordetail_bandavailable = v.findViewById(R.id.sectordetail_tv_bandavailable);
-        // tv_sectordetail_APC ;
-        // tv_sectordetail_preazimuth ;
+        //  tv_sectordetail_APC ;
+        //  tv_sectordetail_preazimuth ;
         //  tv_sectordetail_postazimuth ;
         //  tv_sectordetail_premechanical_tilt;
         //  tv_sectordetail_postmechanical_tilt;
@@ -781,16 +764,16 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         tv_sectordetail_postelectrical_tilt4gf1 = v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt4gf1);
         tv_sectordetail_preelectrical_tilt4gf2 = v.findViewById(R.id.sectordeatail_tv_preelectrical_tilt4gf2);
         tv_sectordetail_postelectrical_tilt4gf2 = v.findViewById(R.id.sectordeatail_tv_postelectrical_tilt4gf2);
-        //  tv_sectordetail_preelectrical_tilt;
-        //  tv_sectordetail_postelectrical_tilt;
+        //   tv_sectordetail_preelectrical_tilt;
+        //   tv_sectordetail_postelectrical_tilt;
         //   tv_sectordetail_antennaheight;
         tv_sectordetail_poleheight = v.findViewById(R.id.sectordeatail_tv_poleheight);
         tv_sectordetail_buildingheight = v.findViewById(R.id.sectordeatail_tv_buildingheight);
         //    tv_sectordetail_towertype ;
         //    tv_sectordetail_antenamake;
         //    tv_sectordetail_antenamodel;
-        //   tv_sectordetail_cullterpic;
-        //  tv_sectordetail_txbandwidth;
+        //    tv_sectordetail_cullterpic;
+        //    tv_sectordetail_txbandwidth;
         tv_sectordetail_AST = v.findViewById(R.id.sectordeatail_tv_AST);
         tv_sectordetail_APST = v.findViewById(R.id.sectordeatail_tv_APST);
         tv_sectordetail_typeenodeb = v.findViewById(R.id.sectordeatail_tv_typ_enodeb);
@@ -806,43 +789,39 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         tv_sectordetail_DFS = v.findViewById(R.id.sectordeatail_tv_DFS);
         tv_sectordetail_rb_percell = v.findViewById(R.id.sectordeatail_tv_rb_percell);
         tv_sectordetail_m_mimo = v.findViewById(R.id.sectordeatail_tv_m_mimo);
-        //    tv_sectordetail_FCT;
-        //    tv_sectordetail_JCT;
-        //    tv_sectordetail_FCL;
-        //    tv_sectordetail_jumperlength;
+        //      tv_sectordetail_FCT;
+        //      tv_sectordetail_JCT;
+        //      tv_sectordetail_FCL;
+        //      tv_sectordetail_jumperlength;
         //      tv_sectordetail_prachconfig_index;
-        //    tv_sectordetail_carrieraggregation;
+        //      tv_sectordetail_carrieraggregation;
         tv_sectordetail_ACD = v.findViewById(R.id.sectordeatail_tv_ACD);
         tv_sectordetail_VSWRtest = v.findViewById(R.id.sectordeatail_tv_VSWRtest);
         tv_sectordetail_URS = v.findViewById(R.id.sectordeatail_tv_URS);
         tv_sdbasebandtype = v.findViewById(R.id.tv_sd_basebandunittype);
         tv_sdrnc = v.findViewById(R.id.tv_sd_rncname);
         tv_sdnoofchannelelement = v.findViewById(R.id.tv_noofchannelelement);
-
-
         //  end change templete code
         if (changetempleteName.equalsIgnoreCase("Site AuditERICSSONAIRTEL")) {
-
             tvextra1.setText("Sector ID");
             tvextra2.setText("PCI/PSC/BCCH");
             tvremark1.setText("No of Antenna");
             tvremark2.setText("Antenna");
-
             linear_sectordetail_bandavailable.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt2g.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt2g.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt3g.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt3g.setVisibility(View.GONE);
-
-           /* linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
+            /*
+            linear_sectordetail_preelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_postelectrical_tilt4gf1.setVisibility(View.GONE);
             linear_sectordetail_preelectrical_tilt4gf2.setVisibility(View.GONE);
-            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);*/
+            linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
+           */
             tv_sectordetail_preelectrical_tilt4gf1.setText("Pre Electrical Tilt 2G F1");
             tv_sectordetail_postelectrical_tilt4gf1.setText("Post Electrical Tilt 2G F1");
             tv_sectordetail_preelectrical_tilt4gf2.setText("Pre Electrical Tilt 2G F2");
             tv_sectordetail_postelectrical_tilt4gf2.setText("Post Electrical Tilt 2G F2");
-
 
             linear_sectordetail_mimotype.setVisibility(View.GONE);
             linear_sectordetail_ret.setVisibility(View.GONE);
@@ -868,6 +847,7 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             linear_sdbasebandtype.setVisibility(View.GONE);
             linear_sdnoofchannelelement.setVisibility(View.GONE);
         }
+
         if (changetempleteName_Operator.equalsIgnoreCase("VFI")) {
             tv_sectordetail_bandavailable.setText("Multi Layer Supported (8, 16, 24, 32)");
             tv_sectordetail_preelectrical_tilt2g.setText("Pcell carrier Bandwidth");
@@ -889,18 +869,14 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             // tvremark2.setText("");
             tvextra1.setText("Node B Power cell wise(20W/40W/60W)");
             tvextra2.setText("Node B transmitter output power measurement test.");
-
             // tv_sdbasebandtype .setText("");
             // tv_sdrnc .setText("");
             // tv_sdnoofchannelelement .setText("");
-
             linear_sectordetail_remark2.setVisibility(View.GONE);
             linear_sdnoofchannelelement.setVisibility(View.VISIBLE);
-
-
         }
-        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("SCFT")) {
 
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("SCFT")) {
             tv_sectordetail_preelectrical_tilt2g.setText("CGI");
             tv_sectordetail_postelectrical_tilt2g.setText("Antenna Quantity");
             tv_sectordetail_preelectrical_tilt3g.setText("Antenna Gain -dBi");
@@ -908,7 +884,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_preelectrical_tilt4gf1.setText("BCCH/PSC/PCI");
             tv_sectordetail_postelectrical_tilt4gf1.setText("Bandwidth(Mhz)");
             tv_sectordetail_preelectrical_tilt4gf2.setText("Cell ID");
-
             linear_sectordetail_postelectrical_tilt4gf2.setVisibility(View.GONE);
             linear_sectordetail_MOP.setVisibility(View.GONE);
             linear_sectordetail_antennapicleg.setVisibility(View.GONE);
@@ -929,15 +904,14 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_URS.setText("Parented BSC");
             tv_sdbasebandtype.setText("Base Unit (Model No)");
             tv_sdrnc.setText("RNC/BSC Name");
-          //tv_sdnoofchannelelement.setText("");
+            //tv_sdnoofchannelelement.setText("");
             tvextra1.setText("UE Model");
             tvextra2.setText("UE IMEI No");
             tvremark1.setText("Phone Number");
             tvremark2.setText("SIM Number");
-
         }
-        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("CLUSTER")) {
 
+        if (changetempleteName.equalsIgnoreCase("Site AuditNSNAIRTEL") && activityType.equalsIgnoreCase("CLUSTER")) {
             tv_sectordetail_preelectrical_tilt2g.setText("Planned Azimuth");
             tv_sectordetail_postelectrical_tilt2g.setText("Changed Azimuth");
             tv_sectordetail_preelectrical_tilt3g.setText("Planned Tilt-ET");
@@ -954,23 +928,17 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
             tv_sectordetail_mimotype.setText("3G Cell ID");
             tv_sectordetail_ret.setText("FDD EARFCN DL");
             tv_sectordetail_enodebband.setText("FDD EARFCN UL");
-
             tv_sectordetail_multiplexer_avail.setText("No of TRX");
             linear_sectordetail_antennapicleg.setVisibility(View.GONE);
             tv_sectordetail_powerdeboosting.setText("FDD dlChannelBandwidth(MHz)");
             tv_sectordetail_DFS.setText("FDD ulChannelBandwidth(MHz)");
             tv_sectordetail_rb_percell.setText("4G Cell Id ");
-
             tv_sectordetail_URS.setText("Parented BSC");
             tv_sdbasebandtype.setText("Base Unit (Model No)");
             tv_sdrnc.setText("RNC/BSC Name");
-            //             tv_sdnoofchannelelement.setText("");
-
-            //   tvextra1.setText("UE Model");
-
-
+      //    tv_sdnoofchannelelement.setText("");
+      //    tvextra1.setText("UE Model");
         }
-
     }
 
     @Override
@@ -983,11 +951,9 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-
         if (v == sectordetail_img_techavailable) {
             selectImage("1");
         }
-
         if (v == sectordeatail_img_bandavailable) {
             selectImage("2");
         }
@@ -1054,7 +1020,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         if (v == sectordeatail_img_antennamodel) {
             selectImage("23");
         }
-
         if (v == sectordeatail_img_clutterpic) {
             selectImage("24");
         }
@@ -1156,7 +1121,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
         }
         if (v == btnsectordetailsave) {
 
-
 /*
         db.insertSectorDetailData(new  SectorDetailData( sectordetail_edt_techavailable.getText()+"", sectordetail_techavailable, sectordetail_edt_bandavailable.getText()+"",  sectordetail_bandavailable ,  sectordeatail_edt_APC.getText()+"",  sectordetail_APC,  sectoreatail_edt_preazimuth.getText()+"",  sectordetail_preazimuth,  sectordeatail_edt_postazimuth.getText()+"", sectordetail_postazimuth,  sectordeatail_edt_premechanical_tilt.getText()+"", sectordetail_premechanical_tilt,  sectordeatail_edt_postmechanical_tilt.getText()+"",  sectordetail_postmechanical_tilt,sectordeatail_edt_preelectrical_tilt2g.getText()+"", sectordetail_preelectrical_tilt2g,  sectordeatail_edt_postelectrical_tilt2g.getText()+"", sectordetail_postelectrical_tilt2g,  sectordeatail_edt_preelectrical_tilt3g.getText()+"",  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_postelectrical_tilt3g.getText()+"",
                  sectordetail_postelectrical_tilt3g,  sectordeatail_edt_preelectrical_tilt4gf1.getText()+"",  sectordetail_preelectrical_tilt4gf1,  sectordeatail_edt_postelectrical_tilt4gf1.getText()+"", sectordetail_postelectrical_tilt4gf1,  sectordeatail_edt_preelectrical_tilt4gf2.getText()+"", sectordetail_preelectrical_tilt4gf2, sectordeatail_edt_postelectrical_tilt4gf2.getText()+"",sectordetail_postelectrical_tilt4gf2,  sectordeatail_edt_preelectrical_tilt.getText()+"", sectordetail_preelectrical_tilt,  sectordeatail_edt_postelectrical_tilt.getText()+"",sectordetail_postelectrical_tilt,  sectordeatail_edt_antennaheight.getText()+"", sectordetail_antennaheight, sectordeatail_edt_poleheight.getText()+"",  sectordetail_poleheight, sectordeatail_edt_buildingheight.getText()+"",sectordetail_buildingheight,sectordeatail_edt_towertype.getText()+"",sectordetail_towertype, sectordeatail_edt_antennamake.getText()+"",sectordetail_antenamake ,
@@ -1169,7 +1133,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
                     sectordeatail_edt_antenmodel.getText() + "", sectordetail_antenamodel, sectordeatail_edt_clutterpic.getText() + "", sectordetail_cullterpic, sectordeatail_edt_txbandwidth.getText() + "", sectordetail_txbandwidth, sectordeatail_edt_AST.getText() + "", sectordetail_AST, sectordeatail_edt_APST.getText() + "", sectordetail_APST, sectordeatail_edt_typ_enodeb.getText() + "", sectordetail_typeenodeb, sectordeatail_edt_mimo.getText() + "", sectordetail_mimotype, sectordeatail_edt_ret.getText() + "", sectordetail_ret, sectordeatail_edt_enodebband.getText() + "", sectordetail_enodebband, sectordeatail_edt_MOP.getText() + "", sectordetail_MOP, sectordeatail_edt_COP.getText() + "", sectordetail_COP, sectordeatail_edt_multiplexer_avail.getText() + "", sectordetail_multiplexer_avail, sectordeatail_edt_antennapicleg.getText() + "", sectordetail_antennapicleg, sectordeatail_edt_CRP.getText() + "", sectordetail_CRP, sectordeatail_edt_powerdeboosting.getText() + "", sectordetail_powerdeboosting,
                     sectordeatail_edt_DFS.getText() + "", sectordetail_DFS, sectordeatail_edt_rb_percell.getText() + "", sectordetail_rb_percell, sectordeatail_edt_m_mimo.getText() + "", sectordetail_img_m_mimo, sectordeatail_edt_FCT.getText() + "", sectordetail_FCT, sectordeatail_edt_JCT.getText() + "", sectordetail_JCT, sectordeatail_edt_FCL.getText() + "", sectordetail_FCL, sectordeatail_edt_jumperlength.getText() + "", sectordetail_jumperlength, sectordeatail_edt_prachconfig_index.getText() + "", sectordetail_prachconfig_index, sectordeatail_edt_carrieraggregation.getText() + "", sectordetail_carrieraggregation, sectordeatail_edt_ACD.getText() + "", sectordetail_ACD, sectordeatail_edt_VSWRtest.getText() + "", sectordetail_VSWRtest, sectordeatail_edt_URS.getText() + "", sectordetail_URS, sectordeatail_edt_extra1.getText() + "", sectordetail_extra1, sectordeatail_edt_extra2.getText() + "", sectordetail_extra2, sectordeatail_edt_remak1.getText() + "", sectordetail_remark1, sectordeatail_edt_remak2.getText() + "", sectordetail_remark2, sectordeatailfrgamentname, 1, time,
                     sdbasebandtype_edt.getText() + "", sdbasebandtype_st, sdrnc_edt.getText() + "", sdrnc_st, sdnoofchannelelement_edt.getText() + "", sdnoofchannelelement_st));
-
 
             int count = db.getCountSectorDetail();
             tv_sectordetail_count.setText(count + "");
@@ -1191,7 +1154,6 @@ public class SectorDetailFragment extends Fragment implements View.OnClickListen
     }
 
     private void selectImage(String Value) {
-
         if (Value.equals("1")) {
           /*  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, 1);*/

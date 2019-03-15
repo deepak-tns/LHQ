@@ -19,11 +19,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.constants.AppConstants;
 import com.linkquest.lhq.R;
@@ -35,12 +37,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.linkquest.lhq.constants.AppConstants.ALERT_TYPE_NO_NETWORK;
 
 public class LoginActivity extends AppCompatActivity {
-
     String[] permissions = {
             "android.permission.ACCESS_FINE_LOCATION",
             "android.permission.READ_EXTERNAL_STORAGE",
@@ -56,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edt_password;
     private Button btn_login;
     private SharedPreferenceUtils sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
+    //    getnotificationcount();
     }
 
     private void validatelogin() {
@@ -290,6 +292,61 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private void getnotificationcount() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://13.229.8.149/wmsapiinv/api/login/GetDashboard",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response == null) {
+
+                        } else {
+                            String s = response.trim();
+                            System.out.println("msgmainactivity:::" + s);
+                            Log.v("data",response);
+
+                            try {
+                                JSONArray mJsonArray = new JSONArray(s);
+                                JSONObject mJsonObject = mJsonArray.getJSONObject(0);
+                                String dashtatus = mJsonObject.getString("dashboardstatus");
+                                String inward = mJsonObject.getString("inward");
+
+                             //   Log.v("data",dashtatus);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.error_invalid_email_id), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("projectcode","DICWHR1800000");
+                params.put("whcode", "WHSHA01");
+                params.put("empcode", "OPS1103");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("Content-Type", "application/json");
+                // params.put("Synchronized32!_89ioHeader", "Synchronized75!_89ioAppid:Synchronized75!_89ioAppkey");
+                return params;
+            }
+        };
+
+        AppSingleton.getInstance(this).addToRequestQueue(stringRequest, null);
+
     }
 
 
