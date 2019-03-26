@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:text="Survey Date"
                     android:textSize="@dimen/font_small"></TextView>
 
@@ -202,7 +202,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:text="Clutter Type"
                     android:textSize="@dimen/font_small"></TextView>
 
@@ -236,7 +236,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:text="Site Type"
                     android:textSize="@dimen/font_small"></TextView>
 

@@ -500,32 +500,7 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
                 Log.v("img-encode", img_NearEndFarEndphoto3);
             }
         }
-        if (name.equals("6")) {
 
-            if (lat == null) {
-                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
-            } else {
-
-                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_TowerPhoto2.setImageBitmap( out);
-                //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TowerPhoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                Log.v("img-encode", img_TowerPhoto2);
-            }
-        }
-        if (name.equals("7")) {
-
-            if (lat == null) {
-                Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
-            } else {
-
-                Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
-                iv_NearEndFarEndphoto3.setImageBitmap( out);
-                //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_NearEndFarEndphoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                Log.v("img-encode", img_NearEndFarEndphoto3);
-            }
-        }
         if (name.equals("8")) {
 
             if (lat == null) {
