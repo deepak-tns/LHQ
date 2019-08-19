@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -100,7 +101,6 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private ImageView  iv_Towertype;
     private ImageView  iv_remarks;
 
-
     private ImageButton ib_SiteID;
     private  ImageButton ib_SiteName;
     private  ImageButton  ib_Sharing;
@@ -163,7 +163,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private TextView tv_previouscount,tv_aftercount;
     private Handler handler;
     private String time;
-
+    private TextView tv_clearrecord;
 
 
 
@@ -199,11 +199,23 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
 
         int precount = db.getCountLosSiteDetail();
         tv_previouscount.setText(tv_previouscount.getText().toString()+precount+"");
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.deleteSomeRow_LosSiteDetail();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(LOSDetailFragment.this).replace(R.id.frameLayout_home_frag, new LOSDetailFragment());;
+                ft.commit();
+            }
+        });
 
         return v;
     }
 
     private void findIds(View v){
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
         edt_SiteID = v.findViewById(R.id.losdetail_edt_site_id);
         edt_SiteName =v.findViewById(R.id.losdetail_edt_site_name) ;
         edt_Sharing = v.findViewById(R.id.losdetail_edt_sharing);
@@ -298,7 +310,6 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
         ib_remarks.setOnClickListener(this);
         btn_save .setOnClickListener(this);
         btnlosdetail_next .setOnClickListener(this);
-
 
         iv_SiteID = v.findViewById(R.id.losdetail_ivsite_id);
         iv_SiteName =v.findViewById(R.id.losdetail_ivsite_name) ;
@@ -427,10 +438,6 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 return;
             } else {
                 btnlosdetail_next.setVisibility(View.VISIBLE);
-                if (db.getCountLosSiteDetail() > 2) {
-                    db.deleteSomeRow_LosSiteDetail();
-
-                }
 
                 db.insertLOSSiteDetailData(new LOSSiteDetailData(edt_SiteID.getText() + "", edt_SiteName.getText() + "", edt_Sharing.getText() + "", edt_SiteType.getText() + "", edt_SurveyDate.getText() + "", edt_TNPEngineer.getText() + "", edt_TNPEngineerTel.getText() + "", edt_Customerrepresentative.getText() + "", edt_Nearenddetails.getText() + "", edt_Lat.getText() + "", edt_Long.getText() + "", edt_CandidateName.getText() + "", edt_Address.getText() + "", edt_Bldght.getText() + "", edt_Totalht.getText() + "", edt_AMSL.getText() + "", edt_Buildingsideviewphoto.getText() + "", edt_AntennaTowerlocationphoto.getText() + "", edt_Possibleobstacle.getText() + "", edt_HeightofObstruction.getText() + "", edt_PanaromicPhoto.getText() + "", edt_ExisitngNoofMWAntennatypewithsizeandPhotograph.getText() + "", edt_ExisitngMWAntennaheightandPolemountPhotograph.getText() + "",
                         img_SiteID, img_SiteName, img_Sharing, img_SiteType, img_SurveyDate, img_TNPEngineer, img_TNPEngineerTel, img_Customerrepresentative, img_Nearenddetails, img_CandidateName, img_Address, img_Bldght, img_Totalht, img_AMSL, img_Buildingsideviewphoto, img_AntennaTowerlocationphoto, img_Possimgleobstacle, img_HeightofObstruction, img_PanaromicPhoto, img_ExisitngNoofMWAntennatypewithsizeandPhotograph, img_ExisitngMWAntennaheightandPolemountPhotograph,
@@ -450,62 +457,51 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
     private void selectImage(String Value) {
 
         if (Value.equals("1")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",1);
             startActivityForResult(i, 1);
         }
         if (Value.equals("2")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",2);
             startActivityForResult(i, 2);
-
         }
         if (Value.equals("3")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",3);
             startActivityForResult(i, 3);
         }
         if (Value.equals("4")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",4);
             startActivityForResult(i, 4);
         }
         if (Value.equals("5")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",5);
             startActivityForResult(i, 5);
         }
         if (Value.equals("6")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",6);
             startActivityForResult(i, 6);
         }
         if (Value.equals("7")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",7);
             startActivityForResult(i, 7);
         }
         if (Value.equals("8")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",8);
             startActivityForResult(i, 8);
         }
         if (Value.equals("9")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",9);
             startActivityForResult(i, 9);
         }
         if (Value.equals("10")) {
-
             Intent i = new Intent(getContext(), CameraSurfaceViewActivity.class);
             i.putExtra("pos",10);
             startActivityForResult(i, 10);
@@ -1053,7 +1049,7 @@ public class LOSDetailFragment extends Fragment implements View.OnClickListener 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_Commentsaddnew.setImageBitmap( out);
                 //    imgBearing330 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_Customerrepresentative = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_Commentsaddnew = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 Log.v("img-encode", img_Commentsaddnew);
             }
         }

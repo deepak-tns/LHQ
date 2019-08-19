@@ -157,6 +157,7 @@ public class SiteSurveylqt extends Fragment   {
         spi_operator.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+              //  ((TextView) parent.getChildAt(0)).setTextColor(Color.BLUE);
                 selectitem = parent.getItemAtPosition(position).toString();
                 //  todatasppinerCircle(selectitem);
 

@@ -22,6 +22,15 @@
                 android:id="@+id/tv_count_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:padding="2dp"
+                android:layout_gravity="right"
+                android:background="@drawable/edt_border"
+                android:text="Clear All Records"
+                android:id="@+id/tv_clearrecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"

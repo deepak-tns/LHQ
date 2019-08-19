@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -34,6 +35,7 @@ import com.linkquest.lhq.BitmapEncodedDecoded;
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.HTTPPostRequestMethod;
 import com.linkquest.lhq.R;
+import com.linkquest.lhq.SiteAudit.SitePanoramicFragment;
 import com.linkquest.lhq.Utils.AppSingleton;
 import com.linkquest.lhq.Utils.SharedPreferenceUtils;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
@@ -109,6 +111,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
     private final String NOLINK5 = "NOLink5";
     private final String NOLINK6 = "NOLink6";
     private SharedPreferenceUtils sharedPreferences;
+    private TextView tv_clearrecord;
 
     public LOSOtherFragment() {
         // Required empty public constructor
@@ -139,8 +142,20 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         }, 1000);
 
         findIDS(v);
-        tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString() + db.getCountOtherDetail());
 
+        tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString() + db.getCountOtherDetail());
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    db.deleteSomeRow_OtherDetail();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(LOSOtherFragment.this).replace(R.id.frameLayout_home_frag, new LOSOtherFragment());;
+                ft.commit();
+            }
+        });
         sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
         // String empId = sharedPreferences.getString(AppConstraint.EMPID);
@@ -150,6 +165,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
     }
 
     private void findIDS(View v) {
+
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
 
         tv_show_status = v.findViewById(R.id.tv_show_status);
         edtRiggerPic = v.findViewById(R.id.other_riggerpic);
@@ -202,10 +219,7 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             selectImage("5");
         }
         if (v == btnothersave) {
-            if (db.getCountOtherDetail() > 2) {
-                db.deleteSomeRow_OtherDetail();
 
-            }
             db.insertOtherData(new OtherDetailData(edtRiggerPic.getText().toString(), edtEngineerPic.getText().toString(), edtCarPic.getText().toString(),
                     edt_RiggerPicwithclimbingTower.getText().toString(), edtRiggerPicduringWah.getText().toString(), pic_RiggerPic, pic_EngineerPic, pic_CarPic,
                     pic_RiggerPicwithclimbingTower, pic_RiggerPicduringWah, time, 1));
@@ -289,19 +303,21 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                 jsonObject.put("Possibleobstacle_PIC", losSiteDetailData.get(0).getPossibleobstacle_PIC());
                 jsonObject.put("HeightofObstruction_PIC", losSiteDetailData.get(0).getHeightofObstruction_PIC());
                 jsonObject.put("PanaromicPhoto_PIC", losSiteDetailData.get(0).getPanaromicPhoto_PIC());
-                jsonObject.put("ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC", losSiteDetailData.get(0).getExisitngNoofMWAntennatypewithsizeandPhotograph_TXT());
-                jsonObject.put("ExisitngMWAntennaheightandPolemountPhotograph_PIC", losSiteDetailData.get(0).getExisitngMWAntennaheightandPolemountPhotograph_TXT());
+                jsonObject.put("ExisitngNoofMWAntennatypewithsizeandPhotograph_PIC", losSiteDetailData.get(0).getExisitngNoofMWAntennatypewithsizeandPhotograph_PIC());
+                jsonObject.put("ExisitngMWAntennaheightandPolemountPhotograph_PIC", losSiteDetailData.get(0).getExisitngMWAntennaheightandPolemountPhotograph_PIC());
                 // add  2/02/2019................................................
                 jsonObject.put("edt_Commentaddnew", losSiteDetailData.get(0).getEdt_Commentsaddnew());
                 jsonObject.put("edt_MWAntennaht", losSiteDetailData.get(0).getEdt_MWAntennaht());
                 jsonObject.put("edt_towerexistingnew", losSiteDetailData.get(0).getEdt_towerexistingnew());
                 jsonObject.put("edt_Towertype", losSiteDetailData.get(0).getEdt_Towertype());
                 jsonObject.put("edt_remarks", losSiteDetailData.get(0).getEdt_remarks());
+
                 jsonObject.put("img_Commentaddnew", losSiteDetailData.get(0).getImg_Commentsaddnew());
                 jsonObject.put("img_MWAntennaht", losSiteDetailData.get(0).getImg_MWAntennaht());
                 jsonObject.put("img_towerexistingnew", losSiteDetailData.get(0).getImg_towerexistingnew());
                 jsonObject.put("img_Towertype", losSiteDetailData.get(0).getImg_Towertype());
                 jsonObject.put("img_remarks", losSiteDetailData.get(0).getImg_remarks());
+
                 jsonObject.put("flag", losSiteDetailData.get(0).getFlag());
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
@@ -1966,7 +1982,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
                         parseSettingResponseSitePanaromic(response.toString());
                         Log.v(" response_sitepanaromic", response.toString());
                         pDialog.hide();
-
                     }
                 }, new Response.ErrorListener() {
 
@@ -1991,7 +2006,6 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void retry(VolleyError error) throws VolleyError {
-
             }
         });
 
@@ -2016,18 +2030,80 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
         JSONObject jsonObject = new JSONObject();
         List<LosPhotoData> losPhotoData = db.getLastLosPhotos();
         try {
-            jsonObject.put("NearEndFarEndphoto1", losPhotoData.get(0).getNearEndFarEndphoto1());
-            jsonObject.put("FarEndtoNearEndphoto1", losPhotoData.get(0).getFarEndtoNearEndphoto1());
-            jsonObject.put("TowerPhoto1", losPhotoData.get(0).getTowerPhoto1());
-            jsonObject.put("NearEndtoFarEndphoto2", losPhotoData.get(0).getNearEndtoFarEndphoto2());
-            jsonObject.put("FarEndNearEndphoto2", losPhotoData.get(0).getFarEndNearEndphoto2());
-            jsonObject.put("TowerPhoto2", losPhotoData.get(0).getTowerPhoto2());
-            jsonObject.put("NearEndFarEndphoto3", losPhotoData.get(0).getNearEndFarEndphoto3());
-            jsonObject.put("FarEndtoNearEndphoto3", losPhotoData.get(0).getFarEndtoNearEndphoto3());
-            jsonObject.put("TowerPhoto3", losPhotoData.get(0).getTowerPhoto3());
-            jsonObject.put("NearEndtoFarEndphoto4", losPhotoData.get(0).getNearEndtoFarEndphoto4());
-            jsonObject.put("FarEndtoNearEndphoto4", losPhotoData.get(0).getFarEndtoNearEndphoto4());
-            jsonObject.put("TowerPhoto4", losPhotoData.get(0).getTowerPhoto4());
+            if(!losPhotoData.get(0).getNearEndFarEndphoto1().equals("")){
+                jsonObject.put("NearEndFarEndphoto1", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getNearEndFarEndphoto1()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("NearEndFarEndphoto1",losPhotoData.get(0).getNearEndFarEndphoto1() );
+            }
+            if(!losPhotoData.get(0).getFarEndtoNearEndphoto1().equals("")){
+                jsonObject.put("FarEndtoNearEndphoto1", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getFarEndtoNearEndphoto1()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("FarEndtoNearEndphoto1",losPhotoData.get(0).getFarEndtoNearEndphoto1() );
+            }
+            if(!losPhotoData.get(0).getTowerPhoto1().equals("")){
+                jsonObject.put("TowerPhoto1", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getTowerPhoto1()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("TowerPhoto1",losPhotoData.get(0).getTowerPhoto1() );
+            }
+            if(!losPhotoData.get(0).getNearEndtoFarEndphoto2().equals("")){
+                jsonObject.put("NearEndtoFarEndphoto2", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getNearEndtoFarEndphoto2()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("NearEndtoFarEndphoto2",losPhotoData.get(0).getNearEndtoFarEndphoto2() );
+            }
+            if(!losPhotoData.get(0).getFarEndNearEndphoto2().equals("")){
+                jsonObject.put("FarEndNearEndphoto2", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getFarEndNearEndphoto2()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("FarEndNearEndphoto2",losPhotoData.get(0).getFarEndNearEndphoto2() );
+            }
+            if(!losPhotoData.get(0).getTowerPhoto2().equals("")){
+                jsonObject.put("TowerPhoto2", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getTowerPhoto2()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("TowerPhoto2",losPhotoData.get(0).getTowerPhoto2() );
+            }
+            if(!losPhotoData.get(0).getNearEndFarEndphoto3().equals("")){
+                jsonObject.put("NearEndFarEndphoto3", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getNearEndFarEndphoto3()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("NearEndFarEndphoto3",losPhotoData.get(0).getNearEndFarEndphoto3() );
+            }
+            if(!losPhotoData.get(0).getFarEndtoNearEndphoto3().equals("")){
+                jsonObject.put("FarEndtoNearEndphoto3", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getFarEndtoNearEndphoto3()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("FarEndtoNearEndphoto3",losPhotoData.get(0).getFarEndtoNearEndphoto3() );
+            }
+            if(!losPhotoData.get(0).getTowerPhoto3().equals("")){
+                jsonObject.put("TowerPhoto3", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getTowerPhoto3()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("TowerPhoto3",losPhotoData.get(0).getTowerPhoto3() );
+
+            }
+            if(!losPhotoData.get(0).getNearEndtoFarEndphoto4().equals("")){
+                jsonObject.put("NearEndtoFarEndphoto4", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getNearEndtoFarEndphoto4()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("NearEndtoFarEndphoto4",losPhotoData.get(0).getNearEndtoFarEndphoto4() );
+            }
+            if(!losPhotoData.get(0).getFarEndtoNearEndphoto4().equals("")){
+                jsonObject.put("FarEndtoNearEndphoto4", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getFarEndtoNearEndphoto4()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("FarEndtoNearEndphoto4",losPhotoData.get(0).getFarEndtoNearEndphoto4() );
+            }
+            if(!losPhotoData.get(0).getTowerPhoto4().equals("")){
+                jsonObject.put("TowerPhoto4", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(losPhotoData.get(0).getTowerPhoto4()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("TowerPhoto4",losPhotoData.get(0).getTowerPhoto4() );
+            }
+
             // jsonObject.put("date", losPhotoData.get(0).getDate());
             jsonObject.put("flag", losPhotoData.get(0).getFlag());
             jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
@@ -2095,8 +2171,8 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             JSONArray jsonArray = new JSONArray(s);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             String status = jsonObject.getString("Status");
-            Toast.makeText(getActivity(), status + "los Detail", Toast.LENGTH_LONG).show();
-            tv_show_status.append("los Detail :" + status + "\n");
+            Toast.makeText(getActivity(), status + "los photo", Toast.LENGTH_LONG).show();
+            tv_show_status.append("los photo :" + status + "\n");
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
@@ -2115,11 +2191,40 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             jsonObject.put("edtCarPic", otherDetailData.get(0).getEdtCarPic());
             jsonObject.put("edt_RiggerPicwithclimbingTower", otherDetailData.get(0).getEdt_RiggerPicwithclimbingTower());
             jsonObject.put("edtRiggerPicduringWah", otherDetailData.get(0).getEdtRiggerPicduringWah());
-            jsonObject.put("iv_RiggerPic", otherDetailData.get(0).getIv_RiggerPic());
-            jsonObject.put("iv_EngineerPic", otherDetailData.get(0).getIv_EngineerPic());
-            jsonObject.put("iv_CarPic", otherDetailData.get(0).getIv_CarPic());
-            jsonObject.put("iv_RiggerPicwithclimbingTower", otherDetailData.get(0).getIv_RiggerPicwithclimbingTower());
-            jsonObject.put("iv_RiggerPicduringWah", otherDetailData.get(0).getIv_RiggerPicduringWah());
+
+            if(!otherDetailData.get(0).getIv_RiggerPic().equals("")){
+                jsonObject.put("iv_RiggerPic", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(otherDetailData.get(0).getIv_RiggerPic()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("iv_RiggerPic",otherDetailData.get(0).getIv_RiggerPic() );
+            }
+            if(!otherDetailData.get(0).getIv_EngineerPic().equals("")){
+                jsonObject.put("iv_EngineerPic", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(otherDetailData.get(0).getIv_EngineerPic()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("iv_EngineerPic",otherDetailData.get(0).getIv_EngineerPic() );
+            }
+            if(!otherDetailData.get(0).getIv_CarPic().equals("")){
+                jsonObject.put("iv_CarPic", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(otherDetailData.get(0).getIv_CarPic()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("iv_CarPic",otherDetailData.get(0).getIv_CarPic() );
+            }
+            if(!otherDetailData.get(0).getIv_RiggerPicwithclimbingTower().equals("")){
+                jsonObject.put("iv_RiggerPicwithclimbingTower", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(otherDetailData.get(0).getIv_RiggerPicwithclimbingTower()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("iv_RiggerPicwithclimbingTower",otherDetailData.get(0).getIv_RiggerPicwithclimbingTower() );
+            }
+
+            if(!otherDetailData.get(0).getIv_RiggerPicduringWah().equals("")){
+                jsonObject.put("iv_RiggerPicduringWah", BitmapEncodedDecoded.encodeToBase64(BitmapFactory.decodeFile(otherDetailData.get(0).getIv_RiggerPicduringWah()), Bitmap.CompressFormat.JPEG, 100));
+            }
+            else{
+                jsonObject.put("iv_RiggerPicduringWah",otherDetailData.get(0).getIv_RiggerPicduringWah() );
+            }
+
+
             // jsonObject.put("date", otherDetailData.get(0).getDate());
             jsonObject.put("flag", otherDetailData.get(0).getFlag());
             jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
@@ -2285,41 +2390,12 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-               /* String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
-                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
-                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String destinationpath = Environment.getExternalStorageDirectory().toString();
-                File destination = new File(destinationpath + "/LinkQuest/");
-                if (!destination.exists()) {
-                    destination.mkdirs();
-                }
-                File file = null;
-                FileOutputStream fo;
-                try {
-                    // destination.createNewFile();
-                    file = new File(destination, time + ".jpg");
-                    fo = new FileOutputStream(file);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path2 = destinationpath + "/LinkQuest/"+ time+".jpg";
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-               // pic_RiggerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
-               // iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));*/
 
                 iv_RiggerPic.setImageBitmap(BitmapFactory.decodeFile(thumbnail));
-                pic_RiggerPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                //  pic_RiggerPic= thumbnail;
+              //  pic_RiggerPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                  pic_RiggerPic= thumbnail;
                 Log.v("img-encode", pic_RiggerPic);
-                // Log.v("img-encode", path2);
+
             }
         }
         if (name.equals("2")) {
@@ -2327,43 +2403,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-       /*         String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
-                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
-                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String destinationpath = Environment.getExternalStorageDirectory().toString();
-                File destination = new File(destinationpath + "/LinkQuest/");
-                if (!destination.exists()) {
-                    destination.mkdirs();
-                }
-                File file = null;
-                FileOutputStream fo;
-                try {
-                    // destination.createNewFile();
-                    file = new File(destination, time + ".jpg");
-                    fo = new FileOutputStream(file);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-              //  pic_EngineerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
-              //  iv_EngineerPic.setImageBitmap(decodeBase64(pic_EngineerPic));
-
-                String path2 = destinationpath + "/LinkQuest/"+ time+".jpg";
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                // pic_RiggerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
-                // iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));*/
 
                 iv_EngineerPic.setImageBitmap(BitmapFactory.decodeFile(thumbnail));
-                pic_EngineerPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                //  pic_EngineerPic= pic_EngineerPic;
+          //      pic_EngineerPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                  pic_EngineerPic= thumbnail;
                 Log.v("img-encode", pic_EngineerPic);
 
             }
@@ -2373,42 +2416,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-              /*  String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
-                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
-                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String destinationpath = Environment.getExternalStorageDirectory().toString();
-                File destination = new File(destinationpath + "/LinkQuest/");
-                if (!destination.exists()) {
-                    destination.mkdirs();
-                }
-                File file = null;
-                FileOutputStream fo;
-                try {
-                    // destination.createNewFile();
-                    file = new File(destination, time + ".jpg");
-                    fo = new FileOutputStream(file);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-               // pic_CarPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
-               // iv_CarPic.setImageBitmap(decodeBase64(pic_CarPic));
-                String path2 = destinationpath + "/LinkQuest/"+ time+".jpg";
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                // pic_RiggerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
-                // iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));*/
 
                 iv_CarPic.setImageBitmap(BitmapFactory.decodeFile(thumbnail));
-                pic_CarPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                //  pic_CarPic= path2;
+              //  pic_CarPic = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                  pic_CarPic= thumbnail;
                 Log.v("img-encode", thumbnail);
 
             }
@@ -2418,42 +2429,10 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-       /*         String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
-                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
-                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String destinationpath = Environment.getExternalStorageDirectory().toString();
-                File destination = new File(destinationpath + "/LinkQuest/");
-                if (!destination.exists()) {
-                    destination.mkdirs();
-                }
-                File file = null;
-                FileOutputStream fo;
-                try {
-                    // destination.createNewFile();
-                    file = new File(destination, time + ".jpg");
-                    fo = new FileOutputStream(file);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-               // pic_RiggerPicwithclimbingTower = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
-               // iv_RiggerPicwithclimbingTower.setImageBitmap(decodeBase64(pic_RiggerPicwithclimbingTower));
-                String path2 = destinationpath + "/LinkQuest/"+ time+".jpg";
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                // pic_RiggerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
-                // iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));*/
 
                 iv_RiggerPicwithclimbingTower.setImageBitmap(BitmapFactory.decodeFile(thumbnail));
-                pic_RiggerPicwithclimbingTower = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                // pic_RiggerPicwithclimbingTower= thumbnail;
+             //   pic_RiggerPicwithclimbingTower = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                 pic_RiggerPicwithclimbingTower= thumbnail;
                 Log.v("img-encode", thumbnail);
             }
         }
@@ -2462,42 +2441,9 @@ public class LOSOtherFragment extends Fragment implements View.OnClickListener {
             if (lat == null) {
                 Toast.makeText(getActivity(), "please wait gps location not found", Toast.LENGTH_LONG).show();
             } else {
-          /*      String totalString = time + "\nLat :" + lat + "\nLong :" + log + "\n" + angle;
-                // Bitmap setTextwithImage =    ProcessingBitmap(thumbnail,totalString);
-                Bitmap setTextwithImage = DrawBitmapAll.drawTextToBitmap(getContext(), thumbnail, totalString);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                setTextwithImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String destinationpath = Environment.getExternalStorageDirectory().toString();
-                File destination = new File(destinationpath + "/LinkQuest/");
-                if (!destination.exists()) {
-                    destination.mkdirs();
-                }
-                File file = null;
-                FileOutputStream fo;
-                try {
-                    // destination.createNewFile();
-                    file = new File(destination, time + ".jpg");
-                    fo = new FileOutputStream(file);
-                    fo.write(bytes.toByteArray());
-                    fo.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                String path = (file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-               // pic_RiggerPicduringWah = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);
-               // iv_RiggerPicduringWah.setImageBitmap(decodeBase64(pic_RiggerPicduringWah));
-                String path2 = destinationpath + "/LinkQuest/"+ time+".jpg";
-                // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
-                // pic_RiggerPic = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);
-                // iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));*/
-
                 iv_RiggerPicduringWah.setImageBitmap(BitmapFactory.decodeFile(thumbnail));
-                pic_RiggerPicduringWah = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                //   pic_RiggerPicduringWah= thumbnail;
+              //  pic_RiggerPicduringWah = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                   pic_RiggerPicduringWah= thumbnail;
                 Log.v("img-encode", thumbnail);
             }
         }

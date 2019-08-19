@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.text.format.DateFormat;
 import android.util.Base64;
@@ -43,7 +44,7 @@ import static android.app.Activity.RESULT_CANCELED;
  * A simple {@link Fragment} subclass.
  */
 public class SiteDetailFragment extends Fragment implements View.OnClickListener {
-    private String lat, log;
+    private String lat ="UnKnown", log = "UnKnown";
     int REQUEST_CAMERA = 1;
     private Handler handler;
     private String time;
@@ -152,7 +153,6 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private LinearLayout linear_extra2;
     private LinearLayout linear_remark1;
     private LinearLayout linear_remark2;
-    private SiteDetailForm siteDetailForm;
 
     private Button btnsitedetail;
     private Button btnsitedetailsave;
@@ -192,6 +192,34 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private TextView tv_remark1;
     private TextView tv_remark2;
 
+    private String imgsiteid = "";
+    private String imgsitename = "";
+    private String imgtowersiteid  = "";
+    private String imgtowercompnyname  = "";
+    private String imgsiteaddress  = "";
+    private String imgsectorid  = "";
+    private String imgsitetype  = "";
+    private String imgbuildingfloor  = "";
+    private String imgbuildingheight  = "";
+    private String imgtowerheight  = "";
+    private String imgfulltowerphoto  = "";
+    private String imgnodebtype  = "";
+    private String imgclassicalrrm  = "";
+    private String imgenodebtype  = "";
+    private String imganchoroper  = "";
+    private String imgsharingopco1  = "";
+    private String imgsharingopco2  = "";
+    private String imgsharingopco3  = "";
+    private String imginfraprovider  = "";
+    private String imgtypeindoor  = "";
+    private String imginfrashared  = "";
+    private String imgextra1  = "";
+    private String imgextra2  = "";
+    private String imgremark1  = "";
+    private String imgremark2  = "";
+
+    private TextView tv_clearrecord;
+
     public SiteDetailFragment() {
         // Required empty public constructor
     }
@@ -230,10 +258,151 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
         findviewIDS(v);
         db = new DatabaseHandler(getActivity());
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db. deleteSomeRow_SiteDetail();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                  ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(SiteDetailFragment.this).replace(R.id.frameLayout_home_frag, new SiteDetailFragment());;
+                ft.commit();
+            }
+        });
 
-
-        siteDetailForm = new SiteDetailForm();
         tv_sitedetail_count_previous.setText(tv_sitedetail_count_previous.getText().toString() + db.getCountSiteDetail());
+
+        if(db.getCountSiteDetail() > 0){
+
+            imgsitename =   db.getLastSiteDetailData().get(0).getSitename_photo();
+            ivsitename.setImageBitmap(decodeBase64(imgsitename));
+
+            imgtowersiteid =   db.getLastSiteDetailData().get(0).getTowersiteid_photo();
+            ivtowersiteid.setImageBitmap(decodeBase64(imgtowersiteid));
+
+            imgtowercompnyname =   db.getLastSiteDetailData().get(0).getTowercompanyname__photo();
+            ivtowercompnyname.setImageBitmap(decodeBase64(imgtowercompnyname));
+
+            imgsiteaddress =   db.getLastSiteDetailData().get(0).getSiteaddress_photo();
+            ivsiteaddress.setImageBitmap(decodeBase64(imgsiteaddress));
+
+            imgsectorid =   db.getLastSiteDetailData().get(0).getSectorid_photo();
+            ivsectorid.setImageBitmap(decodeBase64(imgsectorid));
+
+            imgsitetype =   db.getLastSiteDetailData().get(0).getSitetype_photo();
+            ivsitetype.setImageBitmap(decodeBase64(imgsitetype));
+
+            imgbuildingfloor =   db.getLastSiteDetailData().get(0).getBuildingfloor_photo();
+            ivbuildingfloor.setImageBitmap(decodeBase64(imgbuildingfloor));
+
+            imgbuildingheight =   db.getLastSiteDetailData().get(0).getBuildingheight_photo();
+            ivbuildingheight.setImageBitmap(decodeBase64(imgbuildingheight));
+
+            imgtowerheight =   db.getLastSiteDetailData().get(0).getTowerheight_photo();
+            ivtowerheight.setImageBitmap(decodeBase64(imgtowerheight));
+
+            imgfulltowerphoto =   db.getLastSiteDetailData().get(0).getFulltowerphoto_photo();
+            ivfulltowerphoto.setImageBitmap(decodeBase64(imgfulltowerphoto));
+
+            imgnodebtype =   db.getLastSiteDetailData().get(0).getNodebtype_photo();
+            ivnodebtype.setImageBitmap(decodeBase64(imgnodebtype));
+
+            imgclassicalrrm =   db.getLastSiteDetailData().get(0).getClassical_photo();
+            ivclassicalrrm.setImageBitmap(decodeBase64(imgclassicalrrm));
+
+            imgenodebtype =   db.getLastSiteDetailData().get(0).getEnodebtype_photo();
+            ivenodebtype.setImageBitmap(decodeBase64(imgenodebtype));
+
+            imganchoroper =   db.getLastSiteDetailData().get(0).getAnchoroperator_photo();
+            ivanchoroper.setImageBitmap(decodeBase64(imganchoroper));
+
+            imgsharingopco1 =   db.getLastSiteDetailData().get(0).getSharingopco1_photo();
+            ivsharingopco1.setImageBitmap(decodeBase64(imgsharingopco1));
+
+            imgsharingopco2 =   db.getLastSiteDetailData().get(0).getSharingopco2_photo();
+            ivsharingopco2.setImageBitmap(decodeBase64(imgsharingopco2));
+
+            imgsharingopco3 =   db.getLastSiteDetailData().get(0).getSharingopco3_photo();
+            ivsharingopco3.setImageBitmap(decodeBase64(imgsharingopco3));
+
+            imginfraprovider =   db.getLastSiteDetailData().get(0).getInfraprovider_photo();
+            ivinfraprovider.setImageBitmap(decodeBase64(imginfraprovider));
+
+            imgtypeindoor =   db.getLastSiteDetailData().get(0).getType_id_od_photo();
+            ivtypeindoor.setImageBitmap(decodeBase64(imgtypeindoor));
+
+            imginfrashared =   db.getLastSiteDetailData().get(0).getInfrashared_photo();
+            ivinfrashared.setImageBitmap(decodeBase64(imginfrashared));
+
+            imgextra1 =   db.getLastSiteDetailData().get(0).getExtra1_photo();
+            ivextra1.setImageBitmap(decodeBase64(imgextra1));
+
+            imgextra2 =   db.getLastSiteDetailData().get(0).getExtra2_photo();
+            ivextra2.setImageBitmap(decodeBase64(imgextra2));
+
+            imgremark1 =   db.getLastSiteDetailData().get(0).getRemark1_photo();
+            ivremark1.setImageBitmap(decodeBase64(imgremark1));
+
+            imgremark2 =   db.getLastSiteDetailData().get(0).getRemark2_photo();
+            ivremark2.setImageBitmap(decodeBase64(imgremark2));
+
+
+            sitename.setText(db.getLastSiteDetailData().get(0).getSitename());
+
+            towersiteid.setText(db.getLastSiteDetailData().get(0).getTowersiteid());
+
+            towercompanyname.setText(db.getLastSiteDetailData().get(0).getTowercompanyname());
+
+            siteaddress.setText(db.getLastSiteDetailData().get(0).getSiteaddress());
+
+            sectorid.setText( db.getLastSiteDetailData().get(0).getSectorid());
+
+            edt_lat.setText(db.getLastSiteDetailData().get(0).getLat());
+
+            edt_log.setText(db.getLastSiteDetailData().get(0).getLog());
+
+            sitetype.setText(db.getLastSiteDetailData().get(0).getSitetype());
+
+            buildingfloor.setText(db.getLastSiteDetailData().get(0).getBuildingfloor());
+
+            buildingheight.setText(db.getLastSiteDetailData().get(0).getBuildingheight());
+
+            towerheight.setText(db.getLastSiteDetailData().get(0).getTowerheight());
+
+            fulltowerphoto.setText(db.getLastSiteDetailData().get(0).getFulltowerphoto());
+
+            nodebtype.setText( db.getLastSiteDetailData().get(0).getNodebtype());
+
+            classical.setText(db.getLastSiteDetailData().get(0).getClassical());
+
+            enodebtype.setText(db.getLastSiteDetailData().get(0).getEnodebtype());
+
+            anchoroperator.setText(db.getLastSiteDetailData().get(0).getAnchoroperator());
+
+            sharingopco1.setText(db.getLastSiteDetailData().get(0).getSharingopco1());
+
+            sharingopco2.setText(db.getLastSiteDetailData().get(0).getSharingopco2());
+
+            sharingopco3.setText(db.getLastSiteDetailData().get(0).getSharingopco3());
+
+            infraprovider.setText(db.getLastSiteDetailData().get(0).getInfraprovider());
+
+            type_id_od.setText(db.getLastSiteDetailData().get(0).getType_id_od());
+
+            infrashared.setText(db.getLastSiteDetailData().get(0).getInfrashared());
+
+            extra1.setText(db.getLastSiteDetailData().get(0).getExtra1());
+
+            extra2.setText(db.getLastSiteDetailData().get(0).getExtra2());
+
+            remark1.setText( db.getLastSiteDetailData().get(0).getRemark1());
+
+            remark2.setText( db.getLastSiteDetailData().get(0).getRemark2());
+
+
+
+
+        }
 
 
         changeTemplete(v);
@@ -243,6 +412,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
     private void findviewIDS(View v) {
 
         //  start change templete code
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
         linear_sitename = v.findViewById(R.id.linear_sitedeatail_edt_site_name);
         linear_towersiteid = v.findViewById(R.id.linear_sitedeatail_edt_towersiteid);
         linear_towercompanyname = v.findViewById(R.id.linear_sitedeatail_edt_towercompanyname);
@@ -269,7 +439,6 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         linear_remark1 = v.findViewById(R.id.linear_sitedeatail_edt_remark1);
         linear_remark2 = v.findViewById(R.id.linear_sitedeatail_edt_remark2);
 
-
         tv_siteid = v.findViewById(R.id.sitedeatail_tv_site_id);
         tv_sitename = v.findViewById(R.id.sitedeatail_tv_site_name);
         tv_towersiteid = v.findViewById(R.id.sitedeatail_tv_towersiteid);
@@ -289,7 +458,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         tv_sharingopco2 = v.findViewById(R.id.sitedeatail_tv_sharingopco2);
         tv_sharingopco3 = v.findViewById(R.id.sitedeatail_tv_sharingopco3);
         tv_infraprovider = v.findViewById(R.id.sitedeatail_tv_infraprovider);
-//    tv_type_id_od =v.findViewById(R.id.tv_sitedeatail_tv_typeindoor);
+//      tv_type_id_od = v.findViewById(R.id.tv_sitedeatail_tv_typeindoor);
         tv_infrashared = v.findViewById(R.id.sitedeatail_tv_infrashared);
         tv_extra1 = v.findViewById(R.id.sitedeatail_tv_extra1);
         tv_extra2 = v.findViewById(R.id.sitedeatail_tv_extra2);
@@ -298,9 +467,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
         tvsectorid = v.findViewById(R.id.sitedeatail_tv_sectorid);
         tvtype_id_od = v.findViewById(R.id.sitedeatail_tv_typeindoor);
 
-
-        //  end change templete code
-
+ //     end change templete code
 
         siteid = v.findViewById(R.id.sitedeatail_edt_site_id);
         siteid_photo = v.findViewById(R.id.sitedeatail_img_site_id);
@@ -650,9 +817,7 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
             if (edt_lat.getText().toString().equalsIgnoreCase("")) {
                 edt_lat.setError("Please Enter Valid Value");
-
                 btnsitedetail.setVisibility(View.GONE);
-
                 return;
             }
             if (edt_log.getText().toString().equalsIgnoreCase("")) {
@@ -661,24 +826,24 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
                 return;
             } else {
                 btnsitedetail.setVisibility(View.VISIBLE);
-                if (db.getCountSiteDetail() > 2) {
+              /*  if (db.getCountSiteDetail() > 5) {
                     db.deleteSomeRow_SiteDetail();
 
-                }
+                }*/
 
-                db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), siteDetailForm.getSiteid_photo() + "", sitename.getText().toString(), siteDetailForm.getSitename_photo() + "",
-                        towersiteid.getText() + "", siteDetailForm.getTowersiteid_photo() + "", towercompanyname.getText() + "", siteDetailForm.getTowercompanyname__photo() + "",
-                        siteaddress.getText() + "", siteDetailForm.getSiteaddress_photo() + "", sectorid.getText() + "", siteDetailForm.getSectorid_photo() + "",
-                        edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", siteDetailForm.getSitetype_photo() + "", buildingfloor.getText() + "",
-                        siteDetailForm.getBuildingfloor_photo() + "", buildingheight.getText() + "", siteDetailForm.getBuildingheight_photo() + "", towerheight.getText() + "",
-                        siteDetailForm.getTowerheight_photo() + "", fulltowerphoto.getText() + "", siteDetailForm.getFulltowerphoto_photo() + "", nodebtype.getText() + "",
-                        siteDetailForm.getNodebtype_photo() + "", classical.getText() + "", siteDetailForm.getClassical_photo() + "", enodebtype.getText() + "", siteDetailForm.getEnodebtype_photo() + "",
-                        anchoroperator.getText() + "", siteDetailForm.getAnchoroperator_photo() + "", sharingopco1.getText() + "", siteDetailForm.getSharingopco1_photo() + "",
-                        sharingopco2.getText() + "", siteDetailForm.getSharingopco2_photo() + "", sharingopco3.getText() + "", siteDetailForm.getSharingopco3_photo() + "",
-                        infraprovider.getText() + "", siteDetailForm.getInfraprovider_photo() + "", type_id_od.getText() + "", siteDetailForm.getType_id_od_photo() + "",
-                        infrashared.getText() + "", siteDetailForm.getInfrashared_photo() + "", extra1.getText() + "", siteDetailForm.getExtra1_photo() + "",
-                        extra2.getText() + "", siteDetailForm.getExtra2_photo() + "", remark1.getText() + "", siteDetailForm.getRemark1_photo() + "", remark2.getText() + "",
-                        siteDetailForm.getRemark2_photo() + "", 1, time));
+                db.insertSiteDetailData(new SiteDetailForm(siteid.getText().toString(), imgsiteid, sitename.getText().toString(), imgsitename,
+                        towersiteid.getText() + "", imgtowersiteid, towercompanyname.getText() + "", imgtowercompnyname,
+                        siteaddress.getText() + "", imgsiteaddress, sectorid.getText() + "", imgsectorid,
+                        edt_lat.getText() + "", edt_log.getText() + "", sitetype.getText() + "", imgsitetype, buildingfloor.getText() + "",
+                        imgbuildingfloor + "", buildingheight.getText() + "", imgbuildingheight, towerheight.getText() + "",
+                        imgtowerheight, fulltowerphoto.getText() + "", imgfulltowerphoto, nodebtype.getText() + "",
+                        imgnodebtype, classical.getText() + "", imgclassicalrrm+ "", enodebtype.getText() + "", imgenodebtype,
+                        anchoroperator.getText() + "", imganchoroper, sharingopco1.getText() + "", imgsharingopco1,
+                        sharingopco2.getText() + "", imgsharingopco2, sharingopco3.getText() + "", imgsharingopco3,
+                        infraprovider.getText() + "", imginfraprovider, type_id_od.getText() + "", imgtypeindoor,
+                        infrashared.getText() + "", imginfrashared, extra1.getText() + "", imgextra1,
+                        extra2.getText() + "", imgextra2, remark1.getText() + "", imgremark1, remark2.getText() + "",
+                        imgremark2 + "", 1, time));
 
 
                 int count = db.getCountSiteDetail();
@@ -686,13 +851,6 @@ public class SiteDetailFragment extends Fragment implements View.OnClickListener
 
             }
 
-
-
-            /*
-db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","1","1","1","1",
-               "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1",
-               "1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1",1));
-  */
         }
         if (v == btnsitedetail) {
 
@@ -2067,12 +2225,14 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 80);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSiteid_photo(imgtxt);
+                imgsiteid =  imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsiteid.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
             }
         }
+
+
         if (name.equals("2")) {
 
             if (lat == null) {
@@ -2106,7 +2266,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSitename_photo(imgtxt);
+                imgsitename = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsitename.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2145,7 +2305,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setTowersiteid_photo(imgtxt);
+                imgtowersiteid = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivtowersiteid.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2184,7 +2344,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setTowercompanyname__photo(imgtxt);
+                imgtowercompnyname    =imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivtowercompnyname.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2223,7 +2383,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSiteaddress_photo(imgtxt);
+                imgsiteaddress = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsiteaddress.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2262,7 +2422,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSectorid_photo(imgtxt);
+                imgsectorid = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsectorid.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2301,7 +2461,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSitetype_photo(imgtxt);
+                imgsitetype = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsitetype.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2340,7 +2500,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setBuildingfloor_photo(imgtxt);
+                imgbuildingfloor = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivbuildingfloor.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2379,7 +2539,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setBuildingheight_photo(imgtxt);
+                imgbuildingheight = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivbuildingheight.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2418,7 +2578,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setTowerheight_photo(imgtxt);
+                imgtowerheight = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivtowerheight.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2457,7 +2617,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setFulltowerphoto_photo(imgtxt);
+                imgfulltowerphoto = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivfulltowerphoto.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2496,7 +2656,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setNodebtype_photo(imgtxt);
+                imgnodebtype = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivnodebtype.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2535,7 +2695,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setClassical_photo(imgtxt);
+                imgclassicalrrm = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivclassicalrrm.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2574,7 +2734,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setEnodebtype_photo(imgtxt);
+                imgenodebtype = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivenodebtype.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2613,7 +2773,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setAnchoroperator_photo(imgtxt);
+                imganchoroper = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivanchoroper.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2652,7 +2812,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSharingopco1_photo(imgtxt);
+                imgsharingopco1 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsharingopco1.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2691,7 +2851,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSharingopco2_photo(imgtxt);
+                imgsharingopco2 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsharingopco2.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2730,7 +2890,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setSharingopco3_photo(imgtxt);
+                imgsharingopco3 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivsharingopco3.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2769,7 +2929,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setInfraprovider_photo(imgtxt);
+                imginfraprovider = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivinfraprovider.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2808,7 +2968,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setType_id_od_photo(imgtxt);
+                imgtypeindoor = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivtypeindoor.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2847,7 +3007,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setInfrashared_photo(imgtxt);
+                imginfrashared = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivinfrashared.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2886,7 +3046,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setExtra1_photo(imgtxt);
+                imgextra1 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivextra1.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2925,7 +3085,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setExtra2_photo(imgtxt);
+                imgextra2 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivextra2.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -2964,7 +3124,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setRemark1_photo(imgtxt);
+                imgremark1 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivremark1.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);
@@ -3003,7 +3163,7 @@ db.insertSiteDetailData(new SiteDetailForm("1","1","1","1","1","1","1","1","1","
                 // startkmImageEncodeString = encodeToBase64(thumbnail, Bitmap.CompressFormat.JPEG, 50);
                 String imgtxt = encodeToBase64(setTextwithImage, Bitmap.CompressFormat.JPEG, 100);*/
                 String imgtxt = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 50);
-                siteDetailForm.setRemark2_photo(imgtxt);
+                imgremark2 = imgtxt;
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 50, 50, false);
                 ivremark2.setImageBitmap(out);
                 Log.v("img-encode", imgtxt);

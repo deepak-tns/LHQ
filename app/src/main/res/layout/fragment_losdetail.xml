@@ -21,6 +21,15 @@
                 android:id="@+id/tv_losdetail_count_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:padding="2dp"
+                android:layout_gravity="right"
+                android:background="@drawable/edt_border"
+                android:text="Clear All Records"
+                android:id="@+id/tv_clearrecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <LinearLayout
                 android:visibility="gone"
                 android:layout_width="match_parent"
@@ -69,6 +78,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_site_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -105,6 +117,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_sharing"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -139,6 +154,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_sitetype"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -173,6 +191,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_surveydate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -207,6 +228,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_tnpengineer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -243,6 +267,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_tnpengineertel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -277,6 +304,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_lat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -292,6 +322,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_log"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -315,6 +348,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_Customerrepresentative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -349,6 +385,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_Nearenddetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -384,6 +423,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_candidatename"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -419,6 +461,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -453,6 +498,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_buildingheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -489,6 +537,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_totalheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -524,6 +575,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_AMSL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -559,6 +613,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_Buildingsideviewphoto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -595,6 +652,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_AntennaTowerlocationphoto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -630,6 +690,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_Possibleobstacle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -665,6 +728,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_HeightofObstruction"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -700,6 +766,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_PanaromicPhoto"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -735,6 +804,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail_edt_ExisitngNoofMWAntennatypewithsizeandPhotograph"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -770,6 +842,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_ExisitngMWAntennaheightandPolemountPhotograph"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -806,6 +881,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_Commentsaddnew"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -841,6 +919,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_MWAntennaht"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -876,6 +957,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_towerexistingnew"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -911,6 +995,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_Towertype"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -946,6 +1033,9 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:ems="10"
                     android:id="@+id/losdetail__edt_remarks"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

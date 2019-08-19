@@ -23,6 +23,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:padding="2dp"
+                android:layout_gravity="right"
+                android:background="@drawable/edt_border"
+                android:text="Clear All Records"
+                android:id="@+id/tv_clearrecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <LinearLayout
                 android:id="@+id/sectordetail_linear_techavailable"
                 android:layout_width="match_parent"
@@ -47,8 +57,8 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_techavailable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
@@ -84,20 +94,20 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_bandavailable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_bandavailable"
+                    android:id="@+id/sectordetail_img_bandavailable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_APC"
+                android:id="@+id/sectordetail_linear_APC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -111,7 +121,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_APC"
+                    android:id="@+id/sectordetail_edt_APC"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -120,13 +130,13 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_APC"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_APC"
+                    android:id="@+id/sectordetail_img_APC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
@@ -156,20 +166,20 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preazimuth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_preazimuth"
+                    android:id="@+id/sectordetail_img_preazimuth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postazimuth"
+                android:id="@+id/sectordetail_linear_postazimuth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -183,7 +193,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postazimuth"
+                    android:id="@+id/sectordetail_edt_postazimuth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -192,20 +202,20 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postazimuth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postazimuth"
+                    android:id="@+id/sectordetail_img_postazimuth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_premechanical_tilt"
+                android:id="@+id/sectordetail_linear_premechanical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -219,7 +229,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_premechanical_tilt"
+                    android:id="@+id/sectordetail_edt_premechanical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -228,20 +238,20 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_premechanical_tilt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_premechanical_tilt"
+                    android:id="@+id/sectordetail_img_premechanical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postmechanical_tilt"
+                android:id="@+id/sectordetail_linear_postmechanical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -254,7 +264,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postmechanical_tilt"
+                    android:id="@+id/sectordetail_edt_postmechanical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -269,20 +279,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postmechanical_tilt"
+                    android:id="@+id/sectordetail_img_postmechanical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_preelectrical_tilt2g"
+                android:id="@+id/sectordetail_linear_preelectrical_tilt2g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_preelectrical_tilt2g"
+                    android:id="@+id/sectordetail_tv_preelectrical_tilt2g"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -290,7 +300,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_preelectrical_tilt2g"
+                    android:id="@+id/sectordetail_edt_preelectrical_tilt2g"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -305,20 +315,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_preelectrical_tilt2g"
+                    android:id="@+id/sectordetail_img_preelectrical_tilt2g"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postelectrical_tilt2g"
+                android:id="@+id/sectordetail_linear_postelectrical_tilt2g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_postelectrical_tilt2g"
+                    android:id="@+id/sectordetail_tv_postelectrical_tilt2g"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -326,7 +336,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postelectrical_tilt2g"
+                    android:id="@+id/sectordetail_edt_postelectrical_tilt2g"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -341,20 +351,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postelectrical_tilt2g"
+                    android:id="@+id/sectordetail_img_postelectrical_tilt2g"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_preelectrical_tilt3g"
+                android:id="@+id/sectordetail_linear_preelectrical_tilt3g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_preelectrical_tilt3g"
+                    android:id="@+id/sectordetail_tv_preelectrical_tilt3g"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -362,7 +372,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_preelectrical_tilt3g"
+                    android:id="@+id/sectordetail_edt_preelectrical_tilt3g"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -377,20 +387,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_pretelectrical_tilt3g"
+                    android:id="@+id/sectordetail_img_pretelectrical_tilt3g"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postelectrical_tilt3g"
+                android:id="@+id/sectordetail_linear_postelectrical_tilt3g"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_postelectrical_tilt3g"
+                    android:id="@+id/sectordetail_tv_postelectrical_tilt3g"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -398,7 +408,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postelectrical_tilt3g"
+                    android:id="@+id/sectordetail_edt_postelectrical_tilt3g"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -413,21 +423,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postelectrical_tilt3g"
+                    android:id="@+id/sectordetail_img_postelectrical_tilt3g"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_preelectrical_tilt4gf1"
+                android:id="@+id/sectordetail_linear_preelectrical_tilt4gf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_preelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_tv_preelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -435,7 +445,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_preelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_edt_preelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -444,27 +454,27 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preelectrical_tilt4gf1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_preelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_img_preelectrical_tilt4gf1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postelectrical_tilt4gf1"
+                android:id="@+id/sectordetail_linear_postelectrical_tilt4gf1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_postelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_tv_postelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -472,7 +482,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_edt_postelectrical_tilt4gf1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -481,27 +491,27 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postelectrical_tilt4gf1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postelectrical_tilt4gf1"
+                    android:id="@+id/sectordetail_img_postelectrical_tilt4gf1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_preelectrical_tilt4gf2"
+                android:id="@+id/sectordetail_linear_preelectrical_tilt4gf2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_preelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_tv_preelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -509,7 +519,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_preelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_edt_preelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -518,27 +528,27 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_preelectrical_tilt4gf2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_preelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_img_preelectrical_tilt4gf2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postelectrical_tilt4gf2"
+                android:id="@+id/sectordetail_linear_postelectrical_tilt4gf2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_postelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_tv_postelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -546,7 +556,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_edt_postelectrical_tilt4gf2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -555,20 +565,20 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_postelectrical_tilt4gf2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postelectrical_tilt4gf2"
+                    android:id="@+id/sectordetail_img_postelectrical_tilt4gf2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_preelectrical_tilt"
+                android:id="@+id/sectordetail_linear_preelectrical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -581,7 +591,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_preelectrical_tilt"
+                    android:id="@+id/sectordetail_edt_preelectrical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -596,14 +606,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_preelectrical_tilt"
+                    android:id="@+id/sectordetail_img_preelectrical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_postelectrical_tilt"
+                android:id="@+id/sectordetail_linear_postelectrical_tilt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -616,7 +626,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_postelectrical_tilt"
+                    android:id="@+id/sectordetail_edt_postelectrical_tilt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -631,14 +641,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_postelectrical_tilt"
+                    android:id="@+id/sectordetail_img_postelectrical_tilt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_antennaheight"
+                android:id="@+id/sectordetail_linear_antennaheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -651,7 +661,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_antennaheight"
+                    android:id="@+id/sectordetail_edt_antennaheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -666,21 +676,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_antennaheight"
+                    android:id="@+id/sectordetail_img_antennaheight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_poleheight"
+                android:id="@+id/sectordetail_linear_poleheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_poleheight"
+                    android:id="@+id/sectordetail_tv_poleheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -688,7 +698,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_poleheight"
+                    android:id="@+id/sectordetail_edt_poleheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -697,26 +707,26 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_poleheight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_poleheight"
+                    android:id="@+id/sectordetail_img_poleheight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_buildingheight"
+                android:id="@+id/sectordetail_linear_buildingheight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_buildingheight"
+                    android:id="@+id/sectordetail_tv_buildingheight"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -724,7 +734,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_buildingheight"
+                    android:id="@+id/sectordetail_edt_buildingheight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -739,14 +749,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_buildingheight"
+                    android:id="@+id/sectordetail_img_buildingheight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_towertype"
+                android:id="@+id/sectordetail_linear_towertype"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -759,7 +769,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_towertype"
+                    android:id="@+id/sectordetail_edt_towertype"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -774,14 +784,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_towertype"
+                    android:id="@+id/sectordetail_img_towertype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_antennamake"
+                android:id="@+id/sectordetail_linear_antennamake"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -794,7 +804,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_antennamake"
+                    android:id="@+id/sectordetail_edt_antennamake"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -809,14 +819,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_antennamake"
+                    android:id="@+id/sectordetail_img_antennamake"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_antenmodel"
+                android:id="@+id/sectordetail_linear_antenmodel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -829,7 +839,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_antenmodel"
+                    android:id="@+id/sectordetail_edt_antenmodel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -844,14 +854,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_antennamodel"
+                    android:id="@+id/sectordetail_img_antennamodel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_clutterpic"
+                android:id="@+id/sectordetail_linear_clutterpic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -864,7 +874,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_clutterpic"
+                    android:id="@+id/sectordetail_edt_clutterpic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -879,14 +889,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_clutterpic"
+                    android:id="@+id/sectordetail_img_clutterpic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_txbandwidth"
+                android:id="@+id/sectordetail_linear_txbandwidth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -899,7 +909,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_txbandwidth"
+                    android:id="@+id/sectordetail_edt_txbandwidth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -914,20 +924,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_txbandwidth"
+                    android:id="@+id/sectordetail_img_txbandwidth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_AST"
+                android:id="@+id/sectordetail_linear_AST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_AST"
+                    android:id="@+id/sectordetail_tv_AST"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -935,7 +945,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_AST"
+                    android:id="@+id/sectordetail_edt_AST"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -950,20 +960,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_AST"
+                    android:id="@+id/sectordetail_img_AST"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_APST"
+                android:id="@+id/sectordetail_linear_APST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_APST"
+                    android:id="@+id/sectordetail_tv_APST"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -971,7 +981,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_APST"
+                    android:id="@+id/sectordetail_edt_APST"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -986,20 +996,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_APST"
+                    android:id="@+id/sectordetail_img_APST"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_typ_enodeb"
+                android:id="@+id/sectordetail_linear_typ_enodeb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_typ_enodeb"
+                    android:id="@+id/sectordetail_tv_typ_enodeb"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1007,7 +1017,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_typ_enodeb"
+                    android:id="@+id/sectordetail_edt_typ_enodeb"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1022,20 +1032,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_typ_enodeb"
+                    android:id="@+id/sectordetail_img_typ_enodeb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_mimo"
+                android:id="@+id/sectordetail_linear_mimo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_mimo"
+                    android:id="@+id/sectordetail_tv_mimo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1043,7 +1053,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_mimo"
+                    android:id="@+id/sectordetail_edt_mimo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1058,20 +1068,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_mimo"
+                    android:id="@+id/sectordetail_img_mimo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_ret"
+                android:id="@+id/sectordetail_linear_ret"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_ret"
+                    android:id="@+id/sectordetail_tv_ret"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1079,7 +1089,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_ret"
+                    android:id="@+id/sectordetail_edt_ret"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1094,20 +1104,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_ret"
+                    android:id="@+id/sectordetail_img_ret"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_enodebband"
+                android:id="@+id/sectordetail_linear_enodebband"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_enodebband"
+                    android:id="@+id/sectordetail_tv_enodebband"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1115,7 +1125,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_enodebband"
+                    android:id="@+id/sectordetail_edt_enodebband"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1130,20 +1140,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_enodebband"
+                    android:id="@+id/sectordetail_img_enodebband"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_MOP"
+                android:id="@+id/sectordetail_linear_MOP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_MOP"
+                    android:id="@+id/sectordetail_tv_MOP"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1151,7 +1161,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_MOP"
+                    android:id="@+id/sectordetail_edt_MOP"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1166,20 +1176,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_MOP"
+                    android:id="@+id/sectordetail_img_MOP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_COP"
+                android:id="@+id/sectordetail_linear_COP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_COP"
+                    android:id="@+id/sectordetail_tv_COP"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1187,7 +1197,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_COP"
+                    android:id="@+id/sectordetail_edt_COP"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1202,20 +1212,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_COP"
+                    android:id="@+id/sectordetail_img_COP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_multiplexer_avail"
+                android:id="@+id/sectordetail_linear_multiplexer_avail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_multiplexer_avail"
+                    android:id="@+id/sectordetail_tv_multiplexer_avail"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1223,7 +1233,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_multiplexer_avail"
+                    android:id="@+id/sectordetail_edt_multiplexer_avail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1238,20 +1248,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_multiplexer_avail"
+                    android:id="@+id/sectordetail_img_multiplexer_avail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_antennapicleg"
+                android:id="@+id/sectordetail_linear_antennapicleg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_antennapicleg"
+                    android:id="@+id/sectordetail_tv_antennapicleg"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1259,7 +1269,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_antennapicleg"
+                    android:id="@+id/sectordetail_edt_antennapicleg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1274,21 +1284,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_antennapicleg"
+                    android:id="@+id/sectordetail_img_antennapicleg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_CRP"
+                android:id="@+id/sectordetail_linear_CRP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_CRP"
+                    android:id="@+id/sectordetail_tv_CRP"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1296,7 +1306,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_CRP"
+                    android:id="@+id/sectordetail_edt_CRP"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1311,21 +1321,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_CRP"
+                    android:id="@+id/sectordetail_img_CRP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_powerdeboosting"
+                android:id="@+id/sectordetail_linear_powerdeboosting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_powerdeboosting"
+                    android:id="@+id/sectordetail_tv_powerdeboosting"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1333,7 +1343,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_powerdeboosting"
+                    android:id="@+id/sectordetail_edt_powerdeboosting"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1348,21 +1358,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_powerdeboosting"
+                    android:id="@+id/sectordetail_img_powerdeboosting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_DFS"
+                android:id="@+id/sectordetail_linear_DFS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_DFS"
+                    android:id="@+id/sectordetail_tv_DFS"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1370,7 +1380,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_DFS"
+                    android:id="@+id/sectordetail_edt_DFS"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1385,21 +1395,21 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_DFS"
+                    android:id="@+id/sectordetail_img_DFS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_rb_percell"
+                android:id="@+id/sectordetail_linear_rb_percell"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_rb_percell"
+                    android:id="@+id/sectordetail_tv_rb_percell"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1407,7 +1417,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_rb_percell"
+                    android:id="@+id/sectordetail_edt_rb_percell"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1422,20 +1432,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_rb_percell"
+                    android:id="@+id/sectordetail_img_rb_percell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_m_mimo"
+                android:id="@+id/sectordetail_linear_m_mimo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_m_mimo"
+                    android:id="@+id/sectordetail_tv_m_mimo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1443,7 +1453,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_m_mimo"
+                    android:id="@+id/sectordetail_edt_m_mimo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1458,14 +1468,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_m_mimo"
+                    android:id="@+id/sectordetail_img_m_mimo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_FCT"
+                android:id="@+id/sectordetail_linear_FCT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1478,7 +1488,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_FCT"
+                    android:id="@+id/sectordetail_edt_FCT"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1493,14 +1503,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_FCT"
+                    android:id="@+id/sectordetail_img_FCT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_JCT"
+                android:id="@+id/sectordetail_linear_JCT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1513,7 +1523,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_JCT"
+                    android:id="@+id/sectordetail_edt_JCT"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1528,14 +1538,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_JCT"
+                    android:id="@+id/sectordetail_img_JCT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_FCL"
+                android:id="@+id/sectordetail_linear_FCL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1548,7 +1558,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_FCL"
+                    android:id="@+id/sectordetail_edt_FCL"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1563,14 +1573,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_FCL"
+                    android:id="@+id/sectordetail_img_FCL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_jumperlength"
+                android:id="@+id/sectordetail_linear_jumperlength"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1583,7 +1593,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_jumperlength"
+                    android:id="@+id/sectordetail_edt_jumperlength"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1598,14 +1608,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_jumperlength"
+                    android:id="@+id/sectordetail_img_jumperlength"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_prachconfig_index"
+                android:id="@+id/sectordetail_linear_prachconfig_index"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1618,7 +1628,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_prachconfig_index"
+                    android:id="@+id/sectordetail_edt_prachconfig_index"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1633,14 +1643,14 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_prachconfig_index"
+                    android:id="@+id/sectordetail_img_prachconfig_index"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_carrieraggregation"
+                android:id="@+id/sectordetail_linear_carrieraggregation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -1653,7 +1663,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_carrieraggregation"
+                    android:id="@+id/sectordetail_edt_carrieraggregation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1668,20 +1678,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_carrieraggregation"
+                    android:id="@+id/sectordetail_img_carrieraggregation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_ACD"
+                android:id="@+id/sectordetail_linear_ACD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_ACD"
+                    android:id="@+id/sectordetail_tv_ACD"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1690,7 +1700,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_ACD"
+                    android:id="@+id/sectordetail_edt_ACD"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1699,27 +1709,27 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_ACD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_ACD"
+                    android:id="@+id/sectordetail_img_ACD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_VSWRtest"
+                android:id="@+id/sectordetail_linear_VSWRtest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_VSWRtest"
+                    android:id="@+id/sectordetail_tv_VSWRtest"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1727,7 +1737,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_VSWRtest"
+                    android:id="@+id/sectordetail_edt_VSWRtest"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1742,20 +1752,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_VSWRtest"
+                    android:id="@+id/sectordetail_img_VSWRtest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_URS"
+                android:id="@+id/sectordetail_linear_URS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_URS"
+                    android:id="@+id/sectordetail_tv_URS"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -1764,7 +1774,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_URS"
+                    android:id="@+id/sectordetail_edt_URS"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1779,7 +1789,7 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_URS"
+                    android:id="@+id/sectordetail_img_URS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
@@ -1893,14 +1903,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_extra1"
+                android:id="@+id/sectordetail_linear_extra1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_extra1"
+                    android:id="@+id/sectordetail_tv_extra1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1908,7 +1918,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_extra1"
+                    android:id="@+id/sectordetail_edt_extra1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1917,27 +1927,27 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_extra1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_extra1"
+                    android:id="@+id/sectordetail_img_extra1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_extra2"
+                android:id="@+id/sectordetail_linear_extra2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_gravity="center_horizontal"
-                    android:id="@+id/sectordeatail_tv_extra2"
+                    android:id="@+id/sectordetail_tv_extra2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -1945,7 +1955,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_extra2"
+                    android:id="@+id/sectordetail_edt_extra2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1954,26 +1964,26 @@
 
                 <ImageView
                     android:id="@+id/iv_sectordetail_extra2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@android:drawable/ic_menu_gallery"
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_extra2"
+                    android:id="@+id/sectordetail_img_extra2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_remak1"
+                android:id="@+id/sectordetail_linear_remak1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_remak1"
+                    android:id="@+id/sectordetail_tv_remak1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight=".8"
@@ -1981,7 +1991,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_remak1"
+                    android:id="@+id/sectordetail_edt_remak1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -1996,20 +2006,20 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_remark1"
+                    android:id="@+id/sectordetail_img_remark1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sectordeatail_linear_remak2"
+                android:id="@+id/sectordetail_linear_remak2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/sectordeatail_tv_remak2"
+                    android:id="@+id/sectordetail_tv_remak2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
@@ -2017,7 +2027,7 @@
                     android:textSize="@dimen/font_small"></TextView>
 
                 <EditText
-                    android:id="@+id/sectordeatail_edt_remak2"
+                    android:id="@+id/sectordetail_edt_remak2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -2032,7 +2042,7 @@
                     android:tag="imgView,Bearing0" />
 
                 <ImageButton
-                    android:id="@+id/sectordeatail_img_remark2"
+                    android:id="@+id/sectordetail_img_remark2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/ic_menu_camera" />
@@ -2083,3 +2093,4 @@
 
 
 </RelativeLayout>
+

@@ -34,22 +34,21 @@ public class RFTabFragment extends Fragment {
          *Inflate tab_layout and setup Views.
          */
          view =  inflater.inflate(R.layout.fragment_tab_layout,null);
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+         setupViewPager(viewPager);
+         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+         tabLayout.setupWithViewPager(viewPager);
 
         return view;
     }
     private void setupViewPager(ViewPager viewPager) {
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         for(int i =1;i<=4;i++){
             adapter.addFrag( RFSectorDetailFragment.newInstance(i,"Sector"+i), "Sector"+i);
         }
 
-    /*    adapter.addFrag(new SiteDetailFragment(), "Sector2");
+    /*  adapter.addFrag(new SiteDetailFragment(), "Sector2");
         adapter.addFrag(new SiteDetailFragment(), "Sector3");
         adapter.addFrag(new SiteDetailFragment(), "Sector4");
     */
@@ -69,9 +68,6 @@ public class RFTabFragment extends Fragment {
         Log.e("DEBUG", "OnPause of TabFragment");
         super.onPause();
     }
-
-
-
 
      class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

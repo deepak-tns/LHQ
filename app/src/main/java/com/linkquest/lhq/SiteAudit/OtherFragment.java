@@ -10,8 +10,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -50,7 +53,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
+
+import it.sauronsoftware.ftp4j.FTPClient;
+import it.sauronsoftware.ftp4j.FTPDataTransferListener;
 
 import static android.app.Activity.RESULT_CANCELED;
 
@@ -89,7 +98,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     private Button btnUpload;
     private TextView tv_otherdetail_count;
     private TextView tv_otherdetail_count_previous;
-    private TextView tv_show_status;
+    private TextView tv_show_status,tv_clearrecord;
 
     private final String SECTOR1 ="Sector1";
     private final String SECTOR2 ="Sector2";
@@ -125,21 +134,61 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         }, 1000);
 
         findIDS(v);
-        tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString()+db.getCountOtherDetail());
-
-
-
 
         sharedPreferences = SharedPreferenceUtils.getInstance();
         sharedPreferences.setContext(getActivity());
        // String empId = sharedPreferences.getString(AppConstraint.EMPID);
         Toast.makeText(getActivity(), sharedPreferences.getString(AppConstants.DATE)+sharedPreferences.getString(AppConstants.EMPID)+
                 sharedPreferences.getString(AppConstants.SITEID),Toast.LENGTH_LONG).show();
-        return v;
+
+        tv_otherdetail_count_previous.setText(tv_otherdetail_count_previous.getText().toString()+db.getCountOtherDetail());
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db. deleteSomeRow_OtherDetail();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(OtherFragment.this).replace(R.id.frameLayout_home_frag, new OtherFragment());;
+                ft.commit();
+            }
+        });
+
+        if(db.getCountOtherDetail() > 0) {
+
+            pic_RiggerPic = db.getLastOtherdetaiData().get(0).getIv_RiggerPic();
+            iv_RiggerPic.setImageBitmap(decodeBase64(pic_RiggerPic));
+
+            pic_EngineerPic = db.getLastOtherdetaiData().get(0).getIv_EngineerPic();
+            iv_EngineerPic.setImageBitmap(decodeBase64(pic_EngineerPic));
+
+            pic_CarPic = db.getLastOtherdetaiData().get(0).getIv_CarPic();
+            iv_CarPic.setImageBitmap(decodeBase64(pic_CarPic));
+
+            pic_RiggerPicwithclimbingTower = db.getLastOtherdetaiData().get(0).getIv_RiggerPicwithclimbingTower();
+            iv_RiggerPicwithclimbingTower.setImageBitmap(decodeBase64(pic_RiggerPicwithclimbingTower));
+
+            pic_RiggerPicduringWah = db.getLastOtherdetaiData().get(0).getIv_RiggerPicduringWah();
+            iv_RiggerPicduringWah.setImageBitmap(decodeBase64(pic_RiggerPicduringWah));
+
+            edtRiggerPic.setText(db.getLastOtherdetaiData().get(0).getEdtRiggerPic());
+
+            edtEngineerPic.setText(db.getLastOtherdetaiData().get(0).getEdtEngineerPic());
+
+            edtCarPic.setText(db.getLastOtherdetaiData().get(0).getEdtCarPic());
+
+            edt_RiggerPicwithclimbingTower.setText(db.getLastOtherdetaiData().get(0).getEdt_RiggerPicwithclimbingTower());
+
+            edtRiggerPicduringWah.setText(db.getLastOtherdetaiData().get(0).getEdtRiggerPicduringWah());
+
+        }
+
+
+            return v;
     }
 
     private void findIDS(View v){
-
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
         tv_show_status =v.findViewById(R.id.tv_show_status);
 
          edtRiggerPic = v.findViewById(R.id.other_riggerpic);
@@ -192,10 +241,10 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             selectImage("5");
         }
         if(v==btnothersave) {
-            if (db.getCountOtherDetail() > 2) {
+         /*   if (db.getCountOtherDetail() > 2) {
                 db.deleteSomeRow_OtherDetail();
 
-            }
+            }*/
 
         db.insertOtherData(new OtherDetailData(edtRiggerPic.getText().toString(),edtEngineerPic.getText().toString(),edtCarPic.getText().toString(),
         edt_RiggerPicwithclimbingTower.getText().toString(),edtRiggerPicduringWah.getText().toString(),pic_RiggerPic,pic_EngineerPic,pic_CarPic,
@@ -212,8 +261,42 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             toSendDataSectorDetail2(SECTOR2);
             toSendDataSectorDetail3(SECTOR3);
             toSendDataSectorDetail4(SECTOR4);
-            toSendDataSitePanaromic();
+         //   toSendDataSitePanaromic();
             toSendDataOtherDetail();
+
+            final List<SitePanoramicData> sitePanoramicData = db.getLastSitePanaromicData();
+
+// add 19/8/2019................................by deepak
+            new Thread() {
+
+                public void run() {
+                    Looper.prepare();
+
+                    new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing0Image()));
+           /* new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing30Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing60Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing90Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing120Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing150Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing180Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing210Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing240Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing270Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing300Image()));
+            new ftpConnect_Send().uploadFile(new File(sitePanoramicData.get(0).getBtnBearing330Image()));*/
+
+                    Looper.loop();
+                }
+
+
+
+            }.start();
+
+            // add 19/8/2019................................by deepak
+
+            saveTextFileSiteDetail();
+            saveTextFileSurveyDetail();
+
        // startActivity(new Intent(getActivity(),SiteAuditAllDataHistory.class));
         }
     }
@@ -449,183 +532,183 @@ private JSONObject jsondataSectorDetail1(String secname){
     List<SectorDetailData> sectorDetailData = db.getLastSectordetail(secname);
     if(sectorDetailData.size()>0){
         Log.v("OtherFragSectorDetail",sectorDetailData.toString());
-    try {
-        jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
-        jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
-        jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-        jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-        jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-        jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
-        jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-        jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-        jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-        jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-        jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-        jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-        jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-        jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-        jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-        jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-        jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-        jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-        jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-        jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-        jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-        jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-        jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-        jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-        jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-        jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-        jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-        jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-        jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-        jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-        jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-        jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-        jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-        jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-        jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-        jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-        jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-        jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-        jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-        jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-        jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-        jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-        jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-        jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-        jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-        jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-        jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-        jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-        jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-        jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-        jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-        jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-        jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-        jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-        jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-        jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-        jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-        jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-        jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-        jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-        jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-        jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-        jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-        jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-        jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-        jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-        jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-        jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-        jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-        jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-        jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-        jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-        jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-        jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-        jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-        jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-        jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-        jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-        jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-        jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-        jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-        jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-        jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-        jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-        jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-        jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-        jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-        jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-        jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-        jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-        jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-        jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-        jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-        jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-        jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-        jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-        jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-        jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-        jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-        jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-        jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-        jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-        jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-        jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-        jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-        jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-        jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
-        jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-       // jsonObject.put("date", sectorDetailData.get(0).getDate());
+        try {
+            jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
+            jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
+            jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
+            jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordetail_img_bandavailable());
+            jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordetail_edt_APC());
+            jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordetail_img_APC());
+            jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
+            jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordetail_img_preazimuth());
+            jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordetail_edt_postazimuth());
+            jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordetail_img_postazimuth());
+            jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_premechanical_tilt());
+            jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordetail_img_premechanical_tilt());
+            jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_postmechanical_tilt());
+            jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_img_postmechanical_tilt());
+            jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt2g());
+            jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt2g());
+            jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt2g());
+            jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt2g());
+            jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt3g());
+            jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_pretelectrical_tilt3g());
+            jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt3g());
+            jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt3g());
+            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf1());
+            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf1());
+            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf1());
+            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf1());
+            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf2());
+            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf2());
+            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf2());
+            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf2());
+            jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt());
+            jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt());
+            jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt());
+            jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt());
+            jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordetail_edt_antennaheight());
+            jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordetail_img_antennaheight());
+            jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordetail_edt_poleheight());
+            jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordetail_img_poleheight());
+            jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordetail_edt_buildingheight());
+            jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordetail_img_buildingheight());
+            jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordetail_edt_towertype());
+            jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordetail_img_towertype());
+            jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordetail_edt_antennamake());
+            jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordetail_img_antennamake());
+            jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordetail_edt_antenmodel());
+            jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordetail_img_antennamodel());
+            jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordetail_edt_clutterpic());
+            jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordetail_img_clutterpic());
+            jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordetail_edt_txbandwidth());
+            jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordetail_img_txbandwidth());
+            jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordetail_edt_AST());
+            jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordetail_img_AST());
+            jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordetail_edt_APST());
+            jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordetail_img_APST());
+            jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordetail_edt_typ_enodeb());
+            jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordetail_img_typ_enodeb());
+            jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordetail_edt_mimo());
+            jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordetail_img_mimo());
+            jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordetail_edt_ret());
+            jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordetail_img_ret());
+            jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordetail_edt_enodebband());
+            jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordetail_img_enodebband());
+            jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordetail_edt_MOP());
+            jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordetail_img_MOP());
+            jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordetail_edt_COP());
+            jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordetail_img_COP());
+            jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordetail_edt_multiplexer_avail());
+            jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordetail_img_multiplexer_avail());
+            jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordetail_edt_antennapicleg());
+            jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordetail_img_antennapicleg());
+            jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordetail_edt_CRP());
+            jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordetail_img_CRP());
+            jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordetail_edt_powerdeboosting());
+            jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordetail_img_powerdeboosting());
+            jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordetail_edt_DFS());
+            jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordetail_img_DFS());
+            jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordetail_edt_rb_percell());
+            jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordetail_img_rb_percell());
+            jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordetail_edt_m_mimo());
+            jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordetail_img_m_mimo());
+            jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordetail_edt_FCT());
+            jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordetail_img_FCT());
+            jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordetail_edt_JCT());
+            jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordetail_img_JCT());
+            jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordetail_edt_FCL());
+            jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordetail_img_FCL());
+            jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordetail_edt_jumperlength());
+            jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordetail_img_jumperlength());
+            jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordetail_edt_prachconfig_index());
+            jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordetail_img_prachconfig_index());
+            jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordetail_edt_carrieraggregation());
+            jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordetail_img_carrieraggregation());
+            jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordetail_edt_ACD());
+            jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordetail_img_ACD());
+            jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordetail_edt_VSWRtest());
+            jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordetail_img_VSWRtest());
+            jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordetail_edt_URS());
+            jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordetail_img_URS());
+            jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordetail_edt_extra1());
+            jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordetail_img_extra1());
+            jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordetail_edt_extra2());
+            jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordetail_img_extra2());
+            jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordetail_edt_remak1());
+            jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordetail_img_remark1());
+            jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordetail_edt_remak2());
+            jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordetail_img_remark2());
+            jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordetailfrgamentname());
+            jsonObject.put("flag", sectorDetailData.get(0).getFlag());
+            // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
-        jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
-        jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
-        jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
-        jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
+            jsonObject.put("siteid", sharedPreferences.getString(AppConstants.SITEID));
+            jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
+            jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
+            jsonObject.put("idall",sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator));
 
-        jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
-        jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
-        jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
-        jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
-        jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
-        jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
+            jsonObject.put("Baseband_Unit_Type", sectorDetailData.get(0).getSdbasebandUnitType_edt());
+            jsonObject.put("RNC_Name", sectorDetailData.get(0).getSdrNCName_edt());
+            jsonObject.put("No_of_Channel_Elements", sectorDetailData.get(0).getSdnoofChannelElements_edt());
+            jsonObject.put("Baseband_Unit_Type_img", sectorDetailData.get(0).getSdbasebandUnitType_img());
+            jsonObject.put("RNC_Name_img", sectorDetailData.get(0).getSdrNCName_img());
+            jsonObject.put("No_of_Channel_Elements_img", sectorDetailData.get(0).getSdnoofChannelElements_img());
 
-    }catch (Exception e){
-Log.e("Exception",e.toString());
-    }
+        }catch (Exception e){
+            Log.e("Exception",e.toString());
+        }
     }
     return jsonObject;
 }
-private void toSendDataSectorDetail1(String secname) {
-    //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
-    final ProgressDialog pDialog = new ProgressDialog(getActivity());
-    pDialog.setMessage("Loading...");
-    pDialog.setCancelable(false);
-    pDialog.show();
-    Log.v("jsonobjectsectordetail",jsondataSectorDetail1(secname).toString());
-    JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-            AppConstants.SECTORDETAIL,jsondataSectorDetail1(secname),
-            new Response.Listener<JSONArray>() {
+    private void toSendDataSectorDetail1(String secname) {
+        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Loading...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        Log.v("jsonobjectsectordetail",jsondataSectorDetail1(secname).toString());
+        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
+                AppConstants.SECTORDETAIL,jsondataSectorDetail1(secname),
+                new Response.Listener<JSONArray>() {
 
 
-                @Override
-                public void onResponse(JSONArray response) {
-                    parseSettingResponseSectorDetail1(response.toString());
-                    Log.v("response_sectordetail", response.toString());
-                    pDialog.hide();
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        parseSettingResponseSectorDetail1(response.toString());
+                        Log.v("response_sectordetail", response.toString());
+                        pDialog.hide();
 
-                }
-            }, new Response.ErrorListener() {
+                    }
+                }, new Response.ErrorListener() {
 
 
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.v("response errorsectordetail", error.toString());
-            pDialog.hide();
-        }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.v("response errorsectordetail", error.toString());
+                pDialog.hide();
+            }
 
-    });
-    jsonObjReq.setRetryPolicy(new RetryPolicy() {
-        @Override
-        public int getCurrentTimeout() {
-            return 50000;
-        }
+        });
+        jsonObjReq.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
 
-        @Override
-        public int getCurrentRetryCount() {
-            return 50000;
-        }
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
 
-        @Override
-        public void retry(VolleyError error) throws VolleyError {
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
 
-        }
-    });
+            }
+        });
 
-    AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
-}
+        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
+    }
     private void parseSettingResponseSectorDetail1(String s) {
         try {
             JSONArray jsonArray = new JSONArray(s);
@@ -633,17 +716,14 @@ private void toSendDataSectorDetail1(String secname) {
             String status = jsonObject.getString("Status");
             Toast.makeText(getActivity(),status + "Sector Detail1",Toast.LENGTH_LONG).show();
             tv_show_status.append("Sector Detail1 :" +status+"\n");
-            if (db.getCountSectorDetail() > 8) {
-                db.deleteSomeRow_SectorDetail();
 
-            }
             // String password = jsonObject.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//..........................SectorDetail 2
+    //..........................SectorDetail 2
     private JSONObject jsondataSectorDetail2(String secname){
         JSONObject jsonObject = new JSONObject();
         List<SectorDetailData> sectorDetailData = db.getLastSectordetail(secname);
@@ -653,112 +733,112 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
                 jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
                 jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
+                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordetail_img_bandavailable());
+                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordetail_edt_APC());
+                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordetail_img_APC());
                 jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
+                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordetail_img_preazimuth());
+                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordetail_edt_postazimuth());
+                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordetail_img_postazimuth());
+                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_premechanical_tilt());
+                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordetail_img_premechanical_tilt());
+                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_postmechanical_tilt());
+                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_img_postmechanical_tilt());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_pretelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordetail_edt_antennaheight());
+                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordetail_img_antennaheight());
+                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordetail_edt_poleheight());
+                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordetail_img_poleheight());
+                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordetail_edt_buildingheight());
+                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordetail_img_buildingheight());
+                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordetail_edt_towertype());
+                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordetail_img_towertype());
+                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordetail_edt_antennamake());
+                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordetail_img_antennamake());
+                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordetail_edt_antenmodel());
+                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordetail_img_antennamodel());
+                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordetail_edt_clutterpic());
+                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordetail_img_clutterpic());
+                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordetail_edt_txbandwidth());
+                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordetail_img_txbandwidth());
+                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordetail_edt_AST());
+                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordetail_img_AST());
+                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordetail_edt_APST());
+                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordetail_img_APST());
+                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordetail_edt_typ_enodeb());
+                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordetail_img_typ_enodeb());
+                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordetail_edt_mimo());
+                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordetail_img_mimo());
+                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordetail_edt_ret());
+                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordetail_img_ret());
+                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordetail_edt_enodebband());
+                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordetail_img_enodebband());
+                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordetail_edt_MOP());
+                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordetail_img_MOP());
+                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordetail_edt_COP());
+                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordetail_img_COP());
+                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordetail_edt_multiplexer_avail());
+                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordetail_img_multiplexer_avail());
+                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordetail_edt_antennapicleg());
+                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordetail_img_antennapicleg());
+                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordetail_edt_CRP());
+                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordetail_img_CRP());
+                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordetail_edt_powerdeboosting());
+                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordetail_img_powerdeboosting());
+                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordetail_edt_DFS());
+                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordetail_img_DFS());
+                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordetail_edt_rb_percell());
+                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordetail_img_rb_percell());
+                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordetail_edt_m_mimo());
+                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordetail_img_m_mimo());
+                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordetail_edt_FCT());
+                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordetail_img_FCT());
+                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordetail_edt_JCT());
+                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordetail_img_JCT());
+                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordetail_edt_FCL());
+                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordetail_img_FCL());
+                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordetail_edt_jumperlength());
+                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordetail_img_jumperlength());
+                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordetail_edt_prachconfig_index());
+                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordetail_img_prachconfig_index());
+                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordetail_edt_carrieraggregation());
+                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordetail_img_carrieraggregation());
+                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordetail_edt_ACD());
+                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordetail_img_ACD());
+                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordetail_edt_VSWRtest());
+                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordetail_img_VSWRtest());
+                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordetail_edt_URS());
+                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordetail_img_URS());
+                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordetail_edt_extra1());
+                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordetail_img_extra1());
+                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordetail_edt_extra2());
+                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordetail_img_extra2());
+                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordetail_edt_remak1());
+                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordetail_img_remark1());
+                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordetail_edt_remak2());
+                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordetail_img_remark2());
+                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordetailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
@@ -849,112 +929,112 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
                 jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
                 jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
+                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordetail_img_bandavailable());
+                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordetail_edt_APC());
+                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordetail_img_APC());
                 jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
+                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordetail_img_preazimuth());
+                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordetail_edt_postazimuth());
+                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordetail_img_postazimuth());
+                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_premechanical_tilt());
+                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordetail_img_premechanical_tilt());
+                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_postmechanical_tilt());
+                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_img_postmechanical_tilt());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_pretelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordetail_edt_antennaheight());
+                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordetail_img_antennaheight());
+                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordetail_edt_poleheight());
+                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordetail_img_poleheight());
+                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordetail_edt_buildingheight());
+                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordetail_img_buildingheight());
+                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordetail_edt_towertype());
+                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordetail_img_towertype());
+                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordetail_edt_antennamake());
+                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordetail_img_antennamake());
+                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordetail_edt_antenmodel());
+                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordetail_img_antennamodel());
+                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordetail_edt_clutterpic());
+                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordetail_img_clutterpic());
+                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordetail_edt_txbandwidth());
+                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordetail_img_txbandwidth());
+                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordetail_edt_AST());
+                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordetail_img_AST());
+                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordetail_edt_APST());
+                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordetail_img_APST());
+                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordetail_edt_typ_enodeb());
+                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordetail_img_typ_enodeb());
+                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordetail_edt_mimo());
+                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordetail_img_mimo());
+                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordetail_edt_ret());
+                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordetail_img_ret());
+                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordetail_edt_enodebband());
+                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordetail_img_enodebband());
+                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordetail_edt_MOP());
+                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordetail_img_MOP());
+                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordetail_edt_COP());
+                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordetail_img_COP());
+                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordetail_edt_multiplexer_avail());
+                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordetail_img_multiplexer_avail());
+                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordetail_edt_antennapicleg());
+                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordetail_img_antennapicleg());
+                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordetail_edt_CRP());
+                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordetail_img_CRP());
+                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordetail_edt_powerdeboosting());
+                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordetail_img_powerdeboosting());
+                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordetail_edt_DFS());
+                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordetail_img_DFS());
+                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordetail_edt_rb_percell());
+                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordetail_img_rb_percell());
+                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordetail_edt_m_mimo());
+                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordetail_img_m_mimo());
+                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordetail_edt_FCT());
+                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordetail_img_FCT());
+                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordetail_edt_JCT());
+                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordetail_img_JCT());
+                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordetail_edt_FCL());
+                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordetail_img_FCL());
+                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordetail_edt_jumperlength());
+                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordetail_img_jumperlength());
+                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordetail_edt_prachconfig_index());
+                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordetail_img_prachconfig_index());
+                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordetail_edt_carrieraggregation());
+                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordetail_img_carrieraggregation());
+                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordetail_edt_ACD());
+                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordetail_img_ACD());
+                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordetail_edt_VSWRtest());
+                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordetail_img_VSWRtest());
+                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordetail_edt_URS());
+                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordetail_img_URS());
+                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordetail_edt_extra1());
+                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordetail_img_extra1());
+                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordetail_edt_extra2());
+                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordetail_img_extra2());
+                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordetail_edt_remak1());
+                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordetail_img_remark1());
+                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordetail_edt_remak2());
+                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordetail_img_remark2());
+                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordetailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
@@ -1045,112 +1125,112 @@ private void toSendDataSectorDetail1(String secname) {
                 jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
                 jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
                 jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
+                jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordetail_img_bandavailable());
+                jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordetail_edt_APC());
+                jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordetail_img_APC());
                 jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
+                jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordetail_img_preazimuth());
+                jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordetail_edt_postazimuth());
+                jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordetail_img_postazimuth());
+                jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_premechanical_tilt());
+                jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordetail_img_premechanical_tilt());
+                jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_edt_postmechanical_tilt());
+                jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordetail_img_postmechanical_tilt());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt2g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_pretelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt3g());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf1());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt4gf2());
+                jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_preelectrical_tilt());
+                jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_preelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_edt_postelectrical_tilt());
+                jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordetail_img_postelectrical_tilt());
+                jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordetail_edt_antennaheight());
+                jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordetail_img_antennaheight());
+                jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordetail_edt_poleheight());
+                jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordetail_img_poleheight());
+                jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordetail_edt_buildingheight());
+                jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordetail_img_buildingheight());
+                jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordetail_edt_towertype());
+                jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordetail_img_towertype());
+                jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordetail_edt_antennamake());
+                jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordetail_img_antennamake());
+                jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordetail_edt_antenmodel());
+                jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordetail_img_antennamodel());
+                jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordetail_edt_clutterpic());
+                jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordetail_img_clutterpic());
+                jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordetail_edt_txbandwidth());
+                jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordetail_img_txbandwidth());
+                jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordetail_edt_AST());
+                jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordetail_img_AST());
+                jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordetail_edt_APST());
+                jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordetail_img_APST());
+                jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordetail_edt_typ_enodeb());
+                jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordetail_img_typ_enodeb());
+                jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordetail_edt_mimo());
+                jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordetail_img_mimo());
+                jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordetail_edt_ret());
+                jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordetail_img_ret());
+                jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordetail_edt_enodebband());
+                jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordetail_img_enodebband());
+                jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordetail_edt_MOP());
+                jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordetail_img_MOP());
+                jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordetail_edt_COP());
+                jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordetail_img_COP());
+                jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordetail_edt_multiplexer_avail());
+                jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordetail_img_multiplexer_avail());
+                jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordetail_edt_antennapicleg());
+                jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordetail_img_antennapicleg());
+                jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordetail_edt_CRP());
+                jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordetail_img_CRP());
+                jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordetail_edt_powerdeboosting());
+                jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordetail_img_powerdeboosting());
+                jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordetail_edt_DFS());
+                jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordetail_img_DFS());
+                jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordetail_edt_rb_percell());
+                jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordetail_img_rb_percell());
+                jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordetail_edt_m_mimo());
+                jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordetail_img_m_mimo());
+                jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordetail_edt_FCT());
+                jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordetail_img_FCT());
+                jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordetail_edt_JCT());
+                jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordetail_img_JCT());
+                jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordetail_edt_FCL());
+                jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordetail_img_FCL());
+                jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordetail_edt_jumperlength());
+                jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordetail_img_jumperlength());
+                jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordetail_edt_prachconfig_index());
+                jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordetail_img_prachconfig_index());
+                jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordetail_edt_carrieraggregation());
+                jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordetail_img_carrieraggregation());
+                jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordetail_edt_ACD());
+                jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordetail_img_ACD());
+                jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordetail_edt_VSWRtest());
+                jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordetail_img_VSWRtest());
+                jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordetail_edt_URS());
+                jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordetail_img_URS());
+                jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordetail_edt_extra1());
+                jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordetail_img_extra1());
+                jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordetail_edt_extra2());
+                jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordetail_img_extra2());
+                jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordetail_edt_remak1());
+                jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordetail_img_remark1());
+                jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordetail_edt_remak2());
+                jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordetail_img_remark2());
+                jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordetailfrgamentname());
                 jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-               // jsonObject.put("date", sectorDetailData.get(0).getDate());
+                // jsonObject.put("date", sectorDetailData.get(0).getDate());
 
                 jsonObject.put("date", sharedPreferences.getString(AppConstants.DATE));
                 jsonObject.put("empid", sharedPreferences.getString(AppConstants.EMPID));
@@ -1230,13 +1310,16 @@ private void toSendDataSectorDetail1(String secname) {
             e.printStackTrace();
         }
     }
-    //..........................end SectorDetail 3
+    //..........................end SectorDetail 4
 
 
-//......................................Start SitePanaromic........................
+
+    //......................................Start SitePanaromic........................
 private JSONObject jsondataSitePanaromic(){
     JSONObject jsonObject = new JSONObject();
-    List<SitePanoramicData> sitePanoramicData = db.getLastSitePanaromicData();
+     List<SitePanoramicData> sitePanoramicData = db.getLastSitePanaromicData();
+
+
     List<SitePanoramicBlockingData> sitePanoramicBlockingData = db.getLastSitePanaromicBlockingData();
         try {
             jsonObject.put("tvBearing0", sitePanoramicData.get(0).getTvBearing0());
@@ -1531,322 +1614,6 @@ private void toSendDataSitePanaromic() {
 
 //.................................................................................
 
-    private JSONObject  jsonDataAll(){
-
-        List<SurveyForm> surveyformData = db.getLastSurveyformData();
-        if(surveyformData.size()>0){
-            Log.v("OtherFragSurveyform",surveyformData.toString());
-        }
-        List<SiteDetailForm> siteDetailData = db.getLastSiteDetailData();
-        if(siteDetailData.size()>0){
-            Log.v("OtherFragSiteDetail",siteDetailData.toString());
-        }
-        List<SectorDetailData> sectorDetailData = db.getLastSectorDetailData();
-        if(sectorDetailData.size()>0){
-            Log.v("OtherFragSectorDetail",sectorDetailData.toString());
-        }
-
-        List<SitePanoramicData> sitePanoramicData = db.getLastSitePanaromicData();
-        List<SitePanoramicBlockingData> sitePanoramicBlockingData = db.getLastSitePanaromicBlockingData();
-        List<OtherDetailData> otherDetailData = db.getLastOtherdetaiData();
-        if(otherDetailData.size()>0){
-            Log.v("OtherFragotherDetail",otherDetailData.toString());
-        }
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-// survey aduit detail.....................................................................//
-            jsonObject.put("", surveyformData.get(0).getSurveytype());
-            jsonObject.put("", surveyformData.get(0).getCustomer());
-            jsonObject.put("", surveyformData.get(0).getOperator());
-            jsonObject.put("", surveyformData.get(0).getCircle());
-            jsonObject.put("", surveyformData.get(0).getTechnology());
-            jsonObject.put("", surveyformData.get(0).getTechnologytype());
-            jsonObject.put("", surveyformData.get(0).getLocation());
-            jsonObject.put("", surveyformData.get(0).getSiteid());
-            jsonObject.put("", surveyformData.get(0).getDate());
-            jsonObject.put("", surveyformData.get(0).getLat());
-            jsonObject.put("", surveyformData.get(0).getLog());
-            jsonObject.put("", surveyformData.get(0).getFlag());
-// site Detail detail.....................................................................//
-            jsonObject.put("", siteDetailData.get(0).getSiteid());
-            jsonObject.put("", siteDetailData.get(0).getSiteid_photo());
-            jsonObject.put("", siteDetailData.get(0).getSitename());
-            jsonObject.put("", siteDetailData.get(0).getSitename_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowersiteid());
-            jsonObject.put("", siteDetailData.get(0).getTowersiteid_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowercompanyname());
-            jsonObject.put("", siteDetailData.get(0).getTowercompanyname__photo());
-            jsonObject.put("", siteDetailData.get(0).getSiteaddress());
-            jsonObject.put("", siteDetailData.get(0).getSiteaddress_photo());
-            jsonObject.put("", siteDetailData.get(0).getSectorid());
-            jsonObject.put("", siteDetailData.get(0).getSectorid_photo());
-            jsonObject.put("", siteDetailData.get(0).getLat());
-            jsonObject.put("", siteDetailData.get(0).getLog());
-            jsonObject.put("", siteDetailData.get(0).getSitetype());
-            jsonObject.put("", siteDetailData.get(0).getSitetype_photo());
-            jsonObject.put("", siteDetailData.get(0).getBuildingfloor());
-            jsonObject.put("", siteDetailData.get(0).getBuildingfloor_photo());
-            jsonObject.put("", siteDetailData.get(0).getBuildingheight());
-            jsonObject.put("", siteDetailData.get(0).getBuildingheight_photo());
-            jsonObject.put("", siteDetailData.get(0).getTowerheight());
-            jsonObject.put("", siteDetailData.get(0).getTowerheight_photo());
-            jsonObject.put("", siteDetailData.get(0).getFulltowerphoto());
-            jsonObject.put("", siteDetailData.get(0).getFulltowerphoto_photo());
-            jsonObject.put("", siteDetailData.get(0).getNodebtype());
-            jsonObject.put("", siteDetailData.get(0).getNodebtype_photo());
-            jsonObject.put("", siteDetailData.get(0).getClassical());
-            jsonObject.put("", siteDetailData.get(0).getClassical_photo());
-            jsonObject.put("", siteDetailData.get(0).getEnodebtype());
-            jsonObject.put("", siteDetailData.get(0).getEnodebtype_photo());
-            jsonObject.put("", siteDetailData.get(0).getAnchoroperator());
-            jsonObject.put("", siteDetailData.get(0).getAnchoroperator_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco1());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco1_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco2());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco2_photo());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco3());
-            jsonObject.put("", siteDetailData.get(0).getSharingopco3_photo());
-            jsonObject.put("", siteDetailData.get(0).getInfraprovider());
-            jsonObject.put("", siteDetailData.get(0).getInfraprovider_photo());
-            jsonObject.put("", siteDetailData.get(0).getType_id_od());
-            jsonObject.put("", siteDetailData.get(0).getType_id_od_photo());
-            jsonObject.put("", siteDetailData.get(0).getInfrashared());
-            jsonObject.put("", siteDetailData.get(0).getInfrashared_photo());
-            jsonObject.put("", siteDetailData.get(0).getExtra1());
-            jsonObject.put("", siteDetailData.get(0).getExtra1_photo());
-            jsonObject.put("", siteDetailData.get(0).getExtra2());
-            jsonObject.put("", siteDetailData.get(0).getExtra2_photo());
-            jsonObject.put("", siteDetailData.get(0).getRemark1());
-            jsonObject.put("", siteDetailData.get(0).getRemark1_photo());
-            jsonObject.put("", siteDetailData.get(0).getRemark2());
-            jsonObject.put("", siteDetailData.get(0).getRemark2_photo());
-            jsonObject.put("", siteDetailData.get(0).getFlag());
-            jsonObject.put("", siteDetailData.get(0).getDate());
-// sector Detail detail.....................................................................//
-            jsonObject.put("sectordetail_edt_techavailable", sectorDetailData.get(0).getSectordetail_edt_techavailable());
-            jsonObject.put("sectordetail_img_techavailable", sectorDetailData.get(0).getSectordetail_img_techavailable());
-            jsonObject.put("sectordetail_edt_bandavailable", sectorDetailData.get(0).getSectordetail_edt_bandavailable());
-            jsonObject.put("sectordeatail_img_bandavailable", sectorDetailData.get(0).getSectordeatail_img_bandavailable());
-            jsonObject.put("sectordeatail_edt_APC", sectorDetailData.get(0).getSectordeatail_edt_APC());
-            jsonObject.put("sectordeatail_img_APC", sectorDetailData.get(0).getSectordeatail_img_APC());
-            jsonObject.put("sectoreatail_edt_preazimuth", sectorDetailData.get(0).getSectoreatail_edt_preazimuth());
-            jsonObject.put("sectordeatail_img_preazimuth", sectorDetailData.get(0).getSectordeatail_img_preazimuth());
-            jsonObject.put("sectordeatail_edt_postazimuth", sectorDetailData.get(0).getSectordeatail_edt_postazimuth());
-            jsonObject.put("sectordeatail_img_postazimuth", sectorDetailData.get(0).getSectordeatail_img_postazimuth());
-            jsonObject.put("sectordeatail_edt_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_premechanical_tilt());
-            jsonObject.put("sectordeatail_img_premechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_premechanical_tilt());
-            jsonObject.put("sectordeatail_edt_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postmechanical_tilt());
-            jsonObject.put("sectordeatail_img_postmechanical_tilt", sectorDetailData.get(0).getSectordeatail_img_postmechanical_tilt());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt2g());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt2g());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt2g());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt2g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt2g());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt3g());
-            jsonObject.put("sectordeatail_img_pretelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_pretelectrical_tilt3g());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt3g());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt3g", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt3g());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf1", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf1());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt4gf2", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt4gf2());
-            jsonObject.put("sectordeatail_edt_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_preelectrical_tilt());
-            jsonObject.put("sectordeatail_img_preelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_preelectrical_tilt());
-            jsonObject.put("sectordeatail_edt_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_edt_postelectrical_tilt());
-            jsonObject.put("sectordeatail_img_postelectrical_tilt", sectorDetailData.get(0).getSectordeatail_img_postelectrical_tilt());
-            jsonObject.put("sectordeatail_edt_antennaheight", sectorDetailData.get(0).getSectordeatail_edt_antennaheight());
-            jsonObject.put("sectordeatail_img_antennaheight", sectorDetailData.get(0).getSectordeatail_img_antennaheight());
-            jsonObject.put("sectordeatail_edt_poleheight", sectorDetailData.get(0).getSectordeatail_edt_poleheight());
-            jsonObject.put("sectordeatail_img_poleheight", sectorDetailData.get(0).getSectordeatail_img_poleheight());
-            jsonObject.put("sectordeatail_edt_buildingheight", sectorDetailData.get(0).getSectordeatail_edt_buildingheight());
-            jsonObject.put("sectordeatail_img_buildingheight", sectorDetailData.get(0).getSectordeatail_img_buildingheight());
-            jsonObject.put("sectordeatail_edt_towertype", sectorDetailData.get(0).getSectordeatail_edt_towertype());
-            jsonObject.put("sectordeatail_img_towertype", sectorDetailData.get(0).getSectordeatail_img_towertype());
-            jsonObject.put("sectordeatail_edt_antennamake", sectorDetailData.get(0).getSectordeatail_edt_antennamake());
-            jsonObject.put("sectordeatail_img_antennamake", sectorDetailData.get(0).getSectordeatail_img_antennamake());
-            jsonObject.put("sectordeatail_edt_antenmodel", sectorDetailData.get(0).getSectordeatail_edt_antenmodel());
-            jsonObject.put("sectordeatail_img_antennamodel", sectorDetailData.get(0).getSectordeatail_img_antennamodel());
-            jsonObject.put("sectordeatail_edt_clutterpic", sectorDetailData.get(0).getSectordeatail_edt_clutterpic());
-            jsonObject.put("sectordeatail_img_clutterpic", sectorDetailData.get(0).getSectordeatail_img_clutterpic());
-            jsonObject.put("sectordeatail_edt_txbandwidth", sectorDetailData.get(0).getSectordeatail_edt_txbandwidth());
-            jsonObject.put("sectordeatail_img_txbandwidth", sectorDetailData.get(0).getSectordeatail_img_txbandwidth());
-            jsonObject.put("sectordeatail_edt_AST", sectorDetailData.get(0).getSectordeatail_edt_AST());
-            jsonObject.put("sectordeatail_img_AST", sectorDetailData.get(0).getSectordeatail_img_AST());
-            jsonObject.put("sectordeatail_edt_APST", sectorDetailData.get(0).getSectordeatail_edt_APST());
-            jsonObject.put("sectordeatail_img_APST", sectorDetailData.get(0).getSectordeatail_img_APST());
-            jsonObject.put("sectordeatail_edt_typ_enodeb", sectorDetailData.get(0).getSectordeatail_edt_typ_enodeb());
-            jsonObject.put("sectordeatail_img_typ_enodeb", sectorDetailData.get(0).getSectordeatail_img_typ_enodeb());
-            jsonObject.put("sectordeatail_edt_mimo", sectorDetailData.get(0).getSectordeatail_edt_mimo());
-            jsonObject.put("sectordeatail_img_mimo", sectorDetailData.get(0).getSectordeatail_img_mimo());
-            jsonObject.put("sectordeatail_edt_ret", sectorDetailData.get(0).getSectordeatail_edt_ret());
-            jsonObject.put("sectordeatail_img_ret", sectorDetailData.get(0).getSectordeatail_img_ret());
-            jsonObject.put("sectordeatail_edt_enodebband", sectorDetailData.get(0).getSectordeatail_edt_enodebband());
-            jsonObject.put("sectordeatail_img_enodebband", sectorDetailData.get(0).getSectordeatail_img_enodebband());
-            jsonObject.put("sectordeatail_edt_MOP", sectorDetailData.get(0).getSectordeatail_edt_MOP());
-            jsonObject.put("sectordeatail_img_MOP", sectorDetailData.get(0).getSectordeatail_img_MOP());
-            jsonObject.put("sectordeatail_edt_COP", sectorDetailData.get(0).getSectordeatail_edt_COP());
-            jsonObject.put("sectordeatail_img_COP", sectorDetailData.get(0).getSectordeatail_img_COP());
-            jsonObject.put("sectordeatail_edt_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_edt_multiplexer_avail());
-            jsonObject.put("sectordeatail_img_multiplexer_avail", sectorDetailData.get(0).getSectordeatail_img_multiplexer_avail());
-            jsonObject.put("sectordeatail_edt_antennapicleg", sectorDetailData.get(0).getSectordeatail_edt_antennapicleg());
-            jsonObject.put("sectordeatail_img_antennapicleg", sectorDetailData.get(0).getSectordeatail_img_antennapicleg());
-            jsonObject.put("sectordeatail_edt_CRP", sectorDetailData.get(0).getSectordeatail_edt_CRP());
-            jsonObject.put("sectordeatail_img_CRP", sectorDetailData.get(0).getSectordeatail_img_CRP());
-            jsonObject.put("sectordeatail_edt_powerdeboosting", sectorDetailData.get(0).getSectordeatail_edt_powerdeboosting());
-            jsonObject.put("sectordeatail_img_powerdeboosting", sectorDetailData.get(0).getSectordeatail_img_powerdeboosting());
-            jsonObject.put("sectordeatail_edt_DFS", sectorDetailData.get(0).getSectordeatail_edt_DFS());
-            jsonObject.put("sectordeatail_img_DFS", sectorDetailData.get(0).getSectordeatail_img_DFS());
-            jsonObject.put("sectordeatail_edt_rb_percell", sectorDetailData.get(0).getSectordeatail_edt_rb_percell());
-            jsonObject.put("sectordeatail_img_rb_percell", sectorDetailData.get(0).getSectordeatail_img_rb_percell());
-            jsonObject.put("sectordeatail_edt_m_mimo", sectorDetailData.get(0).getSectordeatail_edt_m_mimo());
-            jsonObject.put("sectordeatail_img_m_mimo", sectorDetailData.get(0).getSectordeatail_img_m_mimo());
-            jsonObject.put("sectordeatail_edt_FCT", sectorDetailData.get(0).getSectordeatail_edt_FCT());
-            jsonObject.put("sectordeatail_img_FCT", sectorDetailData.get(0).getSectordeatail_img_FCT());
-            jsonObject.put("sectordeatail_edt_JCT", sectorDetailData.get(0).getSectordeatail_edt_JCT());
-            jsonObject.put("sectordeatail_img_JCT", sectorDetailData.get(0).getSectordeatail_img_JCT());
-            jsonObject.put("sectordeatail_edt_FCL", sectorDetailData.get(0).getSectordeatail_edt_FCL());
-            jsonObject.put("sectordeatail_img_FCL", sectorDetailData.get(0).getSectordeatail_img_FCL());
-            jsonObject.put("sectordeatail_edt_jumperlength", sectorDetailData.get(0).getSectordeatail_edt_jumperlength());
-            jsonObject.put("sectordeatail_img_jumperlength", sectorDetailData.get(0).getSectordeatail_img_jumperlength());
-            jsonObject.put("sectordeatail_edt_prachconfig_index", sectorDetailData.get(0).getSectordeatail_edt_prachconfig_index());
-            jsonObject.put("sectordeatail_img_prachconfig_index", sectorDetailData.get(0).getSectordeatail_img_prachconfig_index());
-            jsonObject.put("sectordeatail_edt_carrieraggregation", sectorDetailData.get(0).getSectordeatail_edt_carrieraggregation());
-            jsonObject.put("sectordeatail_img_carrieraggregation", sectorDetailData.get(0).getSectordeatail_img_carrieraggregation());
-            jsonObject.put("sectordeatail_edt_ACD", sectorDetailData.get(0).getSectordeatail_edt_ACD());
-            jsonObject.put("sectordeatail_img_ACD", sectorDetailData.get(0).getSectordeatail_img_ACD());
-            jsonObject.put("sectordeatail_edt_VSWRtest", sectorDetailData.get(0).getSectordeatail_edt_VSWRtest());
-            jsonObject.put("sectordeatail_img_VSWRtest", sectorDetailData.get(0).getSectordeatail_img_VSWRtest());
-            jsonObject.put("sectordeatail_edt_URS", sectorDetailData.get(0).getSectordeatail_edt_URS());
-            jsonObject.put("sectordeatail_img_URS", sectorDetailData.get(0).getSectordeatail_img_URS());
-            jsonObject.put("sectordeatail_edt_extra1", sectorDetailData.get(0).getSectordeatail_edt_extra1());
-            jsonObject.put("sectordeatail_img_extra1", sectorDetailData.get(0).getSectordeatail_img_extra1());
-            jsonObject.put("sectordeatail_edt_extra2", sectorDetailData.get(0).getSectordeatail_edt_extra2());
-            jsonObject.put("sectordeatail_img_extra2", sectorDetailData.get(0).getSectordeatail_img_extra2());
-            jsonObject.put("sectordeatail_edt_remark1", sectorDetailData.get(0).getSectordeatail_edt_remak1());
-            jsonObject.put("sectordeatail_img_remark1", sectorDetailData.get(0).getSectordeatail_img_remark1());
-            jsonObject.put("sectordeatail_edt_remark2", sectorDetailData.get(0).getSectordeatail_edt_remak2());
-            jsonObject.put("sectordeatail_img_remark2", sectorDetailData.get(0).getSectordeatail_img_remark2());
-            jsonObject.put("sectordeatailfrgamentname", sectorDetailData.get(0).getSectordeatailfrgamentname());
-            jsonObject.put("flag", sectorDetailData.get(0).getFlag());
-            jsonObject.put("date", sectorDetailData.get(0).getDate());
-
-// site panoramic....................................................................................
-            jsonObject.put("tvBearing0", sitePanoramicData.get(0).getTvBearing0());
-            jsonObject.put("tvBearing30", sitePanoramicData.get(0).getTvBearing30());
-            jsonObject.put("tvBearing60", sitePanoramicData.get(0).getTvBearing60());
-            jsonObject.put("tvBearing90", sitePanoramicData.get(0).getTvBearing90());
-            jsonObject.put("tvBearing120", sitePanoramicData.get(0).getTvBearing120());
-            jsonObject.put("tvBearing150", sitePanoramicData.get(0).getTvBearing150());
-            jsonObject.put("tvBearing180", sitePanoramicData.get(0).getTvBearing180());
-            jsonObject.put("tvBearing210", sitePanoramicData.get(0).getTvBearing210());
-            jsonObject.put("tvBearing240", sitePanoramicData.get(0).getTvBearing240());
-            jsonObject.put("tvBearing270", sitePanoramicData.get(0).getTvBearing270());
-            jsonObject.put("tvBearing300", sitePanoramicData.get(0).getTvBearing300());
-            jsonObject.put("tvBearing330", sitePanoramicData.get(0).getTvBearing330());
-            jsonObject.put("inputBearin_extra1", sitePanoramicData.get(0).getInputBearin_extra1());
-            jsonObject.put("inputBearin_extra2", sitePanoramicData.get(0).getInputBearin_extra2());
-            jsonObject.put("inputBearin_remark1", sitePanoramicData.get(0).getInputBearin_remark1());
-            jsonObject.put("inputBearin_remark2", sitePanoramicData.get(0).getInputBearin_remark2());
-            jsonObject.put("flag", sitePanoramicData.get(0).getFlag());
-            jsonObject.put("date", sitePanoramicData.get(0).getDate());
- //..................sitepanoramicBlocking................
-            jsonObject.put("blocking0", sitePanoramicBlockingData.get(0).getBlocking0());
-            jsonObject.put("blocking30", sitePanoramicBlockingData.get(0).getBlocking30());
-            jsonObject.put("blocking60", sitePanoramicBlockingData.get(0).getBlocking60());
-            jsonObject.put("blocking90", sitePanoramicBlockingData.get(0).getBlocking90());
-            jsonObject.put("blocking120", sitePanoramicBlockingData.get(0).getBlocking120());
-            jsonObject.put("blocking150", sitePanoramicBlockingData.get(0).getBlocking150());
-            jsonObject.put("blocking180", sitePanoramicBlockingData.get(0).getBlocking180());
-            jsonObject.put("blocking210", sitePanoramicBlockingData.get(0).getBlocking210());
-            jsonObject.put("blocking240", sitePanoramicBlockingData.get(0).getBlocking240());
-            jsonObject.put("blocking270", sitePanoramicBlockingData.get(0).getBlocking270());
-            jsonObject.put("blocking300", sitePanoramicBlockingData.get(0).getBlocking300());
-            jsonObject.put("blocking330", sitePanoramicBlockingData.get(0).getBlocking330());
-            jsonObject.put("flag", sitePanoramicBlockingData.get(0).getFlag());
-//  //..................sitepanoramicBlocking................
-        jsonObject.put("", otherDetailData.get(0).getEdtRiggerPic());
-        jsonObject.put("", otherDetailData.get(0).getEdtEngineerPic());
-        jsonObject.put("", otherDetailData.get(0).getEdtCarPic());
-        jsonObject.put("", otherDetailData.get(0).getEdt_RiggerPicwithclimbingTower());
-        jsonObject.put("", otherDetailData.get(0).getEdtRiggerPicduringWah());
-        jsonObject.put("", otherDetailData.get(0).getIv_RiggerPic());
-        jsonObject.put("", otherDetailData.get(0).getIv_EngineerPic());
-        jsonObject.put("", otherDetailData.get(0).getIv_CarPic());
-        jsonObject.put("", otherDetailData.get(0).getEdt_RiggerPicwithclimbingTower());
-        jsonObject.put("", otherDetailData.get(0).getEdtRiggerPicduringWah());
-        jsonObject.put("", otherDetailData.get(0).getDate());
-        jsonObject.put("", otherDetailData.get(0).getFlag());
-
-        }catch (Exception e){
-
-        }
-        return jsonObject;
-    }
-
-    private void toSendDataAll() {
-        //  +"?Loginid="+empId+"&password="+empPassword+"&imeno="+"1234567890"
-        final ProgressDialog pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Loading...");
-        pDialog.setCancelable(false);
-        pDialog.show();
-
-        JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.POST,
-                AppConstants.VERIFYLOGINURL,jsonDataAll(),
-                new Response.Listener<JSONArray>() {
-
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        parseSettingResponse(response);
-                        Log.v("login response", response.toString());
-                        pDialog.hide();
-
-                    }
-                }, new Response.ErrorListener() {
-
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.v("login response error", error.toString());
-                pDialog.hide();
-            }
-
-        });
-        jsonObjReq.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 50000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 50000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-
-        AppSingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq, null);
-    }
-
-    private void parseSettingResponse(JSONArray response) {
-        try {
-            JSONArray jsonArray = new JSONArray(response.toString());
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            String status = jsonObject.getString("Status");
-
-            // String password = jsonObject.getString("password");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     private void selectImage(String Value) {
@@ -2195,6 +1962,7 @@ private void toSendDataSitePanaromic() {
 
     };
 
+    // add 16/8/2019................................by deepak
 
     private class getDataAsnycTask extends AsyncTask<String, Void, String> {
         // ProgressDialog pd = AllPermissionGrant.createProgressDialog(LoginActivity.this);
@@ -2231,5 +1999,223 @@ private void toSendDataSitePanaromic() {
         }
 
     }
+
+    private void saveTextFileSiteDetail() {
+
+        List<SiteDetailForm> siteDetailData = db.getLastSiteDetailData();
+        try {
+            //  String projectno= latLongDataList.get(0).getFormno().replace("/","");
+            // Log.v("projectno",projectno);
+            String h = DateFormat.format("MM-dd-yyyy-h-mmssaa", System.currentTimeMillis()).toString();
+            // this will create a new name everytime and unique
+            File root = new File(Environment.getExternalStorageDirectory()+ "/LHQTextData/");
+            // if external memory exists and folder with name Notes
+            if (!root.exists()) {
+                root.mkdirs(); // this will create folder.
+            }
+            File filepath = new File(root, "SiteDetail"+h + ".txt");  // file path to save
+            FileWriter writer = new FileWriter(filepath);
+            for(SiteDetailForm data : siteDetailData) {
+                writer.append(data.getId() +","+data.getSitename() +","+data.getTowersiteid()+","+data.getTowercompanyname() +","+data.getSiteaddress()
+                        +","+data.getSectorid() +","+data.getLat() +","+data.getLog() +","+data.getSitetype() +","+data.getBuildingfloor()
+                        +","+data.getBuildingheight() +","+data.getTowerheight() +","+data.getFulltowerphoto() +","+data.getNodebtype()
+                        +","+data.getClassical() +","+data.getEnodebtype() +","+data.getAnchoroperator() +","+data.getSharingopco1()
+                        +","+data.getSharingopco2() +","+data.getSharingopco3() +","+data.getInfraprovider() +","+data.getType_id_od()
+                        +","+data.getInfrashared() +","+data.getExtra1() +","+data.getExtra2() +","+data.getRemark1() +","+data.getRemark2()
+                        +","+data.getFlag() +","+sharedPreferences.getString(AppConstants.DATE)+","+ sharedPreferences.getString(AppConstants.EMPID)
+                        +","+sharedPreferences.getString(AppConstants.SITEID) +","+sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator)
+                );
+
+                writer.append("\n\r");
+            }
+            writer.flush();
+            writer.close();
+
+            String path  =filepath.getPath();
+            String m = "File generated with name " + path ;
+            Toast.makeText(getActivity(),m,Toast.LENGTH_LONG).show();
+
+           /* Intent intent =new Intent(getActivity(),SendMailActivity.class);
+            intent.putExtra("attachmentpathgpsdata",path);
+            startActivity(intent);*/
+
+        } catch (IOException e) {
+            Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+    private void saveTextFileSurveyDetail() {
+
+        List<SurveyForm> surveyDetailData = db.getLastSurveyformData();
+        try {
+            //  String projectno= latLongDataList.get(0).getFormno().replace("/","");
+            // Log.v("projectno",projectno);
+            String h = DateFormat.format("MM-dd-yyyy-h-mmssaa", System.currentTimeMillis()).toString();
+            // this will create a new name everytime and unique
+            File root = new File(Environment.getExternalStorageDirectory()+ "/LHQTextData/");
+            // if external memory exists and folder with name Notes
+            if (!root.exists()) {
+                root.mkdirs(); // this will create folder.
+            }
+            File filepath = new File(root, "SiteDetail"+h + ".txt");  // file path to save
+            FileWriter writer = new FileWriter(filepath);
+            for(SurveyForm data : surveyDetailData) {
+
+                writer.append(data.getId() +","+data.getSurveytype() +","+data.getCustomer()+","+data.getOperator() +","+data.getCircle() +","+data.getTechnology()
+                        +","+data.getTechnologytype() +","+data.getLat() +","+data.getLog() +","+data.getLocation() +","+data.getSiteid()
+                        +","+data.getCusterid()
+                        +","+data.getFlag() +","+sharedPreferences.getString(AppConstants.DATE)+","+ sharedPreferences.getString(AppConstants.EMPID)
+                        +","+sharedPreferences.getString(AppConstants.SITEID) +","+sharedPreferences.getString(AppConstants.surveytpeandcustomerandoperator)
+                );
+
+                writer.append("\n\r");
+            }
+            writer.flush();
+            writer.close();
+
+            String path  =filepath.getPath();
+            String m = "File generated with name " + path ;
+            Toast.makeText(getActivity(),m,Toast.LENGTH_LONG).show();
+
+           /* Intent intent =new Intent(getActivity(),SendMailActivity.class);
+            intent.putExtra("attachmentpathgpsdata",path);
+            startActivity(intent);*/
+
+        } catch (IOException e) {
+            Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+    // add 19/8/2019................................by deepak
+    public class ftpConnect_Send {
+        ProgressDialog pd = new ProgressDialog(getActivity(), R.style.AppCompatAlertDialogStyle);
+        public void uploadFile(File fileName) {
+
+            FTPClient client = new FTPClient();
+            try {
+                pd.show();
+                client.connect(AppConstants.FTP_HOST, 21);
+                client.login(AppConstants.FTP_USER, AppConstants.FTP_PASS);
+                client.setType(FTPClient.TYPE_BINARY);
+                // client.changeDirectory("TNSSOFT Folder");
+
+                try {
+
+                    // client.changeDirectory("/upload/"); //I want to upload picture in MyPictures directory/folder. you can use your own.
+                } catch (Exception e) {
+
+                    //client.createDirectory("/upload/");
+                    // client.changeDirectory("/upload/");
+                }
+                Log.v("ftpimglog",fileName.getAbsolutePath());
+                client.upload(fileName, new MyTransferListener_Send());
+
+            } catch (Exception e) {
+
+                pd.dismiss();
+
+                e.printStackTrace();
+                try {
+                    client.disconnect(true);
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+
+        }
+
+    }
+
+
+    /*******
+     * Used to file upload and show progress
+     **********/
+
+
+    private class MyTransferListener_Send implements FTPDataTransferListener {
+
+        public void started() {
+
+            // Transfer started
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    //    Toast.makeText(getActivity(), " Upload Started ...", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //System.out.println(" Upload Started ...");
+        }
+
+        public void transferred(final int length) {
+
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    //   Toast.makeText(getActivity(), " transferred ..." + length, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            // Yet other length bytes has been transferred since the last time this
+            // method was called
+
+            //System.out.println(" transferred ..." + length);
+        }
+
+        public void completed() {
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    Toast.makeText(getActivity(), " images upload successfully ...", Toast.LENGTH_SHORT).show();
+                    Log.v("Capture send  ", "Completed");
+                    //  progressDialog.dismiss();
+                }
+            });
+
+            // Transfer completed
+
+
+            //System.out.println(" completed ..." );
+        }
+
+        public void aborted() {
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    Toast.makeText(getActivity(), " transfer aborted , please try again...", Toast.LENGTH_SHORT).show();
+                    // progressDialog.dismiss();
+                }
+            });
+
+            // Transfer aborted
+
+            //System.out.println(" aborted ..." );
+        }
+
+        public void failed() {
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), " failed...", Toast.LENGTH_SHORT).show();
+                    // progressDialog.dismiss();
+
+                }
+            });
+
+            // Transfer failed
+            System.out.println(" failed ...");
+        }
+
+    }
+
 
 }

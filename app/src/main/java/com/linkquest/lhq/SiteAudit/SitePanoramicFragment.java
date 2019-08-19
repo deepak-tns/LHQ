@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -91,7 +92,7 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
 
    Button btnSave;
    Button btnUpload;
-   String lat, log;
+   String lat="Unknown", log="Unknown";
    Handler handler;
    String time;
 
@@ -137,6 +138,7 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
     TextView tv_sitepanaromic_count;
     TextView tv_sitepanaromic_count_previous;
 
+    private TextView tv_clearrecord;
     DatabaseHandler db;
 
     public SitePanoramicFragment() {
@@ -156,7 +158,7 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_site_panoramic, container, false);
-        int arg = getArguments().getInt("index");
+       // int arg = getArguments().getInt("index");
        // Toast.makeText(getActivity(), arg + "", Toast.LENGTH_LONG).show();
         db = new DatabaseHandler(getActivity());
 
@@ -172,11 +174,79 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
         findviewbyIDs( v);
 
         tv_sitepanaromic_count_previous.setText(tv_sitepanaromic_count_previous.getText().toString()+ db.getCountSitePanaromic());
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  db.deleteSomeRow_SitePanoramic();
+                  db.deleteSomeRow_SitePanoramicBlocking();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(SitePanoramicFragment.this).replace(R.id.frameLayout_home_frag, new SitePanoramicFragment());;
+                ft.commit();
+            }
+        });
+        if(db.getCountSitePanaromic() > 0)
+        {
+            Bitmap out = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing0Image());
+            Log.v("out0",db.getLastSitePanaromicData().get(0).getBtnBearing0Image());
+            imgBearing0Image.setImageBitmap( out);
+            Bitmap out30 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing30Image());
+            imgBearing30Image.setImageBitmap( out30);
+            Bitmap out60 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing60Image());
+            imgBearing60Image.setImageBitmap( out60);
+            Bitmap out90 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing90Image());
+            imgBearing90Image.setImageBitmap( out90);
+            Bitmap out120 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing120Image());
+            imgBearing120Image.setImageBitmap( out120);
+            Bitmap out150 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing150Image());
+            imgBearing150Image.setImageBitmap( out150);
+            Bitmap out180 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing180Image());
+            imgBearing180Image.setImageBitmap( out180);
+            Bitmap out210 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing210Image());
+            imgBearing210Image.setImageBitmap( out210);
+            Bitmap out240 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing240Image());
+            imgBearing240Image.setImageBitmap( out240);
+            Bitmap out270 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing270Image());
+            imgBearing270Image.setImageBitmap( out270);
+            Bitmap out300 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing300Image());
+            imgBearing300Image.setImageBitmap( out300);
+            Bitmap out330 = BitmapFactory.decodeFile(db.getLastSitePanaromicData().get(0).getBtnBearing330Image());
+            imgBearing330Image.setImageBitmap( out330);
+
+
+        }else{
+             imgBearing0 ="";
+             imgBearing30 ="";
+             imgBearing60="";
+             imgBearing90="";
+             imgBearing120="";
+             imgBearing150="";
+             imgBearing180="";
+             imgBearing210="";
+             imgBearing240="";
+             imgBearing270="";
+             imgBearing300="";
+             imgBearing330="";
+
+        }
+          /* if (db.getCountSitePanaromic() > 1) {
+                db.deleteSomeRow_SitePanoramic();
+                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                imgBearing60Image.setImageBitmap( out);
+
+            }
+            if (db.getCountSitePanaromicBlocking() > 1) {
+                db.deleteSomeRow_SitePanoramicBlocking();
+
+            }*/
+
         return v;
     }
 
     private void findviewbyIDs(View v){
 
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
          tvBearing0 = v.findViewById(R.id.tvBearing0);
          tvBearing30 = v.findViewById(R.id.tvBearing30);
          tvBearing60 = v.findViewById(R.id.tvBearing60);
@@ -237,9 +307,6 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
         tv_sitepanaromic_count =v.findViewById(R.id.tv_sitepanaromic_count);
         tv_sitepanaromic_count_previous =v.findViewById(R.id.tv_sitepanaromic_count_previous);
 
-        btnSave = v.findViewById(R.id.btnSave);
-        btnUpload = v.findViewById(R.id.btnUpload);
-
 
         btnBearing0Image.setOnClickListener(this);
         btnBearing30Image.setOnClickListener(this);
@@ -253,6 +320,9 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
         btnBearing270Image.setOnClickListener(this);
         btnBearing300Image.setOnClickListener(this);
         btnBearing330Image.setOnClickListener(this);
+
+        btnSave = v.findViewById(R.id.btnSave);
+        btnUpload = v.findViewById(R.id.btnUpload);
 
         btnSave.setOnClickListener(this);
         btnUpload.setOnClickListener(this);
@@ -303,14 +373,16 @@ public class SitePanoramicFragment extends Fragment  implements View.OnClickList
 
         if(v == btnSave){
 
-            if (db.getCountSitePanaromic() > 1) {
+           /* if (db.getCountSitePanaromic() > 1) {
                 db.deleteSomeRow_SitePanoramic();
+                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
+                imgBearing60Image.setImageBitmap( out);
 
             }
             if (db.getCountSitePanaromicBlocking() > 1) {
                 db.deleteSomeRow_SitePanoramicBlocking();
 
-            }
+            }*/
 
             if(chkBlockingBearing0.isChecked())
             {

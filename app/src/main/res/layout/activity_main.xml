@@ -32,9 +32,6 @@
                 android:src="@android:drawable/ic_dialog_email" />
         </FrameLayout>
 
-
-
-
         <LinearLayout
             android:background="@color/colorAccent"
             android:id="@+id/bottomBarLinear"

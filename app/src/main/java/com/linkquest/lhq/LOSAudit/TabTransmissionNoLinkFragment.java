@@ -42,7 +42,7 @@ public class TabTransmissionNoLinkFragment extends Fragment {
     }
     private void setupViewPager(ViewPager viewPager) {
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         for(int i =1;i<=6;i++){
             adapter.addFrag( TransmissionNoLinkFragment.newInstance(i,"NOLink"+i), "NOLink"+i);

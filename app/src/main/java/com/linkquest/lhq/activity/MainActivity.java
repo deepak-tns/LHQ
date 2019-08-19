@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_otherdetail.setOnClickListener(this);
         tv_siteinforeport.setOnClickListener(this);
 
-
         tv_los_sitedetail.setOnClickListener(this);
         tv_tranmissionlink.setOnClickListener(this);
         tv_tranmission_nolink.setOnClickListener(this);
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_losotherdetail.setOnClickListener(this);
         tv_rf_sitedetail.setOnClickListener(this);
         tv_rf_sectorDetail.setOnClickListener(this);
-
 
         linear_surveyaudit.setOnClickListener(this);
         linear_losaudit.setOnClickListener(this);
@@ -279,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             linear_losaudit.setVisibility(View.VISIBLE);
             linear_RFSurvey.setVisibility(View.GONE);
         }
+
         if(data.equals("Site Audit")){
             linear_surveyaudit.setVisibility(View.VISIBLE);
             linear_losaudit.setVisibility(View.GONE);

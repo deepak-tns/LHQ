@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.format.DateFormat;
 import android.util.Base64;
 import android.util.Log;
@@ -17,19 +18,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.linkquest.lhq.GoogleGPSService;
 import com.linkquest.lhq.R;
-import com.linkquest.lhq.SiteAudit.SitePanoramicFragment;
 import com.linkquest.lhq.activity.CameraSurfaceViewActivity;
 import com.linkquest.lhq.database.DatabaseHandler;
 import com.linkquest.lhq.database.LosPhotoData;
-
 import java.io.ByteArrayOutputStream;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -87,7 +84,7 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
     private Button btnUNext;
     private TextView tv_count;
     private TextView tv_count_previous;
-
+    private TextView tv_clearrecord;
 
 
 
@@ -114,11 +111,24 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
         }, 1000);
         int count = db.getCountLosPhotos();
         tv_count_previous.setText(tv_count_previous.getText().toString()+count+"");
+
+        tv_clearrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                db.deleteSomeRow_LosPhotos();
+              /*  FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(SiteDetailFragment.this).attach(SiteDetailFragment.this).commit();*/
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.remove(LosPhotoFragment.this).replace(R.id.frameLayout_home_frag, new LosPhotoFragment());;
+                ft.commit();
+            }
+        });
         return v;
     }
 
     private void findIds(View v){
-
+        tv_clearrecord = v.findViewById(R.id.tv_clearrecord);
         ib_NearEndFarEndphoto1 = v.findViewById(R.id.ib_NearEndFarEndphoto1);
         ib_FarEndtoNearEndphoto1= v.findViewById(R.id.ib_FarEndtoNearEndphoto1);
         ib_TowerPhoto1= v.findViewById(R.id.ib_TowerPhoto1);
@@ -221,10 +231,6 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
             selectImage("12");
         }
         if (view ==btnsave){
-            if (db.getCountLosPhotos() > 2) {
-                db.deleteSomeRow_LosPhotos();
-
-            }
 
            db.insertLosPhotos(new LosPhotoData( img_NearEndFarEndphoto1,  img_FarEndtoNearEndphoto1,  img_TowerPhoto1,  img_NearEndtoFarEndphoto2, img_FarEndNearEndphoto2,img_TowerPhoto2,  img_NearEndFarEndphoto3, img_FarEndtoNearEndphoto3, img_TowerPhoto3, img_NearEndtoFarEndphoto4,  img_NearEndtoFarEndphoto4,  img_TowerPhoto4,  date, 1));
            int count = db.getCountLosPhotos();
@@ -418,7 +424,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_NearEndFarEndphoto1.setImageBitmap( out);
-                img_NearEndFarEndphoto1 =  encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     img_NearEndFarEndphoto1 =  encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_NearEndFarEndphoto1 =  thumbnail;
                 Log.v("img-encode", img_NearEndFarEndphoto1);
             }
         }
@@ -430,8 +437,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_FarEndtoNearEndphoto1.setImageBitmap(out);
-                //  imgBearing30 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_FarEndtoNearEndphoto1 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+             //   img_FarEndtoNearEndphoto1 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_FarEndtoNearEndphoto1 =  thumbnail;
                 Log.v("img-encode", img_FarEndtoNearEndphoto1);
             }
         }
@@ -443,8 +450,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TowerPhoto1.setImageBitmap( out);
-                //  imgBearing60 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TowerPhoto1 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     img_TowerPhoto1 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_TowerPhoto1 =  thumbnail;
                 Log.v("img-encode", img_TowerPhoto1);
             }
         }
@@ -456,8 +463,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_NearEndtoFarEndphoto2.setImageBitmap( out);
-                //   imgBearing90 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_NearEndtoFarEndphoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+          //      img_NearEndtoFarEndphoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_NearEndtoFarEndphoto2 =  thumbnail;
                 Log.v("img-encode", img_NearEndtoFarEndphoto2);
             }
         }
@@ -469,7 +476,7 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_FarEndNearEndphoto2.setImageBitmap( out);
-                //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+              //  img_FarEndNearEndphoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
                 img_FarEndNearEndphoto2 = thumbnail;
                 Log.v("img-encode", img_FarEndNearEndphoto2);
             }
@@ -482,8 +489,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TowerPhoto2.setImageBitmap( out);
-                //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TowerPhoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+              //  img_TowerPhoto2 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_TowerPhoto2  = thumbnail;
                 Log.v("img-encode", img_TowerPhoto2);
             }
         }
@@ -495,8 +502,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_NearEndFarEndphoto3.setImageBitmap( out);
-                //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_NearEndFarEndphoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     img_NearEndFarEndphoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_NearEndFarEndphoto3   = thumbnail;
                 Log.v("img-encode", img_NearEndFarEndphoto3);
             }
         }
@@ -509,8 +516,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_FarEndtoNearEndphoto3.setImageBitmap( out);
-                //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_FarEndtoNearEndphoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     img_FarEndtoNearEndphoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_FarEndtoNearEndphoto3   = thumbnail;
                 Log.v("img-encode", img_FarEndtoNearEndphoto3);
             }
         }
@@ -522,8 +529,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TowerPhoto3.setImageBitmap( out);
-                //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TowerPhoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+        //        img_TowerPhoto3 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_TowerPhoto3   = thumbnail;
                 Log.v("img-encode", img_TowerPhoto3);
             }
         }
@@ -535,8 +542,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_NearEndtoFarEndphoto4.setImageBitmap( out);
-                //     imgBearing180 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_NearEndtoFarEndphoto4 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    img_NearEndtoFarEndphoto4 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_NearEndtoFarEndphoto4   = thumbnail;
                 Log.v("img-encode", img_NearEndtoFarEndphoto4);
             }
         }
@@ -548,8 +555,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_FarEndtoNearEndphoto4.setImageBitmap( out);
-                //  imgBearing120 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_FarEndtoNearEndphoto4 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+            //    img_FarEndtoNearEndphoto4 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_FarEndtoNearEndphoto4   = thumbnail;
                 Log.v("img-encode", img_FarEndtoNearEndphoto4);
             }
         }
@@ -561,8 +568,8 @@ public class LosPhotoFragment extends Fragment implements  View.OnClickListener{
 
                 Bitmap out = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(thumbnail), 100, 100, false);
                 iv_TowerPhoto4.setImageBitmap( out);
-                //    imgBearing150 = encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
-                img_TowerPhoto4= encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+           //     img_TowerPhoto4= encodeToBase64(BitmapFactory.decodeFile(thumbnail), Bitmap.CompressFormat.JPEG, 100);
+                img_TowerPhoto4   = thumbnail;
                 Log.v("img-encode", img_TowerPhoto4);
             }
         }

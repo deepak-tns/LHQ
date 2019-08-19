@@ -2,6 +2,7 @@ package com.linkquest.lhq.activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.arch.core.executor.TaskExecutor;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edt_loginid;
     private EditText edt_password;
     private Button btn_login;
+    private TextView tv_createdate;
     private SharedPreferenceUtils sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         findIds();
         checkPermissions();
+        tv_createdate.setText("1-06-2019");
         //JSonobjParameter("18459","18459");
 
     }
@@ -91,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void findIds() {
+
+        tv_createdate = findViewById(R.id.createdate);
+
         edt_loginid = findViewById(R.id.editEmail);
         edt_password = findViewById(R.id.editPassword);
         btn_login = findViewById(R.id.buttonLogin);

@@ -9,6 +9,11 @@ public interface AppConstants {
     public static final int ALERT_TYPE_LOGOUT = 0x02;
     public static final int ALERT_TYPE_DELETE_USER = 0x03;
 
+
+    public static final String FTP_HOST = "tde.lqtindia.com";
+    public static final String FTP_USER = "TDEFTP";
+    public static final String FTP_PASS = "FTP@9876";
+
     public static String siteID ="";
     public static String date ="";
 

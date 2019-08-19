@@ -42,7 +42,7 @@ public class TabFragment extends Fragment {
     }
     private void setupViewPager(ViewPager viewPager) {
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
 
         for(int i =1;i<=4;i++){
             adapter.addFrag( SectorDetailFragment.newInstance(i,"Sector"+i), "Sector"+i);
